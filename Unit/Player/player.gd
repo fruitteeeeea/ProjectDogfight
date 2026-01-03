@@ -5,17 +5,53 @@ var base_accel : float = 1.0
 var target_accel : float = 1.0
 var burst_accel : float = 1.0
 
+var force_dir : Vector2 = Vector2.ZERO
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		burst_accel = 3.0
+		GameFeel.do_camera_shake(1.5)
 	if event.is_action_released("ui_accept"):
 		target_accel = 1.0
 
 
-func _get_direction() -> Vector2:
-	var target_direction = (get_global_mouse_position() - global_position).normalized()
-	direction = direction.lerp(target_direction, .05)
-	return direction
+func _apply_force_direction(
+	dir: Vector2,
+	max_angle_deg := 15.0,
+	force_weight := 0.7
+) -> Vector2:
+	if global_position.y >= 1280.0:
+		force_dir = Vector2.UP
+	
+	if force_dir.length_squared() > 0.0001:
+		var d := dir.normalized()
+		var f := force_dir.normalized()
+
+		var dot := d.dot(f)
+		var cos_threshold := cos(deg_to_rad(max_angle_deg))
+
+		# 接近时自动解除强制
+		if dot >= cos_threshold:
+			force_dir = Vector2.ZERO
+			return d
+
+		# ⭐ 强制方向作为“偏置”
+		return d.lerp(f, force_weight).normalized()
+
+	return dir.normalized()
+
+
+func _get_forward(delta) -> Vector2:
+	var target_forward = (get_global_mouse_position() - global_position).normalized()
+	
+	target_forward = _apply_force_direction(target_forward) 
+	
+	var turn_speed := 2.5  # 越大越灵敏
+	forward = forward.slerp(target_forward, 1.0 - exp(-turn_speed * delta))
+	
+	#forward = forward.lerp(target_forward, .05)
+	return forward
 
 
 func _get_speed() -> float:

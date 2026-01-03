@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://mv1sve8aww0k"]
+
+[ext_resource type="Script" uid="uid://b5r0nyd22n43f" path="res://Camera/truma_component.gd" id="1_ls06o"]
+[ext_resource type="FastNoiseLite" uid="uid://bb0jbtx14py4m" path="res://Camera/truma_component_noise.tres" id="2_5pjl4"]
+
+[node name="TrumaComponent" type="Node"]
+script = ExtResource("1_ls06o")
+max_trauma = 5.0
+noise = ExtResource("2_5pjl4")

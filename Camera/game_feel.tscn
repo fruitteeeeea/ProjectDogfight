@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmtu30mo35u26"]
+
+[ext_resource type="Script" uid="uid://ca4uigyhfsotd" path="res://Camera/game_feel.gd" id="1_nkjge"]
+
+[node name="GameFeel" type="Node"]
+script = ExtResource("1_nkjge")
