@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://qmreh1awhiwm"]
+
+[ext_resource type="Script" uid="uid://wv8hg8gydsmq" path="res://Unit/Jet/jet_base.gd" id="1_4lrnv"]
+[ext_resource type="Texture2D" uid="uid://b0tjq0vj10dcl" path="res://Asset/Jet/ship_K.png" id="1_dwq5a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dwq5a"]
+radius = 8.0
+height = 32.0
+
+[sub_resource type="Gradient" id="Gradient_4lrnv"]
+offsets = PackedFloat32Array(0, 0.337662)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oc6om"]
+gradient = SubResource("Gradient_4lrnv")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_oc6om"]
+_data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="JetBase" type="CharacterBody2D"]
+script = ExtResource("1_4lrnv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dwq5a")
+
+[node name="Graphic" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphic"]
+rotation = 1.5708
+scale = Vector2(0.24997, 0.24997)
+texture = ExtResource("1_dwq5a")
+
+[node name="Trail" type="CPUParticles2D" parent="Graphic"]
+rotation = 1.5708
+texture = SubResource("GradientTexture2D_oc6om")
+lifetime = 0.5
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_oc6om")
