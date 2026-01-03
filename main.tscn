@@ -20,6 +20,7 @@ offset_left = -1280.0
 offset_top = -1280.0
 offset_right = 1920.0
 offset_bottom = 1920.0
+mouse_filter = 2
 color = Color(0.211765, 0.211765, 0.211765, 0.501961)
 
 [node name="Icon2" type="Sprite2D" parent="BG"]
