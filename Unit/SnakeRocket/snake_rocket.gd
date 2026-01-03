@@ -10,16 +10,23 @@ extends Node2D
 @onready var trail: Trails = $Graphic/Trail
 
 var target_pos: Vector2
+var target_dir : Vector2
+
 var time := 0.0
 var direction := Vector2.RIGHT
 
 func _process(delta):
-	if not target_pos:
+	if not target_pos and not target_dir:
 		return
 
 	time += delta
 
-	var to_target = (target_pos - global_position).normalized()
+	var to_target : Vector2
+	if target_pos:
+		to_target = (target_pos - global_position).normalized()
+	elif target_dir:
+		to_target = target_dir
+	
 	direction = direction.lerp(to_target, turn_speed * delta).normalized()
 
 	var perpendicular = Vector2(-direction.y, direction.x)
