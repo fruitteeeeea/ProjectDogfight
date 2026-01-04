@@ -1,11 +1,11 @@
 extends Node2D
 
+var speed_up := false
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		speed_up = !speed_up
+		if speed_up:
+			Engine.time_scale = 2.0
+		else :
+			Engine.time_scale = 1.0

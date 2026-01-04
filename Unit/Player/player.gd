@@ -1,5 +1,5 @@
 extends JetBase
-class_name PlayerJet
+class_name Player
 
 var base_accel : float = 1.0
 var target_accel : float = 1.0
@@ -53,13 +53,10 @@ func _apply_force_direction(
 
 
 func _get_forward(delta) -> Vector2:
-	var target_forward = (get_global_mouse_position() - global_position).normalized()
-	
+	target_forward = (get_global_mouse_position() - global_position).normalized()
 	target_forward = _apply_force_direction(target_forward) 
 	
-	var turn_speed := 2.5  # 越大越灵敏
-	forward = forward.slerp(target_forward, 1.0 - exp(-turn_speed * delta))
-	
+	super(delta)
 	#forward = forward.lerp(target_forward, .05)
 	return forward
 

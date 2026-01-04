@@ -10,16 +10,8 @@
 #*
 @tool
 extends BTAction
-#根据自身位置 选择返回作战区域的方向 
+#爬升 或降低水平高度至与玩家一致 
 
 
 func _tick(_delta: float) -> Status:
-	var a = agent as Enemy
-	var final_dir = a.add_random_angle((Vector2.ZERO - a.global_position).normalized(), 90.0)
-	a.target_forward = final_dir
 	return SUCCESS
-
-func _is_dircetion_legal() -> bool:
-	#可以使用dot来确认方向是否 合法 
-	#因为来到这里了 不能再选择远离战斗中心的方向了 
-	return true
