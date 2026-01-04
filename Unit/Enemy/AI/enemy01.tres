@@ -1,10 +1,17 @@
-[gd_resource type="BehaviorTree" load_steps=13 format=3 uid="uid://c04qvwf7i2xkn"]
+[gd_resource type="BehaviorTree" load_steps=23 format=3 uid="uid://c04qvwf7i2xkn"]
 
 [ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_1gapl"]
 [ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/return_to_combat_area.gd" id="1_c0ri4"]
 [ext_resource type="Script" uid="uid://dqhahvrr7rky6" path="res://ai/tasks/climb_up_or_down.gd" id="3_3rvhi"]
+[ext_resource type="Script" uid="uid://ccr43pgd4488l" path="res://ai/tasks/get_first_in_group.gd" id="4_swpx5"]
+[ext_resource type="Script" uid="uid://djhfd04royy1o" path="res://ai/tasks/is_horizontal_aligned_with_target.gd" id="4_yibc0"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_s64y3"]
+var/target/name = &"target"
+var/target/type = 4
+var/target/value = ""
+var/target/hint = 0
+var/target/hint_string = ""
 
 [sub_resource type="BTCondition" id="BTCondition_1gapl"]
 script = ExtResource("1_1gapl")
@@ -25,15 +32,46 @@ script = ExtResource("1_c0ri4")
 custom_name = "CheckPosition"
 children = [SubResource("BTInvert_c0ri4"), SubResource("BTAction_c0ri4"), SubResource("BTWait_c0ri4")]
 
+[sub_resource type="BTAction" id="BTAction_yibc0"]
+script = ExtResource("4_swpx5")
+group = &"player"
+output_var = &"target"
+
+[sub_resource type="BTCondition" id="BTCondition_7kei1"]
+script = ExtResource("4_yibc0")
+target_var = &"target"
+tolerance = 30.0
+
+[sub_resource type="BTInvert" id="BTInvert_31koj"]
+children = [SubResource("BTCondition_7kei1")]
+
 [sub_resource type="BTAction" id="BTAction_swpx5"]
 script = ExtResource("3_3rvhi")
+target_var = null
 
-[sub_resource type="BTSequence" id="BTSequence_c0ri4"]
+[sub_resource type="BTSequence" id="BTSequence_yibc0"]
+custom_name = "Climb"
+children = [SubResource("BTInvert_31koj"), SubResource("BTAction_swpx5")]
+
+[sub_resource type="BTWait" id="BTWait_yibc0"]
+
+[sub_resource type="BTSequence" id="BTSequence_7kei1"]
+custom_name = "HorizontalMove"
+children = [SubResource("BTWait_yibc0")]
+
+[sub_resource type="BTSelector" id="BTSelector_yibc0"]
+children = [SubResource("BTSequence_yibc0"), SubResource("BTSequence_7kei1")]
+
+[sub_resource type="BTSequence" id="BTSequence_swpx5"]
+custom_name = "ClimbToSameHorizontal"
+children = [SubResource("BTAction_yibc0"), SubResource("BTSelector_yibc0")]
+
+[sub_resource type="BTSelector" id="BTSelector_swpx5"]
 custom_name = "AttackState"
-children = [SubResource("BTAction_swpx5")]
+children = [SubResource("BTSequence_swpx5")]
 
 [sub_resource type="BTSelector" id="BTSelector_ioxih"]
-children = [SubResource("BTSequence_ioxih"), SubResource("BTSequence_c0ri4")]
+children = [SubResource("BTSequence_ioxih"), SubResource("BTSelector_swpx5")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_s64y3")

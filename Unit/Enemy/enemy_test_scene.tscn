@@ -9,7 +9,7 @@
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 
-[node name="Dummy" type="Node2D" parent="."]
+[node name="Dummy" type="Node2D" parent="." groups=["player"]]
 script = ExtResource("1_r2w7w")
 
 [node name="Sprite2D" type="Sprite2D" parent="Dummy"]
@@ -18,33 +18,3 @@ texture = ExtResource("2_4eqtc")
 
 [node name="Enemy" parent="." instance=ExtResource("3_3e1t1")]
 position = Vector2(-1384, 184)
-
-[node name="Enemy2" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1648, -80)
-
-[node name="Enemy3" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1024, -288)
-
-[node name="Enemy4" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-944, 136)
-
-[node name="Enemy5" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(232, 624)
-
-[node name="Enemy6" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(896, 408)
-
-[node name="Enemy7" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(1096, 80)
-
-[node name="Enemy8" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(1296, 184)
-
-[node name="Enemy9" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(1400, -376)
-
-[node name="Enemy10" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(912, -456)
-
-[node name="Enemy11" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(912, -456)

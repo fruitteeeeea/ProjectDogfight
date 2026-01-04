@@ -8,7 +8,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ois23"]
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_qudsa"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_s64y3"]
 
 [node name="Enemy" instance=ExtResource("1_0dgib")]
 collision_layer = 0
@@ -33,6 +33,6 @@ shape = SubResource("CapsuleShape2D_ois23")
 
 [node name="BTPlayer" type="BTPlayer" parent="." index="3"]
 behavior_tree = ExtResource("5_s64y3")
-blackboard_plan = SubResource("BlackboardPlan_qudsa")
+blackboard_plan = SubResource("BlackboardPlan_s64y3")
 
 [connection signal="body_entered" from="DamageComponent/HurtBox" to="DamageComponent" method="_on_hurt_box_body_entered"]

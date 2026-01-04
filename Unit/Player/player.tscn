@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dw514kmcsyfxe" path="res://Unit/SnakeRocket/rocket_launcher.tscn" id="5_mh83u"]
 [ext_resource type="PackedScene" uid="uid://iw4ebp6p7gw7" path="res://Unit/Bullet/bullet.tscn" id="5_pm1gd"]
 
-[node name="Player" instance=ExtResource("1_bfvk7")]
+[node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
 
 [node name="Trail" parent="Graphic" index="1"]
