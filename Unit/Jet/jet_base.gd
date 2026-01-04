@@ -19,9 +19,9 @@ func _handle_movement(delta) -> void:
 	move_and_slide()
 
 
-func _wrap_position():
-	global_position.x = fposmod(global_position.x, MAP_WIDTH)
-	global_position.y = fposmod(global_position.y, MAP_WIDTH)
+#func _wrap_position():
+	#global_position.x = fposmod(global_position.x, MAP_WIDTH)
+	#global_position.y = fposmod(global_position.y, MAP_WIDTH)
 
 func _get_forward(delta) -> Vector2:
 	return forward

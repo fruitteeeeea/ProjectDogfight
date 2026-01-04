@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://de22mgi5rbfe8"]
+
+[ext_resource type="Script" uid="uid://b412n4n4ga4nf" path="res://Unit/Enemy/dummy.gd" id="1_r2w7w"]
+[ext_resource type="Texture2D" uid="uid://fdexqao4a04g" path="res://icon.svg" id="2_4eqtc"]
+
+[node name="EnemyTestScene" type="Node2D"]
+
+[node name="Dummy" type="Node2D" parent="."]
+position = Vector2(896, 576)
+script = ExtResource("1_r2w7w")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dummy"]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_4eqtc")

@@ -24,6 +24,16 @@ func _apply_force_direction(
 	if global_position.y >= 1280.0:
 		force_dir = Vector2.UP
 	
+	elif global_position.y <= -1280.0:
+		force_dir = Vector2.DOWN
+	
+	elif global_position.x >= 1280.0 * 2:
+		force_dir = Vector2.LEFT
+	
+	elif global_position.x <= -1280.0 * 2:
+		force_dir = Vector2.RIGHT
+	
+	
 	if force_dir.length_squared() > 0.0001:
 		var d := dir.normalized()
 		var f := force_dir.normalized()

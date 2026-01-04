@@ -1,20 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2rcul35yljaa"]
+[gd_scene load_steps=8 format=3 uid="uid://d2rcul35yljaa"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_0dgib"]
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
 [ext_resource type="Texture2D" uid="uid://cusx3iicve3id" path="res://Asset/Jet/ship_sidesB.png" id="3_ois23"]
 [ext_resource type="Script" uid="uid://cyvt0ejvx3uyr" path="res://Unit/Enemy/damage_component.gd" id="4_qudsa"]
+[ext_resource type="BehaviorTree" uid="uid://c04qvwf7i2xkn" path="res://Unit/Enemy/AI/enemy01.tres" id="5_s64y3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ois23"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_qudsa"]
 
 [node name="Enemy" instance=ExtResource("1_0dgib")]
 script = ExtResource("2_kg1yc")
 
 [node name="Sprite2D" parent="Graphic" index="0"]
 texture = ExtResource("3_ois23")
-
-[node name="Trail" parent="Graphic" index="1"]
-emitting = false
 
 [node name="DamageComponent" type="Node2D" parent="." index="2"]
 script = ExtResource("4_qudsa")
@@ -26,5 +26,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageComponent/HurtBox" index="0"]
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_ois23")
+
+[node name="BTPlayer" type="BTPlayer" parent="." index="3"]
+behavior_tree = ExtResource("5_s64y3")
+blackboard_plan = SubResource("BlackboardPlan_qudsa")
 
 [connection signal="body_entered" from="DamageComponent/HurtBox" to="DamageComponent" method="_on_hurt_box_body_entered"]

@@ -1,0 +1,56 @@
+[gd_resource type="BehaviorTree" load_steps=15 format=3 uid="uid://c04qvwf7i2xkn"]
+
+[ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_1gapl"]
+[ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/return_to_combat_area.gd" id="1_c0ri4"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_s64y3"]
+
+[sub_resource type="BTComment" id="BTComment_ioxih"]
+custom_name = "如果离开了边界 返回边界内"
+
+[sub_resource type="BTComment" id="BTComment_1gapl"]
+custom_name = "wait 1s"
+
+[sub_resource type="BTCondition" id="BTCondition_1gapl"]
+script = ExtResource("1_1gapl")
+combat_area_x_min = 0.0
+combat_area_x_max = 0.0
+combat_area_y_min = 0.0
+combat_area_y_max = 0.0
+distance_min = 0.0
+distance_max = 0.0
+target_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_3rvhi"]
+script = ExtResource("1_c0ri4")
+target_position_var = &"pos"
+speed_var = &"speed"
+tolerance = 50.0
+avoid_var = &""
+
+[sub_resource type="BTSequence" id="BTSequence_ioxih"]
+custom_name = "CheckPosition"
+children = [SubResource("BTComment_ioxih"), SubResource("BTComment_1gapl"), SubResource("BTCondition_1gapl"), SubResource("BTAction_3rvhi")]
+
+[sub_resource type="BTSequence" id="BTSequence_1gapl"]
+custom_name = "ADJUST_HEIGHT"
+
+[sub_resource type="BTSequence" id="BTSequence_c0ri4"]
+custom_name = "APPROACH"
+
+[sub_resource type="BTSequence" id="BTSequence_3rvhi"]
+custom_name = "ATTACK_PASS"
+
+[sub_resource type="BTSequence" id="BTSequence_swpx5"]
+custom_name = "RESET"
+
+[sub_resource type="BTSelector" id="BTSelector_1gapl"]
+custom_name = "AttackState"
+children = [SubResource("BTSequence_1gapl"), SubResource("BTSequence_c0ri4"), SubResource("BTSequence_3rvhi"), SubResource("BTSequence_swpx5")]
+
+[sub_resource type="BTSelector" id="BTSelector_ioxih"]
+children = [SubResource("BTSequence_ioxih"), SubResource("BTSelector_1gapl")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_s64y3")
+root_task = SubResource("BTSelector_ioxih")

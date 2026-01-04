@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp4mablrmhtp1"]
-
-[ext_resource type="Script" uid="uid://btd2cyjlqddpx" path="res://Unit/SnakeRocket/rocket_spwaner.gd" id="1_tjkiv"]
-
-[node name="RocketTest" type="Node2D"]
-
-[node name="RocketSpwaner" type="Node2D" parent="."]
-position = Vector2(824, 456)
-script = ExtResource("1_tjkiv")
