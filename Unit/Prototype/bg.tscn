@@ -46,7 +46,7 @@ offset_top = -1600.0
 offset_right = 2888.0
 offset_bottom = 1600.0
 mouse_filter = 2
-color = Color(0.0392157, 0.0392157, 0.0392157, 0.541176)
+color = Color(0.0392157, 0.0392157, 0.0392157, 0.701961)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 100

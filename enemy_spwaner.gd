@@ -15,7 +15,8 @@ func _get_spwan_pos() -> Vector2:
 
 
 func _on_timer_timeout() -> void:
-	var enemy = EnemyScene.instantiate() as Enemy
-	var pos = _get_spwan_pos()
-	get_tree().current_scene.call_deferred("add_child", enemy)
-	enemy.global_position = pos
+	for i in range(5):
+		var enemy = EnemyScene.instantiate() as Enemy
+		var pos = _get_spwan_pos()
+		get_tree().current_scene.call_deferred("add_child", enemy)
+		enemy.global_position = pos

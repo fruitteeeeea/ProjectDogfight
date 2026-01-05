@@ -1,6 +1,6 @@
 extends Node
 
-@export var trauma_reduction_rate := 2.0 * 5#抖动恢复 
+@export var trauma_reduction_rate := 2.0 * 10#抖动恢复 
 
 @export var max_x := 8.0
 @export var max_y := 8.0

@@ -20,6 +20,10 @@ func _physics_process(delta: float) -> void:
 	_hanlde_rotation()
 
 
+func take_damage() -> void:
+	pass
+
+
 func die() -> void:
 	is_dead = true
 	pass

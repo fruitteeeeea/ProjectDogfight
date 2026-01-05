@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=11 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -10,8 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="8_qacwo"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
-_data = [Vector2(0, 0.307845), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_qacwo"]
+offsets = PackedFloat32Array(0, 0.206637, 1)
+colors = PackedColorArray(1, 0.960784, 0.615686, 1, 0.883146, 0.434939, 0.32355, 1, 0.827451, 0.184314, 0.184314, 1)
 
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
@@ -31,17 +35,19 @@ BulletScene = ExtResource("5_pm1gd")
 autostart = true
 
 [node name="RocketLauncher" parent="Graphic" index="4" instance=ExtResource("5_mh83u")]
+rocket_nb = 1
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Graphic" index="5"]
+[node name="Trail2" type="CPUParticles2D" parent="Graphic" index="5"]
 position = Vector2(-16, 0)
 texture = ExtResource("8_qacwo")
 lifetime = 0.3
 particle_flag_align_y = true
 direction = Vector2(-1, 0)
 gravity = Vector2(0, 5)
-initial_velocity_min = 100.0
-initial_velocity_max = 100.0
+initial_velocity_min = 150.0
+initial_velocity_max = 400.0
 scale_amount_curve = SubResource("Curve_qacwo")
+color_ramp = SubResource("Gradient_qacwo")
 
 [node name="Camera2D" type="Camera2D" parent="." index="2" node_paths=PackedStringArray("target_point")]
 script = ExtResource("3_aph0k")

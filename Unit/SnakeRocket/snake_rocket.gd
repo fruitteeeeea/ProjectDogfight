@@ -5,10 +5,12 @@ extends Node2D
 @export var wave_frequency := 58.0
 @export var turn_speed := 16.0
 
+@onready var graphic: Node2D = $Graphic
 @onready var explode_particle: CPUParticles2D = $Graphic/ExplodeParticle
 @onready var sprite_2d: Sprite2D = $Graphic/Sprite2D
 @onready var trail: Trails = $Graphic/Trail
 
+var target : Node2D
 var target_pos: Vector2
 var target_dir : Vector2
 
@@ -27,13 +29,17 @@ func _process(delta):
 	elif target_dir:
 		to_target = target_dir
 	
+	elif target:
+		to_target = (target.global_position - global_position).normalized()
+	
+	
 	direction = direction.lerp(to_target, turn_speed * delta).normalized()
 
 	var perpendicular = Vector2(-direction.y, direction.x)
 	var wave = perpendicular * sin(time * wave_frequency) * wave_amplitude * delta
 
 	position += direction * speed * delta + wave
-	rotation = direction.angle()
+	graphic.rotation = direction.angle()
 
 
 func _on_timer_timeout() -> void:
@@ -46,3 +52,8 @@ func _explord() -> void:
 	explode_particle.emitting = true
 	await explode_particle.finished
 	queue_free()
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		target = body

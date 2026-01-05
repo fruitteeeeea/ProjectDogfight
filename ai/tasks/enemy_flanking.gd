@@ -21,7 +21,8 @@ func _tick(_delta: float) -> Status:
 	
 	if not is_instance_valid(target):
 		return FAILURE
-
-	a.target_forward = (a.global_position - target.global_position).normalized() #逃离到别的地方 
+	
+	var flank_dir = a.add_random_angle((a.global_position - target.global_position).normalized(), 45.0)
+	a.target_forward =  flank_dir#逃离到别的地方 
 
 	return SUCCESS

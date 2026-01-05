@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://iw4ebp6p7gw7"]
+[gd_scene load_steps=5 format=3 uid="uid://iw4ebp6p7gw7"]
 
 [ext_resource type="Texture2D" uid="uid://cl37ykvl18ngi" path="res://Asset/Bullet/ship_B.png" id="1_b72hd"]
 [ext_resource type="Script" uid="uid://b11o8n7cl0a11" path="res://Unit/Bullet/bullet.gd" id="1_p3va5"]
+[ext_resource type="PackedScene" uid="uid://bvh7k0ekrtkbh" path="res://Unit/Bullet/hit_box.tscn" id="3_yotn0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p3va5"]
 
@@ -20,5 +21,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_b72hd")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="HitBox" parent="." instance=ExtResource("3_yotn0")]
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

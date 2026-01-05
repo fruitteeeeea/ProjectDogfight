@@ -2,6 +2,8 @@ extends Node2D
 
 const SNAKE_ROCKET = preload("res://Unit/SnakeRocket/snake_rocket.tscn")
 
+@export var rocket_nb := 5
+
 var up_dir := true
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -11,7 +13,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _spwan_rocket() -> void:
-	for i in range(5):
+	for i in range(rocket_nb):
 		_launch_rocket()
 		await get_tree().create_timer(.2).timeout
 

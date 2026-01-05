@@ -6,7 +6,20 @@ var target_accel : float = 1.0
 var burst_accel : float = 1.0
 
 var force_dir : Vector2 = Vector2.ZERO
+var engine_on : bool = true:
+	set(v):
+		engine_on = v
+		if engine_on:
+			turn_speed = 2.5
+			trail.emitting = true
+			trail_2.emitting = true
+		else :
+			turn_speed = 5.0
+			trail.emitting = false
+			trail_2.emitting = false
 
+@onready var trail: CPUParticles2D = $Graphic/Trail
+@onready var trail_2: CPUParticles2D = $Graphic/Trail2
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -14,6 +27,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		GameFeel.do_camera_shake(1.5)
 	if event.is_action_released("ui_accept"):
 		target_accel = 1.0
+	
+	if event.is_action_pressed("engine"): #切换引擎状态 
+		engine_on = !engine_on
 
 
 func _apply_force_direction(
@@ -52,8 +68,23 @@ func _apply_force_direction(
 	return dir.normalized()
 
 
+#检查引擎是否处于点火状态 点火： 朝着鼠标方向飞行 熄火：朝着地面滑落 
+func _check_engine() -> Vector2:
+	var final_dir : Vector2
+	
+	if engine_on:
+		final_dir = (get_global_mouse_position() - global_position).normalized()
+	else :
+		if velocity.x > 0:
+			final_dir = Vector2(1, 1)
+		else :
+			final_dir = Vector2(-1, 1)
+	
+	return final_dir
+
+
 func _get_forward(delta) -> Vector2:
-	target_forward = (get_global_mouse_position() - global_position).normalized()
+	target_forward = _check_engine()
 	target_forward = _apply_force_direction(target_forward) 
 	
 	super(delta)

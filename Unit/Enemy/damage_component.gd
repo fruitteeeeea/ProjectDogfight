@@ -1,9 +1,12 @@
 extends Node2D
+class_name DamageComponent
 
 var health : float = 10.0
 
-@onready var hit_splash_particle: CPUParticles2D = $"../HitSplashParticle"
 @export var jet : JetBase
+
+@onready var hit_splash_particle: CPUParticles2D = $"../HitSplashParticle"
+@onready var crash_splash_particle: CPUParticles2D = $"../CrashSplashParticle"
 
 
 func _ready() -> void:
@@ -13,22 +16,15 @@ func _ready() -> void:
 		printerr("DamageComponent 未找到 JetBase 父节点 ")
 
 
-func _take_damage(damage : float) -> void:
-	#记得判断 未摧毁的时候 才会接受伤害 
-	if jet.is_dead:
-		return
-	
+func take_damage(damage : float) -> void:
 	jet.die()
 	_hit_effect()
 
 
-func _on_hurt_box_body_entered(body: Node2D) -> void:
-	_take_damage(10.0)
-
-
 
 func _hit_effect() -> void:
-	GameFeel.do_camera_shake(1.5)
-	GameFeel.hit_stop_short()
+	GameFeel.do_camera_shake(5.5)
+	GameFeel.hit_stop_medium()
 	hit_splash_particle.restart()
 	hit_splash_particle.emitting = true
+	crash_splash_particle.emitting = true

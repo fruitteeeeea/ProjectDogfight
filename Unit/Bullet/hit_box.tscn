@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvh7k0ekrtkbh"]
+
+[ext_resource type="Script" uid="uid://dgu332k36r34g" path="res://Unit/Bullet/hit_box.gd" id="1_ynbsh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yotn0"]
+radius = 16.0
+height = 48.0
+
+[node name="HitBox" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ynbsh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_yotn0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
