@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4vpogepx8flp"]
+[gd_scene load_steps=9 format=3 uid="uid://b4vpogepx8flp"]
 
 [ext_resource type="Script" uid="uid://h3mujltinpsu" path="res://Unit/SnakeRocket/snake_rocket.gd" id="1_n13jw"]
 [ext_resource type="Texture2D" uid="uid://cifbuc6k72yky" path="res://Asset/Rocket/Rocket.png" id="2_eatv8"]
 [ext_resource type="PackedScene" uid="uid://ch12iu35e0pqj" path="res://Unit/SnakeRocket/Trail/trail.tscn" id="3_xe1xm"]
 [ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="4_w84y8"]
+[ext_resource type="Texture2D" uid="uid://bu1j36afux0ib" path="res://Asset/Rocket/effect_yellow.png" id="5_m5gxl"]
 
 [sub_resource type="Curve" id="Curve_m5gxl"]
 _limits = [0.0, 100.0, 0.0, 1.0]
@@ -51,6 +52,8 @@ color_ramp = SubResource("Gradient_w84y8")
 [node name="Trail" parent="Graphic" instance=ExtResource("3_xe1xm")]
 top_level = true
 width = 5.0
+texture = ExtResource("5_m5gxl")
+texture_mode = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5

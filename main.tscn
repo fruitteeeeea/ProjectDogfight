@@ -1,68 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://k5msw5fm124k"]
+[gd_scene load_steps=5 format=3 uid="uid://k5msw5fm124k"]
 
-[ext_resource type="Texture2D" uid="uid://fdexqao4a04g" path="res://icon.svg" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dnc5yjftuv7il" path="res://Unit/Player/player.tscn" id="2_h2yge"]
-[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="2_lquwl"]
-
-[sub_resource type="Curve" id="Curve_lquwl"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.694581, 0.516981), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_7mycd"]
-curve = SubResource("Curve_lquwl")
-
-[sub_resource type="Curve" id="Curve_1bvp3"]
-_data = [Vector2(0, 0.426415), 0.0, 0.0, 0, 0, Vector2(0.221675, 0.766038), 0.0, 0.0, 0, 0, Vector2(0.438424, 0.230189), 0.0, 0.0, 0, 0, Vector2(1, 0.456604), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_lquwl"]
-curve = SubResource("Curve_1bvp3")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1bvp3"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(2560, 1280, 1)
-gravity = Vector3(0, 98, 0)
-scale_min = 0.5
-scale_max = 0.5
-scale_curve = SubResource("CurveTexture_lquwl")
-alpha_curve = SubResource("CurveTexture_7mycd")
-turbulence_enabled = true
+[ext_resource type="Script" uid="uid://bfjkludygb62r" path="res://enemy_spwaner.gd" id="4_1bvp3"]
 
 [node name="main" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-640.0]
 
-[node name="BG" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
-
-[node name="TextureRect" type="TextureRect" parent="BG"]
-offset_left = -2880.0
-offset_top = -1600.0
-offset_right = -957.0
-offset_bottom = -534.0
-scale = Vector2(3, 3)
-texture = ExtResource("2_0xm2m")
-stretch_mode = 1
-
-[node name="ColorRect" type="ColorRect" parent="BG"]
-offset_left = -2880.0
-offset_top = -1600.0
-offset_right = 2880.0
-offset_bottom = 1600.0
-mouse_filter = 2
-color = Color(0.211765, 0.211765, 0.211765, 0.501961)
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="BG"]
-amount = 100
-texture = ExtResource("2_lquwl")
-lifetime = 2.0
-fixed_fps = 60
-visibility_rect = Rect2(-4000, -4000, 40000, 4000)
-process_material = SubResource("ParticleProcessMaterial_1bvp3")
+[node name="BG" parent="." instance=ExtResource("1_h2yge")]
 
 [node name="Player" parent="." instance=ExtResource("2_h2yge")]
 position = Vector2(0, 8)
 
 [node name="Enemy" parent="." instance=ExtResource("2_1bvp3")]
 position = Vector2(360, 288)
+
+[node name="EnemySpwaner" type="Node2D" parent="."]
+script = ExtResource("4_1bvp3")
+EnemyScene = ExtResource("2_1bvp3")
+
+[node name="Timer" type="Timer" parent="EnemySpwaner"]
+wait_time = 2.5
+autostart = true
+
+[connection signal="timeout" from="EnemySpwaner/Timer" to="EnemySpwaner" method="_on_timer_timeout"]

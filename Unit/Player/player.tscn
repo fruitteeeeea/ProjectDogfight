@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=10 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -7,11 +7,17 @@
 [ext_resource type="Script" uid="uid://bghf3dl8ten4h" path="res://Unit/Jet/gun.gd" id="4_j3lyf"]
 [ext_resource type="PackedScene" uid="uid://dw514kmcsyfxe" path="res://Unit/SnakeRocket/rocket_launcher.tscn" id="5_mh83u"]
 [ext_resource type="PackedScene" uid="uid://iw4ebp6p7gw7" path="res://Unit/Bullet/bullet.tscn" id="5_pm1gd"]
+[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="8_qacwo"]
+
+[sub_resource type="Curve" id="Curve_qacwo"]
+_data = [Vector2(0, 0.307845), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
 
 [node name="Trail" parent="Graphic" index="1"]
+position = Vector2(-32, 0)
 lifetime = 2.0
 
 [node name="CameraPoint" type="Marker2D" parent="Graphic" index="2"]
@@ -26,11 +32,23 @@ autostart = true
 
 [node name="RocketLauncher" parent="Graphic" index="4" instance=ExtResource("5_mh83u")]
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Graphic" index="5"]
+position = Vector2(-16, 0)
+texture = ExtResource("8_qacwo")
+lifetime = 0.3
+particle_flag_align_y = true
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 5)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_curve = SubResource("Curve_qacwo")
+
 [node name="Camera2D" type="Camera2D" parent="." index="2" node_paths=PackedStringArray("target_point")]
-zoom = Vector2(1.5, 1.5)
 script = ExtResource("3_aph0k")
 target_point = NodePath("../Graphic/CameraPoint")
 
 [node name="TrumaComponent" parent="Camera2D" index="0" instance=ExtResource("3_pm1gd")]
+
+[node name="HUD" type="CanvasLayer" parent="." index="3"]
 
 [connection signal="timeout" from="Graphic/Gun/fire_interval_timer" to="Graphic/Gun" method="_on_fire_interval_timer_timeout"]

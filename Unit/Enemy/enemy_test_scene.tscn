@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://de22mgi5rbfe8"]
+[gd_scene load_steps=6 format=3 uid="uid://de22mgi5rbfe8"]
 
 [ext_resource type="Script" uid="uid://b412n4n4ga4nf" path="res://Unit/Enemy/dummy.gd" id="1_r2w7w"]
 [ext_resource type="Texture2D" uid="uid://fdexqao4a04g" path="res://icon.svg" id="2_4eqtc"]
 [ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="3_3e1t1"]
+[ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="4_if1b7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3e1t1"]
+font_size = 64
 
 [node name="EnemyTestScene" type="Node2D"]
+
+[node name="BG" parent="." instance=ExtResource("4_if1b7")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
@@ -15,6 +21,14 @@ script = ExtResource("1_r2w7w")
 [node name="Sprite2D" type="Sprite2D" parent="Dummy"]
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("2_4eqtc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Dummy"]
+
+[node name="GameSpeedLabel" type="Label" parent="Dummy/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "GAMESPEED"
+label_settings = SubResource("LabelSettings_3e1t1")
 
 [node name="Enemy" parent="." instance=ExtResource("3_3e1t1")]
 position = Vector2(-1384, 184)

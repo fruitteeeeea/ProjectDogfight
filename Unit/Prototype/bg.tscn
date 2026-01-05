@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://bl1cf0r32i67t"]
+
+[ext_resource type="Texture2D" uid="uid://dkm8o6vmpmbcn" path="res://Asset/Prototype/BluePrintSprite32X32.png" id="1_clmw2"]
+[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="2_v7n5n"]
+
+[sub_resource type="Curve" id="Curve_lquwl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.694581, 0.516981), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7mycd"]
+curve = SubResource("Curve_lquwl")
+
+[sub_resource type="Curve" id="Curve_1bvp3"]
+_data = [Vector2(0, 0.426415), 0.0, 0.0, 0, 0, Vector2(0.221675, 0.766038), 0.0, 0.0, 0, 0, Vector2(0.438424, 0.230189), 0.0, 0.0, 0, 0, Vector2(1, 0.456604), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_lquwl"]
+curve = SubResource("Curve_1bvp3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1bvp3"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2560, 1280, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_lquwl")
+alpha_curve = SubResource("CurveTexture_7mycd")
+turbulence_enabled = true
+
+[node name="BG" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -2880.0
+offset_top = -1600.0
+offset_right = -957.0
+offset_bottom = -534.0
+scale = Vector2(3, 3)
+texture = ExtResource("1_clmw2")
+stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -2880.0
+offset_top = -1600.0
+offset_right = 2888.0
+offset_bottom = 1600.0
+mouse_filter = 2
+color = Color(0.0392157, 0.0392157, 0.0392157, 0.541176)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 100
+texture = ExtResource("2_v7n5n")
+lifetime = 2.0
+fixed_fps = 60
+visibility_rect = Rect2(-4000, -4000, 40000, 4000)
+process_material = SubResource("ParticleProcessMaterial_1bvp3")
