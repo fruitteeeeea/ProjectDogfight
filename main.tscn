@@ -7,14 +7,16 @@
 
 [node name="main" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-640.0]
+metadata/_edit_horizontal_guides_ = [-2136.0]
 
 [node name="BG" parent="." instance=ExtResource("1_h2yge")]
 
 [node name="Player" parent="." instance=ExtResource("2_h2yge")]
-position = Vector2(0, 8)
+position = Vector2(1224, 1080)
+metadata/_edit_horizontal_guides_ = [448.0]
 
 [node name="Enemy" parent="." instance=ExtResource("2_1bvp3")]
-position = Vector2(360, 288)
+position = Vector2(654, 782)
 
 [node name="EnemySpwaner" type="Node2D" parent="."]
 script = ExtResource("4_1bvp3")

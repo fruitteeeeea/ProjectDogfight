@@ -87,6 +87,7 @@ top_level = true
 width = 5.0
 texture = ExtResource("5_m5gxl")
 texture_mode = 1
+MAX_LENGTH = 100
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5

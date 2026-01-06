@@ -6,13 +6,12 @@ var health : float = 10.0
 @export var jet : JetBase
 
 @onready var hit_splash_particle: CPUParticles2D = $"../HitSplashParticle"
+@onready var trail: CPUParticles2D = $"../Graphic/Trail"
 @onready var crash_splash_particle: CPUParticles2D = $"../CrashSplashParticle"
-
+@onready var die_particle: CPUParticles2D = $DieParticle
 
 func _ready() -> void:
-	if get_parent() is JetBase:
-		jet = get_parent()
-	else :
+	if !jet:
 		printerr("DamageComponent 未找到 JetBase 父节点 ")
 
 
@@ -28,3 +27,5 @@ func _hit_effect() -> void:
 	hit_splash_particle.restart()
 	hit_splash_particle.emitting = true
 	crash_splash_particle.emitting = true
+	trail.emitting = false
+	die_particle.emitting = true

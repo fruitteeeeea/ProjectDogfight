@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://de22mgi5rbfe8"]
+[gd_scene load_steps=6 format=3 uid="uid://de22mgi5rbfe8"]
 
 [ext_resource type="Script" uid="uid://b412n4n4ga4nf" path="res://Unit/Enemy/dummy.gd" id="1_r2w7w"]
 [ext_resource type="Texture2D" uid="uid://fdexqao4a04g" path="res://icon.svg" id="2_4eqtc"]
 [ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="3_3e1t1"]
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="4_if1b7"]
-[ext_resource type="Script" uid="uid://bmjuh1tnrnck8" path="res://Unit/Enemy/indicator_test.gd" id="5_cuthw"]
-[ext_resource type="Texture2D" uid="uid://njb2cbf4ee6k" path="res://Asset/EnemyIndicator.png" id="6_8v28q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3e1t1"]
 font_size = 64
@@ -15,9 +13,11 @@ font_size = 64
 [node name="BG" parent="." instance=ExtResource("4_if1b7")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-6088, -1208)
 zoom = Vector2(0.5, 0.5)
 
 [node name="Dummy" type="Node2D" parent="." groups=["player"]]
+position = Vector2(-2848, -2312)
 script = ExtResource("1_r2w7w")
 
 [node name="Sprite2D" type="Sprite2D" parent="Dummy"]
@@ -33,22 +33,4 @@ text = "GAMESPEED"
 label_settings = SubResource("LabelSettings_3e1t1")
 
 [node name="Enemy" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1384, 184)
-
-[node name="IndicatorTest" type="Node2D" parent="."]
-script = ExtResource("5_cuthw")
-
-[node name="EnemyIndicator" type="TextureRect" parent="IndicatorTest"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = 468.0
-offset_right = 64.0
-offset_bottom = 596.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_8v28q")
+position = Vector2(-4232, -2128)

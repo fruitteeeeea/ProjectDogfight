@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2rcul35yljaa"]
+[gd_scene load_steps=13 format=3 uid="uid://d2rcul35yljaa"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_0dgib"]
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
@@ -6,6 +6,15 @@
 [ext_resource type="Script" uid="uid://cyvt0ejvx3uyr" path="res://Unit/Enemy/damage_component.gd" id="4_qudsa"]
 [ext_resource type="BehaviorTree" uid="uid://c04qvwf7i2xkn" path="res://Unit/Enemy/AI/enemy01.tres" id="5_s64y3"]
 [ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="6_3gebf"]
+[ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
+
+[sub_resource type="Curve" id="Curve_lebci"]
+_data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lebci"]
+offsets = PackedFloat32Array(0, 0.226244, 1)
+colors = PackedColorArray(0.223529, 0.223529, 0.223529, 1, 0.325419, 0.325419, 0.325419, 0.895023, 1, 1, 1, 0.2)
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_s64y3"]
 
@@ -26,8 +35,21 @@ forward = Vector2(1, 0)
 [node name="Sprite2D" parent="Graphic" index="0"]
 texture = ExtResource("3_ois23")
 
-[node name="DamageComponent" type="Node2D" parent="." index="2"]
+[node name="DamageComponent" type="Node2D" parent="." index="2" node_paths=PackedStringArray("jet")]
 script = ExtResource("4_qudsa")
+jet = NodePath("..")
+
+[node name="DieParticle" type="CPUParticles2D" parent="DamageComponent" index="0"]
+position = Vector2(-16, 0)
+rotation = 1.5708
+emitting = false
+amount = 100
+texture = ExtResource("6_3gebf")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_lebci")
+color_ramp = SubResource("Gradient_lebci")
 
 [node name="BTPlayer" type="BTPlayer" parent="." index="3"]
 behavior_tree = ExtResource("5_s64y3")
@@ -70,3 +92,10 @@ initial_velocity_min = 450.0
 initial_velocity_max = 750.0
 scale_amount_curve = SubResource("Curve_3gebf")
 color_ramp = SubResource("Gradient_3gebf")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="7"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="8"]
+
+[node name="EnemyIndicator" parent="CanvasLayer" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("7_lebci")]
+enemy = NodePath("../..")

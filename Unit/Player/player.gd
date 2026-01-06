@@ -3,7 +3,10 @@ class_name Player
 
 var base_accel : float = 1.0
 var target_accel : float = 1.0
-var burst_accel : float = 1.0
+var burst_accel : float = 1.0:
+	set(v):
+		burst_accel = v
+		print("加速度改变 %s", base_accel)
 
 var force_dir : Vector2 = Vector2.ZERO
 var engine_on : bool = true:
@@ -12,21 +15,18 @@ var engine_on : bool = true:
 		if engine_on:
 			turn_speed = 2.5
 			trail.emitting = true
-			trail_2.emitting = true
 		else :
 			turn_speed = 1.0
 			trail.emitting = false
-			trail_2.emitting = false
 
 @onready var trail: CPUParticles2D = $Graphic/Trail
-@onready var trail_2: CPUParticles2D = $Graphic/Trail2
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		burst_accel = 3.0
-		GameFeel.do_camera_shake(1.5)
-	if event.is_action_released("ui_accept"):
-		target_accel = 1.0
+	#if event.is_action_pressed("ui_accept"):
+		#burst_accel = 3.0
+		#GameFeel.do_camera_shake(1.5)
+	#if event.is_action_released("ui_accept"):
+		#target_accel = 1.0
 	
 	if event.is_action_pressed("engine"): #切换引擎状态 
 		engine_on = !engine_on
@@ -105,8 +105,9 @@ func _get_accel() -> float:
 	base_accel = lerpf(base_accel, target_accel, .1)
 	return base_accel
 
-
+#持续加速
 func _get_burst_accel() -> float:
-	burst_accel = lerpf(burst_accel, 1.0, .1)
+	#burst_accel = lerpf(burst_accel, 1.0, .1)
 	return burst_accel
-	
+
+#将来还会有一个瞬时加速 

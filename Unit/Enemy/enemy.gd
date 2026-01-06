@@ -1,6 +1,7 @@
 extends JetBase
 class_name Enemy
 
+
 @onready var color_rect: ColorRect = $ColorRect
 @onready var bt_player: BTPlayer = $BTPlayer
 
