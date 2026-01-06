@@ -36,11 +36,11 @@ func _crash() -> void:
 	if velocity.y >= 0:
 		crash_dir_x = -1.0
 	
-	turn_speed = 10.0
+	turn_speed = 50.0
 	target_forward = Vector2(crash_dir_x, -1.0)
 	await  get_tree().create_timer(randf_range(.25, .5)).timeout
 	turn_speed = 2.5
-	target_forward = Vector2(crash_dir_x, 1.0)
+	target_forward = add_random_angle(Vector2(crash_dir_x,  1.0), 30)
 	await get_tree().create_timer(5.0).timeout
 	queue_free()
 

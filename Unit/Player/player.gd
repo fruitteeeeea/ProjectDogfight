@@ -14,7 +14,7 @@ var engine_on : bool = true:
 			trail.emitting = true
 			trail_2.emitting = true
 		else :
-			turn_speed = 5.0
+			turn_speed = 1.0
 			trail.emitting = false
 			trail_2.emitting = false
 
@@ -37,16 +37,16 @@ func _apply_force_direction(
 	max_angle_deg := 15.0,
 	force_weight := 0.7
 ) -> Vector2:
-	if global_position.y >= 1280.0:
+	if global_position.y >= 2144.0:
 		force_dir = Vector2.UP
 	
-	elif global_position.y <= -1280.0:
+	elif global_position.y <= -2144.0:
 		force_dir = Vector2.DOWN
 	
-	elif global_position.x >= 1280.0 * 2:
+	elif global_position.x >= 3840:
 		force_dir = Vector2.LEFT
 	
-	elif global_position.x <= -1280.0 * 2:
+	elif global_position.x <= -3840:
 		force_dir = Vector2.RIGHT
 	
 	

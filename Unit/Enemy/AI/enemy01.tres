@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=35 format=3 uid="uid://c04qvwf7i2xkn"]
+[gd_resource type="BehaviorTree" load_steps=37 format=3 uid="uid://c04qvwf7i2xkn"]
 
 [ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_1gapl"]
 [ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/return_to_combat_area.gd" id="1_c0ri4"]
@@ -25,10 +25,10 @@ method = &"_enter_combat_area"
 
 [sub_resource type="BTCondition" id="BTCondition_1gapl"]
 script = ExtResource("1_1gapl")
-combat_area_x_min = -1470.0
-combat_area_x_max = 1470.0
-combat_area_y_min = -980.0
-combat_area_y_max = 980.0
+combat_area_x_min = -3840.0
+combat_area_x_max = 3840.0
+combat_area_y_min = -2144.0
+combat_area_y_max = 2144.0
 
 [sub_resource type="BTInvert" id="BTInvert_c0ri4"]
 children = [SubResource("BTCondition_1gapl")]
@@ -49,8 +49,8 @@ output_var = &"target"
 
 [sub_resource type="BTCondition" id="BTCondition_d80a3"]
 script = ExtResource("5_31koj")
-distance_min = 100.0
-distance_max = 150.0
+distance_min = 300.0
+distance_max = 450.0
 target_var = &"target"
 
 [sub_resource type="BBNode" id="BBNode_7kei1"]
@@ -116,8 +116,12 @@ children = [SubResource("BTSequence_swpx5")]
 custom_name = "NormalState"
 children = [SubResource("BTCooldown_7kei1"), SubResource("BTSelector_swpx5")]
 
+[sub_resource type="BTSequence" id="BTSequence_31koj"]
+
+[sub_resource type="BTSequence" id="BTSequence_d80a3"]
+
 [sub_resource type="BTSelector" id="BTSelector_ioxih"]
-children = [SubResource("BTSequence_ioxih"), SubResource("BTSelector_7kei1")]
+children = [SubResource("BTSequence_ioxih"), SubResource("BTSelector_7kei1"), SubResource("BTSequence_31koj"), SubResource("BTSequence_d80a3")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_s64y3")

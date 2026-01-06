@@ -21,7 +21,7 @@ script = ExtResource("4_1bvp3")
 EnemyScene = ExtResource("2_1bvp3")
 
 [node name="Timer" type="Timer" parent="EnemySpwaner"]
-wait_time = 10.0
+wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="EnemySpwaner/Timer" to="EnemySpwaner" method="_on_timer_timeout"]

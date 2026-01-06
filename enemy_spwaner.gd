@@ -1,6 +1,6 @@
 extends Node2D
 
-var spwan_pos_x_rand := Vector2(-25, 25)
+var spwan_pos_x_rand := Vector2(-125, 125)
 var spwan_pos_y_rand := Vector2(-1350, 1350)
 
 var x_pos := [-2500, 2500]
