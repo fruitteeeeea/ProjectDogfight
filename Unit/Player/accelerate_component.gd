@@ -7,6 +7,7 @@ extends Node2D
 @onready var player: Player = $".."
 @onready var camera_2d: PlayerCamera2D = $"../Camera2D"
 @onready var burst_trail: CPUParticles2D = $"../Graphic/BurstTrail"
+@onready var hud_offset_manager: HUDOffsetManager = $"../HUD/HUDOffsetManager"
 
 var burst_accel := false:
 	set(v):
@@ -18,7 +19,7 @@ var burst_accel := false:
 			player.burst_accel = burst_accel_speed
 			camera_2d.target_zoom = .9
 			burst_trail.emitting = true
-
+			hud_offset_manager.trigger_accel_shake()
 			
 		else :
 			player.burst_accel = 1.0
