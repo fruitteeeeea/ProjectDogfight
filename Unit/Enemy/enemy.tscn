@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cusx3iicve3id" path="res://Asset/Jet/ship_sidesB.png" id="3_ois23"]
 [ext_resource type="Script" uid="uid://cyvt0ejvx3uyr" path="res://Unit/Enemy/damage_component.gd" id="4_qudsa"]
 [ext_resource type="BehaviorTree" uid="uid://c04qvwf7i2xkn" path="res://Unit/Enemy/AI/enemy01.tres" id="5_s64y3"]
-[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="6_3gebf"]
+[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="6_3gebf"]
 [ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
 
 [sub_resource type="Curve" id="Curve_lebci"]
@@ -26,7 +26,7 @@ point_count = 5
 offsets = PackedFloat32Array(0.0015083, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.776471, 0.156863, 0.156863, 1)
 
-[node name="Enemy" instance=ExtResource("1_0dgib")]
+[node name="Enemy" groups=["enemy"] instance=ExtResource("1_0dgib")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("2_kg1yc")
@@ -62,7 +62,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -16.0
-offset_top = -32.0
+offset_top = -24.0
 offset_right = 16.0
 offset_bottom = -16.0
 grow_horizontal = 2

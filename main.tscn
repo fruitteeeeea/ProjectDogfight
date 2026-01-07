@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dnc5yjftuv7il" path="res://Unit/Player/player.tscn" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://bfjkludygb62r" path="res://enemy_spwaner.gd" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://duhpi6ih7unwk" path="res://Unit/Enemy/enemy_spwaner.tscn" id="4_1bvp3"]
 
 [node name="main" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-640.0]
@@ -18,12 +18,4 @@ metadata/_edit_horizontal_guides_ = [448.0]
 [node name="Enemy" parent="." instance=ExtResource("2_1bvp3")]
 position = Vector2(654, 782)
 
-[node name="EnemySpwaner" type="Node2D" parent="."]
-script = ExtResource("4_1bvp3")
-EnemyScene = ExtResource("2_1bvp3")
-
-[node name="Timer" type="Timer" parent="EnemySpwaner"]
-wait_time = 5.0
-autostart = true
-
-[connection signal="timeout" from="EnemySpwaner/Timer" to="EnemySpwaner" method="_on_timer_timeout"]
+[node name="EnemySpwaner" parent="." instance=ExtResource("4_1bvp3")]

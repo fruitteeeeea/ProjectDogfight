@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bl1cf0r32i67t"]
 
 [ext_resource type="Texture2D" uid="uid://dkm8o6vmpmbcn" path="res://Asset/Prototype/BluePrintSprite32X32.png" id="1_clmw2"]
-[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="2_v7n5n"]
+[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="2_v7n5n"]
 
 [sub_resource type="Curve" id="Curve_lquwl"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.694581, 0.516981), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

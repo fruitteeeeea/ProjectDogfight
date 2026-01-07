@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://qmreh1awhiwm"]
+[gd_scene load_steps=7 format=3 uid="uid://qmreh1awhiwm"]
 
 [ext_resource type="Script" uid="uid://wv8hg8gydsmq" path="res://Unit/Jet/jet_base.gd" id="1_4lrnv"]
 [ext_resource type="Texture2D" uid="uid://b0tjq0vj10dcl" path="res://Asset/Jet/ship_K.png" id="1_dwq5a"]
-[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="3_ssqsk"]
+[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="3_ssqsk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dwq5a"]
 radius = 8.0
@@ -11,6 +11,10 @@ height = 32.0
 [sub_resource type="Curve" id="Curve_oc6om"]
 _data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(0.249643, 0.267162), 0.0, 0.0, 0, 0, Vector2(0.843081, 0.258763), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_ssqsk"]
+offsets = PackedFloat32Array(0, 0.352941, 0.998492, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.526277, 1, 1, 1, 0.147813, 1, 1, 1, 0)
 
 [node name="JetBase" type="CharacterBody2D"]
 script = ExtResource("1_4lrnv")
@@ -35,3 +39,4 @@ gravity = Vector2(0, 0)
 scale_amount_min = 0.3
 scale_amount_max = 0.4
 scale_amount_curve = SubResource("Curve_oc6om")
+color_ramp = SubResource("Gradient_ssqsk")

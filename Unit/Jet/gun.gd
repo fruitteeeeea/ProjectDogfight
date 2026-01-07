@@ -1,14 +1,14 @@
 extends Node2D
 
 
-@export var trriger_button := "ui_accept"
+@export var trriger_button := "open_fire"
 @export var BulletScene : PackedScene
 
 @export var fire_interval : float = .1
 
 @onready var fire_interval_timer: Timer = $fire_interval_timer
 
-var fire_on : bool = true:
+@export var fire_on : bool = true:
 	set(v):
 		fire_on = v
 		if fire_on:
@@ -18,6 +18,8 @@ var fire_on : bool = true:
 
 
 func _ready() -> void:
+	if fire_on:
+		fire_interval_timer.autostart = true
 	fire_interval_timer.wait_time = fire_interval
 
 

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://iw4ebp6p7gw7" path="res://Unit/Bullet/bullet.tscn" id="5_pm1gd"]
 [ext_resource type="Texture2D" uid="uid://cifbuc6k72yky" path="res://Asset/Rocket/Rocket.png" id="6_r22qm"]
 [ext_resource type="Script" uid="uid://dbepmm8o001e8" path="res://Unit/Player/State/engine_on_state.gd" id="8_f8s14"]
-[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="8_qacwo"]
+[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="8_qacwo"]
 [ext_resource type="Script" uid="uid://k7u52r1h256" path="res://Unit/Player/State/engine_off_state.gd" id="9_85r8r"]
 [ext_resource type="Texture2D" uid="uid://bg2nyf70pvp8l" path="res://Asset/Rocket/PlayerPositionGuideline.png" id="10_dpwos"]
 [ext_resource type="Script" uid="uid://depgavo7qxod3" path="res://Unit/Player/player_position_guide_line.gd" id="10_oriqu"]
@@ -52,7 +52,6 @@ script = ExtResource("4_j3lyf")
 BulletScene = ExtResource("5_pm1gd")
 
 [node name="fire_interval_timer" type="Timer" parent="Graphic/Gun" index="0"]
-autostart = true
 
 [node name="RocketLauncher" parent="Graphic" index="4" instance=ExtResource("5_mh83u")]
 rocket_nb = 1
@@ -158,25 +157,18 @@ value = 20.0
 
 [node name="Label" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="1"]
 layout_mode = 0
-offset_left = 944.0
-offset_top = 944.0
-offset_right = 984.0
-offset_bottom = 967.0
+offset_left = 1176.0
+offset_top = 912.0
+offset_right = 1216.0
+offset_bottom = 945.0
 
-[node name="EngineState" type="Control" parent="AccelerateComponent/CanvasLayer" index="1"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="AccelerateComponent/CanvasLayer/EngineState" index="0"]
+[node name="Label2" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="2"]
 layout_mode = 0
-offset_left = 1224.0
-offset_top = 784.0
-offset_right = 1304.0
-offset_bottom = 833.0
-text = "Engine: On
-"
+offset_left = 1176.0
+offset_top = 880.0
+offset_right = 1297.0
+offset_bottom = 951.0
+text = "Engine: On"
 
 [node name="Camera2D" type="Camera2D" parent="." index="4" node_paths=PackedStringArray("target_point")]
 zoom = Vector2(1.3, 1.3)

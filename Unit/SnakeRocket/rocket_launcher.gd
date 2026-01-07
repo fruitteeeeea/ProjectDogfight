@@ -27,12 +27,13 @@ func _launch_rocket(nb := 1) -> void:
 		var rocket = SNAKE_ROCKET.instantiate()
 
 		if up_dir:
-			angle = - PI / 4
+			angle = - PI / 4 - PI /2 
 		else :
-			angle = PI / 4
+			angle = PI / 4 + PI /2
 		up_dir = !up_dir
-		rocket.direction = forward
-		rocket.target_dir = forward.rotated(angle)
+		
+		rocket.direction = forward.rotated(angle)
+		rocket.target_dir = forward
 		
 		get_tree().current_scene.add_child(rocket)
 		rocket.global_position = global_position

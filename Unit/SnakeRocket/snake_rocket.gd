@@ -1,37 +1,51 @@
 extends Node2D
 
-@export var speed := 1200.0
+@export var speed := 1000.0
 @export var wave_amplitude := 330.0
 @export var wave_frequency := 58.0
 @export var turn_speed := 16.0
 
 @onready var graphic: Node2D = $Graphic
+@onready var detect_area: Area2D = $DetectArea
 @onready var explode_particle: CPUParticles2D = $Graphic/ExplodeParticle
 @onready var sprite_2d: Sprite2D = $Graphic/Sprite2D
 @onready var trail: Trails = $Graphic/Trail
+@onready var color_rect: ColorRect = $ColorRect
+@onready var label: Label = $Label
 
-var target : Node2D
-var target_pos: Vector2
+
+
+var target : Node2D:
+	set(v):
+		target = v
+		color_rect.color = Color.RED
+		label.text = "found!"
+
 var target_dir : Vector2
+var target_pos: Vector2 
+
 
 var time := 0.0
 var direction := Vector2.RIGHT
 
 func _process(delta):
-	if not target_pos and not target_dir:
-		return
-
-	time += delta
-
 	var to_target : Vector2
-	if target_pos:
-		to_target = (target_pos - global_position).normalized()
-	elif target_dir:
-		to_target = target_dir
-	
-	elif target:
+
+	if target != null: #目标敌人的优先级最高 
+		if global_position.distance_squared_to(target.global_position) <= 100:
+			_explord()
+		
 		to_target = (target.global_position - global_position).normalized()
+		
+	elif target_dir != Vector2.ZERO:
+		to_target = target_dir.normalized()
+		
+	elif target_pos != null:
+		to_target = (target_pos - global_position).normalized()
+	else:
+		return
 	
+	time += delta
 	
 	direction = direction.lerp(to_target, turn_speed * delta).normalized()
 
@@ -50,10 +64,16 @@ func _explord() -> void:
 	sprite_2d.hide()
 	trail.active_trail = false
 	explode_particle.emitting = true
+	
+	for e in detect_area.get_overlapping_bodies():
+		if e is Enemy:
+			e.take_damage()
+	
 	await explode_particle.finished
 	queue_free()
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_detect_area_body_entered(body: Node2D) -> void:
 	if body is Enemy:
-		target = body
+		if !body.is_dead:
+			target = body
