@@ -1,6 +1,7 @@
 extends Node2D
 
 
+@export var trriger_button := "ui_accept"
 @export var BulletScene : PackedScene
 
 @export var fire_interval : float = .1
@@ -21,7 +22,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed(trriger_button):
 		fire_on = !fire_on
 
 

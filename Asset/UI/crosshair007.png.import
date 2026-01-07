@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://njb2cbf4ee6k"
-path="res://.godot/imported/EnemyIndicator.png-17fc492dff7346ea2fa7420aad3803de.ctex"
+uid="uid://qgtt4iihnros"
+path="res://.godot/imported/crosshair007.png-02b4b8638149b9fc29c72298eefb091e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/EnemyIndicator.png"
-dest_files=["res://.godot/imported/EnemyIndicator.png-17fc492dff7346ea2fa7420aad3803de.ctex"]
+source_file="res://Asset/UI/crosshair007.png"
+dest_files=["res://.godot/imported/crosshair007.png-02b4b8638149b9fc29c72298eefb091e.ctex"]
 
 [params]
 

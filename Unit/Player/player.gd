@@ -8,28 +8,39 @@ var burst_accel : float = 1.0:
 		burst_accel = v
 		print("加速度改变 %s", base_accel)
 
+
+enum MoveMode {
+	TO_MOUSE,
+	FORCE_DIR,
+}
+
+var current_move_mode : MoveMode = MoveMode.TO_MOUSE
 var force_dir : Vector2 = Vector2.ZERO
+
+
 var engine_on : bool = true:
 	set(v):
 		engine_on = v
 		if engine_on:
+			limbo_hsm.dispatch("EngineOn")
 			turn_speed = 2.5
 			trail.emitting = true
 		else :
+			limbo_hsm.dispatch("EngineOff")
 			turn_speed = 1.0
 			trail.emitting = false
 
+@onready var limbo_hsm: LimboHSM = $LimboHSM
 @onready var trail: CPUParticles2D = $Graphic/Trail
 
 func _unhandled_input(event: InputEvent) -> void:
-	#if event.is_action_pressed("ui_accept"):
-		#burst_accel = 3.0
-		#GameFeel.do_camera_shake(1.5)
-	#if event.is_action_released("ui_accept"):
-		#target_accel = 1.0
-	
 	if event.is_action_pressed("engine"): #切换引擎状态 
 		engine_on = !engine_on
+
+
+func _init_state_machine(): #初始化状态机
+	limbo_hsm.initialize(self)
+	limbo_hsm.set_active(true)
 
 
 func _apply_force_direction(

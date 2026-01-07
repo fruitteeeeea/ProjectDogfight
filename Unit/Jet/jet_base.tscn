@@ -9,8 +9,8 @@ radius = 8.0
 height = 32.0
 
 [sub_resource type="Curve" id="Curve_oc6om"]
-_data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(0.249643, 0.267162), 0.0, 0.0, 0, 0, Vector2(0.843081, 0.258763), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [node name="JetBase" type="CharacterBody2D"]
 script = ExtResource("1_4lrnv")

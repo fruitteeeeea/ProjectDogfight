@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://pch86ahboxtj"]
 
 [ext_resource type="Script" uid="uid://crpb5dmphqscm" path="res://Unit/Enemy/enemy_indicator.gd" id="1_uhv8j"]
-[ext_resource type="Texture2D" uid="uid://njb2cbf4ee6k" path="res://Asset/EnemyIndicator.png" id="2_3qr2e"]
+[ext_resource type="Texture2D" uid="uid://njb2cbf4ee6k" path="res://Asset/UI/EnemyIndicator.png" id="2_3qr2e"]
 
-[node name="EnemyIndicator" type="Control" node_paths=PackedStringArray("enemy")]
+[node name="EnemyIndicator" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -17,7 +17,6 @@ offset_bottom = -572.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uhv8j")
-enemy = NodePath("")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -49,3 +48,9 @@ grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("2_3qr2e")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Enemy State"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=23 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -8,9 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://dw514kmcsyfxe" path="res://Unit/SnakeRocket/rocket_launcher.tscn" id="5_mh83u"]
 [ext_resource type="PackedScene" uid="uid://iw4ebp6p7gw7" path="res://Unit/Bullet/bullet.tscn" id="5_pm1gd"]
 [ext_resource type="Texture2D" uid="uid://cifbuc6k72yky" path="res://Asset/Rocket/Rocket.png" id="6_r22qm"]
+[ext_resource type="Script" uid="uid://dbepmm8o001e8" path="res://Unit/Player/State/engine_on_state.gd" id="8_f8s14"]
 [ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/Rocket/Particle00.png" id="8_qacwo"]
+[ext_resource type="Script" uid="uid://k7u52r1h256" path="res://Unit/Player/State/engine_off_state.gd" id="9_85r8r"]
 [ext_resource type="Texture2D" uid="uid://bg2nyf70pvp8l" path="res://Asset/Rocket/PlayerPositionGuideline.png" id="10_dpwos"]
 [ext_resource type="Script" uid="uid://depgavo7qxod3" path="res://Unit/Player/player_position_guide_line.gd" id="10_oriqu"]
+[ext_resource type="Script" uid="uid://ch3hf4ujv44vf" path="res://Unit/Player/State/burst_accelerate_state.gd" id="10_toghf"]
+[ext_resource type="Script" uid="uid://dsxmv6q6qj4o8" path="res://Unit/Player/State/force_turn_state.gd" id="11_85r8r"]
 [ext_resource type="Script" uid="uid://bhv5mohwbu3ig" path="res://Unit/Player/accelerate_component.gd" id="11_oriqu"]
 [ext_resource type="Script" uid="uid://beswwf0ir65f8" path="res://Unit/Player/hud_offset_manager.gd" id="11_uefnm"]
 
@@ -108,7 +112,21 @@ initial_velocity_max = 400.0
 scale_amount_curve = SubResource("Curve_qacwo")
 color_ramp = SubResource("Gradient_qacwo")
 
-[node name="AccelerateComponent" type="Node2D" parent="." index="2"]
+[node name="LimboHSM" type="LimboHSM" parent="." index="2"]
+
+[node name="EngineOnState" type="LimboState" parent="LimboHSM" index="0"]
+script = ExtResource("8_f8s14")
+
+[node name="EngineOffState" type="LimboState" parent="LimboHSM" index="1"]
+script = ExtResource("9_85r8r")
+
+[node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2"]
+script = ExtResource("10_toghf")
+
+[node name="ForceTurnState" type="LimboState" parent="LimboHSM" index="3"]
+script = ExtResource("11_85r8r")
+
+[node name="AccelerateComponent" type="Node2D" parent="." index="3"]
 script = ExtResource("11_oriqu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="AccelerateComponent" index="0"]
@@ -145,14 +163,29 @@ offset_top = 944.0
 offset_right = 984.0
 offset_bottom = 967.0
 
-[node name="Camera2D" type="Camera2D" parent="." index="3" node_paths=PackedStringArray("target_point")]
+[node name="EngineState" type="Control" parent="AccelerateComponent/CanvasLayer" index="1"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="AccelerateComponent/CanvasLayer/EngineState" index="0"]
+layout_mode = 0
+offset_left = 1224.0
+offset_top = 784.0
+offset_right = 1304.0
+offset_bottom = 833.0
+text = "Engine: On
+"
+
+[node name="Camera2D" type="Camera2D" parent="." index="4" node_paths=PackedStringArray("target_point")]
 zoom = Vector2(1.3, 1.3)
 script = ExtResource("3_aph0k")
 target_point = NodePath("../Graphic/CameraPoint")
 
 [node name="TrumaComponent" parent="Camera2D" index="0" instance=ExtResource("3_pm1gd")]
 
-[node name="HUD" type="CanvasLayer" parent="." index="4"]
+[node name="HUD" type="CanvasLayer" parent="." index="5"]
 
 [node name="HUDOffsetManager" type="Node2D" parent="HUD" index="0" node_paths=PackedStringArray("player", "control_list")]
 script = ExtResource("11_uefnm")

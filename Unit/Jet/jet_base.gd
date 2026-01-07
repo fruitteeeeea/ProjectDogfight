@@ -1,10 +1,9 @@
 extends CharacterBody2D
 class_name JetBase
 
-const MAP_WIDTH := 640.0
+#const MAP_WIDTH := 640.0
 
 @export var forward : Vector2 = Vector2.UP
-
 var target_forward : Vector2 = Vector2.UP
 
 @export var turn_speed := 2.5  # 越大越灵敏

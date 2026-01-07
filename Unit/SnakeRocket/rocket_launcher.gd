@@ -2,12 +2,13 @@ extends Node2D
 
 const SNAKE_ROCKET = preload("res://Unit/SnakeRocket/snake_rocket.tscn")
 
+@export var trriger_button := "launch_rocket"
 @export var rocket_nb := 5
 
 var up_dir := true
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("launch_rocket"):
+	if event.is_action_pressed(trriger_button):
 		_spwan_rocket()
 
 

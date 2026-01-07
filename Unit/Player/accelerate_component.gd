@@ -1,6 +1,7 @@
 extends Node2D
 
 
+@export var trriger_button := "ui_accept"
 @export var burst_accel_speed := 1.5
 
 
@@ -34,7 +35,7 @@ var burst_recover := 1.0
 
 #按下之后 开始加速 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed(trriger_button):
 		burst_accel = !burst_accel
 
 
