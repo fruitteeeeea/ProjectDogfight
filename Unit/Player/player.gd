@@ -33,10 +33,14 @@ var engine_on : bool = true:
 
 @onready var limbo_hsm: LimboHSM = $LimboHSM
 @onready var trail: CPUParticles2D = $Graphic/Trail
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("engine"): #切换引擎状态 
 		engine_on = !engine_on
+		
+	if event.is_action_pressed("dodge"):
+		animation_player.play("dodge")
 
 
 func _init_state_machine(): #初始化状态机

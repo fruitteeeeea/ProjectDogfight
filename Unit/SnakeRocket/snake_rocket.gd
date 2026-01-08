@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var speed := 1000.0
+@export var speed := 800.0
 @export var wave_amplitude := 330.0
 @export var wave_frequency := 58.0
 @export var turn_speed := 16.0

@@ -6,8 +6,8 @@ extends Node2D
 @export var fire_interval : float = .1
 @onready var fire_interval_timer: Timer = $fire_interval_timer
 
-@export var max_bullet := 1000
-@export var current_bullet := 1000
+@export var max_bullet := 100
+@export var current_bullet := 0
 @export var reload_speed_curve : Curve
 
 @onready var bullet_number: Label = $CanvasLayer/GunSlot/BulletNumber
@@ -61,12 +61,15 @@ func _fire() -> void:
 		fire_on = false
 		return
 	
-	current_bullet -= 1
+	current_bullet -= 2
 	
-	var bullet = BulletScene.instantiate() as Bullet
-	bullet.position = global_position
-	bullet.direction = global_transform.x.normalized()
-	get_tree().current_scene.add_child(bullet)
+	var bullet_offset : Array[Vector2] = [Vector2(0, -12.0), Vector2(0, 12.0)]
+	
+	for i in range(bullet_offset.size()):
+		var bullet = BulletScene.instantiate() as Bullet
+		bullet.position = global_position + bullet_offset.pop_back().rotated(global_rotation) #要旋转一下这个offset
+		bullet.direction = global_transform.x.normalized()
+		get_tree().current_scene.add_child(bullet)
 
 
 func _on_fire_interval_timer_timeout() -> void:

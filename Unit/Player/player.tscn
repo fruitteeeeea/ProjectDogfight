@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=31 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
 [ext_resource type="Script" uid="uid://r077cnmnbhed" path="res://Unit/Jet/camera_2d.gd" id="3_aph0k"]
+[ext_resource type="Texture2D" uid="uid://dry37qywo51n1" path="res://Asset/UI/crosshair005.png" id="3_dhsxg"]
 [ext_resource type="PackedScene" uid="uid://mv1sve8aww0k" path="res://Camera/truma_component.tscn" id="3_pm1gd"]
 [ext_resource type="Script" uid="uid://bghf3dl8ten4h" path="res://Unit/Jet/gun.gd" id="4_j3lyf"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="5_dhsxg"]
@@ -48,6 +49,91 @@ font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_toghf"]
 
+[sub_resource type="Animation" id="Animation_toghf"]
+resource_name = "dodge"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(0.189464, 0.189464, 0.189464),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1e-05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(0.189464, 0.189464, 0.189464),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(8, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.5),
+"transitions": PackedFloat32Array(0.189464, 0.189464, 0.189464),
+"update": 0,
+"values": [1.5708, 0.633555, 1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_dhsxg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhsxg"]
+_data = {
+&"RESET": SubResource("Animation_dhsxg"),
+&"dodge": SubResource("Animation_toghf")
+}
+
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
 
@@ -58,11 +144,13 @@ lifetime = 2.0
 [node name="CameraPoint" type="Marker2D" parent="Graphic" index="2"]
 position = Vector2(192, 0)
 
+[node name="Sprite2D" type="Sprite2D" parent="Graphic/CameraPoint" index="0"]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("3_dhsxg")
+
 [node name="Gun" type="Node2D" parent="Graphic" index="3"]
 script = ExtResource("4_j3lyf")
 BulletScene = ExtResource("5_pm1gd")
-fire_interval = 0.05
-max_bullet = 50
 reload_speed_curve = SubResource("Curve_toghf")
 
 [node name="fire_interval_timer" type="Timer" parent="Graphic/Gun" index="0"]
@@ -635,5 +723,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "MissileApproach"
 label_settings = SubResource("LabelSettings_toghf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+root_node = NodePath("../Graphic")
+libraries = {
+&"": SubResource("AnimationLibrary_dhsxg")
+}
 
 [connection signal="timeout" from="Graphic/Gun/fire_interval_timer" to="Graphic/Gun" method="_on_fire_interval_timer_timeout"]
