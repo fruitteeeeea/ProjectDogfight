@@ -1,4 +1,5 @@
 extends Node2D
+class_name RocketLauncher
 
 const SNAKE_ROCKET = preload("res://Unit/SnakeRocket/snake_rocket.tscn")
 
@@ -19,8 +20,8 @@ func _spwan_rocket() -> void:
 		await get_tree().create_timer(.2).timeout
 
 
-func _launch_rocket(nb := 1) -> void:
-	var forward := global_transform.x.normalized()
+func _launch_rocket(dir :float = 1 , nb := 1, interval := .1) -> void:
+	var forward := global_transform.x.normalized() * (Vector2.ONE * dir)
 	var angle : float
 	
 	for i in range(nb):

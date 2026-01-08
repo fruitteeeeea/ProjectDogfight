@@ -1,9 +1,13 @@
 extends Node2D
+class_name SnakeRocket
+#蛇形导弹 
 
 @export var speed := 800.0
 @export var wave_amplitude := 330.0
 @export var wave_frequency := 58.0
 @export var turn_speed := 16.0
+
+@onready var missile_jammer: MissileJammer = $MissileJammer
 
 @onready var graphic: Node2D = $Graphic
 @onready var detect_area: Area2D = $DetectArea
@@ -28,7 +32,7 @@ var time := 0.0
 var direction := Vector2.RIGHT
 
 func _process(delta):
-	var to_target : Vector2
+	var to_target : Vector2 #这个是导弹最终前进方向 
 
 	if target != null or is_instance_valid(target): #目标敌人的优先级最高 
 		if global_position.distance_squared_to(target.global_position) <= 100:
@@ -45,6 +49,11 @@ func _process(delta):
 		return
 	
 	time += delta
+	
+	var jam_dir = missile_jammer.update_jam_dir(delta, to_target) #热诱弹 
+	if jam_dir != Vector2.ZERO:
+		to_target = to_target.slerp(jam_dir, missile_jammer.jam_weight).normalized()
+
 	
 	direction = direction.lerp(to_target, turn_speed * delta).normalized()
 

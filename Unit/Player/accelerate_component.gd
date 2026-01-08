@@ -2,19 +2,28 @@ extends Node2D
 
 
 @export var trriger_button := "ui_accept"
-@export var burst_accel_speed := 1.5
+@export var burst_accel_speed := 1.8
 
+@export var max_burst_accel_fuel := 20.0
+@export var burst_comsume := 5.0
+@export var burst_recover := 1.0
+
+@export var rocket_launcher : RocketLauncher
 
 @onready var player: Player = $".."
 @onready var camera_2d: PlayerCamera2D = $"../Camera2D"
 @onready var burst_trail: CPUParticles2D = $"../Graphic/BurstTrail"
 @onready var hud_offset_manager: HUDOffsetManager = $"../HUD/HUDOffsetManager"
+@onready var progress_bar: ProgressBar = $CanvasLayer/AccelHUD/ProgressBar
 
 var burst_accel := false:
 	set(v):
 		burst_accel = v
 		if v == true:
 			print("加速！")
+			
+			rocket_launcher._launch_rocket(-.1, 5, .05) #朝后方发射热诱弹 
+			
 			GameFeel.do_camera_shake(3.0)
 			player.engine_on = true
 			player.burst_accel = burst_accel_speed
@@ -26,12 +35,11 @@ var burst_accel := false:
 			player.burst_accel = 1.0
 			camera_2d.target_zoom = camera_2d.defult_zoom
 			burst_trail.emitting = false
-			
 
-var burst_comsume := 5.0
-var burst_recover := 1.0
+func _ready() -> void:
+	progress_bar.max_value = max_burst_accel_fuel
+	progress_bar.value = max_burst_accel_fuel
 
-@onready var progress_bar: ProgressBar = $CanvasLayer/AccelHUD/ProgressBar
 
 #按下之后 开始加速 
 func _unhandled_input(event: InputEvent) -> void:

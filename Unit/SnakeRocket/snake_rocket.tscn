@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b4vpogepx8flp"]
+[gd_scene load_steps=21 format=3 uid="uid://b4vpogepx8flp"]
 
 [ext_resource type="Script" uid="uid://h3mujltinpsu" path="res://Unit/SnakeRocket/snake_rocket.gd" id="1_n13jw"]
 [ext_resource type="Texture2D" uid="uid://cifbuc6k72yky" path="res://Asset/Rocket/Rocket.png" id="2_eatv8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="7_1fdsh"]
 [ext_resource type="Texture2D" uid="uid://hob5x3xc5myj" path="res://Asset/UI/crosshair160.png" id="8_1ftbv"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="10_vkt1o"]
+[ext_resource type="Script" uid="uid://f034hyslrf1" path="res://Unit/SnakeRocket/missile_jammer.gd" id="10_y6jex"]
 
 [sub_resource type="Curve" id="Curve_c7l16"]
 _data = [Vector2(0, 0.704594), 0.0, 0.0, 0, 0, Vector2(1, 0.348814), 0.0, 0.0, 0, 0]
@@ -175,6 +176,13 @@ script = ExtResource("10_vkt1o")
 min_value = Color(0.980392, 0.980392, 0.980392, 1)
 max_value = Color(0.827451, 0.184314, 0.184314, 1)
 metadata/_custom_type_script = "uid://dxl17dpembjyc"
+
+[node name="MissileJammer" type="Node" parent="."]
+script = ExtResource("10_y6jex")
+change_interval = 0.05
+max_angle_deg = 180.0
+jam_weight = 1.0
+rotate_speed = 300.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="DetectArea" to="." method="_on_detect_area_body_entered"]

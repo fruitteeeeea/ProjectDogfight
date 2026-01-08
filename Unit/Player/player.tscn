@@ -287,8 +287,10 @@ script = ExtResource("10_toghf")
 [node name="ForceTurnState" type="LimboState" parent="LimboHSM" index="3"]
 script = ExtResource("11_85r8r")
 
-[node name="AccelerateComponent" type="Node2D" parent="." index="3"]
+[node name="AccelerateComponent" type="Node2D" parent="." index="3" node_paths=PackedStringArray("rocket_launcher")]
 script = ExtResource("11_oriqu")
+max_burst_accel_fuel = 100.0
+rocket_launcher = NodePath("../Graphic/RocketLauncher")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="AccelerateComponent" index="0"]
 
