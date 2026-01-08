@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b4vpogepx8flp"]
+[gd_scene load_steps=18 format=3 uid="uid://b4vpogepx8flp"]
 
 [ext_resource type="Script" uid="uid://h3mujltinpsu" path="res://Unit/SnakeRocket/snake_rocket.gd" id="1_n13jw"]
 [ext_resource type="Texture2D" uid="uid://cifbuc6k72yky" path="res://Asset/Rocket/Rocket.png" id="2_eatv8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="4_w84y8"]
 [ext_resource type="Texture2D" uid="uid://bu1j36afux0ib" path="res://Asset/Rocket/effect_yellow.png" id="5_m5gxl"]
 [ext_resource type="Texture2D" uid="uid://b26yd6r61og5e" path="res://Asset/Rocket/RocketFlame.png" id="6_c7l16"]
+[ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="7_1fdsh"]
 
 [sub_resource type="Curve" id="Curve_c7l16"]
 _data = [Vector2(0, 0.704594), 0.0, 0.0, 0, 0, Vector2(1, 0.348814), 0.0, 0.0, 0, 0]
@@ -125,19 +126,27 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
 shape = SubResource("CircleShape2D_c7l16")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="2DWorldLabel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_1fdsh")
+
+[node name="ColorRect" type="ColorRect" parent="2DWorldLabel"]
+layout_mode = 0
 offset_left = -16.0
 offset_top = -24.0
 offset_right = 16.0
 offset_bottom = -16.0
 color = Color(1, 0.933333, 0.345098, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="2DWorldLabel"]
+layout_mode = 0
 offset_left = -56.0
 offset_top = -56.0
 offset_right = 71.0
 offset_bottom = -23.0
-scale = Vector2(0.769, 0.769)
 text = "Searching"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

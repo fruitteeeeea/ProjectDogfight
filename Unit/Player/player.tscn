@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=26 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://dsxmv6q6qj4o8" path="res://Unit/Player/State/force_turn_state.gd" id="11_85r8r"]
 [ext_resource type="Script" uid="uid://bhv5mohwbu3ig" path="res://Unit/Player/accelerate_component.gd" id="11_oriqu"]
 [ext_resource type="Script" uid="uid://beswwf0ir65f8" path="res://Unit/Player/hud_offset_manager.gd" id="11_uefnm"]
+[ext_resource type="Script" uid="uid://yrfw1sonij32" path="res://Unit/Player/warning.gd" id="18_toghf"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -36,6 +37,11 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.766816, 1, 1, 1, 0, 1, 1, 1, 0.
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_r22qm"]
 gradient = SubResource("Gradient_oriqu")
 width = 44
+
+[sub_resource type="LabelSettings" id="LabelSettings_85r8r"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_toghf"]
 
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
@@ -186,7 +192,8 @@ control_list = {
 NodePath("../../Graphic/RocketLauncher/CanvasLayer/RocketSlot"): 1.0,
 NodePath("../../AccelerateComponent/CanvasLayer/AccelHUD"): 1.25,
 NodePath("../Control/ScaleLineHUD"): 1.3,
-NodePath("../Control/ScaleLineHUD2"): 1.3
+NodePath("../Control/ScaleLineHUD2"): 1.3,
+NodePath("../Warning"): 0.1
 }
 
 [node name="Control" type="Control" parent="HUD" index="1"]
@@ -505,5 +512,52 @@ offset_bottom = 28.0
 grow_horizontal = 0
 rotation = 1.57079
 texture = SubResource("GradientTexture1D_r22qm")
+
+[node name="Warning" type="Control" parent="HUD" index="2"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -252.0
+offset_right = -20.0
+offset_bottom = -252.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("18_toghf")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="HUD/Warning" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -36.5
+offset_right = 64.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Warning/HBoxContainer" index="0"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Warning/HBoxContainer/PanelContainer" index="0"]
+layout_mode = 2
+color = Color(0.827451, 0.184314, 0.184314, 1)
+
+[node name="Label" type="Label" parent="HUD/Warning/HBoxContainer/PanelContainer" index="1"]
+layout_mode = 2
+text = "Warning"
+label_settings = SubResource("LabelSettings_85r8r")
+
+[node name="Label2" type="Label" parent="HUD/Warning/HBoxContainer" index="1"]
+layout_mode = 2
+text = "MissileApproach"
+label_settings = SubResource("LabelSettings_toghf")
 
 [connection signal="timeout" from="Graphic/Gun/fire_interval_timer" to="Graphic/Gun" method="_on_fire_interval_timer_timeout"]

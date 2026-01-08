@@ -48,9 +48,3 @@ grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("2_3qr2e")
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Enemy State"

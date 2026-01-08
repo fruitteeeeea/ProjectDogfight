@@ -30,15 +30,12 @@ var engine_on : bool = true:
 			turn_speed = 1.0
 			trail.emitting = false
 
+
+
 @onready var limbo_hsm: LimboHSM = $LimboHSM
 @onready var trail: CPUParticles2D = $Graphic/Trail
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("game_speed"):
-		Engine.time_scale = .8
-	if event.is_action_released("game_speed"):
-		Engine.time_scale = 1.0
-	
 	if event.is_action_pressed("engine"): #切换引擎状态 
 		engine_on = !engine_on
 

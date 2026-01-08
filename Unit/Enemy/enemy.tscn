@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2rcul35yljaa"]
+[gd_scene load_steps=15 format=3 uid="uid://d2rcul35yljaa"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_0dgib"]
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
@@ -7,6 +7,7 @@
 [ext_resource type="BehaviorTree" uid="uid://c04qvwf7i2xkn" path="res://Unit/Enemy/AI/enemy01.tres" id="5_s64y3"]
 [ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="6_3gebf"]
 [ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
+[ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="8_iw8a2"]
 
 [sub_resource type="Curve" id="Curve_lebci"]
 _data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -25,6 +26,8 @@ point_count = 5
 [sub_resource type="Gradient" id="Gradient_3gebf"]
 offsets = PackedFloat32Array(0.0015083, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.776471, 0.156863, 0.156863, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_iw8a2"]
 
 [node name="Enemy" groups=["enemy"] instance=ExtResource("1_0dgib")]
 collision_layer = 4
@@ -95,7 +98,30 @@ color_ramp = SubResource("Gradient_3gebf")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="7"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="8"]
+[node name="WorldLabel2D" type="Control" parent="." index="8"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_iw8a2")
+metadata/_custom_type_script = "uid://da7a50jvg5hpp"
+
+[node name="Velocity" type="Label" parent="WorldLabel2D" index="0"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 33.0
+text = "speed : 100
+dir : Vector(1,1)"
+label_settings = SubResource("LabelSettings_iw8a2")
+
+[node name="State" type="Label" parent="WorldLabel2D" index="1"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 203.0
+offset_bottom = 135.0
+text = "state : attack"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="9"]
 
 [node name="EnemyIndicator" parent="CanvasLayer" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("7_lebci")]
 enemy = NodePath("../..")

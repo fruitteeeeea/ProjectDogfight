@@ -10,9 +10,8 @@ extends Node2D
 @onready var explode_particle: CPUParticles2D = $Graphic/ExplodeParticle
 @onready var sprite_2d: Sprite2D = $Graphic/Sprite2D
 @onready var trail: Trails = $Graphic/Trail
-@onready var color_rect: ColorRect = $ColorRect
-@onready var label: Label = $Label
-
+@onready var color_rect: ColorRect = $"2DWorldLabel/ColorRect"
+@onready var label: Label = $"2DWorldLabel/Label"
 
 
 var target : Node2D:
