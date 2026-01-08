@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Bullet
 
 var direction : Vector2 = Vector2.RIGHT
-var speed : float = 1500.0
+var speed : float = 1000.0
 
 func _ready() -> void:
 	rotation = direction.angle()
