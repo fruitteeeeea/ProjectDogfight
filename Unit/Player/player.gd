@@ -31,7 +31,6 @@ var engine_on : bool = true:
 			trail.emitting = false
 
 
-
 @onready var limbo_hsm: LimboHSM = $LimboHSM
 @onready var trail: CPUParticles2D = $Graphic/Trail
 

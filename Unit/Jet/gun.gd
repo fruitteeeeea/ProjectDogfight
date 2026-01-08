@@ -1,26 +1,54 @@
 extends Node2D
 
-
 @export var trriger_button := "open_fire"
 @export var BulletScene : PackedScene
 
 @export var fire_interval : float = .1
-
 @onready var fire_interval_timer: Timer = $fire_interval_timer
 
-@export var fire_on : bool = true:
+@export var max_bullet := 1000
+@export var current_bullet := 1000
+@export var reload_speed_curve : Curve
+
+@onready var bullet_number: Label = $CanvasLayer/GunSlot/BulletNumber
+@onready var fire_on_label: CanvasGroup = $CanvasLayer/GunSlot/BulletNumber/FireOnLabel
+@onready var reloding_label: CanvasGroup = $CanvasLayer/GunSlot/BulletNumber/RelodingLabel
+
+
+var fire_on : bool = false:
 	set(v):
 		fire_on = v
 		if fire_on:
+			fire_on_label.show()
 			fire_interval_timer.start(fire_interval)
+			
+			reload_active = false
 		else :
+			fire_on_label.hide()
 			fire_interval_timer.stop()
+			
+			reload_active = true
+			reload_time = 0.0
+			reload_accumulator = 0.0
 
+var reload_active := false:
+	set(v):
+		if reload_active == v:
+			return
+
+		reload_active = v
+		
+		if reload_active:
+			reloding_label.show()
+		else :
+			reloding_label.hide()
+
+var reload_time = 0.0
+var reload_accumulator := 0.0
 
 func _ready() -> void:
-	if fire_on:
-		fire_interval_timer.autostart = true
-	fire_interval_timer.wait_time = fire_interval
+	current_bullet = max_bullet #初始时补充弹药
+	fire_interval_timer.wait_time = fire_interval #赋值开火间隔
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -29,6 +57,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _fire() -> void:
+	if current_bullet <= 0:
+		fire_on = false
+		return
+	
+	current_bullet -= 1
+	
 	var bullet = BulletScene.instantiate() as Bullet
 	bullet.position = global_position
 	bullet.direction = global_transform.x.normalized()
@@ -37,3 +71,31 @@ func _fire() -> void:
 
 func _on_fire_interval_timer_timeout() -> void:
 	_fire() 
+
+
+func _physics_process(delta: float) -> void:
+	_update_gun_text()
+	_handle_bullet_reload(delta)
+
+
+func _update_gun_text() -> void:
+	bullet_number.text = "Gun : " + str(current_bullet) + "/" + str(max_bullet)
+
+
+func _handle_bullet_reload(delta : float) -> void:
+	if !reload_active or current_bullet >= max_bullet:
+		return
+
+	reload_time += delta
+	var progress = clamp(reload_time, 0.0, reload_speed_curve.max_domain)
+	var reload_speed := reload_speed_curve.sample(progress)
+	
+	reload_accumulator += reload_speed * delta
+	
+	while reload_accumulator >= 1.0:
+		current_bullet += 1
+		reload_accumulator -= 1.0
+
+		if current_bullet >= max_bullet:
+			reload_active = false
+			break

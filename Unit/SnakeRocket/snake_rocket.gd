@@ -30,7 +30,7 @@ var direction := Vector2.RIGHT
 func _process(delta):
 	var to_target : Vector2
 
-	if target != null: #目标敌人的优先级最高 
+	if target != null or is_instance_valid(target): #目标敌人的优先级最高 
 		if global_position.distance_squared_to(target.global_position) <= 100:
 			_explord()
 		
