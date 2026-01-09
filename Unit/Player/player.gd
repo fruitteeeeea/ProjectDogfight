@@ -1,6 +1,11 @@
 extends JetBase
 class_name Player
 
+const WORLD_RECT := Rect2(
+	Vector2(-3840.0, -2144.0),  # 左上角
+	Vector2(7680.0, 4288.0)    # 宽高
+)
+
 var base_accel : float = 1.0
 var target_accel : float = 1.0
 var burst_accel : float = 1.0:
@@ -9,29 +14,17 @@ var burst_accel : float = 1.0:
 		print("加速度改变 %s", base_accel)
 
 
-enum MoveMode {
-	TO_MOUSE,
-	FORCE_DIR,
-}
-
-var current_move_mode : MoveMode = MoveMode.TO_MOUSE
 var force_dir : Vector2 = Vector2.ZERO
 
-
-var engine_on : bool = true:
-	set(v):
-		engine_on = v
-		if engine_on:
-			limbo_hsm.dispatch("EngineOn")
-			turn_speed = 2.5
-			trail.emitting = true
-		else :
-			limbo_hsm.dispatch("EngineOff")
-			turn_speed = 1.0
-			trail.emitting = false
+var engine_on : bool = true
 
 
 @onready var limbo_hsm: LimboHSM = $LimboHSM
+@onready var engine_on_state: LimboState = $LimboHSM/EngineOnState
+@onready var engine_off_state: LimboState = $LimboHSM/EngineOffState
+@onready var burst_accelerate_state: LimboState = $LimboHSM/BurstAccelerateState
+
+
 @onready var trail: CPUParticles2D = $Graphic/Trail
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -42,69 +35,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("dodge"):
 		animation_player.play("dodge")
 
+func _ready() -> void:
+	_init_state_machine()
+
 
 func _init_state_machine(): #初始化状态机
+	limbo_hsm.add_transition(limbo_hsm.ANYSTATE, engine_on_state, "EngineOn")
+	limbo_hsm.add_transition(engine_on_state, engine_off_state, engine_on_state.EVENT_FINISHED)
+	limbo_hsm.add_transition(engine_off_state, engine_on_state, engine_off_state.EVENT_FINISHED)
+	
 	limbo_hsm.initialize(self)
 	limbo_hsm.set_active(true)
 
 
-func _apply_force_direction(
-	dir: Vector2,
-	max_angle_deg := 15.0,
-	force_weight := 0.7
-) -> Vector2:
-	if global_position.y >= 2144.0:
-		force_dir = Vector2.UP
-	
-	elif global_position.y <= -2144.0:
-		force_dir = Vector2.DOWN
-	
-	elif global_position.x >= 3840:
-		force_dir = Vector2.LEFT
-	
-	elif global_position.x <= -3840:
-		force_dir = Vector2.RIGHT
-	
-	
-	if force_dir.length_squared() > 0.0001:
-		var d := dir.normalized()
-		var f := force_dir.normalized()
-
-		var dot := d.dot(f)
-		var cos_threshold := cos(deg_to_rad(max_angle_deg))
-
-		# 接近时自动解除强制
-		if dot >= cos_threshold:
-			force_dir = Vector2.ZERO
-			return d
-
-		# ⭐ 强制方向作为“偏置”
-		return d.lerp(f, force_weight).normalized()
-
-	return dir.normalized()
-
-
-#检查引擎是否处于点火状态 点火： 朝着鼠标方向飞行 熄火：朝着地面滑落 
-func _check_engine() -> Vector2:
-	var final_dir : Vector2
-	
-	if engine_on:
-		final_dir = (get_global_mouse_position() - global_position).normalized()
-	else :
-		if velocity.x > 0:
-			final_dir = Vector2(1, 1)
-		else :
-			final_dir = Vector2(-1, 1)
-	
-	return final_dir
-
-
 func _get_forward(delta) -> Vector2:
-	target_forward = _check_engine()
-	target_forward = _apply_force_direction(target_forward) 
-	
+	check_position()
 	super(delta)
-	#forward = forward.lerp(target_forward, .05)
 	return forward
 
 
@@ -126,4 +72,20 @@ func _get_burst_accel() -> float:
 	#burst_accel = lerpf(burst_accel, 1.0, .1)
 	return burst_accel
 
-#将来还会有一个瞬时加速 
+
+#检查位置 超出边界了 就会强制返回 
+func check_position() -> void:
+	if WORLD_RECT.has_point(global_position):
+		return  # 在范围内，什么都不做
+
+	# 出界了，再判断从哪边出去
+	if global_position.y > WORLD_RECT.end.y:
+		force_dir = Vector2.UP
+	elif global_position.y < WORLD_RECT.position.y:
+		force_dir = Vector2.DOWN
+	elif global_position.x > WORLD_RECT.end.x:
+		force_dir = Vector2.LEFT
+	elif global_position.x < WORLD_RECT.position.x:
+		force_dir = Vector2.RIGHT
+	
+	limbo_hsm.dispatch("EngineOn")

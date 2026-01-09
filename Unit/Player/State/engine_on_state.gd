@@ -1,11 +1,53 @@
-extends LimboState
+extends PlayerJetState
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
+func _setup() -> void:
+	player = agent as Player
+	print("EngineOn执行一次")
+
+func _enter() -> void:
+	player.turn_speed = 2.5
+	player.trail.emitting = true
+	player.engine_on = true
+	print("玩家进入 EngineOn 状态 ")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _update(delta: float) -> void:
+	if player.force_dir == Vector2.ZERO: #没有强制方向的时候 
+		player.target_forward = (player.get_global_mouse_position() - player.global_position).normalized()
+	else :
+		player.target_forward = _apply_force_direction(player.target_forward)
+	
+	
+	if !player.engine_on && player.force_dir == Vector2.ZERO: #注意 返回战斗区域不会关闭引擎 
+		get_root().dispatch(EVENT_FINISHED)
+
+
+#到达屏幕底部 强制转向 
+func _apply_force_direction(
+	dir: Vector2,
+	max_angle_deg := 15.0,
+	force_weight := 0.7
+) -> Vector2:
+	
+	if agent.force_dir.length_squared() > 0.0001:
+		var d := dir.normalized()
+		var f = agent.force_dir.normalized()
+
+		var dot := d.dot(f)
+		var cos_threshold := cos(deg_to_rad(max_angle_deg))
+
+		# 接近时自动解除强制
+		if dot >= cos_threshold:
+			agent.force_dir = Vector2.ZERO
+			return d
+
+		# ⭐ 强制方向作为“偏置” #采用不同的转向速度?
+		return d.lerp(f, force_weight).normalized()
+
+	return dir.normalized()
+
+
+func _exit() -> void:
+	print("玩家离开 EngineOn 状态 ")

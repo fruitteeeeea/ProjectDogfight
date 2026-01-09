@@ -1,11 +1,24 @@
-extends LimboState
+extends PlayerJetState
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _setup() -> void:
+	player = agent as Player
+	print("EngineOff执行一次")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _enter() -> void:
+	player.turn_speed = 1.0
+	player.trail.emitting = false
+	print("玩家进入 EngineOff 状态 ")
+
+
+func _update(delta: float) -> void:
+	
+	if player.velocity.x > 0:
+		player.target_forward = Vector2(1, 1)
+	else :
+		player.target_forward = Vector2(-1, 1)
+	
+	
+	if player.engine_on: #注意 返回战斗区域不会关闭引擎 
+		get_root().dispatch(EVENT_FINISHED)

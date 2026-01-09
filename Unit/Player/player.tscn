@@ -137,6 +137,17 @@ _data = {
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
 
+[node name="LimboHSM" type="LimboHSM" parent="." index="0"]
+
+[node name="EngineOnState" type="LimboState" parent="LimboHSM" index="0"]
+script = ExtResource("8_f8s14")
+
+[node name="EngineOffState" type="LimboState" parent="LimboHSM" index="1"]
+script = ExtResource("9_85r8r")
+
+[node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2"]
+script = ExtResource("10_toghf")
+
 [node name="Trail" parent="Graphic" index="1"]
 position = Vector2(-32, 0)
 lifetime = 2.0
@@ -271,17 +282,6 @@ initial_velocity_min = 150.0
 initial_velocity_max = 400.0
 scale_amount_curve = SubResource("Curve_qacwo")
 color_ramp = SubResource("Gradient_qacwo")
-
-[node name="LimboHSM" type="LimboHSM" parent="." index="2"]
-
-[node name="EngineOnState" type="LimboState" parent="LimboHSM" index="0"]
-script = ExtResource("8_f8s14")
-
-[node name="EngineOffState" type="LimboState" parent="LimboHSM" index="1"]
-script = ExtResource("9_85r8r")
-
-[node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2"]
-script = ExtResource("10_toghf")
 
 [node name="AccelerateComponent" type="Node2D" parent="." index="3" node_paths=PackedStringArray("rocket_launcher")]
 script = ExtResource("11_oriqu")

@@ -1,11 +1,10 @@
-extends LimboState
+extends PlayerJetState
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _setup() -> void:
+	player = agent as Player
+	print("Accel 执行一次")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _enter() -> void:
+	print("玩家进入 Accel 状态 ")

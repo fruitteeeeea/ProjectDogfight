@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name JetBase
 
+
 @export var forward : Vector2 = Vector2.UP
 var target_forward : Vector2 = Vector2.UP
 
@@ -17,17 +18,14 @@ func _physics_process(delta: float) -> void:
 	_hanlde_rotation()
 
 
-func take_damage() -> void:
-	pass
-
-
-func die() -> void:
-	is_dead = true
-
-
+#region MovementSystem
 func _handle_movement(delta) -> void:
 	velocity = _get_forward(delta) * _get_speed()
 	move_and_slide()
+
+
+func _hanlde_rotation() -> void:
+	graphic.rotation = forward.angle()
 
 
 func _get_forward(delta) -> Vector2:
@@ -38,6 +36,14 @@ func _get_forward(delta) -> Vector2:
 func _get_speed() -> float:
 	return speed
 
+#endregion
 
-func _hanlde_rotation() -> void:
-	graphic.rotation = forward.angle()
+#region DamageSystem
+func take_damage() -> void:
+	pass
+
+
+func die() -> void:
+	is_dead = true
+
+#endregion
