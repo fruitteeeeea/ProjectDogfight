@@ -15,6 +15,8 @@ extends BTAction
 @export var target_var: StringName = &"target"
 @export var tolerance: float = 30.0
 
+var new_tolerance := 0.0 
+
 func _enter() -> void:
 	var target := blackboard.get_var(target_var) as Node2D
 	var a = agent as Enemy
@@ -24,6 +26,8 @@ func _enter() -> void:
 			a.target_forward = Vector2.DOWN
 		else :
 			a.target_forward = Vector2.UP
+	
+	new_tolerance = randf() * tolerance
 
 
 func _tick(_delta: float) -> Status:
@@ -33,7 +37,7 @@ func _tick(_delta: float) -> Status:
 	if not is_instance_valid(target):
 		return FAILURE
 	
-	if agent.global_position.y - target.global_position.y < tolerance:
+	if agent.global_position.y - target.global_position.y < new_tolerance:
 		return SUCCESS
 
 	return RUNNING

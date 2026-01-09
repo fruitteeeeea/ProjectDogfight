@@ -6,7 +6,7 @@ extends Node2D
 @export var fire_interval : float = .1
 @onready var fire_interval_timer: Timer = $fire_interval_timer
 
-@export var max_bullet := 100
+@export var max_bullet := 200
 @export var current_bullet := 0
 @export var reload_speed_curve : Curve
 

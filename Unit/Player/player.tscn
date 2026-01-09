@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=33 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://ch3hf4ujv44vf" path="res://Unit/Player/State/burst_accelerate_state.gd" id="10_toghf"]
 [ext_resource type="Script" uid="uid://bhv5mohwbu3ig" path="res://Unit/Player/accelerate_component.gd" id="11_oriqu"]
 [ext_resource type="Script" uid="uid://beswwf0ir65f8" path="res://Unit/Player/hud_offset_manager.gd" id="11_uefnm"]
+[ext_resource type="FontFile" uid="uid://bpkb7efje5rwl" path="res://Asset/font/realtimeroundedtest-black.otf" id="20_4dcrn"]
 [ext_resource type="Texture2D" uid="uid://b34j05vi4y03q" path="res://Asset/UI/skull.png" id="20_6h1yq"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
@@ -133,6 +134,10 @@ width = 44
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_toghf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dhsxg"]
+font = ExtResource("20_4dcrn")
+font_size = 32
 
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
@@ -779,6 +784,7 @@ theme_override_constants/margin_bottom = 5
 material = SubResource("CanvasItemMaterial_dpwos")
 layout_mode = 2
 text = "Misson"
+label_settings = SubResource("LabelSettings_dhsxg")
 
 [node name="Label" type="Label" parent="HUD/Misson/Misson" index="1"]
 offset_top = 56.0

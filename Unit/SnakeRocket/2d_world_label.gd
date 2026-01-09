@@ -7,4 +7,3 @@ func _ready() -> void:
 	var camera = get_viewport().get_camera_2d()
 	if camera:
 		scale = Vector2.ONE / camera.zoom
-		print("worldlabel2d 大小为 %s" % scale)

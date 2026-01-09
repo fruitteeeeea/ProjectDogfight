@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
 [ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="8_iw8a2"]
 
+[sub_resource type="Gradient" id="Gradient_iw8a2"]
+offsets = PackedFloat32Array(0, 0.352941, 0.998492, 1)
+colors = PackedColorArray(0.619608, 0.619608, 0.619608, 0.827451, 1, 1, 1, 0.526277, 1, 1, 1, 0.147813, 1, 1, 1, 0)
+
 [sub_resource type="Curve" id="Curve_lebci"]
 _data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -27,8 +31,6 @@ point_count = 5
 offsets = PackedFloat32Array(0.0015083, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.776471, 0.156863, 0.156863, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_iw8a2"]
-
 [node name="Enemy" groups=["enemy"] instance=ExtResource("1_0dgib")]
 collision_layer = 4
 collision_mask = 0
@@ -37,6 +39,9 @@ forward = Vector2(1, 0)
 
 [node name="Sprite2D" parent="Graphic" index="0"]
 texture = ExtResource("3_ois23")
+
+[node name="Trail" parent="Graphic" index="1"]
+color_ramp = SubResource("Gradient_iw8a2")
 
 [node name="DamageComponent" type="Node2D" parent="." index="2" node_paths=PackedStringArray("jet")]
 script = ExtResource("4_qudsa")
@@ -106,13 +111,12 @@ offset_bottom = 40.0
 script = ExtResource("8_iw8a2")
 metadata/_custom_type_script = "uid://da7a50jvg5hpp"
 
-[node name="Velocity" type="Label" parent="WorldLabel2D" index="0"]
+[node name="VelocityInfo" type="Label" parent="WorldLabel2D" index="0"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 33.0
 text = "speed : 100
 dir : Vector(1,1)"
-label_settings = SubResource("LabelSettings_iw8a2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="9"]
 

@@ -12,12 +12,17 @@
 extends BTAction
 #根据自身位置 选择返回作战区域的方向 
 
+var enemy : Enemy
+
+func _setup() -> void:
+	enemy = agent
+
 
 func _tick(_delta: float) -> Status:
-	var a = agent as Enemy
-	var final_dir = a.add_random_angle((Vector2.ZERO - a.global_position).normalized(), 90.0)
-	a.target_forward = final_dir
+	var final_dir = JetMath.add_random_offset_to_angle((Vector2.ZERO - enemy.global_position).normalized(), 90.0)
+	enemy.target_forward = final_dir
 	return SUCCESS
+
 
 func _is_dircetion_legal() -> bool:
 	#可以使用dot来确认方向是否 合法 

@@ -13,72 +13,21 @@ extends BTCondition
 
 #检查敌人是否在战斗区域内 
 #如果不是的话 直接返回到作战区域 
-
-@export var combat_area_x_min : float
-@export var combat_area_x_max : float
-@export var combat_area_y_min : float
-@export var combat_area_y_max : float
-
 # Called to generate a display name for the task.
 func _generate_name() -> String:
-	return "InCombatArea (%d, %d, %d, %d)" % [combat_area_x_min, combat_area_x_max, 
-		combat_area_y_min, combat_area_y_max]
+	return "InCombatArea"
+
 
 # Called when the task is executed.
 func _tick(_delta: float) -> Status:
 	if not is_instance_valid(agent):
 		return FAILURE
 
-	if agent.global_position.x <= combat_area_x_min or agent.global_position.x >= combat_area_x_max:
-		return FAILURE
-	elif agent.global_position.y <= combat_area_y_min or agent.global_position.y >= combat_area_y_max:
-		return FAILURE
+	var enemy = agent as Enemy
+	var WORLD_RECT : Rect2 = enemy.WORLD_RECT
+	var new_rect : Rect2 = Rect2(WORLD_RECT.position * .5, WORLD_RECT.size * .5)
 
-	return SUCCESS
-
-
-
-#region Aban
-## InRange condition checks if the agent is within a range of target,
-## defined by [member distance_min] and [member distance_max]. [br]
-## Returns [code]SUCCESS[/code] if the agent is within the given range;
-## otherwise, returns [code]FAILURE[/code].
-
-### Minimum distance to target.
-#@export var distance_min: float
-#
-### Maximum distance to target.
-#@export var distance_max: float
-#
-### Blackboard variable that holds the target (expecting Node2D).
-#@export var target_var: StringName = &"target"
-#
-#var _min_distance_squared: float
-#var _max_distance_squared: float
-
-
-## Called to generate a display name for the task.
-#func _generate_name() -> String:
-	#return "InRange (%d, %d) of %s" % [distance_min, distance_max,
-		#LimboUtility.decorate_var(target_var)]
-
-
-## Called to initialize the task.
-#func _setup() -> void:
-	### Small performance optimization
-	#_min_distance_squared = distance_min * distance_min
-	#_max_distance_squared = distance_max * distance_max
-
-
-## Called when the task is executed.
-#func _tick(_delta: float) -> Status:
-	#var target: Node2D = blackboard.get_var(target_var, null)
-	#if not is_instance_valid(target):
-		#return FAILURE
-#
-	#var dist_sq: float = agent.global_position.distance_squared_to(target.global_position)
-	#if dist_sq >= _min_distance_squared and dist_sq <= _max_distance_squared:
-		#return SUCCESS
-	#else:
-		#return FAILURE
-#endregion
+	if new_rect.has_point(enemy.global_position):
+		return SUCCESS
+	
+	return FAILURE

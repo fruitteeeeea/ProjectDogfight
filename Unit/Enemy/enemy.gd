@@ -4,20 +4,19 @@ class_name Enemy
 
 @onready var color_rect: ColorRect = $ColorRect
 @onready var bt_player: BTPlayer = $BTPlayer
-
 @onready var damage_component: DamageComponent = $DamageComponent
 
 func _ready() -> void:
 	target_forward = [Vector2.LEFT, Vector2.RIGHT].pick_random()
 
 
-#获取带有偏差的目标方向 
-func add_random_angle(dir: Vector2, max_deg := 15.0) -> Vector2:
-	var angle_offset = randf_range(-max_deg, max_deg)
-	return dir.normalized().rotated(deg_to_rad(angle_offset))
+func _physics_process(delta: float) -> void:
+	super(delta)
+	_update_debug_label()
 
 
 
+#region TakeDamage
 func take_damage() -> void:
 	if is_dead:
 		return
@@ -41,15 +40,21 @@ func _crash() -> void:
 	target_forward = Vector2(crash_dir_x, -1.0)
 	await  get_tree().create_timer(randf_range(.25, .5)).timeout
 	turn_speed = 2.5
-	target_forward = add_random_angle(Vector2(crash_dir_x,  1.0), 30)
+	target_forward = JetMath.add_random_offset_to_angle(Vector2(crash_dir_x,  1.0), 30)
 	await get_tree().create_timer(5.0).timeout
 	queue_free()
+#endregion
 
+#region DebugState
+@onready var velocity_info: Label = $WorldLabel2D/VelocityInfo
 
+func _update_debug_label() -> void:
+	velocity_info.text = "speed : %.1f\ndir : (%.2f, %.2f)" % [
+	speed,
+	target_forward.x,
+	target_forward.y
+]
 
-
-
-#region State
 func _enter_combat_area() -> void:
 	color_rect.color = Color.YELLOW
 

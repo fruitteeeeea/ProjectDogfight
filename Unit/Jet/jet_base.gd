@@ -1,6 +1,10 @@
 extends CharacterBody2D
 class_name JetBase
 
+@export var WORLD_RECT := Rect2(
+	Vector2(-3840.0, -2144.0),  # 左上角
+	Vector2(7680.0, 4288.0)    # 宽高
+)
 
 @export var forward : Vector2 = Vector2.UP
 var target_forward : Vector2 = Vector2.UP

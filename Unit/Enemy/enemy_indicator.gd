@@ -18,8 +18,6 @@ func _physics_process(delta: float) -> void:
 	
 	time_eclpase += delta
 	if time_eclpase >= .5:
-		print(_get_screen_pos(enemy))
-		print(control.position)
 		time_eclpase = 0 
 
 

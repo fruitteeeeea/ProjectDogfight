@@ -24,6 +24,10 @@ func _ready():
 			base_positions[ctrl] = ctrl.position
 
 
+func trigger_dodge_shake() -> void:
+	shake_strength =35.0
+
+
 func trigger_accel_shake():
 	shake_strength = 45.0
 

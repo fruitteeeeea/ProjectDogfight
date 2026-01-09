@@ -1,11 +1,6 @@
 extends JetBase
 class_name Player
 
-const WORLD_RECT := Rect2(
-	Vector2(-3840.0, -2144.0),  # 左上角
-	Vector2(7680.0, 4288.0)    # 宽高
-)
-
 var base_accel : float = 1.0
 var target_accel : float = 1.0
 var burst_accel : float = 1.0:
@@ -27,12 +22,14 @@ var engine_on : bool = true
 
 @onready var trail: CPUParticles2D = $Graphic/Trail
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hud_offset_manager: HUDOffsetManager = $HUD/HUDOffsetManager
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("engine"): #切换引擎状态 
 		engine_on = !engine_on
 		
 	if event.is_action_pressed("dodge"):
+		hud_offset_manager.trigger_dodge_shake()
 		animation_player.play("dodge")
 
 func _ready() -> void:

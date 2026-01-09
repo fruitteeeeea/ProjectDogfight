@@ -11,7 +11,7 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-16, -32)
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.7, 0.7)
 
 [node name="Dummy" type="Node2D" parent="." groups=["player"]]
 position = Vector2(-8, -24)
@@ -22,6 +22,31 @@ texture = ExtResource("2_4eqtc")
 
 [node name="Enemy" parent="." instance=ExtResource("3_3e1t1")]
 position = Vector2(-1392, 160)
+WORLD_RECT = Rect2(-960, -536, 1920, 1072)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_3e1t1")]
+position = Vector2(-1392, 160)
+WORLD_RECT = Rect2(-960, -536, 1920, 1072)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_3e1t1")]
+position = Vector2(-1392, 160)
+WORLD_RECT = Rect2(-960, -536, 1920, 1072)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_3e1t1")]
+position = Vector2(-1392, 160)
+WORLD_RECT = Rect2(-960, -536, 1920, 1072)
+
+[node name="Enemy5" parent="." instance=ExtResource("3_3e1t1")]
+position = Vector2(-1392, 160)
+WORLD_RECT = Rect2(-960, -536, 1920, 1072)
+
+[node name="Enemy6" parent="." instance=ExtResource("3_3e1t1")]
+position = Vector2(-1392, 160)
+WORLD_RECT = Rect2(-960, -536, 1920, 1072)
+
+[node name="Enemy7" parent="." instance=ExtResource("3_3e1t1")]
+position = Vector2(-1392, 160)
+WORLD_RECT = Rect2(-960, -536, 1920, 1072)
 
 [node name="GameSpeed" parent="." instance=ExtResource("4_cuthw")]
 trriger_type = "Click"
