@@ -1,8 +1,6 @@
 extends CharacterBody2D
 class_name JetBase
 
-#const MAP_WIDTH := 640.0
-
 @export var forward : Vector2 = Vector2.UP
 var target_forward : Vector2 = Vector2.UP
 
@@ -25,7 +23,6 @@ func take_damage() -> void:
 
 func die() -> void:
 	is_dead = true
-	pass
 
 
 func _handle_movement(delta) -> void:
@@ -33,16 +30,7 @@ func _handle_movement(delta) -> void:
 	move_and_slide()
 
 
-#func _wrap_position():
-	#global_position.x = fposmod(global_position.x, MAP_WIDTH)
-	#global_position.y = fposmod(global_position.y, MAP_WIDTH)
-
-#var spin_angle := 0.0
-
 func _get_forward(delta) -> Vector2:
-	#spin_angle += turn_speed * delta   # turn_speed = 角速度（rad/s）
-	#target_forward = Vector2.RIGHT.rotated(spin_angle)
-
 	forward = forward.slerp(target_forward, 1.0 - exp(-turn_speed * delta))
 	return forward
 
