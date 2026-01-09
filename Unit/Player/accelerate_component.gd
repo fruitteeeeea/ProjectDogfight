@@ -22,7 +22,7 @@ var burst_accel := false:
 		if v == true:
 			print("加速！")
 			
-			rocket_launcher._launch_rocket(-.1, 5, .05) #朝后方发射热诱弹 
+			rocket_launcher._launch_rocket(-.1, 5, .05, 1.0) #朝后方发射热诱弹 
 			
 			GameFeel.do_camera_shake(3.0)
 			player.engine_on = true

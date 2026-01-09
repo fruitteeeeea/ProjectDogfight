@@ -20,7 +20,7 @@ func _spwan_rocket() -> void:
 		await get_tree().create_timer(.2).timeout
 
 
-func _launch_rocket(dir :float = 1 , nb := 1, interval := .1) -> void:
+func _launch_rocket(dir :float = 1 , nb := 1, interval := .1, jam := 0.0) -> void:
 	var forward := global_transform.x.normalized() * (Vector2.ONE * dir)
 	var angle : float
 	
@@ -33,6 +33,7 @@ func _launch_rocket(dir :float = 1 , nb := 1, interval := .1) -> void:
 			angle = PI / 4 + PI /2
 		up_dir = !up_dir
 		
+		rocket.jam_weight = jam
 		rocket.direction = forward.rotated(angle)
 		rocket.target_dir = forward
 		

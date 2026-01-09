@@ -20,14 +20,6 @@
 [ext_resource type="Script" uid="uid://beswwf0ir65f8" path="res://Unit/Player/hud_offset_manager.gd" id="11_uefnm"]
 [ext_resource type="Texture2D" uid="uid://b34j05vi4y03q" path="res://Asset/UI/skull.png" id="20_6h1yq"]
 
-[sub_resource type="Curve" id="Curve_toghf"]
-_limits = [0.0, 30.0, 0.0, 2.0]
-_data = [Vector2(0.522949, 0), 0.0, 0.0, 0, 0, Vector2(0.981919, 2.53432), 0.0, 0.0, 0, 0, Vector2(2, 30), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dpwos"]
-blend_mode = 2
-
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -35,19 +27,6 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_qacwo"]
 offsets = PackedFloat32Array(0, 0.206637, 1)
 colors = PackedColorArray(1, 0.960784, 0.615686, 1, 0.883146, 0.434939, 0.32355, 1, 0.827451, 0.184314, 0.184314, 1)
-
-[sub_resource type="Gradient" id="Gradient_oriqu"]
-offsets = PackedFloat32Array(0, 0.152466, 0.249626, 0.665172, 0.792227, 0.913303, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.766816, 1, 1, 1, 0, 1, 1, 1, 0.0213995, 1, 1, 1, 0.156831, 1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_r22qm"]
-gradient = SubResource("Gradient_oriqu")
-width = 44
-
-[sub_resource type="LabelSettings" id="LabelSettings_85r8r"]
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_toghf"]
 
 [sub_resource type="Animation" id="Animation_dhsxg"]
 length = 0.001
@@ -134,143 +113,35 @@ _data = {
 &"dodge": SubResource("Animation_toghf")
 }
 
+[sub_resource type="Curve" id="Curve_toghf"]
+_limits = [0.0, 30.0, 0.0, 2.0]
+_data = [Vector2(0.522949, 0), 0.0, 0.0, 0, 0, Vector2(0.981919, 2.53432), 0.0, 0.0, 0, 0, Vector2(2, 30), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dpwos"]
+blend_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_oriqu"]
+offsets = PackedFloat32Array(0, 0.152466, 0.249626, 0.665172, 0.792227, 0.913303, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.766816, 1, 1, 1, 0, 1, 1, 1, 0.0213995, 1, 1, 1, 0.156831, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r22qm"]
+gradient = SubResource("Gradient_oriqu")
+width = 44
+
+[sub_resource type="LabelSettings" id="LabelSettings_85r8r"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_toghf"]
+
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
-
-[node name="LimboHSM" type="LimboHSM" parent="." index="0"]
-
-[node name="EngineOnState" type="LimboState" parent="LimboHSM" index="0"]
-script = ExtResource("8_f8s14")
-
-[node name="EngineOffState" type="LimboState" parent="LimboHSM" index="1"]
-script = ExtResource("9_85r8r")
-
-[node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2"]
-script = ExtResource("10_toghf")
 
 [node name="Trail" parent="Graphic" index="1"]
 position = Vector2(-32, 0)
 lifetime = 2.0
 
-[node name="CameraPoint" type="Marker2D" parent="Graphic" index="2"]
-position = Vector2(128, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Graphic/CameraPoint" index="0"]
-scale = Vector2(0.375, 0.375)
-texture = ExtResource("3_dhsxg")
-
-[node name="Gun" type="Node2D" parent="Graphic" index="3"]
-script = ExtResource("4_j3lyf")
-BulletScene = ExtResource("5_pm1gd")
-reload_speed_curve = SubResource("Curve_toghf")
-
-[node name="fire_interval_timer" type="Timer" parent="Graphic/Gun" index="0"]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Graphic/Gun" index="1"]
-
-[node name="GunSlot" type="Control" parent="Graphic/Gun/CanvasLayer" index="0"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="BulletNumber" type="Label" parent="Graphic/Gun/CanvasLayer/GunSlot" index="0"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -344.0
-offset_top = 340.0
-offset_right = -235.0
-offset_bottom = 373.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Gun: 1000"
-
-[node name="FireOnLabel" type="CanvasGroup" parent="Graphic/Gun/CanvasLayer/GunSlot/BulletNumber" index="0"]
-visible = false
-position = Vector2(0, -40)
-
-[node name="ColorRect" type="ColorRect" parent="Graphic/Gun/CanvasLayer/GunSlot/BulletNumber/FireOnLabel" index="0"]
-offset_left = -8.0
-offset_right = 128.0
-offset_bottom = 40.0
-
-[node name="Label2" type="Label" parent="Graphic/Gun/CanvasLayer/GunSlot/BulletNumber/FireOnLabel" index="1"]
-material = SubResource("CanvasItemMaterial_dpwos")
-offset_right = 114.0
-offset_bottom = 33.0
-text = "Fire : ON"
-
-[node name="RelodingLabel" type="CanvasGroup" parent="Graphic/Gun/CanvasLayer/GunSlot/BulletNumber" index="1"]
-visible = false
-position = Vector2(0, 40)
-
-[node name="ColorRect" type="ColorRect" parent="Graphic/Gun/CanvasLayer/GunSlot/BulletNumber/RelodingLabel" index="0"]
-offset_left = -8.0
-offset_right = 128.0
-offset_bottom = 40.0
-
-[node name="Label2" type="Label" parent="Graphic/Gun/CanvasLayer/GunSlot/BulletNumber/RelodingLabel" index="1"]
-material = SubResource("CanvasItemMaterial_dpwos")
-offset_right = 114.0
-offset_bottom = 33.0
-text = "Reloading"
-
-[node name="BlinkCanvsItem" type="Node" parent="Graphic/Gun/CanvasLayer/GunSlot/BulletNumber/RelodingLabel" index="2"]
-script = ExtResource("5_dhsxg")
-
-[node name="RocketLauncher" parent="Graphic" index="4" instance=ExtResource("5_mh83u")]
-rocket_nb = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Graphic/RocketLauncher" index="0"]
-
-[node name="RocketSlot" type="Control" parent="Graphic/RocketLauncher/CanvasLayer" index="0"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Graphic/RocketLauncher/CanvasLayer/RocketSlot" index="0"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -56.0
-offset_top = 300.0
-offset_right = 20.0
-offset_bottom = 340.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.5, 1.5)
-
-[node name="TextureRect" type="TextureRect" parent="Graphic/RocketLauncher/CanvasLayer/RocketSlot/HBoxContainer" index="0"]
-layout_mode = 2
-texture = ExtResource("6_r22qm")
-
-[node name="TextureRect2" type="TextureRect" parent="Graphic/RocketLauncher/CanvasLayer/RocketSlot/HBoxContainer" index="1"]
-layout_mode = 2
-texture = ExtResource("6_r22qm")
-
-[node name="TextureRect3" type="TextureRect" parent="Graphic/RocketLauncher/CanvasLayer/RocketSlot/HBoxContainer" index="2"]
-layout_mode = 2
-texture = ExtResource("6_r22qm")
-
-[node name="TextureRect4" type="TextureRect" parent="Graphic/RocketLauncher/CanvasLayer/RocketSlot/HBoxContainer" index="3"]
-layout_mode = 2
-texture = ExtResource("6_r22qm")
-
-[node name="BurstTrail" type="CPUParticles2D" parent="Graphic" index="5"]
+[node name="BurstTrail" type="CPUParticles2D" parent="Graphic" index="2"]
 position = Vector2(-16, 0)
 emitting = false
 texture = ExtResource("8_qacwo")
@@ -283,10 +154,31 @@ initial_velocity_max = 400.0
 scale_amount_curve = SubResource("Curve_qacwo")
 color_ramp = SubResource("Gradient_qacwo")
 
+[node name="CameraPoint" type="Marker2D" parent="Graphic" index="3"]
+position = Vector2(128, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphic/CameraPoint" index="0"]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("3_dhsxg")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Graphic" index="4"]
+remote_path = NodePath("../../Weapon")
+
+[node name="LimboHSM" type="LimboHSM" parent="." index="2"]
+
+[node name="EngineOnState" type="LimboState" parent="LimboHSM" index="0"]
+script = ExtResource("8_f8s14")
+
+[node name="EngineOffState" type="LimboState" parent="LimboHSM" index="1"]
+script = ExtResource("9_85r8r")
+
+[node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2"]
+script = ExtResource("10_toghf")
+
 [node name="AccelerateComponent" type="Node2D" parent="." index="3" node_paths=PackedStringArray("rocket_launcher")]
 script = ExtResource("11_oriqu")
 max_burst_accel_fuel = 100.0
-rocket_launcher = NodePath("../Graphic/RocketLauncher")
+rocket_launcher = NodePath("../Weapon/RocketLauncher")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="AccelerateComponent" index="0"]
 
@@ -337,18 +229,137 @@ target_point = NodePath("../Graphic/CameraPoint")
 
 [node name="TrumaComponent" parent="Camera2D" index="0" instance=ExtResource("3_pm1gd")]
 
-[node name="HUD" type="CanvasLayer" parent="." index="5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+root_node = NodePath("../Graphic")
+libraries = {
+&"": SubResource("AnimationLibrary_dhsxg")
+}
+
+[node name="Weapon" type="Node2D" parent="." index="6"]
+
+[node name="Gun" type="Node2D" parent="Weapon" index="0"]
+script = ExtResource("4_j3lyf")
+BulletScene = ExtResource("5_pm1gd")
+reload_speed_curve = SubResource("Curve_toghf")
+
+[node name="fire_interval_timer" type="Timer" parent="Weapon/Gun" index="0"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Weapon/Gun" index="1"]
+
+[node name="GunSlot" type="Control" parent="Weapon/Gun/CanvasLayer" index="0"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BulletNumber" type="Label" parent="Weapon/Gun/CanvasLayer/GunSlot" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = 340.0
+offset_right = -235.0
+offset_bottom = 373.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gun: 1000"
+
+[node name="FireOnLabel" type="CanvasGroup" parent="Weapon/Gun/CanvasLayer/GunSlot/BulletNumber" index="0"]
+visible = false
+position = Vector2(0, -40)
+
+[node name="ColorRect" type="ColorRect" parent="Weapon/Gun/CanvasLayer/GunSlot/BulletNumber/FireOnLabel" index="0"]
+offset_left = -8.0
+offset_right = 128.0
+offset_bottom = 40.0
+
+[node name="Label2" type="Label" parent="Weapon/Gun/CanvasLayer/GunSlot/BulletNumber/FireOnLabel" index="1"]
+material = SubResource("CanvasItemMaterial_dpwos")
+offset_right = 114.0
+offset_bottom = 33.0
+text = "Fire : ON"
+
+[node name="RelodingLabel" type="CanvasGroup" parent="Weapon/Gun/CanvasLayer/GunSlot/BulletNumber" index="1"]
+visible = false
+position = Vector2(0, 40)
+
+[node name="ColorRect" type="ColorRect" parent="Weapon/Gun/CanvasLayer/GunSlot/BulletNumber/RelodingLabel" index="0"]
+offset_left = -8.0
+offset_right = 128.0
+offset_bottom = 40.0
+
+[node name="Label2" type="Label" parent="Weapon/Gun/CanvasLayer/GunSlot/BulletNumber/RelodingLabel" index="1"]
+material = SubResource("CanvasItemMaterial_dpwos")
+offset_right = 114.0
+offset_bottom = 33.0
+text = "Reloading"
+
+[node name="BlinkCanvsItem" type="Node" parent="Weapon/Gun/CanvasLayer/GunSlot/BulletNumber/RelodingLabel" index="2"]
+script = ExtResource("5_dhsxg")
+
+[node name="RocketLauncher" parent="Weapon" index="1" instance=ExtResource("5_mh83u")]
+rocket_nb = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Weapon/RocketLauncher" index="0"]
+
+[node name="RocketSlot" type="Control" parent="Weapon/RocketLauncher/CanvasLayer" index="0"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Weapon/RocketLauncher/CanvasLayer/RocketSlot" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = 300.0
+offset_right = 20.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+
+[node name="TextureRect" type="TextureRect" parent="Weapon/RocketLauncher/CanvasLayer/RocketSlot/HBoxContainer" index="0"]
+layout_mode = 2
+texture = ExtResource("6_r22qm")
+
+[node name="TextureRect2" type="TextureRect" parent="Weapon/RocketLauncher/CanvasLayer/RocketSlot/HBoxContainer" index="1"]
+layout_mode = 2
+texture = ExtResource("6_r22qm")
+
+[node name="TextureRect3" type="TextureRect" parent="Weapon/RocketLauncher/CanvasLayer/RocketSlot/HBoxContainer" index="2"]
+layout_mode = 2
+texture = ExtResource("6_r22qm")
+
+[node name="TextureRect4" type="TextureRect" parent="Weapon/RocketLauncher/CanvasLayer/RocketSlot/HBoxContainer" index="3"]
+layout_mode = 2
+texture = ExtResource("6_r22qm")
+
+[node name="HUD" type="CanvasLayer" parent="." index="7"]
 
 [node name="HUDOffsetManager" type="Node2D" parent="HUD" index="0" node_paths=PackedStringArray("player", "control_list")]
 script = ExtResource("11_uefnm")
 player = NodePath("../..")
 control_list = {
-NodePath("../../Graphic/RocketLauncher/CanvasLayer/RocketSlot"): 1.0,
+NodePath("../../Weapon/RocketLauncher/CanvasLayer/RocketSlot"): 1.0,
 NodePath("../../AccelerateComponent/CanvasLayer/AccelHUD"): 1.25,
 NodePath("../Control/ScaleLineHUD"): 1.3,
 NodePath("../Control/ScaleLineHUD2"): 1.3,
 NodePath("../Warning"): 0.1,
-NodePath("../../Graphic/Gun/CanvasLayer/GunSlot"): 1.0,
+NodePath("../../Weapon/Gun/CanvasLayer/GunSlot"): 1.0,
 NodePath("../Misson"): 1.0
 }
 
@@ -775,10 +786,4 @@ offset_right = 40.0
 offset_bottom = 89.0
 text = "Get 11/25 Kill."
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
-root_node = NodePath("../Graphic")
-libraries = {
-&"": SubResource("AnimationLibrary_dhsxg")
-}
-
-[connection signal="timeout" from="Graphic/Gun/fire_interval_timer" to="Graphic/Gun" method="_on_fire_interval_timer_timeout"]
+[connection signal="timeout" from="Weapon/Gun/fire_interval_timer" to="Weapon/Gun" method="_on_fire_interval_timer_timeout"]

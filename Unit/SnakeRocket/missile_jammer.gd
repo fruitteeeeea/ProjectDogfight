@@ -15,7 +15,6 @@ var _time := 0.0
 var _target_dir := Vector2.ZERO
 var _current_dir := Vector2.ZERO
 
-
 func update_jam_dir(delta: float, base_dir: Vector2) -> Vector2:
 	if not enabled:
 		return Vector2.ZERO

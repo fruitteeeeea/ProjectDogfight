@@ -7,6 +7,7 @@ class_name SnakeRocket
 @export var wave_frequency := 58.0
 @export var turn_speed := 16.0
 
+@export var jam_weight := 0.0
 @onready var missile_jammer: MissileJammer = $MissileJammer
 
 @onready var graphic: Node2D = $Graphic
@@ -30,6 +31,11 @@ var target_pos: Vector2
 
 var time := 0.0
 var direction := Vector2.RIGHT
+
+
+func _ready() -> void:
+	missile_jammer.jam_weight = jam_weight #赋值扰流权重 
+
 
 func _process(delta):
 	var to_target : Vector2 #这个是导弹最终前进方向 
