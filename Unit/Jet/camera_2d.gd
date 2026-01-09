@@ -3,7 +3,8 @@ class_name PlayerCamera2D
 
 @export var target_point : Marker2D
 
-var defult_zoom : float = 1.3
+var defult_zoom : float = 1.2
+var accel_zoom : float = 0.8
 var target_zoom : float = 0.0
 
 func _ready() -> void:

@@ -37,7 +37,7 @@ func _handle_movement(delta) -> void:
 	#global_position.x = fposmod(global_position.x, MAP_WIDTH)
 	#global_position.y = fposmod(global_position.y, MAP_WIDTH)
 
-var spin_angle := 0.0
+#var spin_angle := 0.0
 
 func _get_forward(delta) -> Vector2:
 	#spin_angle += turn_speed * delta   # turn_speed = 角速度（rad/s）

@@ -114,13 +114,6 @@ text = "speed : 100
 dir : Vector(1,1)"
 label_settings = SubResource("LabelSettings_iw8a2")
 
-[node name="State" type="Label" parent="WorldLabel2D" index="1"]
-layout_mode = 0
-offset_top = 64.0
-offset_right = 203.0
-offset_bottom = 135.0
-text = "state : attack"
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="9"]
 
 [node name="EnemyIndicator" parent="CanvasLayer" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("7_lebci")]

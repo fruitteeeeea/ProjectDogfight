@@ -27,7 +27,7 @@ var burst_accel := false:
 			GameFeel.do_camera_shake(3.0)
 			player.engine_on = true
 			player.burst_accel = burst_accel_speed
-			camera_2d.target_zoom = .9
+			camera_2d.target_zoom = camera_2d.accel_zoom
 			burst_trail.emitting = true
 			hud_offset_manager.trigger_accel_shake()
 			
