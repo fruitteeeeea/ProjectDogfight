@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=38 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -20,6 +20,11 @@
 [ext_resource type="Script" uid="uid://beswwf0ir65f8" path="res://Unit/Player/hud_offset_manager.gd" id="11_uefnm"]
 [ext_resource type="FontFile" uid="uid://bpkb7efje5rwl" path="res://Asset/font/realtimeroundedtest-black.otf" id="20_4dcrn"]
 [ext_resource type="Texture2D" uid="uid://b34j05vi4y03q" path="res://Asset/UI/skull.png" id="20_6h1yq"]
+[ext_resource type="Texture2D" uid="uid://bji2a24tvivpl" path="res://Asset/UI/InputPrompts/keyboard_w.png" id="21_4dcrn"]
+[ext_resource type="Texture2D" uid="uid://dokrl0ufy8l66" path="res://Asset/UI/InputPrompts/mouse.png" id="22_8ce0y"]
+[ext_resource type="Texture2D" uid="uid://bp3c65c1pyvph" path="res://Asset/UI/InputPrompts/keyboard_space.png" id="23_xx0et"]
+[ext_resource type="Texture2D" uid="uid://cms55552ivqkj" path="res://Asset/UI/InputPrompts/keyboard_q.png" id="24_v1p3j"]
+[ext_resource type="Texture2D" uid="uid://djeirgrk1cueb" path="res://Asset/UI/InputPrompts/keyboard_e.png" id="25_pcvun"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -365,7 +370,8 @@ NodePath("../Control/ScaleLineHUD"): 1.3,
 NodePath("../Control/ScaleLineHUD2"): 1.3,
 NodePath("../Warning"): 0.1,
 NodePath("../../Weapon/Gun/CanvasLayer/GunSlot"): 1.0,
-NodePath("../Misson"): 1.0
+NodePath("../Misson"): 1.0,
+NodePath("../InputPrompts"): 1.0
 }
 
 [node name="Control" type="Control" parent="HUD" index="1"]
@@ -791,5 +797,132 @@ offset_top = 56.0
 offset_right = 40.0
 offset_bottom = 89.0
 text = "Get 11/25 Kill."
+
+[node name="InputPrompts" type="Control" parent="HUD" index="4"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/InputPrompts" index="0"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -464.0
+offset_top = 40.0
+offset_right = -116.0
+offset_bottom = 434.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/InputPrompts/MarginContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="0"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2/Control" index="0"]
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("22_8ce0y")
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="1"]
+layout_mode = 2
+text = "Jet Direction"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control" index="0"]
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("21_4dcrn")
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+layout_mode = 2
+text = "Engine Switch"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="2"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3" index="0"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -44.94
+offset_right = 78.0
+offset_bottom = 83.06
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("23_xx0et")
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3" index="1"]
+layout_mode = 2
+text = "Acceleration"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="3"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="0"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control" index="0"]
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24_v1p3j")
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="1"]
+layout_mode = 2
+text = "MiniGun"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="4"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="0"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control" index="0"]
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("25_pcvun")
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="1"]
+layout_mode = 2
+text = "RocketLauncher"
 
 [connection signal="timeout" from="Weapon/Gun/fire_interval_timer" to="Weapon/Gun" method="_on_fire_interval_timer_timeout"]
