@@ -21,7 +21,7 @@
 [ext_resource type="FontFile" uid="uid://bpkb7efje5rwl" path="res://Asset/font/realtimeroundedtest-black.otf" id="20_4dcrn"]
 [ext_resource type="Texture2D" uid="uid://b34j05vi4y03q" path="res://Asset/UI/skull.png" id="20_6h1yq"]
 [ext_resource type="Texture2D" uid="uid://bji2a24tvivpl" path="res://Asset/UI/InputPrompts/keyboard_w.png" id="21_4dcrn"]
-[ext_resource type="Texture2D" uid="uid://dokrl0ufy8l66" path="res://Asset/UI/InputPrompts/mouse.png" id="22_8ce0y"]
+[ext_resource type="Texture2D" uid="uid://bwdkyxd77xhqq" path="res://Asset/UI/InputPrompts/mouse_move.png" id="21_pcvun"]
 [ext_resource type="Texture2D" uid="uid://bp3c65c1pyvph" path="res://Asset/UI/InputPrompts/keyboard_space.png" id="23_xx0et"]
 [ext_resource type="Texture2D" uid="uid://cms55552ivqkj" path="res://Asset/UI/InputPrompts/keyboard_q.png" id="24_v1p3j"]
 [ext_resource type="Texture2D" uid="uid://djeirgrk1cueb" path="res://Asset/UI/InputPrompts/keyboard_e.png" id="25_pcvun"]
@@ -838,7 +838,7 @@ layout_mode = 1
 offset_right = 128.0
 offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("22_8ce0y")
+texture = ExtResource("21_pcvun")
 
 [node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="1"]
 layout_mode = 2
