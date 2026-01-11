@@ -1,7 +1,6 @@
 extends PlayerJetState
 
 
-
 func _setup() -> void:
 	player = agent as Player
 	print("EngineOn执行一次")

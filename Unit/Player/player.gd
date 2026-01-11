@@ -2,12 +2,7 @@ extends JetBase
 class_name Player
 
 var base_accel : float = 1.0
-var target_accel : float = 1.0
-var burst_accel : float = 1.0:
-	set(v):
-		burst_accel = v
-		print("加速度改变 %s", base_accel)
-
+var burst_accel : float = 1.0
 
 var force_dir : Vector2 = Vector2.ZERO
 
@@ -59,17 +54,12 @@ func _get_speed() -> float:
 
 func _get_final_speed() -> float:
 	var _speed = speed
-	return _speed * _get_accel() * _get_burst_accel()
-
-
-func _get_accel() -> float:
-	base_accel = lerpf(base_accel, target_accel, .1)
-	return base_accel
+	return _speed * _get_burst_accel()
 
 #持续加速
 func _get_burst_accel() -> float:
-	#burst_accel = lerpf(burst_accel, 1.0, .1)
-	return burst_accel
+	base_accel = lerpf(base_accel, burst_accel, .5)
+	return base_accel
 
 
 #检查位置 超出边界了 就会强制返回 

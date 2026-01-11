@@ -35,6 +35,7 @@ enemy=""
 
 [gui]
 
+theme/default_theme_scale=1.5
 theme/custom_font="uid://d2qrj4ibq4v3e"
 
 [input]

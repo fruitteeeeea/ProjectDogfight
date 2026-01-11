@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=41 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -26,6 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://bp3c65c1pyvph" path="res://Asset/UI/InputPrompts/keyboard_space.png" id="23_xx0et"]
 [ext_resource type="Texture2D" uid="uid://cms55552ivqkj" path="res://Asset/UI/InputPrompts/keyboard_q.png" id="24_v1p3j"]
 [ext_resource type="Texture2D" uid="uid://djeirgrk1cueb" path="res://Asset/UI/InputPrompts/keyboard_e.png" id="25_pcvun"]
+[ext_resource type="Texture2D" uid="uid://dkrm6l6nahost" path="res://Asset/UI/crosshair127.png" id="27_0xfex"]
+[ext_resource type="Script" uid="uid://d163en6k6x26j" path="res://Unit/Player/player_attitude.gd" id="27_4ei6y"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -968,5 +970,104 @@ texture = ExtResource("25_pcvun")
 [node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="1"]
 layout_mode = 2
 text = "RocketLauncher"
+
+[node name="PlayerAttitude" type="Control" parent="HUD" index="5" node_paths=PackedStringArray("player")]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("27_4ei6y")
+player = NodePath("../..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PlayerAttitude" index="0"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -352.0
+offset_top = -280.0
+offset_right = -152.0
+offset_bottom = -59.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Direction" type="Control" parent="HUD/PlayerAttitude/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="MoveDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="0"]
+modulate = Color(0.422371, 0.422371, 0.422371, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = 1.57079
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("27_0xfex")
+
+[node name="HeadDireciton" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("27_0xfex")
+
+[node name="ForceDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="2"]
+modulate = Color(0.956863, 0.262745, 0.211765, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = 0.785397
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("27_0xfex")
+
+[node name="Info" type="VBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="TurnSpeed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="0"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/TurnSpeed" index="0"]
+layout_mode = 2
+text = "TurnSpeed"
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/TurnSpeed" index="1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Speed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="1"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/Speed" index="0"]
+layout_mode = 2
+text = "Speed"
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/Speed" index="1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="AccelSpeed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/AccelSpeed" index="0"]
+layout_mode = 2
+text = "AccelSpeed"
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/AccelSpeed" index="1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
 
 [connection signal="timeout" from="Weapon/Gun/fire_interval_timer" to="Weapon/Gun" method="_on_fire_interval_timer_timeout"]
