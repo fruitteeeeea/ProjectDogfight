@@ -2,11 +2,26 @@ extends JetBase
 class_name Player
 
 var base_accel : float = 1.0
+
 var burst_accel : float = 1.0
+var burst_ratio : float = 1.0
 
 var force_dir : Vector2 = Vector2.ZERO
 
 var engine_on : bool = true
+
+#引擎关闭
+@export var engine_off_burst_accel := .4 
+@export var engine_off_burst_ratio := 1.0
+
+@export var engine_off_turn_speed := 1.5 #引擎关闭的时候转向倍率 
+
+@export var gravity_dir := Vector2.DOWN
+@export var fall_strength := 0.4  # 下坠影响程度（0~1）
+
+#开启加速
+@export var accelerate_burst_accel :=  1.8
+
 
 
 @onready var limbo_hsm: LimboHSM = $LimboHSM
@@ -42,7 +57,22 @@ func _init_state_machine(): #初始化状态机
 	limbo_hsm.set_active(true)
 
 
+func _get_move_direction(delta) -> Vector2:
+	var forward_dir : Vector2 =  _get_forward(delta)
+	if engine_on:
+		return forward_dir
+	else:
+		move_direction = move_direction.lerp(
+			gravity_dir,
+			fall_strength * delta
+		).normalized()
+		return move_direction
+
+
 func _get_forward(delta) -> Vector2:
+	if !force_dir:
+		target_forward = (get_global_mouse_position() - global_position).normalized()
+	
 	check_position()
 	super(delta)
 	return forward
@@ -58,7 +88,7 @@ func _get_final_speed() -> float:
 
 #持续加速
 func _get_burst_accel() -> float:
-	base_accel = lerpf(base_accel, burst_accel, .5)
+	base_accel = lerpf(base_accel, burst_accel, .5 * burst_ratio)
 	return base_accel
 
 

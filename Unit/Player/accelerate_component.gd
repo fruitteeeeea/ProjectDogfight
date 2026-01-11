@@ -16,6 +16,8 @@ extends Node2D
 @onready var hud_offset_manager: HUDOffsetManager = $"../HUD/HUDOffsetManager"
 @onready var progress_bar: ProgressBar = $CanvasLayer/AccelHUD/ProgressBar
 
+@onready var accel_and_speed: Label = $CanvasLayer/AccelHUD/AccelAndSpeed
+
 var burst_accel := false:
 	set(v):
 		burst_accel = v
@@ -57,5 +59,4 @@ func _physics_process(delta: float) -> void:
 	else :
 		progress_bar.value += delta * burst_recover
 	
-	$CanvasLayer/AccelHUD/Label.text = str(player._get_burst_accel()) + " / " + str(player._get_final_speed())
-	
+	accel_and_speed.text = str(snappedf(player._get_burst_accel(), .1)) + " / " + str(snappedf(player._get_final_speed(), .1))

@@ -6,10 +6,11 @@ class_name JetBase
 	Vector2(7680.0, 4288.0)    # 宽高
 )
 
-@export var forward : Vector2 = Vector2.UP
+var forward : Vector2 = Vector2.UP
 var target_forward : Vector2 = Vector2.UP
+var move_direction : Vector2 = Vector2.UP
 
-@export var turn_speed := 2.0  # 越大越灵敏
+@export var turn_speed := 1.5  # 越大越灵敏
 @export var speed = 380.0
 
 @onready var graphic: Node2D = $Graphic
@@ -24,12 +25,13 @@ func _physics_process(delta: float) -> void:
 
 #region MovementSystem
 func _handle_movement(delta) -> void:
-	velocity = _get_forward(delta) * _get_speed()
+	move_direction = _get_move_direction(delta)
+	velocity = move_direction * _get_speed()
 	move_and_slide()
 
 
-func _hanlde_rotation() -> void:
-	graphic.rotation = forward.angle()
+func _get_move_direction(delta) -> Vector2:
+	return _get_forward(delta)
 
 
 func _get_forward(delta) -> Vector2:
@@ -39,6 +41,10 @@ func _get_forward(delta) -> Vector2:
 
 func _get_speed() -> float:
 	return speed
+
+
+func _hanlde_rotation() -> void:
+	graphic.rotation = forward.angle()
 
 #endregion
 
