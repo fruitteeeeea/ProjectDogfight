@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=60 format=3 uid="uid://c04qvwf7i2xkn"]
+[gd_resource type="BehaviorTree" load_steps=61 format=3 uid="uid://c04qvwf7i2xkn"]
 
 [ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_1gapl"]
 [ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/enemy_return_to_combat_area.gd" id="2_d80a3"]
@@ -44,6 +44,44 @@ duration = 0.1
 [sub_resource type="BTSequence" id="BTSequence_ioxih"]
 custom_name = "CheckPosition"
 children = [SubResource("BTComment_4cm3n"), SubResource("BTCallMethod_axqv5"), SubResource("BTInvert_c0ri4"), SubResource("BTAction_c0ri4"), SubResource("BTWait_c0ri4")]
+
+[sub_resource type="BBNode" id="BBNode_31koj"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_d80a3"]
+node = SubResource("BBNode_31koj")
+method = &"_enter_attack_state"
+
+[sub_resource type="BTAction" id="BTAction_rg4p3"]
+script = ExtResource("4_swpx5")
+group = &"player"
+output_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_swpx5"]
+script = ExtResource("3_3rvhi")
+target_var = &"target"
+tolerance = 30.0
+
+[sub_resource type="BTAction" id="BTAction_7kei1"]
+script = ExtResource("5_yibc0")
+target_var = &"target"
+tolerance = 150.0
+
+[sub_resource type="BTSequence" id="BTSequence_yibc0"]
+custom_name = "Aattacck"
+children = [SubResource("BTAction_swpx5"), SubResource("BTAction_7kei1")]
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_31koj"]
+children = [SubResource("BTSequence_yibc0")]
+
+[sub_resource type="BTSequence" id="BTSequence_swpx5"]
+custom_name = "ClimbToSameHorizontal"
+children = [SubResource("BTCallMethod_d80a3"), SubResource("BTAction_rg4p3"), SubResource("BTTimeLimit_31koj")]
+
+[sub_resource type="BTSelector" id="BTSelector_swpx5"]
+custom_name = "AttackState"
+children = [SubResource("BTSequence_swpx5")]
 
 [sub_resource type="BTAction" id="BTAction_yibc0"]
 script = ExtResource("4_swpx5")
@@ -109,42 +147,9 @@ children = [SubResource("BTAction_yibc0"), SubResource("BTCondition_d80a3"), Sub
 duration = 5.0
 children = [SubResource("BTSequence_7kei1")]
 
-[sub_resource type="BBNode" id="BBNode_31koj"]
-saved_value = NodePath(".")
-resource_name = "."
-
-[sub_resource type="BTCallMethod" id="BTCallMethod_d80a3"]
-node = SubResource("BBNode_31koj")
-method = &"_enter_attack_state"
-
-[sub_resource type="BTAction" id="BTAction_swpx5"]
-script = ExtResource("3_3rvhi")
-target_var = &"target"
-tolerance = 30.0
-
-[sub_resource type="BTAction" id="BTAction_7kei1"]
-script = ExtResource("5_yibc0")
-target_var = &"target"
-tolerance = 150.0
-
-[sub_resource type="BTSequence" id="BTSequence_yibc0"]
-custom_name = "Aattacck"
-children = [SubResource("BTAction_swpx5"), SubResource("BTAction_7kei1")]
-
-[sub_resource type="BTTimeLimit" id="BTTimeLimit_31koj"]
-children = [SubResource("BTSequence_yibc0")]
-
-[sub_resource type="BTSequence" id="BTSequence_swpx5"]
-custom_name = "ClimbToSameHorizontal"
-children = [SubResource("BTCallMethod_d80a3"), SubResource("BTTimeLimit_31koj")]
-
-[sub_resource type="BTSelector" id="BTSelector_swpx5"]
-custom_name = "AttackState"
-children = [SubResource("BTSequence_swpx5")]
-
 [sub_resource type="BTSelector" id="BTSelector_7kei1"]
 custom_name = "NormalState"
-children = [SubResource("BTCooldown_7kei1"), SubResource("BTSelector_swpx5")]
+children = [SubResource("BTSelector_swpx5"), SubResource("BTCooldown_7kei1")]
 
 [sub_resource type="BBNode" id="BBNode_axqv5"]
 saved_value = NodePath(".")

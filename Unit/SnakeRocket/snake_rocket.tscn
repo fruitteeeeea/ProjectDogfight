@@ -180,7 +180,7 @@ metadata/_custom_type_script = "uid://dxl17dpembjyc"
 [node name="MissileJammer" type="Node" parent="."]
 script = ExtResource("10_y6jex")
 change_interval = 0.05
-max_angle_deg = 180.0
+max_angle_deg = 90.0
 jam_weight = 1.0
 rotate_speed = 300.0
 

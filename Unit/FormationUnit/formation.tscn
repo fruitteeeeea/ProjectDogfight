@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0eaxp2r1lsdd"]
+
+[ext_resource type="Script" uid="uid://2sl2dj4ayb6m" path="res://Unit/FormationUnit/formation.gd" id="1_jrh5x"]
+
+[node name="Formation" type="Node2D" node_paths=PackedStringArray("center")]
+script = ExtResource("1_jrh5x")
+center = NodePath("")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-64, -64)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(-32, -32)
+
+[node name="Marker2D3" type="Marker2D" parent="."]
+
+[node name="Marker2D4" type="Marker2D" parent="."]
+position = Vector2(-32, 32)
+
+[node name="Marker2D5" type="Marker2D" parent="."]
+position = Vector2(-64, 64)

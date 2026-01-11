@@ -1,9 +1,10 @@
-[gd_scene load_steps=38 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=40 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
 [ext_resource type="Script" uid="uid://r077cnmnbhed" path="res://Unit/Jet/camera_2d.gd" id="3_aph0k"]
 [ext_resource type="Texture2D" uid="uid://dry37qywo51n1" path="res://Asset/UI/crosshair005.png" id="3_dhsxg"]
+[ext_resource type="Texture2D" uid="uid://cn5f6uqbujhpp" path="res://Asset/Jet/ship_J.png" id="3_ibccj"]
 [ext_resource type="PackedScene" uid="uid://mv1sve8aww0k" path="res://Camera/truma_component.tscn" id="3_pm1gd"]
 [ext_resource type="Script" uid="uid://bghf3dl8ten4h" path="res://Unit/Jet/gun.gd" id="4_j3lyf"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="5_dhsxg"]
@@ -25,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://bp3c65c1pyvph" path="res://Asset/UI/InputPrompts/keyboard_space.png" id="23_xx0et"]
 [ext_resource type="Texture2D" uid="uid://cms55552ivqkj" path="res://Asset/UI/InputPrompts/keyboard_q.png" id="24_v1p3j"]
 [ext_resource type="Texture2D" uid="uid://djeirgrk1cueb" path="res://Asset/UI/InputPrompts/keyboard_e.png" id="25_pcvun"]
+[ext_resource type="PackedScene" uid="uid://c0eaxp2r1lsdd" path="res://Unit/FormationUnit/formation.tscn" id="27_0xfex"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -147,6 +149,10 @@ font_size = 32
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
 
+[node name="Sprite2D" parent="Graphic" index="0"]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("3_ibccj")
+
 [node name="Trail" parent="Graphic" index="1"]
 position = Vector2(-32, 0)
 lifetime = 2.0
@@ -173,6 +179,9 @@ texture = ExtResource("3_dhsxg")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Graphic" index="4"]
 remote_path = NodePath("../../Weapon")
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Graphic" index="5"]
+remote_path = NodePath("../../Formation")
 
 [node name="LimboHSM" type="LimboHSM" parent="." index="2"]
 
@@ -796,7 +805,7 @@ label_settings = SubResource("LabelSettings_dhsxg")
 offset_top = 56.0
 offset_right = 40.0
 offset_bottom = 89.0
-text = "Get 11/25 Kill."
+text = "Get enough points within the time limit."
 
 [node name="InputPrompts" type="Control" parent="HUD" index="4"]
 layout_mode = 3
@@ -809,20 +818,22 @@ mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD/InputPrompts" index="0"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -464.0
-offset_top = 40.0
-offset_right = -116.0
-offset_bottom = 434.0
-grow_horizontal = 0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -612.0
+offset_top = -154.0
+offset_right = 612.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/InputPrompts/MarginContainer" index="0"]
+[node name="VBoxContainer" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 8
 
@@ -924,5 +935,8 @@ texture = ExtResource("25_pcvun")
 [node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="1"]
 layout_mode = 2
 text = "RocketLauncher"
+
+[node name="Formation" parent="." index="8" node_paths=PackedStringArray("center") instance=ExtResource("27_0xfex")]
+center = NodePath("..")
 
 [connection signal="timeout" from="Weapon/Gun/fire_interval_timer" to="Weapon/Gun" method="_on_fire_interval_timer_timeout"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://djcaqydpjjnpq"]
+
+[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="1_1utsv"]
+[ext_resource type="Texture2D" uid="uid://b0tjq0vj10dcl" path="res://Asset/Jet/ship_K.png" id="1_6vtnh"]
+[ext_resource type="Script" uid="uid://cmjqluiq60hpx" path="res://Unit/FormationUnit/formation_units.gd" id="1_kxago"]
+
+[sub_resource type="Curve" id="Curve_6vtnh"]
+_data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(0.249643, 0.267162), 0.0, 0.0, 0, 0, Vector2(0.843081, 0.258763), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_kxago"]
+offsets = PackedFloat32Array(0, 0.352941, 0.998492, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.526277, 1, 1, 1, 0.147813, 1, 1, 1, 0)
+
+[node name="Formation units" type="Node2D"]
+script = ExtResource("1_kxago")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_6vtnh")
+
+[node name="Trail" type="CPUParticles2D" parent="."]
+position = Vector2(-16, 0)
+rotation = 1.5708
+amount = 100
+texture = ExtResource("1_1utsv")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_6vtnh")
+color_ramp = SubResource("Gradient_kxago")
