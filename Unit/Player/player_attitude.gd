@@ -7,9 +7,28 @@ extends Control
 @onready var target_forward_direciton: TextureRect = $VBoxContainer/Direction/TargetForwardDireciton
 @onready var force_direction: TextureRect = $VBoxContainer/Direction/ForceDirection
 
+@onready var progress_bar_speed: ProgressBar = $VBoxContainer/Info/Speed/ProgressBarSpeed
+@onready var progress_bar_accel_speed: ProgressBar = $VBoxContainer/Info/AccelSpeed/ProgressBarAccelSpeed
+@onready var progress_bar_turn_speed: ProgressBar = $VBoxContainer/Info/TurnSpeed/ProgressBarTurnSpeed
+
+
 func _physics_process(delta: float) -> void:
 	_handel_player_attitude_arrow()
 	_handel_player_attitude_arrow_force()
+	
+	_handel_player_attitude_info()
+	
+	
+	
+func _handel_player_attitude_info() -> void:
+	var _speed := snappedf(player._get_final_speed(), .1)
+	var _accel_speed := snappedf(player._get_burst_accel(), .1)
+	var _turn_speed := snappedf(player.turn_speed, .1)
+	
+	progress_bar_speed.value = lerpf(progress_bar_speed.value, _speed, .1)
+	progress_bar_accel_speed.value = lerpf(progress_bar_accel_speed.value, _accel_speed, .1)
+	progress_bar_turn_speed.value = lerpf(progress_bar_turn_speed.value, _turn_speed, .1)
+
 
 
 #region ForceDirection

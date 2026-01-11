@@ -15,6 +15,7 @@ func _enter() -> void:
 	player.turn_speed = engine_off_turn_speed
 	player.trail.emitting = false
 	player.flame.emitting = false
+	player.engine_off_label.show()
 	print("玩家进入 EngineOff 状态 ")
 
 
@@ -27,3 +28,4 @@ func _update(delta: float) -> void:
 
 func _exit() -> void:
 	player.turn_speed = defult_trun_speed
+	player.engine_off_label.hide()

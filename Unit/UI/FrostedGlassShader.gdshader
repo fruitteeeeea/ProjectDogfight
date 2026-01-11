@@ -56,7 +56,7 @@ float rounded_rect_sdf(vec2 p, vec2 size, vec4 radii) {
         r = (p.y > 0.0) ? radii.xw : radii.xy;
     }
     float radius = (p.x > 0.0) ? r.x : r.y;
-    
+
     vec2 q = abs(p) - size + radius;
     return min(max(q.x, q.y), 0.0) + length(max(q, 0.0)) - radius;
 }
@@ -70,7 +70,7 @@ float circle_sdf(vec2 p, float r) {
 vec3 blur_screen(vec2 screen_uv, vec2 pixel_size) {
     vec3 color = vec3(0.0);
     float total_weight = 0.0;
-    
+
     for (int x = -blur_samples; x <= blur_samples; x++) {
         for (int y = -blur_samples; y <= blur_samples; y++) {
             vec2 offset = vec2(float(x), float(y)) * pixel_size * blur_amount;
@@ -79,7 +79,7 @@ vec3 blur_screen(vec2 screen_uv, vec2 pixel_size) {
             total_weight += weight;
         }
     }
-    
+
     return color / total_weight;
 }
 
@@ -92,7 +92,7 @@ float get_shape_sdf(vec2 p) {
     } else {
         // Rounded Rectangle
         vec2 half_size = rect_size * 0.5;
-        
+
         // Limit corner radius to half the side length
         float min_dim = min(half_size.x, half_size.y);
         vec4 radii = vec4(
@@ -101,7 +101,7 @@ float get_shape_sdf(vec2 p) {
             min(corner_radius_bottom_right, min_dim),
             min(corner_radius_bottom_left, min_dim)
         );
-        
+
         dist = rounded_rect_sdf(p, half_size, radii);
     }
     return dist;
@@ -110,73 +110,72 @@ float get_shape_sdf(vec2 p) {
 void fragment() {
     // Convert UV to pixel coordinates, center at (0,0)
     vec2 p = (UV - 0.5) * node_size;
-    
+
     // 1. Draw Shadow (Behind Glass)
     vec4 final_color = vec4(0.0);
-    
+
     if (shadow_enabled) {
         float s_dist = get_shape_sdf(p - shadow_offset);
         // Shadow mask: 1 inside, fades out outwards
-        float s_mask = 1.0 - smoothstep(-shadow_blur, 0.0, s_dist); 
+        float s_mask = 1.0 - smoothstep(-shadow_blur, 0.0, s_dist);
         // Mix shadow
         final_color = mix(final_color, shadow_color, s_mask * shadow_color.a);
     }
-    
+
     // 2. Draw Main Glass Shape
     float dist = get_shape_sdf(p);
     // Shape mask (1px antialiasing)
     float shape_alpha = 1.0 - smoothstep(0.0, edge_softness, dist);
-    
+
     // Calculate gradient color (using normalized UV)
     vec2 uv_norm = UV - 0.5;
     // Correct UV aspect ratio for gradient calculation to keep visual consistency
     float aspect = node_size.x / node_size.y;
     uv_norm.x *= aspect;
-    
+
     vec3 dynamic_color = vec3(
         shape_color.r + uv_norm.y * color_gradient_y,
         shape_color.g + uv_norm.x * color_gradient_x,
         shape_color.b
     ) * color_multiplier;
-    
+
     vec3 glass_col = dynamic_color;
-    
+
     // Apply Screen Blur (Frosted Glass Effect)
     if (enable_screen_blur) {
         vec2 screen_uv = SCREEN_UV;
         vec2 pixel_size = SCREEN_PIXEL_SIZE;
         vec3 blurred_bg = blur_screen(screen_uv, pixel_size);
-        
+
         // Mix effect color with blurred background
         glass_col = mix(blurred_bg, glass_col, glass_opacity);
     }
-    
+
     // Mix glass layer onto final color
     final_color = mix(final_color, vec4(glass_col, 1.0), shape_alpha);
-    
+
     // 3. Draw Outline (Above Glass)
     if (outline_enabled) {
         // Outline mask: generated at edge, width is outline_width
         // abs(dist) < width/2 means outline centered on edge
         float outline_mask = 1.0 - smoothstep(outline_width * 0.5 - 0.5, outline_width * 0.5 + 0.5, abs(dist));
-        
+
         // Use Alpha Compositing formula instead of simple mix to prevent gray edges
         vec4 src_color = outline_color;
         float src_alpha = outline_mask * outline_color.a;
         vec4 dst_color = final_color;
-        
+
         // Final Alpha = SrcAlpha + DstAlpha * (1 - SrcAlpha)
         float out_alpha = src_alpha + dst_color.a * (1.0 - src_alpha);
-        
+
         vec3 out_rgb = vec3(0.0);
         if (out_alpha > 0.0) {
             // Final RGB = (SrcRGB * SrcAlpha + DstRGB * DstAlpha * (1 - SrcAlpha)) / FinalAlpha
             out_rgb = (src_color.rgb * src_alpha + dst_color.rgb * dst_color.a * (1.0 - src_alpha)) / out_alpha;
         }
-        
+
         final_color = vec4(out_rgb, out_alpha);
     }
-    
+
     COLOR = final_color;
 }
-

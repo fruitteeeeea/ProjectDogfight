@@ -10,6 +10,7 @@ func _enter() -> void:
 	player.trail.emitting = true
 	player.flame.emitting = true
 	player.engine_on = true
+	player.engine_on_label.show()
 	print("玩家进入 EngineOn 状态 ")
 
 
@@ -50,4 +51,5 @@ func _apply_force_direction(
 
 
 func _exit() -> void:
+	player.engine_on_label.hide()
 	print("玩家离开 EngineOn 状态 ")

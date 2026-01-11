@@ -11,7 +11,7 @@ var force_dir : Vector2 = Vector2.ZERO
 var engine_on : bool = true
 
 #引擎关闭
-@export var engine_off_burst_accel := .4 
+@export var engine_off_burst_accel := - 0.4 
 @export var engine_off_burst_ratio := 1.0
 
 @export var engine_off_turn_speed := 1.5 #引擎关闭的时候转向倍率 
@@ -19,9 +19,14 @@ var engine_on : bool = true
 @export var gravity_dir := Vector2.DOWN
 @export var fall_strength := 0.4  # 下坠影响程度（0~1）
 
+@onready var engine_on_label: CanvasGroup = $AccelerateComponent/CanvasLayer/AccelHUD/EngineOnLabel
+@onready var engine_off_label: Label = $AccelerateComponent/CanvasLayer/AccelHUD/EngineOffLabel
+
 #开启加速
 @export var accelerate_burst_accel :=  1.8
+@export var accelerate_off_burst_ratio := 2.0
 
+@export var accelerate_turn_speed := 1.5 #引擎关闭的时候转向倍率 
 
 
 @onready var limbo_hsm: LimboHSM = $LimboHSM

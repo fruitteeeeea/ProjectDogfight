@@ -17,6 +17,7 @@ extends Node2D
 @onready var progress_bar: ProgressBar = $CanvasLayer/AccelHUD/ProgressBar
 
 @onready var accel_and_speed: Label = $CanvasLayer/AccelHUD/AccelAndSpeed
+@onready var accelerate_on: CanvasGroup = $CanvasLayer/AccelHUD/AccelerateOn
 
 var burst_accel := false:
 	set(v):
@@ -32,11 +33,13 @@ var burst_accel := false:
 			camera_2d.target_zoom = camera_2d.accel_zoom
 			burst_trail.emitting = true
 			hud_offset_manager.trigger_accel_shake()
+			accelerate_on.show()
 			
 		else :
 			player.burst_accel = 1.0
 			camera_2d.target_zoom = camera_2d.defult_zoom
 			burst_trail.emitting = false
+			accelerate_on.hide()
 
 func _ready() -> void:
 	progress_bar.max_value = max_burst_accel_fuel
