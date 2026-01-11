@@ -36,12 +36,19 @@ font_size = 64
 [sub_resource type="LabelSettings" id="LabelSettings_pnvqm"]
 font_size = 32
 
-[node name="ResultMenu" type="CanvasLayer"]
-layer = 128
+[node name="ResultMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_7cjnc")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BlurBackground" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_7cjnc")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -49,6 +56,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BattleCompelete" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -91,6 +100,7 @@ label_settings = SubResource("LabelSettings_pnvqm")
 
 [node name="GameOver" type="VBoxContainer" parent="."]
 visible = false
+layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -113,13 +123,15 @@ label_settings = SubResource("LabelSettings_cn1xi")
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="GameOver/HBoxContainer"]
+[node name="Result" type="Label" parent="GameOver/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Jet has been destory."
+text = "Run out of time."
 label_settings = SubResource("LabelSettings_pnvqm")
 
-[node name="Done" type="Button" parent="."]
+[node name="Retry" type="Button" parent="."]
+visible = false
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -131,6 +143,6 @@ offset_right = 64.0
 offset_bottom = -248.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "done"
+text = "Retry"
 
-[connection signal="pressed" from="Done" to="." method="_on_done_pressed"]
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
