@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=45 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -35,8 +35,21 @@ _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_qacwo"]
-offsets = PackedFloat32Array(0, 0.206637, 1)
+offsets = PackedFloat32Array(0, 0.612368, 1)
 colors = PackedColorArray(1, 0.960784, 0.615686, 1, 0.883146, 0.434939, 0.32355, 1, 0.827451, 0.184314, 0.184314, 1)
+
+[sub_resource type="Curve" id="Curve_vj671"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 49.1126), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_4qink"]
+_data = [Vector2(0, 0.993531), 0.0, 0.0, 0, 0, Vector2(1, 0.292752), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_4qink"]
+offsets = PackedFloat32Array(0, 0.509804, 0.996983)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.682299, 1, 1, 1, 0)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dpwos"]
 blend_mode = 2
@@ -194,6 +207,58 @@ texture = ExtResource("3_dhsxg")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Graphic" index="5"]
 remote_path = NodePath("../../Weapon")
+
+[node name="EngineOnParticle" type="CPUParticles2D" parent="Graphic" index="6"]
+emitting = false
+amount = 24
+texture = ExtResource("8_qacwo")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 600.0
+linear_accel_min = 100.0
+linear_accel_max = 200.0
+damping_min = 50.0
+damping_max = 100.0
+damping_curve = SubResource("Curve_vj671")
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+split_scale = true
+scale_curve_x = SubResource("Curve_4qink")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_4qink")
+
+[node name="AccelerateParticle" type="CPUParticles2D" parent="Graphic" index="7"]
+emitting = false
+amount = 24
+texture = ExtResource("8_qacwo")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 600.0
+initial_velocity_max = 780.0
+linear_accel_min = 100.0
+linear_accel_max = 200.0
+damping_min = 50.0
+damping_max = 100.0
+damping_curve = SubResource("Curve_vj671")
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+split_scale = true
+scale_curve_x = SubResource("Curve_4qink")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_qacwo")
 
 [node name="LimboHSM" type="LimboHSM" parent="." index="2"]
 

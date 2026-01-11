@@ -7,6 +7,7 @@ func _setup() -> void:
 
 func _enter() -> void:
 	player.turn_speed = 2.5
+	player.engine_on_particle.emitting = true
 	player.trail.emitting = true
 	player.flame.emitting = true
 	player.engine_on = true

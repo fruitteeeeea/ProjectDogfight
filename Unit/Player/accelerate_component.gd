@@ -18,6 +18,7 @@ extends Node2D
 
 @onready var accel_and_speed: Label = $CanvasLayer/AccelHUD/AccelAndSpeed
 @onready var accelerate_on: CanvasGroup = $CanvasLayer/AccelHUD/AccelerateOn
+@onready var accelerate_particle: CPUParticles2D = $"../Graphic/AccelerateParticle"
 
 var burst_accel := false:
 	set(v):
@@ -31,6 +32,7 @@ var burst_accel := false:
 			player.engine_on = true
 			player.burst_accel = burst_accel_speed
 			camera_2d.target_zoom = camera_2d.accel_zoom
+			accelerate_particle.emitting = true
 			burst_trail.emitting = true
 			hud_offset_manager.trigger_accel_shake()
 			accelerate_on.show()

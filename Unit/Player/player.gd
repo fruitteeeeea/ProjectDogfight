@@ -20,6 +20,7 @@ var engine_on : bool = true
 @export var fall_strength := 0.4  # 下坠影响程度（0~1）
 
 @onready var engine_on_label: CanvasGroup = $AccelerateComponent/CanvasLayer/AccelHUD/EngineOnLabel
+@onready var engine_on_particle: CPUParticles2D = $Graphic/EngineOnParticle
 @onready var engine_off_label: Label = $AccelerateComponent/CanvasLayer/AccelHUD/EngineOffLabel
 
 #开启加速
