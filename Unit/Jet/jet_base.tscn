@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://qmreh1awhiwm"]
+[gd_scene load_steps=11 format=3 uid="uid://qmreh1awhiwm"]
 
 [ext_resource type="Script" uid="uid://wv8hg8gydsmq" path="res://Unit/Jet/jet_base.gd" id="1_4lrnv"]
 [ext_resource type="Texture2D" uid="uid://b0tjq0vj10dcl" path="res://Asset/Jet/ship_K.png" id="1_dwq5a"]
@@ -15,6 +15,22 @@ point_count = 4
 [sub_resource type="Gradient" id="Gradient_ssqsk"]
 offsets = PackedFloat32Array(0, 0.352941, 0.998492, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.526277, 1, 1, 1, 0.147813, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_ssqsk"]
+_data = [Vector2(0, 0.704594), 0.0, 0.0, 0, 0, Vector2(1, 0.348814), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_i7vpu"]
+_data = [Vector2(0.00998573, 0.715376), 0.0, 0.0, 0, 0, Vector2(0.53923, 0.219439), 0.0, 0.0, 0, 0, Vector2(1, 0.730469), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_af0ov"]
+_data = [Vector2(0, 0.232377), 0.0, 0.0, 0, 0, Vector2(0.449358, 0.685188), 0.0, 0.0, 0, 0, Vector2(1, 0.424283), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_y1q86"]
+offsets = PackedFloat32Array(0, 0.819005)
+colors = PackedColorArray(1, 1, 1, 0.721569, 1, 1, 1, 0.561057)
 
 [node name="JetBase" type="CharacterBody2D"]
 script = ExtResource("1_4lrnv")
@@ -35,8 +51,22 @@ position = Vector2(-16, 0)
 rotation = 1.5708
 amount = 100
 texture = ExtResource("3_ssqsk")
+lifetime = 1.5
 gravity = Vector2(0, 0)
 scale_amount_min = 0.3
 scale_amount_max = 0.4
 scale_amount_curve = SubResource("Curve_oc6om")
 color_ramp = SubResource("Gradient_ssqsk")
+
+[node name="Flame" type="CPUParticles2D" parent="Graphic"]
+position = Vector2(-24, 0)
+amount = 1
+texture = ExtResource("3_ssqsk")
+lifetime = 0.1
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_ssqsk")
+split_scale = true
+scale_curve_x = SubResource("Curve_i7vpu")
+scale_curve_y = SubResource("Curve_af0ov")
+color_ramp = SubResource("Gradient_y1q86")

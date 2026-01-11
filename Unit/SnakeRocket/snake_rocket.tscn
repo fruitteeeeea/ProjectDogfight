@@ -73,7 +73,7 @@ wave_frequency = 20.0
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Graphic"]
 amount = 1
 texture = ExtResource("4_w84y8")
-lifetime = 0.3
+lifetime = 0.1
 local_coords = true
 gravity = Vector2(0, 0)
 scale_amount_curve = SubResource("Curve_c7l16")

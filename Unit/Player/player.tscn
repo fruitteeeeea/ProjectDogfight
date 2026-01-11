@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=39 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -26,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://bp3c65c1pyvph" path="res://Asset/UI/InputPrompts/keyboard_space.png" id="23_xx0et"]
 [ext_resource type="Texture2D" uid="uid://cms55552ivqkj" path="res://Asset/UI/InputPrompts/keyboard_q.png" id="24_v1p3j"]
 [ext_resource type="Texture2D" uid="uid://djeirgrk1cueb" path="res://Asset/UI/InputPrompts/keyboard_e.png" id="25_pcvun"]
-[ext_resource type="PackedScene" uid="uid://c0eaxp2r1lsdd" path="res://Unit/FormationUnit/formation.tscn" id="27_0xfex"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -157,7 +156,7 @@ texture = ExtResource("3_ibccj")
 position = Vector2(-32, 0)
 lifetime = 2.0
 
-[node name="BurstTrail" type="CPUParticles2D" parent="Graphic" index="2"]
+[node name="BurstTrail" type="CPUParticles2D" parent="Graphic" index="3"]
 position = Vector2(-16, 0)
 emitting = false
 texture = ExtResource("8_qacwo")
@@ -170,18 +169,15 @@ initial_velocity_max = 400.0
 scale_amount_curve = SubResource("Curve_qacwo")
 color_ramp = SubResource("Gradient_qacwo")
 
-[node name="CameraPoint" type="Marker2D" parent="Graphic" index="3"]
+[node name="CameraPoint" type="Marker2D" parent="Graphic" index="4"]
 position = Vector2(128, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphic/CameraPoint" index="0"]
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("3_dhsxg")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Graphic" index="4"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Graphic" index="5"]
 remote_path = NodePath("../../Weapon")
-
-[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Graphic" index="5"]
-remote_path = NodePath("../../Formation")
 
 [node name="LimboHSM" type="LimboHSM" parent="." index="2"]
 
@@ -702,6 +698,7 @@ rotation = 1.57079
 texture = SubResource("GradientTexture1D_r22qm")
 
 [node name="Warning" type="Control" parent="HUD" index="2"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -806,6 +803,42 @@ offset_top = 56.0
 offset_right = 40.0
 offset_bottom = 89.0
 text = "Get enough points within the time limit."
+
+[node name="Time" type="CanvasGroup" parent="HUD/Misson" index="1"]
+position = Vector2(1408, 136)
+
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/Misson/Time" index="0"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Misson/Time/PanelContainer2" index="0"]
+layout_mode = 2
+
+[node name="PanelContainer" type="MarginContainer" parent="HUD/Misson/Time/PanelContainer2" index="1"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 5
+
+[node name="Label2" type="Label" parent="HUD/Misson/Time/PanelContainer2/PanelContainer" index="0"]
+material = SubResource("CanvasItemMaterial_dpwos")
+layout_mode = 2
+text = "00：54"
+label_settings = SubResource("LabelSettings_dhsxg")
+
+[node name="Label" type="Label" parent="HUD/Misson/Time" index="1"]
+offset_left = -64.0
+offset_top = 16.0
+offset_bottom = 49.0
+text = "Time"
+
+[node name="Label2" type="Label" parent="HUD/Misson/Time" index="2"]
+offset_left = -16.0
+offset_top = 64.0
+offset_right = 161.0
+offset_bottom = 97.0
+text = "2345/5000 pts."
 
 [node name="InputPrompts" type="Control" parent="HUD" index="4"]
 layout_mode = 3
@@ -935,8 +968,5 @@ texture = ExtResource("25_pcvun")
 [node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="1"]
 layout_mode = 2
 text = "RocketLauncher"
-
-[node name="Formation" parent="." index="8" node_paths=PackedStringArray("center") instance=ExtResource("27_0xfex")]
-center = NodePath("..")
 
 [connection signal="timeout" from="Weapon/Gun/fire_interval_timer" to="Weapon/Gun" method="_on_fire_interval_timer_timeout"]

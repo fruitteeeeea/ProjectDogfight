@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://duhpi6ih7unwk"]
 
-[ext_resource type="Script" uid="uid://bfjkludygb62r" path="res://enemy_spwaner.gd" id="1_6vpwe"]
+[ext_resource type="Script" uid="uid://bfjkludygb62r" path="res://Unit/Prototype/enemy_spwaner.gd" id="1_6vpwe"]
 [ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="2_bmhlk"]
 
 [node name="EnemySpwaner" type="Node2D" groups=["enemy"]]

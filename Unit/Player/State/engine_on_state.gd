@@ -9,6 +9,7 @@ func _setup() -> void:
 func _enter() -> void:
 	player.turn_speed = 2.5
 	player.trail.emitting = true
+	player.flame.emitting = true
 	player.engine_on = true
 	print("玩家进入 EngineOn 状态 ")
 

@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://rtgahvid3v5d"]
+
+[ext_resource type="Texture2D" uid="uid://djyvuelxfwf1j" path="res://Asset/UI/floatting_text.png" id="1_2m0g8"]
+[ext_resource type="Script" uid="uid://ofd1rvdr41bg" path="res://Unit/UI/floatting_text/floatting_text.gd" id="2_yg7ee"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg7ee"]
+atlas = ExtResource("1_2m0g8")
+region = Rect2(0, 0, 160, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pc4dv"]
+atlas = ExtResource("1_2m0g8")
+region = Rect2(160, 0, 160, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8p7l4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg7ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg7ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pc4dv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg7ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg7ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pc4dv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg7ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg7ee")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="FloattingText" type="AnimatedSprite2D"]
+modulate = Color(1, 0.921569, 0.231373, 1)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_8p7l4")
+frame = 7
+frame_progress = 1.0
+script = ExtResource("2_yg7ee")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
+[connection signal="draw" from="." to="." method="_on_draw"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dsm8xf4dmc6xd"]
 
-[ext_resource type="Script" uid="uid://ceomk10fl2gpm" path="res://game_speed.gd" id="1_mllhc"]
+[ext_resource type="Script" uid="uid://ceomk10fl2gpm" path="res://Unit/Prototype/game_speed.gd" id="1_mllhc"]
 
 [node name="GameSpeed" type="CanvasLayer"]
 script = ExtResource("1_mllhc")

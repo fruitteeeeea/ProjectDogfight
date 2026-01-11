@@ -20,10 +20,13 @@ var side_sign := 1
 @export var spacing_horizontal := 64.0 # 玩家左右飞时
 @export var spacing_lerp_speed := 4.0
 
+@export var runtime_offset := 8.0
+
 @export var mode_focus := true
 
 func _ready() -> void:
-	
+	if get_parent() is JetBase:
+		center = get_parent()
 	
 	for i in get_children():
 		if i is Marker2D:
@@ -78,6 +81,8 @@ func update_spacing(delta):
 	else:
 		target_spacing = spacing_horizontal
 		target_height = height_horizontal
+
+	target_spacing += randf()  * runtime_offset #运动时的微量水平差距 
 
 	current_hight = lerp(
 		current_hight,

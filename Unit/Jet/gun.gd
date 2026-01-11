@@ -82,7 +82,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _update_gun_text() -> void:
-	bullet_number.text = "Gun : " + str(current_bullet) + "/" + str(max_bullet)
+	bullet_number.text = "Gun : " + str(clamp(current_bullet, 0, max_bullet) ) + "/" + str(max_bullet)
 
 
 func _handle_bullet_reload(delta : float) -> void:

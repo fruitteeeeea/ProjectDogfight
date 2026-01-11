@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d2rcul35yljaa"]
+[gd_scene load_steps=16 format=3 uid="uid://d2rcul35yljaa"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_0dgib"]
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="6_3gebf"]
 [ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
 [ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="8_iw8a2"]
+[ext_resource type="PackedScene" uid="uid://rtgahvid3v5d" path="res://Unit/UI/floatting_text/floatting_text.tscn" id="9_gcf3q"]
 
 [sub_resource type="Gradient" id="Gradient_iw8a2"]
 offsets = PackedFloat32Array(0, 0.352941, 0.998492, 1)
@@ -21,8 +22,6 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.226244, 1)
 colors = PackedColorArray(0.223529, 0.223529, 0.223529, 1, 0.325419, 0.325419, 0.325419, 0.895023, 1, 1, 1, 0.2)
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_s64y3"]
-
 [sub_resource type="Curve" id="Curve_3gebf"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.253923, 0.394095), 0.0, 0.0, 0, 0, Vector2(0.339515, 0.566595), -4.09002, -4.09002, 0, 0, Vector2(0.611983, 0.38547), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
@@ -30,6 +29,8 @@ point_count = 5
 [sub_resource type="Gradient" id="Gradient_3gebf"]
 offsets = PackedFloat32Array(0.0015083, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.776471, 0.156863, 0.156863, 1)
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_s64y3"]
 
 [node name="Enemy" groups=["enemy"] instance=ExtResource("1_0dgib")]
 collision_layer = 4
@@ -59,6 +60,31 @@ scale_amount_max = 0.4
 scale_amount_curve = SubResource("Curve_lebci")
 color_ramp = SubResource("Gradient_lebci")
 
+[node name="HitSplashParticle" type="CPUParticles2D" parent="DamageComponent" index="1"]
+emitting = false
+texture = ExtResource("6_3gebf")
+lifetime = 0.3
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+scale_amount_curve = SubResource("Curve_3gebf")
+color_ramp = SubResource("Gradient_lebci")
+
+[node name="CrashSplashParticle" type="CPUParticles2D" parent="DamageComponent" index="2"]
+emitting = false
+texture = ExtResource("6_3gebf")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 450.0
+initial_velocity_max = 750.0
+scale_amount_curve = SubResource("Curve_3gebf")
+color_ramp = SubResource("Gradient_3gebf")
+
 [node name="BTPlayer" type="BTPlayer" parent="." index="3"]
 behavior_tree = ExtResource("5_s64y3")
 blackboard_plan = SubResource("BlackboardPlan_s64y3")
@@ -76,34 +102,10 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HitSplashParticle" type="CPUParticles2D" parent="." index="5"]
-emitting = false
-texture = ExtResource("6_3gebf")
-lifetime = 0.3
-spread = 180.0
-gravity = Vector2(0, 10)
-initial_velocity_min = 200.0
-initial_velocity_max = 200.0
-scale_amount_curve = SubResource("Curve_3gebf")
-color_ramp = SubResource("Gradient_3gebf")
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="5"]
 
-[node name="CrashSplashParticle" type="CPUParticles2D" parent="." index="6"]
-emitting = false
-texture = ExtResource("6_3gebf")
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-spread = 180.0
-gravity = Vector2(0, 10)
-initial_velocity_min = 450.0
-initial_velocity_max = 750.0
-scale_amount_curve = SubResource("Curve_3gebf")
-color_ramp = SubResource("Gradient_3gebf")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="7"]
-
-[node name="WorldLabel2D" type="Control" parent="." index="8"]
+[node name="WorldLabel2D" type="Control" parent="." index="6"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -118,7 +120,13 @@ offset_bottom = 33.0
 text = "speed : 100
 dir : Vector(1,1)"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="9"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
 
 [node name="EnemyIndicator" parent="CanvasLayer" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("7_lebci")]
 enemy = NodePath("../..")
+
+[node name="FloattingText" parent="." index="8" instance=ExtResource("9_gcf3q")]
+visible = false
+position = Vector2(56, -40)
+frame = 0
+frame_progress = 0.0

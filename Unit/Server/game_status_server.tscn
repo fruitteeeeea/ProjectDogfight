@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr2r2t6yam3xo"]
+
+[ext_resource type="Script" uid="uid://brejfm4wprtmv" path="res://Unit/Server/game_status_server.gd" id="1_wrame"]
+
+[node name="GameStatusServer" type="Node"]
+script = ExtResource("1_wrame")

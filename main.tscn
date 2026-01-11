@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://k5msw5fm124k"]
+[gd_scene load_steps=7 format=3 uid="uid://k5msw5fm124k"]
 
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dnc5yjftuv7il" path="res://Unit/Player/player.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://duhpi6ih7unwk" path="res://Unit/Enemy/enemy_spwaner.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://duhpi6ih7unwk" path="res://Unit/Prototype/enemy_spwaner.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dsm8xf4dmc6xd" path="res://Unit/Prototype/game_speed.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cukppeq26yfa1" path="res://Unit/UI/result_menu.tscn" id="6_7mycd"]
 
 [node name="main" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-640.0]
@@ -22,3 +23,6 @@ position = Vector2(654, 782)
 [node name="EnemySpwaner" parent="." instance=ExtResource("4_1bvp3")]
 
 [node name="GameSpeed" parent="." instance=ExtResource("5_lquwl")]
+
+[node name="ResultMenu" parent="." instance=ExtResource("6_7mycd")]
+visible = false

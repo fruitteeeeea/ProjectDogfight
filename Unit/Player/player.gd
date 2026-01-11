@@ -21,6 +21,8 @@ var engine_on : bool = true
 
 
 @onready var trail: CPUParticles2D = $Graphic/Trail
+@onready var flame: CPUParticles2D = $Graphic/Flame
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hud_offset_manager: HUDOffsetManager = $HUD/HUDOffsetManager
 

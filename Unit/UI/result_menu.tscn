@@ -1,0 +1,136 @@
+[gd_scene load_steps=6 format=3 uid="uid://cukppeq26yfa1"]
+
+[ext_resource type="Script" uid="uid://dkxnx8t4hjveg" path="res://Unit/UI/result_menu.gd" id="1_7cjnc"]
+[ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://Unit/UI/FrostedGlassShader.gdshader" id="1_pnvqm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cjnc"]
+shader = ExtResource("1_pnvqm")
+shader_parameter/shape_type = 1
+shader_parameter/rect_size = Vector2(300, 200)
+shader_parameter/corner_radius_top_left = 37.92
+shader_parameter/corner_radius_top_right = 20.0
+shader_parameter/corner_radius_bottom_left = 20.0
+shader_parameter/corner_radius_bottom_right = 20.0
+shader_parameter/circle_radius = 100.0
+shader_parameter/outline_enabled = true
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = Color(1, 1, 1, 0)
+shader_parameter/shadow_enabled = false
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_blur = 15.0
+shader_parameter/edge_softness = 0.0
+shader_parameter/shape_color = Color(1, 1, 1, 1)
+shader_parameter/color_gradient_y = 0.0
+shader_parameter/color_gradient_x = 9.5e-08
+shader_parameter/color_multiplier = 0.1
+shader_parameter/enable_screen_blur = true
+shader_parameter/blur_amount = 4.0
+shader_parameter/blur_samples = 4
+shader_parameter/glass_opacity = 0.2
+shader_parameter/node_size = Vector2(100, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cn1xi"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_pnvqm"]
+font_size = 32
+
+[node name="ResultMenu" type="CanvasLayer"]
+layer = 128
+script = ExtResource("1_7cjnc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_7cjnc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BattleCompelete" type="VBoxContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -63.5
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="BattleCompelete"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BattleCompelete/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Battle Compelete"
+label_settings = SubResource("LabelSettings_cn1xi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BattleCompelete"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="YourPoints" type="Label" parent="BattleCompelete/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Your points : 1000"
+label_settings = SubResource("LabelSettings_pnvqm")
+
+[node name="EnemyDestory" type="Label" parent="BattleCompelete/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Enemy Destory : 55 "
+label_settings = SubResource("LabelSettings_pnvqm")
+
+[node name="Rank" type="Label" parent="BattleCompelete/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Rank : A"
+label_settings = SubResource("LabelSettings_pnvqm")
+
+[node name="GameOver" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -63.5
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GameOver"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameOver/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Game Over"
+label_settings = SubResource("LabelSettings_cn1xi")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="GameOver"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="GameOver/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Jet has been destory."
+label_settings = SubResource("LabelSettings_pnvqm")
+
+[node name="Done" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -312.0
+offset_right = 64.0
+offset_bottom = -248.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "done"
+
+[connection signal="pressed" from="Done" to="." method="_on_done_pressed"]
