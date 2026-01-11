@@ -1,7 +1,6 @@
 extends JetBase
 class_name Enemy
 
-
 @onready var color_rect: ColorRect = $ColorRect
 @onready var bt_player: BTPlayer = $BTPlayer
 @onready var damage_component: DamageComponent = $DamageComponent
@@ -26,6 +25,8 @@ func take_damage() -> void:
 
 func die() -> void:
 	super()
+	GameStatusServer.your_points += 100
+	GameStatusServer.enemy_destory += 1
 	bt_player.active = false
 	_enter_dead_state()
 	_crash()

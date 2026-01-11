@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@export var trriger_button := "ui_accept"
+@export var trriger_button := "BurstSpeed"
 @export var burst_accel_speed := 1.8
 
 @export var max_burst_accel_fuel := 20.0

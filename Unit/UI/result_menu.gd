@@ -15,9 +15,10 @@ class_name ResultMenu
 
 func _ready() -> void:
 	GameStatusServer.reset_game_status()
+	GameStatusServer.show_result.connect(_show_result)
 
 
-func show_result(_battle_complete : bool) -> void:
+func _show_result(_battle_complete : bool) -> void:
 	if _battle_complete:
 		_show_battle_result()
 	else :
@@ -25,6 +26,23 @@ func show_result(_battle_complete : bool) -> void:
 	
 	blur_background.show()
 	retry.show()
+
+
+func _show_battle_result() -> void:
+	your_points.text = "Your points : " + str(GameStatusServer.your_points)
+	enemy_destory.text = "Enemy Destory : " + str(GameStatusServer.enemy_destory)
+	
+# 1. 获取所有阈值并从大到小排序
+	var thresholds = GameStatusServer.rank.keys()
+	thresholds.sort_custom(func(a, b): return a < b)
+	
+	# 2. 遍历并比较
+	for threshold in thresholds:
+		if GameStatusServer.your_points >= threshold:
+			rank.text = "Rank : " + GameStatusServer.rank[threshold]
+	
+	battle_compelete.show()
+	_display_box(battle_compelete)
 
 
 func _show_game_over() -> void:
@@ -35,22 +53,6 @@ func _show_game_over() -> void:
 	_display_text(result)
 	game_over.show()
 	_display_box(game_over)
-
-
-func _show_battle_result() -> void:
-	your_points.text = "Your points : " + str(GameStatusServer.your_points)
-	enemy_destory.text = "Enemy Destory : " + str(GameStatusServer.enemy_destory)
-	
-	for p in GameStatusServer.rank.keys(): #分数评级 
-		if GameStatusServer.your_points >= p:
-			rank.text = "Rank : " + GameStatusServer.rank[p]
-			break
-	
-	battle_compelete.show()
-	_display_box(battle_compelete)
-
-
-
 
 
 func _on_retry_pressed() -> void:

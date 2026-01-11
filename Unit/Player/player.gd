@@ -35,6 +35,7 @@ var engine_on : bool = true
 @onready var engine_off_state: LimboState = $LimboHSM/EngineOffState
 @onready var burst_accelerate_state: LimboState = $LimboHSM/BurstAccelerateState
 
+@onready var misson: MissionPanel = $HUD/Misson
 
 @onready var trail: CPUParticles2D = $Graphic/Trail
 @onready var flame: CPUParticles2D = $Graphic/Flame

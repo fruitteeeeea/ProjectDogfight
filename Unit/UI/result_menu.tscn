@@ -83,19 +83,19 @@ size_flags_horizontal = 4
 [node name="YourPoints" type="Label" parent="BattleCompelete/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Your points : 1000"
+text = "Your points : "
 label_settings = SubResource("LabelSettings_pnvqm")
 
 [node name="EnemyDestory" type="Label" parent="BattleCompelete/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Enemy Destory : 55 "
+text = "Enemy Destory : "
 label_settings = SubResource("LabelSettings_pnvqm")
 
 [node name="Rank" type="Label" parent="BattleCompelete/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Rank : A"
+text = "Rank : D"
 label_settings = SubResource("LabelSettings_pnvqm")
 
 [node name="GameOver" type="VBoxContainer" parent="."]

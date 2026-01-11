@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=46 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://b34j05vi4y03q" path="res://Asset/UI/skull.png" id="20_6h1yq"]
 [ext_resource type="Texture2D" uid="uid://bji2a24tvivpl" path="res://Asset/UI/InputPrompts/keyboard_w.png" id="21_4dcrn"]
 [ext_resource type="Texture2D" uid="uid://bwdkyxd77xhqq" path="res://Asset/UI/InputPrompts/mouse_move.png" id="21_pcvun"]
+[ext_resource type="Script" uid="uid://bp2sy2vk7tcpq" path="res://Unit/Player/misson.gd" id="22_vj671"]
 [ext_resource type="Texture2D" uid="uid://bp3c65c1pyvph" path="res://Asset/UI/InputPrompts/keyboard_space.png" id="23_xx0et"]
 [ext_resource type="Texture2D" uid="uid://cms55552ivqkj" path="res://Asset/UI/InputPrompts/keyboard_q.png" id="24_v1p3j"]
 [ext_resource type="Texture2D" uid="uid://djeirgrk1cueb" path="res://Asset/UI/InputPrompts/keyboard_e.png" id="25_pcvun"]
@@ -879,7 +880,8 @@ size_flags_horizontal = 4
 text = "MissileApproach"
 label_settings = SubResource("LabelSettings_toghf")
 
-[node name="Misson" type="Control" parent="HUD" index="3"]
+[node name="Misson" type="Control" parent="HUD" index="3" node_paths=PackedStringArray("player")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -887,6 +889,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("22_vj671")
+player = NodePath("../..")
 
 [node name="Misson" type="CanvasGroup" parent="HUD/Misson" index="0"]
 position = Vector2(256, 136)
@@ -934,11 +938,18 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 5
 
-[node name="Label2" type="Label" parent="HUD/Misson/Time/PanelContainer2/PanelContainer" index="0"]
+[node name="TimeLeftLabel" type="Label" parent="HUD/Misson/Time/PanelContainer2/PanelContainer" index="0"]
 material = SubResource("CanvasItemMaterial_dpwos")
 layout_mode = 2
-text = "00：54"
+text = "00 : 54"
 label_settings = SubResource("LabelSettings_dhsxg")
+
+[node name="BlinkCanvsItem" type="Node" parent="HUD/Misson/Time/PanelContainer2" index="2"]
+script = ExtResource("5_dhsxg")
+min_value = Color(0.827451, 0.184314, 0.184314, 0.211765)
+max_value = Color(0.827451, 0.184314, 0.184314, 1)
+interval = 0.0
+enable = false
 
 [node name="Label" type="Label" parent="HUD/Misson/Time" index="1"]
 offset_left = -64.0
@@ -946,12 +957,21 @@ offset_top = 16.0
 offset_bottom = 49.0
 text = "Time"
 
-[node name="Label2" type="Label" parent="HUD/Misson/Time" index="2"]
-offset_left = -16.0
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Misson/Time" index="2"]
 offset_top = 64.0
-offset_right = 161.0
-offset_bottom = 97.0
-text = "2345/5000 pts."
+offset_right = 40.0
+offset_bottom = 104.0
+
+[node name="CurrentPointsLabel" type="Label" parent="HUD/Misson/Time/HBoxContainer" index="0"]
+layout_mode = 2
+text = "1000"
+
+[node name="TargetPointsLabel" type="Label" parent="HUD/Misson/Time/HBoxContainer" index="1"]
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 2
+text = "/ 5000 pts."
+
+[node name="MissionTimer" type="Timer" parent="HUD/Misson" index="2"]
 
 [node name="InputPrompts" type="Control" parent="HUD" index="4"]
 layout_mode = 3
@@ -1205,3 +1225,4 @@ max_value = 3.0
 value = 2.5
 
 [connection signal="timeout" from="Weapon/Gun/fire_interval_timer" to="Weapon/Gun" method="_on_fire_interval_timer_timeout"]
+[connection signal="timeout" from="HUD/Misson/MissionTimer" to="HUD/Misson" method="_on_mission_timer_timeout"]

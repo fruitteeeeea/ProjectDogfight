@@ -10,11 +10,19 @@ var canvas_item : CanvasItem
 @export var duration := 0.3
 @export var interval := 0.3
 
+@export var enable : bool = true #否则需要手动触发 
+
+
 func _ready():
 	var target = get_parent()
 	if target is CanvasItem:
 		canvas_item = target
-	
+
+	if enable:
+		start_tween()
+
+
+func start_tween() -> void:
 	var prop : NodePath = "modulate"
 	
 	if blink_mode == "alpha":

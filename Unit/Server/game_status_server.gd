@@ -1,12 +1,15 @@
 extends Node
 
+signal show_result(complete : bool) #游戏因各种原因结束 展示结算面板 
+
+
 var your_points : int = 0
 var enemy_destory : int = 0
 
 var rank : Dictionary[int, String] = {
-	1000 : "C",
+	100 : "C",
 	2000 : "B",
-	3000 : "A"
+	300 : "A"
 }
 
 func reset_game_status() -> void:
