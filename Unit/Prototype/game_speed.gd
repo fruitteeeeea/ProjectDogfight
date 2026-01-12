@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 @onready var label: Label = $Control/Label
+
+@export var enable := false
 @export var label_title := "GameSpeed : "
 
 @export_enum("Hold", "Click") var trriger_type := "Hold"
@@ -13,6 +15,9 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if !enable:
+		return
+	
 	if not event.is_action("game_speed"):
 		return
 

@@ -21,8 +21,7 @@ metadata/_edit_horizontal_guides_ = [-2136.0]
 
 [node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("1_272bh")
-mission_time = 10.0
-target_points = 100
+target_points = 4500
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_h2yge")]

@@ -972,6 +972,7 @@ layout_mode = 2
 text = "/ 5000 pts."
 
 [node name="MissionTimer" type="Timer" parent="HUD/Misson" index="2"]
+one_shot = true
 
 [node name="InputPrompts" type="Control" parent="HUD" index="4"]
 layout_mode = 3

@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=61 format=3 uid="uid://c04qvwf7i2xkn"]
+[gd_resource type="BehaviorTree" load_steps=62 format=3 uid="uid://c04qvwf7i2xkn"]
 
 [ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_1gapl"]
 [ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/enemy_return_to_combat_area.gd" id="2_d80a3"]
@@ -196,8 +196,10 @@ children = [SubResource("BTProbability_axqv5"), SubResource("BTSequence_d80a3")]
 run_chance = 0.0
 children = [SubResource("BTSelector_d80a3")]
 
+[sub_resource type="BTRandomSequence" id="BTRandomSequence_4cm3n"]
+
 [sub_resource type="BTSelector" id="BTSelector_ioxih"]
-children = [SubResource("BTSequence_ioxih"), SubResource("BTSelector_7kei1"), SubResource("BTProbability_4cm3n")]
+children = [SubResource("BTSequence_ioxih"), SubResource("BTSelector_7kei1"), SubResource("BTProbability_4cm3n"), SubResource("BTRandomSequence_4cm3n")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_s64y3")

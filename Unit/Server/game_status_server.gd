@@ -7,9 +7,9 @@ var your_points : int = 0
 var enemy_destory : int = 0
 
 var rank : Dictionary[int, String] = {
-	100 : "C",
-	2000 : "B",
-	300 : "A"
+	4500 : "C",
+	5000 : "B",
+	5500 : "A"
 }
 
 func reset_game_status() -> void:
