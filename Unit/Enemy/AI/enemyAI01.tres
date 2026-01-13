@@ -1,8 +1,9 @@
-[gd_resource type="BehaviorTree" load_steps=34 format=3 uid="uid://cmoc40bfp74xd"]
+[gd_resource type="BehaviorTree" load_steps=40 format=3 uid="uid://cmoc40bfp74xd"]
 
 [ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_o6x1q"]
 [ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/enemy_return_to_combat_area.gd" id="2_nlwx0"]
 [ext_resource type="Script" uid="uid://ccr43pgd4488l" path="res://ai/tasks/get_first_in_group.gd" id="3_2wkgj"]
+[ext_resource type="Script" uid="uid://cbojiw0t4dv8u" path="res://ai/tasks/enemy_select_flanking_dir.gd" id="4_2wkgj"]
 [ext_resource type="Script" uid="uid://dn7jo2eci56ul" path="res://ai/tasks/enemy_in_range.gd" id="4_ego6o"]
 [ext_resource type="Script" uid="uid://btsv5gi0hovhp" path="res://ai/tasks/enemy_flies_towards_player.gd" id="5_gt1rj"]
 
@@ -34,6 +35,66 @@ duration = 0.1
 [sub_resource type="BTSequence" id="BTSequence_fs1nl"]
 custom_name = "CheckWorldPosition"
 children = [SubResource("BTComment_o5fw7"), SubResource("BTInvert_2wkgj"), SubResource("BTCallMethod_ysiaa"), SubResource("BTAction_h7hig"), SubResource("BTWait_fidfb")]
+
+[sub_resource type="BTComment" id="BTComment_2wkgj"]
+custom_name = "第三阶段 做出攻击或者躲避动作 "
+
+[sub_resource type="BTAction" id="BTAction_gt1rj"]
+script = ExtResource("3_2wkgj")
+group = &"player"
+output_var = &"target"
+
+[sub_resource type="BTCondition" id="BTCondition_ego6o"]
+script = ExtResource("4_ego6o")
+distance_min = 0.0
+distance_max = 299.0
+target_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_ysiaa"]
+script = ExtResource("4_2wkgj")
+target_var = &"target"
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_2wkgj"]
+
+[sub_resource type="BTSequence" id="BTSequence_ego6o"]
+custom_name = "Phase03"
+children = [SubResource("BTComment_2wkgj"), SubResource("BTAction_gt1rj"), SubResource("BTCondition_ego6o"), SubResource("BTAction_ysiaa"), SubResource("BTRandomWait_2wkgj")]
+
+[sub_resource type="BTComment" id="BTComment_gt1rj"]
+custom_name = "第二阶段 接近玩家到交锋距离 "
+
+[sub_resource type="BTAction" id="BTAction_ego6o"]
+script = ExtResource("3_2wkgj")
+group = &"player"
+output_var = &"target"
+
+[sub_resource type="BTCondition" id="BTCondition_2wkgj"]
+script = ExtResource("4_ego6o")
+distance_min = 300.0
+distance_max = 799.0
+target_var = &"target"
+
+[sub_resource type="BBNode" id="BBNode_gt1rj"]
+saved_value = NodePath("EnemyGun")
+resource_name = "EnemyGun"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_gt1rj"]
+node = SubResource("BBNode_gt1rj")
+method = &"fire"
+
+[sub_resource type="BTCooldown" id="BTCooldown_gt1rj"]
+duration = 5.0
+children = [SubResource("BTCallMethod_gt1rj")]
+
+[sub_resource type="BTProbability" id="BTProbability_2wkgj"]
+run_chance = 0.01
+children = [SubResource("BTCooldown_gt1rj")]
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_gt1rj"]
+
+[sub_resource type="BTSequence" id="BTSequence_2wkgj"]
+custom_name = "Phase02"
+children = [SubResource("BTComment_gt1rj"), SubResource("BTAction_ego6o"), SubResource("BTCondition_2wkgj"), SubResource("BTProbability_2wkgj"), SubResource("BTRandomWait_gt1rj")]
 
 [sub_resource type="BTComment" id="BTComment_o6x1q"]
 custom_name = "第一阶段 如果里玩家很远 想办法接近玩家 "
@@ -71,48 +132,8 @@ children = [SubResource("BTComment_fidfb"), SubResource("BTAction_fs1nl"), SubRe
 custom_name = "Phase01"
 children = [SubResource("BTComment_o6x1q"), SubResource("BTSequence_ncdxl")]
 
-[sub_resource type="BTComment" id="BTComment_gt1rj"]
-custom_name = "第二阶段 接近玩家到交锋距离 "
-
-[sub_resource type="BTCondition" id="BTCondition_2wkgj"]
-script = ExtResource("4_ego6o")
-distance_min = 400.0
-distance_max = 799.0
-target_var = &"target"
-
-[sub_resource type="BBNode" id="BBNode_gt1rj"]
-saved_value = NodePath("EnemyGun")
-resource_name = "EnemyGun"
-
-[sub_resource type="BTCallMethod" id="BTCallMethod_gt1rj"]
-node = SubResource("BBNode_gt1rj")
-method = &"fire"
-
-[sub_resource type="BTCooldown" id="BTCooldown_gt1rj"]
-duration = 5.0
-children = [SubResource("BTCallMethod_gt1rj")]
-
-[sub_resource type="BTRandomWait" id="BTRandomWait_gt1rj"]
-
-[sub_resource type="BTSequence" id="BTSequence_2wkgj"]
-custom_name = "Phase02"
-children = [SubResource("BTComment_gt1rj"), SubResource("BTCondition_2wkgj"), SubResource("BTCooldown_gt1rj"), SubResource("BTRandomWait_gt1rj")]
-
-[sub_resource type="BTComment" id="BTComment_2wkgj"]
-custom_name = "第三阶段 做出攻击或者躲避动作 "
-
-[sub_resource type="BTCondition" id="BTCondition_ego6o"]
-script = ExtResource("4_ego6o")
-distance_min = 0.0
-distance_max = 399.0
-target_var = &"target"
-
-[sub_resource type="BTSequence" id="BTSequence_ego6o"]
-custom_name = "Phase03"
-children = [SubResource("BTComment_2wkgj"), SubResource("BTCondition_ego6o")]
-
 [sub_resource type="BTSelector" id="BTSelector_tr1o3"]
-children = [SubResource("BTSequence_fs1nl"), SubResource("BTSequence_nlwx0"), SubResource("BTSequence_2wkgj"), SubResource("BTSequence_ego6o")]
+children = [SubResource("BTSequence_fs1nl"), SubResource("BTSequence_ego6o"), SubResource("BTSequence_2wkgj"), SubResource("BTSequence_nlwx0")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_tr1o3")

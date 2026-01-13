@@ -25,7 +25,7 @@ func _tick(_delta: float) -> Status:
 
 	var enemy = agent as Enemy
 	var WORLD_RECT : Rect2 = enemy.WORLD_RECT
-	var new_rect : Rect2 = Rect2(WORLD_RECT.position * .9, WORLD_RECT.size * .9)
+	var new_rect : Rect2 = Rect2(WORLD_RECT.position * .5, WORLD_RECT.size * .5)
 
 	if new_rect.has_point(enemy.global_position):
 		return SUCCESS
