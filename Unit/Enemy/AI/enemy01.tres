@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=62 format=3 uid="uid://c04qvwf7i2xkn"]
+[gd_resource type="BehaviorTree" load_steps=63 format=3 uid="uid://c04qvwf7i2xkn"]
 
 [ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_1gapl"]
 [ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/enemy_return_to_combat_area.gd" id="2_d80a3"]
@@ -42,8 +42,11 @@ script = ExtResource("2_d80a3")
 duration = 0.1
 
 [sub_resource type="BTSequence" id="BTSequence_ioxih"]
-custom_name = "CheckPosition"
+custom_name = "CheckWorldPosition"
 children = [SubResource("BTComment_4cm3n"), SubResource("BTCallMethod_axqv5"), SubResource("BTInvert_c0ri4"), SubResource("BTAction_c0ri4"), SubResource("BTWait_c0ri4")]
+
+[sub_resource type="BTSequence" id="BTSequence_rg4p3"]
+custom_name = "CheckPlayerPosition"
 
 [sub_resource type="BBNode" id="BBNode_31koj"]
 saved_value = NodePath(".")
@@ -199,7 +202,7 @@ children = [SubResource("BTSelector_d80a3")]
 [sub_resource type="BTRandomSequence" id="BTRandomSequence_4cm3n"]
 
 [sub_resource type="BTSelector" id="BTSelector_ioxih"]
-children = [SubResource("BTSequence_ioxih"), SubResource("BTSelector_7kei1"), SubResource("BTProbability_4cm3n"), SubResource("BTRandomSequence_4cm3n")]
+children = [SubResource("BTSequence_ioxih"), SubResource("BTSequence_rg4p3"), SubResource("BTSelector_7kei1"), SubResource("BTProbability_4cm3n"), SubResource("BTRandomSequence_4cm3n")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_s64y3")

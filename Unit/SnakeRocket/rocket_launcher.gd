@@ -1,7 +1,7 @@
 extends Node2D
 class_name RocketLauncher
 
-const SNAKE_ROCKET = preload("res://Unit/SnakeRocket/snake_rocket.tscn")
+@export var SnakeRocketScene : PackedScene
 
 @export var trriger_button := "launch_rocket"
 @export var rocket_nb := 5
@@ -25,7 +25,7 @@ func _launch_rocket(dir :float = 1 , nb := 1, interval := .1, jam := 0.0) -> voi
 	var angle : float
 	
 	for i in range(nb):
-		var rocket = SNAKE_ROCKET.instantiate()
+		var rocket = SnakeRocketScene.instantiate()
 
 		if up_dir:
 			angle = - PI / 4 - PI /2 

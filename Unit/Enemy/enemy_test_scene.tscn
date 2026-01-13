@@ -24,30 +24,6 @@ texture = ExtResource("2_4eqtc")
 position = Vector2(-1392, 160)
 WORLD_RECT = Rect2(-960, -536, 1920, 1072)
 
-[node name="Enemy2" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1392, 160)
-WORLD_RECT = Rect2(-960, -536, 1920, 1072)
-
-[node name="Enemy3" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1392, 160)
-WORLD_RECT = Rect2(-960, -536, 1920, 1072)
-
-[node name="Enemy4" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1392, 160)
-WORLD_RECT = Rect2(-960, -536, 1920, 1072)
-
-[node name="Enemy5" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1392, 160)
-WORLD_RECT = Rect2(-960, -536, 1920, 1072)
-
-[node name="Enemy6" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1392, 160)
-WORLD_RECT = Rect2(-960, -536, 1920, 1072)
-
-[node name="Enemy7" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1392, 160)
-WORLD_RECT = Rect2(-960, -536, 1920, 1072)
-
 [node name="GameSpeed" parent="." instance=ExtResource("4_cuthw")]
 trriger_type = "Click"
 game_speed_scale = Array[float]([0.5, 1.0, 2.0])
