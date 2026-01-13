@@ -6,14 +6,8 @@ class_name Enemy
 @onready var damage_component: DamageComponent = $DamageComponent
 
 #行为树使用的移动速度和转身速度加成 
-@export var movement_speed_buffer : float = 1.0: 
-	set(v): 
-		movement_speed_buffer = v
-		print("敌人移动速度加成为： %s" % v)
-@export var turn_speed_buffer : float = 1.0:
-	set(v): 
-		turn_speed_buffer = v
-		print("敌人转身速度加成为： %s" % v)
+@export var movement_speed_buffer : float = 1.0
+@export var turn_speed_buffer : float = 1.0
 
 
 

@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=80 format=3 uid="uid://c04qvwf7i2xkn"]
+[gd_resource type="BehaviorTree" load_steps=74 format=3 uid="uid://c04qvwf7i2xkn"]
 
 [ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_fvffq"]
 [ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/enemy_return_to_combat_area.gd" id="2_t3i88"]
@@ -243,29 +243,8 @@ children = [SubResource("BTProbability_axqv5"), SubResource("BTSequence_d80a3")]
 run_chance = 0.0
 children = [SubResource("BTSelector_d80a3")]
 
-[sub_resource type="BTComment" id="BTComment_6b2e6"]
-custom_name = "第一阶段 如果里玩家很远 想办法接近玩家 "
-
-[sub_resource type="BTSequence" id="BTSequence_sfh8e"]
-custom_name = "Phase01"
-children = [SubResource("BTComment_6b2e6")]
-
-[sub_resource type="BTComment" id="BTComment_vqvjh"]
-custom_name = "第二阶段 接近玩家到交锋距离 "
-
-[sub_resource type="BTSequence" id="BTSequence_dotmp"]
-custom_name = "Phase02"
-children = [SubResource("BTComment_vqvjh")]
-
-[sub_resource type="BTComment" id="BTComment_ljcwq"]
-custom_name = "第三阶段 做出攻击或者躲避动作 "
-
-[sub_resource type="BTSequence" id="BTSequence_8ypka"]
-custom_name = "Phase03"
-children = [SubResource("BTComment_ljcwq")]
-
 [sub_resource type="BTSelector" id="BTSelector_ioxih"]
-children = [SubResource("BTSequence_ioxih"), SubResource("BTSequence_rg4p3"), SubResource("BTSelector_7kei1"), SubResource("BTProbability_4cm3n"), SubResource("BTSequence_sfh8e"), SubResource("BTSequence_dotmp"), SubResource("BTSequence_8ypka")]
+children = [SubResource("BTSequence_ioxih"), SubResource("BTSequence_rg4p3"), SubResource("BTSelector_7kei1"), SubResource("BTProbability_4cm3n")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_s64y3")

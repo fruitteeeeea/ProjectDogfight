@@ -14,7 +14,7 @@ offsets = PackedFloat32Array(0.0153257, 0.622605, 1)
 colors = PackedColorArray(1, 0.921569, 0.933333, 1, 0.787015, 0.184348, 0.173338, 1, 0.776471, 0.156863, 0.156863, 1)
 
 [node name="EnemyBullet" instance=ExtResource("1_p8l2b")]
-collision_layer = 2
+collision_layer = 0
 speed = 600.0
 
 [node name="BulletTrail" type="CPUParticles2D" parent="." index="1"]
@@ -35,6 +35,9 @@ color_ramp = SubResource("Gradient_5djv2")
 modulate = Color(0.898039, 0.223529, 0.207843, 1)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_lcdgx")
+
+[node name="HitBox" parent="." index="4"]
+target = "Player"
 
 [node name="Sprite2D2" type="Sprite2D" parent="." index="5"]
 rotation = 1.57079

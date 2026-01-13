@@ -1,7 +1,9 @@
-extends Node2D
+extends Gun
+class_name PlayerGun
+
 
 @export var trriger_button := "open_fire"
-@export var BulletScene : PackedScene
+
 
 @export var fire_interval : float = .1
 @onready var fire_interval_timer: Timer = $fire_interval_timer
@@ -56,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		fire_on = !fire_on
 
 
-func _fire() -> void:
+func fire() -> void:
 	if current_bullet <= 0:
 		fire_on = false
 		return
@@ -66,14 +68,14 @@ func _fire() -> void:
 	var bullet_offset : Array[Vector2] = [Vector2(0, -12.0), Vector2(0, 12.0)]
 	
 	for i in range(bullet_offset.size()):
-		var bullet = BulletScene.instantiate() as Bullet
-		bullet.position = global_position + bullet_offset.pop_back().rotated(global_rotation) #要旋转一下这个offset
-		bullet.direction = global_transform.x.normalized()
-		get_tree().current_scene.add_child(bullet)
+		var pos_offset = bullet_offset.pop_back()
+		var dir =  global_transform.x.normalized()
+
+		_fire(pos_offset, dir)
 
 
 func _on_fire_interval_timer_timeout() -> void:
-	_fire() 
+	fire() 
 
 
 func _physics_process(delta: float) -> void:

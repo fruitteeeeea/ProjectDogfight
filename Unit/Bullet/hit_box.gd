@@ -7,6 +7,8 @@ func _ready() -> void:
 	match target:
 		"Enemy":
 			collision_mask = (1 << 2)
+		"Player":
+			collision_mask = (1 << 1)  # 第 2 层s
 
 
 func _on_body_entered(body: Node2D) -> void:

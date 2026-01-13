@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs7k75frbxvbs"]
+
+[ext_resource type="PackedScene" uid="uid://b6m4bm7mcdcof" path="res://Unit/Weapon/gun.tscn" id="1_5xi0v"]
+[ext_resource type="Script" uid="uid://y05o33tfs208" path="res://Unit/Weapon/enemy_gun.gd" id="2_gmr4g"]
+[ext_resource type="PackedScene" uid="uid://djvkpsb0xg7y8" path="res://Unit/Bullet/enemy_bullet.tscn" id="3_m37mh"]
+
+[node name="EnemyGun" instance=ExtResource("1_5xi0v")]
+script = ExtResource("2_gmr4g")
+bullet_number = 1
+BulletScene = ExtResource("3_m37mh")

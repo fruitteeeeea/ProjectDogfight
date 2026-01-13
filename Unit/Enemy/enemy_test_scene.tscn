@@ -34,7 +34,7 @@ texture = ExtResource("3_cuthw")
 shape = SubResource("CircleShape2D_74kmb")
 
 [node name="Enemy" parent="." instance=ExtResource("3_3e1t1")]
-position = Vector2(-1392, 160)
+position = Vector2(-976, 568)
 WORLD_RECT = Rect2(-960, -536, 1920, 1072)
 
 [node name="GameSpeed" parent="." instance=ExtResource("4_cuthw")]

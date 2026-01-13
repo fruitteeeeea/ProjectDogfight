@@ -40,9 +40,20 @@ func _tick(_delta: float) -> Status:
 	if not is_instance_valid(target):
 		return FAILURE
 	
-	enemy.target_forward = (target.global_position - enemy.global_position).normalized()
+
+	enemy.target_forward = snap_direction_45((target.global_position - enemy.global_position).normalized())
 
 	return RUNNING
+
+func snap_direction_45(dir: Vector2) -> Vector2:
+	if dir == Vector2.ZERO:
+		return Vector2.ZERO
+
+	var angle := dir.angle()                 # 弧度
+	var step := PI / 4.0                     # 45°
+	var snapped_angle = round(angle / step) * step
+
+	return Vector2.from_angle(snapped_angle)
 
 
 func _exit() -> void:

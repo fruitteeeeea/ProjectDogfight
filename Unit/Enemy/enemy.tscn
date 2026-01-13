@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d2rcul35yljaa"]
+[gd_scene load_steps=17 format=3 uid="uid://d2rcul35yljaa"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_0dgib"]
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
 [ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="8_iw8a2"]
 [ext_resource type="PackedScene" uid="uid://rtgahvid3v5d" path="res://Unit/UI/floatting_text/floatting_text.tscn" id="9_gcf3q"]
+[ext_resource type="PackedScene" uid="uid://cs7k75frbxvbs" path="res://Unit/Weapon/enemy_gun.tscn" id="10_s1sfp"]
 
 [sub_resource type="Gradient" id="Gradient_iw8a2"]
 offsets = PackedFloat32Array(0, 0.352941, 0.998492, 1)
@@ -131,3 +132,5 @@ visible = false
 position = Vector2(56, -40)
 frame = 0
 frame_progress = 0.0
+
+[node name="EnemyGun" parent="." index="9" instance=ExtResource("10_s1sfp")]
