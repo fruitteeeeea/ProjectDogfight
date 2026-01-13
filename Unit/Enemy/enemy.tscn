@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
 [ext_resource type="Texture2D" uid="uid://cusx3iicve3id" path="res://Asset/Jet/ship_sidesB.png" id="3_ois23"]
 [ext_resource type="Script" uid="uid://cyvt0ejvx3uyr" path="res://Unit/Enemy/damage_component.gd" id="4_qudsa"]
-[ext_resource type="BehaviorTree" uid="uid://c04qvwf7i2xkn" path="res://Unit/Enemy/AI/enemy01.tres" id="5_s64y3"]
 [ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="6_3gebf"]
+[ext_resource type="BehaviorTree" uid="uid://cmoc40bfp74xd" path="res://Unit/Enemy/AI/enemyAI01.tres" id="6_gcf3q"]
 [ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
 [ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="8_iw8a2"]
 [ext_resource type="PackedScene" uid="uid://rtgahvid3v5d" path="res://Unit/UI/floatting_text/floatting_text.tscn" id="9_gcf3q"]
@@ -36,6 +36,8 @@ colors = PackedColorArray(1, 1, 1, 1, 0.776471, 0.156863, 0.156863, 1)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("2_kg1yc")
+movement_speed_buffer = 1.0
+turn_speed_buffer = 1.0
 
 [node name="Sprite2D" parent="Graphic" index="0"]
 texture = ExtResource("3_ois23")
@@ -85,7 +87,7 @@ scale_amount_curve = SubResource("Curve_3gebf")
 color_ramp = SubResource("Gradient_3gebf")
 
 [node name="BTPlayer" type="BTPlayer" parent="." index="3"]
-behavior_tree = ExtResource("5_s64y3")
+behavior_tree = ExtResource("6_gcf3q")
 blackboard_plan = SubResource("BlackboardPlan_s64y3")
 
 [node name="ColorRect" type="ColorRect" parent="." index="4"]

@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://de22mgi5rbfe8"]
+[gd_scene load_steps=8 format=3 uid="uid://de22mgi5rbfe8"]
 
 [ext_resource type="Texture2D" uid="uid://fdexqao4a04g" path="res://icon.svg" id="2_4eqtc"]
+[ext_resource type="Script" uid="uid://bapefc5oqo6f1" path="res://Unit/Enemy/dummy.gd" id="2_74kmb"]
 [ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="3_3e1t1"]
+[ext_resource type="Texture2D" uid="uid://dkrm6l6nahost" path="res://Asset/UI/crosshair127.png" id="3_cuthw"]
 [ext_resource type="PackedScene" uid="uid://dsm8xf4dmc6xd" path="res://Unit/Prototype/game_speed.tscn" id="4_cuthw"]
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="4_if1b7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74kmb"]
 
 [node name="EnemyTestScene" type="Node2D"]
 
@@ -13,17 +17,27 @@
 position = Vector2(-16, -32)
 zoom = Vector2(0.7, 0.7)
 
-[node name="Dummy" type="Node2D" parent="." groups=["player"]]
+[node name="Dummy" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(-8, -24)
+script = ExtResource("2_74kmb")
+metadata/_custom_type_script = "uid://cnv48xflr8sb6"
 
 [node name="Sprite2D" type="Sprite2D" parent="Dummy"]
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("2_4eqtc")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Dummy"]
+position = Vector2(48, 0)
+texture = ExtResource("3_cuthw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy"]
+shape = SubResource("CircleShape2D_74kmb")
 
 [node name="Enemy" parent="." instance=ExtResource("3_3e1t1")]
 position = Vector2(-1392, 160)
 WORLD_RECT = Rect2(-960, -536, 1920, 1072)
 
 [node name="GameSpeed" parent="." instance=ExtResource("4_cuthw")]
+enable = true
 trriger_type = "Click"
 game_speed_scale = Array[float]([0.5, 1.0, 2.0])

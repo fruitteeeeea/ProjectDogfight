@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://djvkpsb0xg7y8"]
+
+[ext_resource type="PackedScene" uid="uid://iw4ebp6p7gw7" path="res://Unit/Bullet/bullet.tscn" id="1_p8l2b"]
+[ext_resource type="Texture2D" uid="uid://cwrl5eqmpmo5x" path="res://Asset/Bullet/meteor_squareDetailedSmall.png" id="2_lcdgx"]
+[ext_resource type="Texture2D" uid="uid://cl37ykvl18ngi" path="res://Asset/Bullet/ship_B.png" id="3_3e620"]
+[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="4_5djv2"]
+
+[sub_resource type="Curve" id="Curve_5djv2"]
+_data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5djv2"]
+offsets = PackedFloat32Array(0.0153257, 0.622605, 1)
+colors = PackedColorArray(1, 0.921569, 0.933333, 1, 0.787015, 0.184348, 0.173338, 1, 0.776471, 0.156863, 0.156863, 1)
+
+[node name="EnemyBullet" instance=ExtResource("1_p8l2b")]
+collision_layer = 2
+speed = 600.0
+
+[node name="BulletTrail" type="CPUParticles2D" parent="." index="1"]
+texture = ExtResource("4_5djv2")
+lifetime = 0.3
+particle_flag_align_y = true
+direction = Vector2(-1, 0)
+spread = 15.0
+gravity = Vector2(0, 5)
+initial_velocity_min = 150.0
+initial_velocity_max = 400.0
+scale_amount_min = 0.8
+scale_amount_max = 0.8
+scale_amount_curve = SubResource("Curve_5djv2")
+color_ramp = SubResource("Gradient_5djv2")
+
+[node name="Sprite2D" parent="." index="2"]
+modulate = Color(0.898039, 0.223529, 0.207843, 1)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_lcdgx")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="5"]
+rotation = 1.57079
+scale = Vector2(0.348786, 0.15462)
+texture = ExtResource("3_3e620")

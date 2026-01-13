@@ -5,6 +5,18 @@ class_name Enemy
 @onready var bt_player: BTPlayer = $BTPlayer
 @onready var damage_component: DamageComponent = $DamageComponent
 
+#行为树使用的移动速度和转身速度加成 
+@export var movement_speed_buffer : float = 1.0: 
+	set(v): 
+		movement_speed_buffer = v
+		print("敌人移动速度加成为： %s" % v)
+@export var turn_speed_buffer : float = 1.0:
+	set(v): 
+		turn_speed_buffer = v
+		print("敌人转身速度加成为： %s" % v)
+
+
+
 func _ready() -> void:
 	target_forward = [Vector2.LEFT, Vector2.RIGHT].pick_random()
 
@@ -13,6 +25,14 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	_update_debug_label()
 
+
+func _get_speed() -> float:
+	return speed * movement_speed_buffer
+
+
+func _get_forward(delta) -> Vector2:
+	forward = forward.slerp(target_forward, 1.0 - exp(-turn_speed * turn_speed_buffer * delta))
+	return forward
 
 
 #region TakeDamage

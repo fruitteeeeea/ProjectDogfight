@@ -1,15 +1,16 @@
-[gd_resource type="BehaviorTree" load_steps=63 format=3 uid="uid://c04qvwf7i2xkn"]
+[gd_resource type="BehaviorTree" load_steps=80 format=3 uid="uid://c04qvwf7i2xkn"]
 
-[ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_1gapl"]
-[ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/enemy_return_to_combat_area.gd" id="2_d80a3"]
-[ext_resource type="Script" uid="uid://dqhahvrr7rky6" path="res://ai/tasks/climb_up_or_down.gd" id="3_3rvhi"]
-[ext_resource type="Script" uid="uid://nlwph1f7h1al" path="res://ai/tasks/enemy_do_a_roll.gd" id="3_4cm3n"]
-[ext_resource type="Script" uid="uid://b2ks5hmb7npe8" path="res://ai/tasks/enemy_flanking.gd" id="3_7kei1"]
-[ext_resource type="Script" uid="uid://drbcmj0danqlm" path="res://ai/tasks/enemy_move_straight_line.gd" id="3_axqv5"]
-[ext_resource type="Script" uid="uid://cici70d66h5xq" path="res://ai/tasks/enemy_change_direction.gd" id="3_d80a3"]
-[ext_resource type="Script" uid="uid://ccr43pgd4488l" path="res://ai/tasks/get_first_in_group.gd" id="4_swpx5"]
-[ext_resource type="Script" uid="uid://dn7jo2eci56ul" path="res://ai/tasks/enemy_in_range.gd" id="5_31koj"]
-[ext_resource type="Script" uid="uid://bv5r8idf0o1t4" path="res://ai/tasks/enemy_approach.gd" id="5_yibc0"]
+[ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_fvffq"]
+[ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/enemy_return_to_combat_area.gd" id="2_t3i88"]
+[ext_resource type="Script" uid="uid://ccr43pgd4488l" path="res://ai/tasks/get_first_in_group.gd" id="3_uvbqg"]
+[ext_resource type="Script" uid="uid://dn7jo2eci56ul" path="res://ai/tasks/enemy_in_range.gd" id="4_s72rt"]
+[ext_resource type="Script" uid="uid://cu6xvl3jc8li0" path="res://ai/tasks/is_same_direction_with_target.gd" id="5_w6t30"]
+[ext_resource type="Script" uid="uid://nlwph1f7h1al" path="res://ai/tasks/enemy_do_a_roll.gd" id="6_xggl5"]
+[ext_resource type="Script" uid="uid://dqhahvrr7rky6" path="res://ai/tasks/climb_up_or_down.gd" id="7_4a4fk"]
+[ext_resource type="Script" uid="uid://bv5r8idf0o1t4" path="res://ai/tasks/enemy_approach.gd" id="8_ilhni"]
+[ext_resource type="Script" uid="uid://b2ks5hmb7npe8" path="res://ai/tasks/enemy_flanking.gd" id="9_70ubm"]
+[ext_resource type="Script" uid="uid://drbcmj0danqlm" path="res://ai/tasks/enemy_move_straight_line.gd" id="10_q7m3o"]
+[ext_resource type="Script" uid="uid://cici70d66h5xq" path="res://ai/tasks/enemy_change_direction.gd" id="11_jycct"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_s64y3"]
 var/target/name = &"target"
@@ -21,6 +22,12 @@ var/target/hint_string = ""
 [sub_resource type="BTComment" id="BTComment_4cm3n"]
 custom_name = "确保敌人不会离开地图区域 "
 
+[sub_resource type="BTCondition" id="BTCondition_1gapl"]
+script = ExtResource("1_fvffq")
+
+[sub_resource type="BTInvert" id="BTInvert_c0ri4"]
+children = [SubResource("BTCondition_1gapl")]
+
 [sub_resource type="BBNode" id="BBNode_d80a3"]
 saved_value = NodePath(".")
 resource_name = "."
@@ -29,24 +36,61 @@ resource_name = "."
 node = SubResource("BBNode_d80a3")
 method = &"_enter_combat_area"
 
-[sub_resource type="BTCondition" id="BTCondition_1gapl"]
-script = ExtResource("1_1gapl")
-
-[sub_resource type="BTInvert" id="BTInvert_c0ri4"]
-children = [SubResource("BTCondition_1gapl")]
-
 [sub_resource type="BTAction" id="BTAction_c0ri4"]
-script = ExtResource("2_d80a3")
+script = ExtResource("2_t3i88")
 
 [sub_resource type="BTWait" id="BTWait_c0ri4"]
 duration = 0.1
 
 [sub_resource type="BTSequence" id="BTSequence_ioxih"]
 custom_name = "CheckWorldPosition"
-children = [SubResource("BTComment_4cm3n"), SubResource("BTCallMethod_axqv5"), SubResource("BTInvert_c0ri4"), SubResource("BTAction_c0ri4"), SubResource("BTWait_c0ri4")]
+children = [SubResource("BTComment_4cm3n"), SubResource("BTInvert_c0ri4"), SubResource("BTCallMethod_axqv5"), SubResource("BTAction_c0ri4"), SubResource("BTWait_c0ri4")]
+
+[sub_resource type="BTComment" id="BTComment_sfh8e"]
+custom_name = "敌人与玩家过近的时候 采取的措施  "
+
+[sub_resource type="BTAction" id="BTAction_sfh8e"]
+script = ExtResource("3_uvbqg")
+group = &"player"
+output_var = &"target"
+
+[sub_resource type="BTCondition" id="BTCondition_457ul"]
+script = ExtResource("4_s72rt")
+distance_min = 500.0
+distance_max = 650.0
+target_var = &"target"
+
+[sub_resource type="BTInvert" id="BTInvert_rg4p3"]
+children = [SubResource("BTCondition_457ul")]
+
+[sub_resource type="BTCondition" id="BTCondition_rg4p3"]
+script = ExtResource("5_w6t30")
+target_var = &"target"
+tolerance = 30.0
+
+[sub_resource type="BTInvert" id="BTInvert_457ul"]
+children = [SubResource("BTCondition_rg4p3")]
+
+[sub_resource type="BTComment" id="BTComment_3drhp"]
+custom_name = "敌人绕圈"
+
+[sub_resource type="BTAction" id="BTAction_6b2e6"]
+children = [SubResource("BTComment_3drhp")]
+script = ExtResource("6_xggl5")
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_vqvjh"]
+text = "敌人绕圈"
+
+[sub_resource type="BTSequence" id="BTSequence_ljcwq"]
+custom_name = "DoARoll"
+children = [SubResource("BTAction_6b2e6"), SubResource("BTConsolePrint_vqvjh")]
+
+[sub_resource type="BTSelector" id="BTSelector_457ul"]
+custom_name = "SameDirAttack"
 
 [sub_resource type="BTSequence" id="BTSequence_rg4p3"]
 custom_name = "CheckPlayerPosition"
+children = [SubResource("BTComment_sfh8e"), SubResource("BTAction_sfh8e"), SubResource("BTInvert_rg4p3"), SubResource("BTInvert_457ul"), SubResource("BTSequence_ljcwq"), SubResource("BTSelector_457ul")]
 
 [sub_resource type="BBNode" id="BBNode_31koj"]
 saved_value = NodePath(".")
@@ -57,17 +101,17 @@ node = SubResource("BBNode_31koj")
 method = &"_enter_attack_state"
 
 [sub_resource type="BTAction" id="BTAction_rg4p3"]
-script = ExtResource("4_swpx5")
+script = ExtResource("3_uvbqg")
 group = &"player"
 output_var = &"target"
 
 [sub_resource type="BTAction" id="BTAction_swpx5"]
-script = ExtResource("3_3rvhi")
+script = ExtResource("7_4a4fk")
 target_var = &"target"
 tolerance = 30.0
 
 [sub_resource type="BTAction" id="BTAction_7kei1"]
-script = ExtResource("5_yibc0")
+script = ExtResource("8_ilhni")
 target_var = &"target"
 tolerance = 150.0
 
@@ -87,12 +131,12 @@ custom_name = "AttackState"
 children = [SubResource("BTSequence_swpx5")]
 
 [sub_resource type="BTAction" id="BTAction_yibc0"]
-script = ExtResource("4_swpx5")
+script = ExtResource("3_uvbqg")
 group = &"player"
 output_var = &"target"
 
 [sub_resource type="BTCondition" id="BTCondition_d80a3"]
-script = ExtResource("5_31koj")
+script = ExtResource("4_s72rt")
 distance_min = 300.0
 distance_max = 450.0
 target_var = &"target"
@@ -110,7 +154,7 @@ custom_name = "敌人绕圈"
 
 [sub_resource type="BTAction" id="BTAction_457ul"]
 children = [SubResource("BTComment_457ul")]
-script = ExtResource("3_4cm3n")
+script = ExtResource("6_xggl5")
 
 [sub_resource type="BTConsolePrint" id="BTConsolePrint_4cm3n"]
 text = "敌人绕圈"
@@ -127,7 +171,7 @@ custom_name = "敌人反方向逃跑"
 
 [sub_resource type="BTAction" id="BTAction_31koj"]
 children = [SubResource("BTComment_rg4p3")]
-script = ExtResource("3_7kei1")
+script = ExtResource("9_70ubm")
 target_var = &"target"
 
 [sub_resource type="BTConsolePrint" id="BTConsolePrint_457ul"]
@@ -163,7 +207,7 @@ node = SubResource("BBNode_axqv5")
 method = &"_enter_flank_state"
 
 [sub_resource type="BTAction" id="BTAction_4cm3n"]
-script = ExtResource("3_axqv5")
+script = ExtResource("10_q7m3o")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_axqv5"]
 
@@ -183,7 +227,7 @@ node = SubResource("BBNode_4cm3n")
 method = &"_enter_flank_state"
 
 [sub_resource type="BTAction" id="BTAction_axqv5"]
-script = ExtResource("3_d80a3")
+script = ExtResource("11_jycct")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_d80a3"]
 
@@ -199,10 +243,29 @@ children = [SubResource("BTProbability_axqv5"), SubResource("BTSequence_d80a3")]
 run_chance = 0.0
 children = [SubResource("BTSelector_d80a3")]
 
-[sub_resource type="BTRandomSequence" id="BTRandomSequence_4cm3n"]
+[sub_resource type="BTComment" id="BTComment_6b2e6"]
+custom_name = "第一阶段 如果里玩家很远 想办法接近玩家 "
+
+[sub_resource type="BTSequence" id="BTSequence_sfh8e"]
+custom_name = "Phase01"
+children = [SubResource("BTComment_6b2e6")]
+
+[sub_resource type="BTComment" id="BTComment_vqvjh"]
+custom_name = "第二阶段 接近玩家到交锋距离 "
+
+[sub_resource type="BTSequence" id="BTSequence_dotmp"]
+custom_name = "Phase02"
+children = [SubResource("BTComment_vqvjh")]
+
+[sub_resource type="BTComment" id="BTComment_ljcwq"]
+custom_name = "第三阶段 做出攻击或者躲避动作 "
+
+[sub_resource type="BTSequence" id="BTSequence_8ypka"]
+custom_name = "Phase03"
+children = [SubResource("BTComment_ljcwq")]
 
 [sub_resource type="BTSelector" id="BTSelector_ioxih"]
-children = [SubResource("BTSequence_ioxih"), SubResource("BTSequence_rg4p3"), SubResource("BTSelector_7kei1"), SubResource("BTProbability_4cm3n"), SubResource("BTRandomSequence_4cm3n")]
+children = [SubResource("BTSequence_ioxih"), SubResource("BTSequence_rg4p3"), SubResource("BTSelector_7kei1"), SubResource("BTProbability_4cm3n"), SubResource("BTSequence_sfh8e"), SubResource("BTSequence_dotmp"), SubResource("BTSequence_8ypka")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_s64y3")
