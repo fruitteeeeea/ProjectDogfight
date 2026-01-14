@@ -159,7 +159,7 @@ font_size = 32
 
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
-engine_off_burst_accel = -0.4
+engine_off_burst_accel = -0.8
 engine_off_burst_ratio = 1.0
 engine_off_turn_speed = 2.0
 gravity_dir = Vector2(0, 1)
@@ -167,6 +167,7 @@ fall_strength = 0.4
 accelerate_burst_accel = 1.8
 accelerate_off_burst_ratio = 2.0
 accelerate_turn_speed = 1.5
+turn_speed = 1.0
 
 [node name="Sprite2D" parent="Graphic" index="0"]
 scale = Vector2(0.35, 0.35)
