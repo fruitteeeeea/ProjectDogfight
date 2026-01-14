@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://j6rednkkkc1t"]
+
+[ext_resource type="Script" uid="uid://clobmhcou5ixa" path="res://Unit/UI/Menu/main_menu.gd" id="1_b2vmc"]
+[ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_plyx2"]
+[ext_resource type="Shader" uid="uid://dskykeqhsdh1p" path="res://Unit/UI/Menu/moving_texture.gdshader" id="2_36v3h"]
+[ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://Unit/UI/FrostedGlassShader.gdshader" id="3_5a3qv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5a3qv"]
+shader = ExtResource("2_36v3h")
+shader_parameter/speed = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2vmc"]
+shader = ExtResource("3_5a3qv")
+shader_parameter/shape_type = 1
+shader_parameter/rect_size = Vector2(300, 200)
+shader_parameter/corner_radius_top_left = 37.92
+shader_parameter/corner_radius_top_right = 20.0
+shader_parameter/corner_radius_bottom_left = 20.0
+shader_parameter/corner_radius_bottom_right = 20.0
+shader_parameter/circle_radius = 100.0
+shader_parameter/outline_enabled = true
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = Color(1, 1, 1, 0)
+shader_parameter/shadow_enabled = false
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_blur = 15.0
+shader_parameter/edge_softness = 0.0
+shader_parameter/shape_color = Color(1, 1, 1, 1)
+shader_parameter/color_gradient_y = 0.0
+shader_parameter/color_gradient_x = 9.5e-08
+shader_parameter/color_multiplier = 0.1
+shader_parameter/enable_screen_blur = true
+shader_parameter/blur_amount = 4.0
+shader_parameter/blur_samples = 4
+shader_parameter/glass_opacity = 0.2
+shader_parameter/node_size = Vector2(100, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_36v3h"]
+font_size = 92
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_b2vmc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" parent="CanvasLayer/Control" instance=ExtResource("1_plyx2")]
+
+[node name="TextureRect" parent="CanvasLayer/Control/BG" index="0"]
+material = SubResource("ShaderMaterial_5a3qv")
+
+[node name="BlurBackground" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_b2vmc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -28.0
+offset_right = 162.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "Play
+"
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "Option
+"
+
+[node name="Button3" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "About"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -439.0
+offset_top = -212.0
+offset_right = 439.0
+offset_bottom = -87.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Blueprint Dogfight."
+label_settings = SubResource("LabelSettings_36v3h")
+
+[connection signal="pressed" from="CanvasLayer/Control/HBoxContainer/Play" to="." method="_on_play_pressed"]
+
+[editable path="CanvasLayer/Control/BG"]

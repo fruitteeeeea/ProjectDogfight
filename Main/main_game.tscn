@@ -1,39 +1,39 @@
 [gd_scene load_steps=11 format=3 uid="uid://k5msw5fm124k"]
 
-[ext_resource type="Script" uid="uid://doh7g3ch50gia" path="res://Main/game_manager.gd" id="1_272bh"]
-[ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="2_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://dnc5yjftuv7il" path="res://Unit/Player/player.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://duhpi6ih7unwk" path="res://Unit/Prototype/enemy_spwaner.tscn" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://dsm8xf4dmc6xd" path="res://Unit/Prototype/game_speed.tscn" id="5_lquwl"]
-[ext_resource type="PackedScene" uid="uid://cukppeq26yfa1" path="res://Unit/UI/result_menu.tscn" id="6_7mycd"]
-[ext_resource type="Texture2D" uid="uid://c6mtgbu8f2fht" path="res://Asset/UI/InputPrompts/keyboard_enter.png" id="8_qac2q"]
-[ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="9_rj11h"]
+[ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_7dbjd"]
+[ext_resource type="Script" uid="uid://doh7g3ch50gia" path="res://Main/game_manager.gd" id="2_k34uy"]
+[ext_resource type="PackedScene" uid="uid://dnc5yjftuv7il" path="res://Unit/Player/player.tscn" id="3_p1lxc"]
+[ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="4_ui0m1"]
+[ext_resource type="PackedScene" uid="uid://duhpi6ih7unwk" path="res://Unit/Prototype/enemy_spwaner.tscn" id="5_m416f"]
+[ext_resource type="PackedScene" uid="uid://dsm8xf4dmc6xd" path="res://Unit/Prototype/game_speed.tscn" id="6_f7yv3"]
+[ext_resource type="Texture2D" uid="uid://c6mtgbu8f2fht" path="res://Asset/UI/InputPrompts/keyboard_enter.png" id="7_i23kr"]
+[ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="8_x645j"]
+[ext_resource type="PackedScene" uid="uid://cukppeq26yfa1" path="res://Unit/UI/result_menu.tscn" id="9_aab7o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f6fdm"]
 font_size = 32
 
-[node name="main" type="Node2D"]
+[node name="MainGame" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-640.0]
 metadata/_edit_horizontal_guides_ = [-2136.0]
 
-[node name="BG" parent="." instance=ExtResource("1_h2yge")]
+[node name="BG" parent="." instance=ExtResource("1_7dbjd")]
 
 [node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("1_272bh")
+script = ExtResource("2_k34uy")
 target_points = 4500
 player = NodePath("../Player")
 
-[node name="Player" parent="." instance=ExtResource("2_h2yge")]
+[node name="Player" parent="." instance=ExtResource("3_p1lxc")]
 position = Vector2(1176, 2000)
 metadata/_edit_horizontal_guides_ = [448.0]
 
-[node name="Enemy" parent="." instance=ExtResource("2_1bvp3")]
+[node name="Enemy" parent="." instance=ExtResource("4_ui0m1")]
 position = Vector2(654, 782)
 
-[node name="EnemySpwaner" parent="." instance=ExtResource("4_1bvp3")]
+[node name="EnemySpwaner" parent="." instance=ExtResource("5_m416f")]
 
-[node name="GameSpeed" parent="." instance=ExtResource("5_lquwl")]
+[node name="GameSpeed" parent="." instance=ExtResource("6_f7yv3")]
 game_speed_scale = Array[float]([3.0, 1.0])
 
 [node name="GameHUD" type="CanvasLayer" parent="."]
@@ -83,7 +83,7 @@ offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_qac2q")
+texture = ExtResource("7_i23kr")
 
 [node name="Label2" type="Label" parent="GameHUD/ReadyToStart/PanelContainer/HBoxContainer"]
 layout_mode = 2
@@ -92,9 +92,9 @@ text = "To Start the game."
 label_settings = SubResource("LabelSettings_f6fdm")
 
 [node name="BlinkCanvsItem" type="Node" parent="GameHUD/ReadyToStart/PanelContainer"]
-script = ExtResource("9_rj11h")
+script = ExtResource("8_x645j")
 blink_mode = "alpha"
 duration = 1.0
 interval = 0.5
 
-[node name="ResultMenu" parent="GameHUD" instance=ExtResource("6_7mycd")]
+[node name="ResultMenu" parent="GameHUD" instance=ExtResource("9_aab7o")]
