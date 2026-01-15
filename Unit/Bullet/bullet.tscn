@@ -22,6 +22,7 @@ texture = ExtResource("1_b72hd")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 
-[node name="HitBox" parent="." instance=ExtResource("3_yotn0")]
+[node name="HitBox" parent="." node_paths=PackedStringArray("bullet") instance=ExtResource("3_yotn0")]
+bullet = NodePath("..")
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

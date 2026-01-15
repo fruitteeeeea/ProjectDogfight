@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr2n35uakvhy6"]
+
+[ext_resource type="Script" uid="uid://cyvt0ejvx3uyr" path="res://Unit/Jet/Component/damage_component.gd" id="1_nk7qr"]
+[ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="2_215oy"]
+
+[sub_resource type="Curve" id="Curve_5k7b3"]
+_data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_531fe"]
+offsets = PackedFloat32Array(0, 0.226244, 1)
+colors = PackedColorArray(0.223529, 0.223529, 0.223529, 1, 0.325419, 0.325419, 0.325419, 0.895023, 1, 1, 1, 0.2)
+
+[sub_resource type="Curve" id="Curve_261iw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.253923, 0.394095), 0.0, 0.0, 0, 0, Vector2(0.339515, 0.566595), -4.09002, -4.09002, 0, 0, Vector2(0.611983, 0.38547), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Gradient" id="Gradient_b5uau"]
+offsets = PackedFloat32Array(0.0015083, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.776471, 0.156863, 0.156863, 1)
+
+[node name="DamageComponent" type="Node2D"]
+script = ExtResource("1_nk7qr")
+
+[node name="DieParticle" type="CPUParticles2D" parent="."]
+position = Vector2(-16, 0)
+rotation = 1.5708
+emitting = false
+amount = 100
+texture = ExtResource("2_215oy")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_5k7b3")
+color_ramp = SubResource("Gradient_531fe")
+
+[node name="HitSplashParticle" type="CPUParticles2D" parent="."]
+emitting = false
+texture = ExtResource("2_215oy")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 450.0
+initial_velocity_max = 750.0
+scale_amount_curve = SubResource("Curve_261iw")
+color_ramp = SubResource("Gradient_b5uau")
+
+[node name="CrashSplashParticle" type="CPUParticles2D" parent="."]
+emitting = false
+texture = ExtResource("2_215oy")
+lifetime = 0.3
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+scale_amount_curve = SubResource("Curve_261iw")
+color_ramp = SubResource("Gradient_531fe")

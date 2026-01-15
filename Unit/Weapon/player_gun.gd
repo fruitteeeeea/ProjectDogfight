@@ -1,9 +1,7 @@
 extends Gun
 class_name PlayerGun
 
-
 @export var trriger_button := "open_fire"
-
 
 @export var fire_interval : float = .1
 @onready var fire_interval_timer: Timer = $fire_interval_timer
@@ -13,6 +11,8 @@ class_name PlayerGun
 @export var reload_speed_curve : Curve
 
 @export var bullet_number: Label
+@export var alert_clor : Color = Color.BLACK
+@export var alert_threshold : float = .15
 @export var fire_on_label: CanvasGroup 
 @export var reloding_label: CanvasGroup
 
@@ -85,6 +85,11 @@ func _physics_process(delta: float) -> void:
 
 func _update_gun_text() -> void:
 	bullet_number.text = "Gun : " + str(clamp(current_bullet, 0, max_bullet) ) + "/" + str(max_bullet)
+
+	if current_bullet <= max_bullet * alert_threshold: #更新标签的颜色 
+		bullet_number.modulate = alert_clor
+	else :
+		bullet_number.modulate = Color.WHITE
 
 
 func _handle_bullet_reload(delta : float) -> void:

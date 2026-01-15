@@ -49,7 +49,7 @@ func _hanlde_rotation() -> void:
 #endregion
 
 #region DamageSystem
-func take_damage() -> void:
+func take_damage(damage : float) -> void:
 	pass
 
 

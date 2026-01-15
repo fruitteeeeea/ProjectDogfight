@@ -1,6 +1,8 @@
 extends Area2D
 
 @export_enum("Enemy", "Player") var target : String = "Enemy"
+@export var bullet : Bullet
+@export var damage : float = 10.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,4 +15,5 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is JetBase:
-		body.take_damage()
+		body.take_damage(damage)
+		bullet.queue_free()

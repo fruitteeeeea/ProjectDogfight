@@ -81,7 +81,7 @@ func _explord() -> void:
 	
 	for e in detect_area.get_overlapping_bodies():
 		if e is Enemy:
-			e.take_damage()
+			e.take_damage(10.0)
 	
 	await explode_particle.finished
 	queue_free()

@@ -3,13 +3,12 @@ class_name Enemy
 
 @onready var color_rect: ColorRect = $ColorRect
 @onready var bt_player: BTPlayer = $BTPlayer
-@onready var damage_component: DamageComponent = $DamageComponent
+@onready var enemy_damage_component: EnemyDamageComponent = $EnemyDamageComponent
+
 
 #行为树使用的移动速度和转身速度加成 
 @export var movement_speed_buffer : float = 1.0
 @export var turn_speed_buffer : float = 1.0
-
-
 
 func _ready() -> void:
 	target_forward = [Vector2.LEFT, Vector2.RIGHT].pick_random()
@@ -19,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	_update_debug_label()
 
-
+#region 移动速度和转身速度
 func _get_speed() -> float:
 	return speed * movement_speed_buffer
 
@@ -28,13 +27,14 @@ func _get_forward(delta) -> Vector2:
 	forward = forward.slerp(target_forward, 1.0 - exp(-turn_speed * turn_speed_buffer * delta))
 	return forward
 
+#endregion
 
 #region TakeDamage
-func take_damage() -> void:
+func take_damage(damage : float) -> void:
 	if is_dead:
 		return
 	
-	damage_component.take_damage(10.0)
+	enemy_damage_component.take_damage(damage)
 
 
 func die() -> void:

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dek3b4g0lpd8n"]
+
+[ext_resource type="PackedScene" uid="uid://cr2n35uakvhy6" path="res://Unit/Jet/Component/damage_component.tscn" id="1_cbdwm"]
+[ext_resource type="Script" uid="uid://bygux18lhyuft" path="res://Unit/Jet/Component/enemy_damage_component.gd" id="2_gnool"]
+
+[node name="EnemyDamageComponent" instance=ExtResource("1_cbdwm")]
+script = ExtResource("2_gnool")

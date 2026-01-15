@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://owohvdo1fuvj"]
+
+[ext_resource type="PackedScene" uid="uid://cr2n35uakvhy6" path="res://Unit/Jet/Component/damage_component.tscn" id="1_u3j04"]
+[ext_resource type="Script" uid="uid://cskyf80j6yhre" path="res://Unit/Jet/Component/player_damage_component.gd" id="2_uboju"]
+
+[node name="PlayerDamageComponent" instance=ExtResource("1_u3j04")]
+script = ExtResource("2_uboju")
+test_state = true

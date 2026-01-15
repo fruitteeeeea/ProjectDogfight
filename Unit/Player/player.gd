@@ -1,6 +1,8 @@
 extends JetBase
 class_name Player
 
+signal player_dead
+
 var base_accel : float = 1.0
 
 var burst_accel : float = 1.0
@@ -44,6 +46,8 @@ var engine_on : bool = true
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hud_offset_manager: HUDOffsetManager = $HUD/HUDOffsetManager
 
+@onready var player_damage_component: PlayerDamageComponent = $PlayerDamageComponent
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("engine"): #切换引擎状态 
 		engine_on = !engine_on
@@ -65,6 +69,7 @@ func _init_state_machine(): #初始化状态机
 	limbo_hsm.set_active(true)
 
 
+#region Movement 
 func _get_move_direction(delta) -> Vector2:
 	var forward_dir : Vector2 =  _get_forward(delta)
 	if engine_on:
@@ -116,3 +121,19 @@ func check_position() -> void:
 		force_dir = Vector2.RIGHT
 	
 	limbo_hsm.dispatch("EngineOn")
+
+#endregion
+
+
+#region DamageSystem 
+func take_damage(damage : float) -> void:
+	if is_dead:
+		return
+	
+	player_damage_component.take_damage(damage)
+
+
+func die() -> void:
+	is_dead = true
+	player_dead.emit()
+#endregion

@@ -12,8 +12,13 @@ class_name MissionPanel
 
 @export var alert_threshold := .8 
 @export var player : Player
+@export var player_damage_component : PlayerDamageComponent
 
 var target_point : int
+
+func _ready() -> void:
+	player.player_dead.connect(_mission_fall)
+
 
 func mission_start(_time : float, point : int) -> void:
 	GameStatusServer.reset_game_status()
@@ -21,9 +26,14 @@ func mission_start(_time : float, point : int) -> void:
 	target_points_label.text = "/ " + str(point) + " pts. "
 	target_point = point
 	display_mission_panel()
+	player_damage_component.test_state = false
 
 	await get_tree().create_timer(_time * alert_threshold).timeout
 	blink_canvs_item.start_tween() #倒计时警告 
+
+
+func _mission_fall() -> void:
+	GameStatusServer.show_result.emit(false)
 
 
 func _physics_process(delta: float) -> void:
@@ -43,9 +53,6 @@ func seconds_to_mmss(t: float) -> String:
 
 
 func _on_mission_timer_timeout() -> void:
-	if player.is_dead:
-		GameStatusServer.show_result.emit(false)
-
 	#这里对游戏结果进行判断 
 	if GameStatusServer.your_points < target_point:
 		GameStatusServer.show_result.emit(false) #游戏失败 
