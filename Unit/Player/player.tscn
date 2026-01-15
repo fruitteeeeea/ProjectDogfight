@@ -277,7 +277,11 @@ script = ExtResource("9_85r8r")
 [node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2"]
 script = ExtResource("10_toghf")
 
-[node name="AccelerateComponent" type="Node2D" parent="." index="3" node_paths=PackedStringArray("rocket_launcher")]
+[node name="PlayerDamageComponent" parent="." index="3" node_paths=PackedStringArray("player_health_hud", "jet") instance=ExtResource("34_se872")]
+player_health_hud = NodePath("../HUD/PlayerHealth")
+jet = NodePath("..")
+
+[node name="AccelerateComponent" type="Node2D" parent="." index="4" node_paths=PackedStringArray("rocket_launcher")]
 script = ExtResource("11_oriqu")
 max_burst_accel_fuel = 100.0
 rocket_launcher = NodePath("../Weapon/RocketLauncher")
@@ -355,20 +359,20 @@ offset_right = 1297.0
 offset_bottom = 911.0
 text = "Engine: On"
 
-[node name="Camera2D" type="Camera2D" parent="." index="4" node_paths=PackedStringArray("target_point")]
+[node name="Camera2D" type="Camera2D" parent="." index="5" node_paths=PackedStringArray("target_point")]
 zoom = Vector2(1.2, 1.2)
 script = ExtResource("3_aph0k")
 target_point = NodePath("../Graphic/CameraPoint")
 
 [node name="TrumaComponent" parent="Camera2D" index="0" instance=ExtResource("3_pm1gd")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 root_node = NodePath("../Graphic")
 libraries = {
 &"": SubResource("AnimationLibrary_dhsxg")
 }
 
-[node name="Weapon" type="Node2D" parent="." index="6"]
+[node name="Weapon" type="Node2D" parent="." index="7"]
 
 [node name="PlayerGun" parent="Weapon" index="0" node_paths=PackedStringArray("bullet_number", "fire_on_label", "reloding_label") instance=ExtResource("15_vj671")]
 bullet_number = NodePath("../../HUD/GunSlot/BulletNumber")
@@ -381,7 +385,7 @@ reloding_label = NodePath("../../HUD/GunSlot/BulletNumber/RelodingLabel")
 SnakeRocketScene = ExtResource("17_vj671")
 rocket_slot = NodePath("../../HUD/RocketSlot")
 
-[node name="HUD" type="CanvasLayer" parent="." index="7"]
+[node name="HUD" type="CanvasLayer" parent="." index="8"]
 
 [node name="HUDOffsetManager" type="Node2D" parent="HUD" index="0" node_paths=PackedStringArray("player", "control_list")]
 script = ExtResource("11_uefnm")
@@ -1345,10 +1349,5 @@ texture = ExtResource("31_c1pcq")
 visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
-
-[node name="PlayerDamageComponent" parent="." index="8" node_paths=PackedStringArray("player_health_hud", "jet") instance=ExtResource("34_se872")]
-player_health_hud = NodePath("../HUD/PlayerHealth")
-jet = NodePath("..")
-health = 40.0
 
 [connection signal="timeout" from="HUD/Misson/MissionTimer" to="HUD/Misson" method="_on_mission_timer_timeout"]

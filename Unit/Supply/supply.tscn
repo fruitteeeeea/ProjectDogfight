@@ -19,10 +19,10 @@ radius = 48.6621
 script = ExtResource("1_wlrxg")
 
 [node name="Graphic" type="Node2D" parent="."]
+modulate = Color(1, 0.921569, 0.231373, 1)
 scale = Vector2(0.35, 0.35)
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphic"]
-modulate = Color(1, 0.921569, 0.231373, 1)
 rotation = -1.5708
 texture = ExtResource("1_ne522")
 

@@ -59,11 +59,6 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(trriger_button):
 		burst_accel = !burst_accel
-		player.take_damage(10.0)
-	
-	if event.is_action_pressed("debug"):
-		player.take_damage(10.0)
-
 
 
 func _physics_process(delta: float) -> void:

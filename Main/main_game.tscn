@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://k5msw5fm124k"]
+[gd_scene load_steps=13 format=3 uid="uid://k5msw5fm124k"]
 
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_7dbjd"]
 [ext_resource type="Script" uid="uid://doh7g3ch50gia" path="res://Main/game_manager.gd" id="2_k34uy"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="8_x645j"]
 [ext_resource type="PackedScene" uid="uid://cukppeq26yfa1" path="res://Unit/UI/result_menu.tscn" id="9_aab7o"]
 [ext_resource type="PackedScene" uid="uid://iwacin3xf4lt" path="res://Unit/Supply/supply.tscn" id="10_k34uy"]
+[ext_resource type="PackedScene" uid="uid://c0tkaccmwv5by" path="res://Unit/Supply/supply_02_health.tscn" id="11_p1lxc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f6fdm"]
 font_size = 32
@@ -103,8 +104,5 @@ interval = 0.5
 [node name="Supply" parent="." instance=ExtResource("10_k34uy")]
 position = Vector2(1641, 1758)
 
-[node name="Supply2" parent="." instance=ExtResource("10_k34uy")]
-position = Vector2(1504, 1666)
-
-[node name="Supply3" parent="." instance=ExtResource("10_k34uy")]
-position = Vector2(1589, 1453)
+[node name="Supply02Health" parent="." instance=ExtResource("11_p1lxc")]
+position = Vector2(1403, 1806)

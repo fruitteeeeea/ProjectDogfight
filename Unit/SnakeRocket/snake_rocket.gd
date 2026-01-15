@@ -32,6 +32,7 @@ var target_pos: Vector2
 var time := 0.0
 var direction := Vector2.RIGHT
 
+var exploded := false
 
 func _ready() -> void:
 	missile_jammer.jam_weight = jam_weight #赋值扰流权重 
@@ -75,6 +76,11 @@ func _on_timer_timeout() -> void:
 
 
 func _explord() -> void:
+	if exploded:
+		return
+	
+	exploded = true
+	
 	sprite_2d.hide()
 	trail.active_trail = false
 	explode_particle.emitting = true

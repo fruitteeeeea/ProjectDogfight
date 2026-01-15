@@ -2,7 +2,7 @@ extends Node2D
 class_name DamageComponent
 
 @export var jet : JetBase
-@export var health : float = 10.0
+@export var health : float = 40.0
 
 @onready var trail: CPUParticles2D = $"../Graphic/Trail"
 
