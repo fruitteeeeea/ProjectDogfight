@@ -12,9 +12,9 @@ class_name PlayerGun
 @export var current_bullet := 0
 @export var reload_speed_curve : Curve
 
-@onready var bullet_number: Label = $CanvasLayer/GunSlot/BulletNumber
-@onready var fire_on_label: CanvasGroup = $CanvasLayer/GunSlot/BulletNumber/FireOnLabel
-@onready var reloding_label: CanvasGroup = $CanvasLayer/GunSlot/BulletNumber/RelodingLabel
+@export var bullet_number: Label
+@export var fire_on_label: CanvasGroup 
+@export var reloding_label: CanvasGroup
 
 
 var fire_on : bool = false:

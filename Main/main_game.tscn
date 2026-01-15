@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://k5msw5fm124k"]
+[gd_scene load_steps=12 format=3 uid="uid://k5msw5fm124k"]
 
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_7dbjd"]
 [ext_resource type="Script" uid="uid://doh7g3ch50gia" path="res://Main/game_manager.gd" id="2_k34uy"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c6mtgbu8f2fht" path="res://Asset/UI/InputPrompts/keyboard_enter.png" id="7_i23kr"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="8_x645j"]
 [ext_resource type="PackedScene" uid="uid://cukppeq26yfa1" path="res://Unit/UI/result_menu.tscn" id="9_aab7o"]
+[ext_resource type="PackedScene" uid="uid://iwacin3xf4lt" path="res://Unit/Supply/supply.tscn" id="10_k34uy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f6fdm"]
 font_size = 32
@@ -98,3 +99,6 @@ duration = 1.0
 interval = 0.5
 
 [node name="ResultMenu" parent="GameHUD" instance=ExtResource("9_aab7o")]
+
+[node name="Supply" parent="." instance=ExtResource("10_k34uy")]
+position = Vector2(1641, 1758)

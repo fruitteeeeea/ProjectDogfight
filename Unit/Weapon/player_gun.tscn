@@ -1,17 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://0nqokfttyooa"]
+[gd_scene load_steps=5 format=3 uid="uid://0nqokfttyooa"]
 
 [ext_resource type="PackedScene" uid="uid://b6m4bm7mcdcof" path="res://Unit/Weapon/gun.tscn" id="1_gm42i"]
 [ext_resource type="Script" uid="uid://g4w0206vpq2h" path="res://Unit/Weapon/player_gun.gd" id="2_0j3ss"]
 [ext_resource type="PackedScene" uid="uid://iw4ebp6p7gw7" path="res://Unit/Bullet/bullet.tscn" id="3_apcn5"]
-[ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="4_5c061"]
 
 [sub_resource type="Curve" id="Curve_toghf"]
 _limits = [0.0, 30.0, 0.0, 2.0]
 _data = [Vector2(0.522949, 0), 0.0, 0.0, 0, 0, Vector2(0.981919, 2.53432), 0.0, 0.0, 0, 0, Vector2(2, 30), 0.0, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5jqkg"]
-blend_mode = 2
 
 [node name="PlayerGun" instance=ExtResource("1_gm42i")]
 script = ExtResource("2_0j3ss")
@@ -25,62 +21,5 @@ BulletScene = ExtResource("3_apcn5")
 [node name="fire_interval_timer" type="Timer" parent="." index="0"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
-
-[node name="GunSlot" type="Control" parent="CanvasLayer" index="0"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="BulletNumber" type="Label" parent="CanvasLayer/GunSlot" index="0"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -344.0
-offset_top = 340.0
-offset_right = -235.0
-offset_bottom = 373.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Gun: 1000"
-
-[node name="FireOnLabel" type="CanvasGroup" parent="CanvasLayer/GunSlot/BulletNumber" index="0"]
-visible = false
-position = Vector2(0, -40)
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/GunSlot/BulletNumber/FireOnLabel" index="0"]
-offset_left = -8.0
-offset_right = 128.0
-offset_bottom = 40.0
-
-[node name="Label2" type="Label" parent="CanvasLayer/GunSlot/BulletNumber/FireOnLabel" index="1"]
-material = SubResource("CanvasItemMaterial_5jqkg")
-offset_right = 114.0
-offset_bottom = 33.0
-text = "Fire : ON"
-
-[node name="RelodingLabel" type="CanvasGroup" parent="CanvasLayer/GunSlot/BulletNumber" index="1"]
-visible = false
-position = Vector2(0, 40)
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/GunSlot/BulletNumber/RelodingLabel" index="0"]
-offset_left = -8.0
-offset_right = 128.0
-offset_bottom = 40.0
-
-[node name="Label2" type="Label" parent="CanvasLayer/GunSlot/BulletNumber/RelodingLabel" index="1"]
-material = SubResource("CanvasItemMaterial_5jqkg")
-offset_right = 114.0
-offset_bottom = 33.0
-text = "Reloading"
-
-[node name="BlinkCanvsItem" type="Node" parent="CanvasLayer/GunSlot/BulletNumber/RelodingLabel" index="2"]
-script = ExtResource("4_5c061")
 
 [connection signal="timeout" from="fire_interval_timer" to="." method="_on_fire_interval_timer_timeout"]

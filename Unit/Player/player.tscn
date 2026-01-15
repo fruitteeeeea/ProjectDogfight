@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=46 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -156,6 +156,9 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_dhsxg"]
 font = ExtResource("20_4dcrn")
 font_size = 32
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vj671"]
+blend_mode = 2
 
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 script = ExtResource("2_aph0k")
@@ -361,7 +364,10 @@ libraries = {
 
 [node name="Weapon" type="Node2D" parent="." index="6"]
 
-[node name="PlayerGun" parent="Weapon" index="0" instance=ExtResource("15_vj671")]
+[node name="PlayerGun" parent="Weapon" index="0" node_paths=PackedStringArray("bullet_number", "fire_on_label", "reloding_label") instance=ExtResource("15_vj671")]
+bullet_number = NodePath("../../HUD/GunSlot/BulletNumber")
+fire_on_label = NodePath("../../HUD/GunSlot/BulletNumber/FireOnLabel")
+reloding_label = NodePath("../../HUD/GunSlot/BulletNumber/RelodingLabel")
 
 [node name="RocketLauncher" parent="Weapon" index="1" instance=ExtResource("5_mh83u")]
 SnakeRocketScene = ExtResource("17_vj671")
@@ -381,7 +387,7 @@ NodePath("../Misson"): 1.0,
 NodePath("../InputPrompts"): 1.0,
 NodePath("../PlayerAttitude"): 1.0,
 NodePath("../PlayerHealth"): 1.0,
-null: 1.0
+NodePath("../GunSlot"): 1.0
 }
 
 [node name="ScaleLine" type="Control" parent="HUD" index="1"]
@@ -1124,9 +1130,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -20.0
-offset_top = -232.0
+offset_top = -256.0
 offset_right = 20.0
-offset_bottom = -192.0
+offset_bottom = -216.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -1160,5 +1166,62 @@ texture = ExtResource("31_l0xr3")
 [node name="TextureRect4" type="TextureRect" parent="HUD/PlayerHealth/HBoxContainer" index="3"]
 layout_mode = 2
 texture = ExtResource("31_l0xr3")
+
+[node name="GunSlot" type="Control" parent="HUD" index="7"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BulletNumber" type="Label" parent="HUD/GunSlot" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = 340.0
+offset_right = -235.0
+offset_bottom = 373.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gun: 1000"
+
+[node name="FireOnLabel" type="CanvasGroup" parent="HUD/GunSlot/BulletNumber" index="0"]
+visible = false
+position = Vector2(0, -40)
+
+[node name="ColorRect" type="ColorRect" parent="HUD/GunSlot/BulletNumber/FireOnLabel" index="0"]
+offset_left = -8.0
+offset_right = 128.0
+offset_bottom = 40.0
+
+[node name="Label2" type="Label" parent="HUD/GunSlot/BulletNumber/FireOnLabel" index="1"]
+material = SubResource("CanvasItemMaterial_vj671")
+offset_right = 114.0
+offset_bottom = 33.0
+text = "Fire : ON"
+
+[node name="RelodingLabel" type="CanvasGroup" parent="HUD/GunSlot/BulletNumber" index="1"]
+visible = false
+position = Vector2(0, 40)
+
+[node name="ColorRect" type="ColorRect" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="0"]
+offset_left = -8.0
+offset_right = 128.0
+offset_bottom = 40.0
+
+[node name="Label2" type="Label" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="1"]
+material = SubResource("CanvasItemMaterial_vj671")
+offset_right = 114.0
+offset_bottom = 33.0
+text = "Reloading"
+
+[node name="BlinkCanvsItem" type="Node" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="2"]
+script = ExtResource("5_dhsxg")
 
 [connection signal="timeout" from="HUD/Misson/MissionTimer" to="HUD/Misson" method="_on_mission_timer_timeout"]

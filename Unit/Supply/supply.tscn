@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://iwacin3xf4lt"]
+
+[ext_resource type="Texture2D" uid="uid://lqjr3s0tmqtm" path="res://Asset/Supply/meteor_detailedLarge.png" id="1_ne522"]
+[ext_resource type="Texture2D" uid="uid://b7bwbjs1lit2u" path="res://Asset/Supply/star_small.png" id="2_4q4fe"]
+
+[sub_resource type="Curve" id="Curve_4q4fe"]
+_data = [Vector2(0.0839286, 0.939916), 0.0, 0.0, 0, 0, Vector2(0.294643, 0.257143), 0.0, 0.0, 0, 0, Vector2(0.451786, 0.576681), 0.0, 0.0, 0, 0, Vector2(0.575, 0.333613), 0.0, 0.0, 0, 0, Vector2(1, 0.410084), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Gradient" id="Gradient_4q4fe"]
+offsets = PackedFloat32Array(0, 0.787356, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.482759, 1, 1, 1, 0)
+
+[node name="Supply" type="Node2D"]
+
+[node name="Graphic" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphic"]
+modulate = Color(1, 0.921569, 0.231373, 1)
+rotation = -1.5708
+texture = ExtResource("1_ne522")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Graphic"]
+texture = ExtResource("2_4q4fe")
+emission_shape = 1
+emission_sphere_radius = 32.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 152.0
+initial_velocity_max = 152.0
+linear_accel_min = 52.0
+linear_accel_max = 52.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_4q4fe")
+color_ramp = SubResource("Gradient_4q4fe")
