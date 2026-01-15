@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=49 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -30,7 +30,9 @@
 [ext_resource type="Texture2D" uid="uid://dkrm6l6nahost" path="res://Asset/UI/crosshair127.png" id="27_0xfex"]
 [ext_resource type="Script" uid="uid://d163en6k6x26j" path="res://Unit/Player/player_attitude.gd" id="27_4ei6y"]
 [ext_resource type="Texture2D" uid="uid://ch215mlss106s" path="res://Asset/Rocket/rocket_sprite.png" id="31_c1pcq"]
+[ext_resource type="Script" uid="uid://eybkex0wjhmy" path="res://Unit/Player/rocket_slot.gd" id="31_dn0s1"]
 [ext_resource type="Texture2D" uid="uid://sof80q3dpct8" path="res://Asset/UI/suit_hearts.png" id="31_l0xr3"]
+[ext_resource type="Texture2D" uid="uid://bkltacndxyqm7" path="res://Asset/Rocket/rocket_sprite_shadow.png" id="33_dn0s1"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -162,6 +164,7 @@ font_size = 32
 blend_mode = 2
 
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
+collision_layer = 3
 script = ExtResource("2_aph0k")
 engine_off_burst_accel = -0.8
 engine_off_burst_ratio = 1.0
@@ -370,9 +373,9 @@ bullet_number = NodePath("../../HUD/GunSlot/BulletNumber")
 fire_on_label = NodePath("../../HUD/GunSlot/BulletNumber/FireOnLabel")
 reloding_label = NodePath("../../HUD/GunSlot/BulletNumber/RelodingLabel")
 
-[node name="RocketLauncher" parent="Weapon" index="1" instance=ExtResource("5_mh83u")]
+[node name="RocketLauncher" parent="Weapon" index="1" node_paths=PackedStringArray("rocket_slot") instance=ExtResource("5_mh83u")]
 SnakeRocketScene = ExtResource("17_vj671")
-rocket_nb = 1
+rocket_slot = NodePath("../../HUD/RocketSlot")
 
 [node name="HUD" type="CanvasLayer" parent="." index="7"]
 
@@ -1231,29 +1234,60 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("31_dn0s1")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/RocketSlot" index="0"]
+[node name="ShadowIcon" type="HBoxContainer" parent="HUD/RocketSlot" index="0"]
+modulate = Color(0.129412, 0.129412, 0.129412, 0.501961)
 layout_mode = 0
-offset_left = 376.0
+offset_left = 368.0
 offset_top = 624.0
-offset_right = 624.0
+offset_right = 616.0
 offset_bottom = 754.0
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.7, 0.7)
+theme_override_constants/separation = 32
+
+[node name="TextureRect" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="0"]
+layout_mode = 2
+texture = ExtResource("33_dn0s1")
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="1"]
+layout_mode = 2
+texture = ExtResource("33_dn0s1")
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="2"]
+layout_mode = 2
+texture = ExtResource("33_dn0s1")
+
+[node name="TextureRect4" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="3"]
+layout_mode = 2
+texture = ExtResource("33_dn0s1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/RocketSlot" index="1"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 616.0
+offset_right = 608.0
+offset_bottom = 746.0
+scale = Vector2(0.7, 0.7)
 theme_override_constants/separation = 32
 
 [node name="TextureRect" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="0"]
+visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="1"]
+visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
 [node name="TextureRect3" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="2"]
+visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
 [node name="TextureRect4" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="3"]
+visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
 

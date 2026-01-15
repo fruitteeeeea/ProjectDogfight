@@ -28,6 +28,7 @@ var engine_on : bool = true
 @export var accelerate_off_burst_ratio := 2.0
 
 @export var accelerate_turn_speed := 1.5 #引擎关闭的时候转向倍率 
+@onready var accelerate_component: AccelerationComponent = $AccelerateComponent
 
 
 @onready var limbo_hsm: LimboHSM = $LimboHSM

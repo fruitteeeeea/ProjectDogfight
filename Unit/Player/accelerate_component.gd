@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name AccelerationComponent
 
 @export var trriger_button := "BurstSpeed"
 @export var burst_accel_speed := 1.8
@@ -20,13 +20,20 @@ extends Node2D
 @onready var accelerate_on: CanvasGroup = $CanvasLayer/AccelHUD/AccelerateOn
 @onready var accelerate_particle: CPUParticles2D = $"../Graphic/AccelerateParticle"
 
+var acceleration_burst_pack : Array[SupplyPacke] = []
+
 var burst_accel := false:
 	set(v):
 		burst_accel = v
 		if v == true:
 			print("加速！")
 			
-			rocket_launcher._launch_rocket(-.1, 5, .05, 1.0) #朝后方发射热诱弹 
+			if acceleration_burst_pack.size() > 0:
+				var pack = acceleration_burst_pack.pick_random()
+				acceleration_burst_pack.erase(pack)
+				pack.queue_free()
+				
+				rocket_launcher._launch_rocket(-.1, 5, .05, 1.0) #朝后方发射热诱弹 
 			
 			GameFeel.do_camera_shake(3.0)
 			player.engine_on = true
@@ -57,7 +64,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if progress_bar.value<= 0.0:
 		burst_accel = false
-
 	
 	if burst_accel:
 		progress_bar.value -= delta * burst_comsume

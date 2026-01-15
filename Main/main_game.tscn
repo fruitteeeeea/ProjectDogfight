@@ -102,3 +102,9 @@ interval = 0.5
 
 [node name="Supply" parent="." instance=ExtResource("10_k34uy")]
 position = Vector2(1641, 1758)
+
+[node name="Supply2" parent="." instance=ExtResource("10_k34uy")]
+position = Vector2(1504, 1666)
+
+[node name="Supply3" parent="." instance=ExtResource("10_k34uy")]
+position = Vector2(1589, 1453)
