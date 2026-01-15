@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://joyv433lmf2s"]
+
+[ext_resource type="Script" uid="uid://ctkawhd16ejd7" path="res://Unit/Server/spwan_server.gd" id="1_586oy"]
+[ext_resource type="PackedScene" uid="uid://rtgahvid3v5d" path="res://Unit/UI/floatting_text/floatting_text.tscn" id="2_q4v0w"]
+
+[node name="SpwanServer" type="Node2D"]
+script = ExtResource("1_586oy")
+FloattingText = ExtResource("2_q4v0w")

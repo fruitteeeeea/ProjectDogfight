@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2rcul35yljaa"]
+[gd_scene load_steps=16 format=3 uid="uid://d2rcul35yljaa"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_0dgib"]
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
@@ -8,7 +8,6 @@
 [ext_resource type="BehaviorTree" uid="uid://cmoc40bfp74xd" path="res://Unit/Enemy/AI/enemyAI01.tres" id="6_gcf3q"]
 [ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
 [ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="8_iw8a2"]
-[ext_resource type="PackedScene" uid="uid://rtgahvid3v5d" path="res://Unit/UI/floatting_text/floatting_text.tscn" id="9_gcf3q"]
 [ext_resource type="PackedScene" uid="uid://cs7k75frbxvbs" path="res://Unit/Weapon/enemy_gun.tscn" id="10_s1sfp"]
 
 [sub_resource type="Gradient" id="Gradient_iw8a2"]
@@ -41,6 +40,7 @@ movement_speed_buffer = 1.0
 turn_speed_buffer = 1.0
 
 [node name="Sprite2D" parent="Graphic" index="0"]
+modulate = Color(0.898039, 0.223529, 0.207843, 1)
 texture = ExtResource("3_ois23")
 
 [node name="Trail" parent="Graphic" index="1"]
@@ -127,10 +127,7 @@ dir : Vector(1,1)"
 [node name="EnemyIndicator" parent="CanvasLayer" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("7_lebci")]
 enemy = NodePath("../..")
 
-[node name="FloattingText" parent="." index="8" instance=ExtResource("9_gcf3q")]
-visible = false
-position = Vector2(56, -40)
-frame = 0
-frame_progress = 0.0
+[node name="EnemyGun" parent="." index="8" instance=ExtResource("10_s1sfp")]
 
-[node name="EnemyGun" parent="." index="9" instance=ExtResource("10_s1sfp")]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="EnemyGun" method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="EnemyGun" method="_on_visible_on_screen_notifier_2d_screen_exited"]
