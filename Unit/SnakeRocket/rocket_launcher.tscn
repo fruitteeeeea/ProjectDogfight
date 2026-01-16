@@ -1,10 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://dw514kmcsyfxe"]
+[gd_scene load_steps=4 format=3 uid="uid://dw514kmcsyfxe"]
 
 [ext_resource type="Script" uid="uid://btd2cyjlqddpx" path="res://Unit/SnakeRocket/rocket_launcher.gd" id="1_ptis4"]
+[ext_resource type="AudioStream" uid="uid://c3xo5xa30w0am" path="res://Asset/sound/weapon/Rocket/Equip High Tech D.wav" id="2_ptis4"]
+[ext_resource type="AudioStream" uid="uid://c4umlfwlix2bi" path="res://Asset/sound/weapon/Rocket/Missile Fire.wav" id="3_bbeaa"]
 
 [node name="RocketLauncher" type="Node2D"]
 script = ExtResource("1_ptis4")
 
 [node name="ReloadingTimer" type="Timer" parent="."]
+
+[node name="SFXRocketFire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bbeaa")
+pitch_scale = 1.1
+max_polyphony = 5
+
+[node name="SFXRocketReload" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ptis4")
 
 [connection signal="timeout" from="ReloadingTimer" to="." method="_on_timer_timeout"]

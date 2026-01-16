@@ -12,6 +12,10 @@ func _enter() -> void:
 	player.flame.emitting = true
 	player.engine_on = true
 	player.engine_on_label.show()
+	player.sfx_engineoff.stop()
+	player.sfx_engine_start.play()
+	player.sfx_engine.play()
+	
 	print("玩家进入 EngineOn 状态 ")
 
 
@@ -53,4 +57,8 @@ func _apply_force_direction(
 
 func _exit() -> void:
 	player.engine_on_label.hide()
+	
+	player.sfx_engine_end.play()
+	player.sfx_engineoff.play()
+	player.sfx_engine.stop()
 	print("玩家离开 EngineOn 状态 ")

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c4umlfwlix2bi"
+path="res://.godot/imported/Missile Fire.wav-fc5a5dc7b171c4a1c818592dc4c7f797.sample"
+
+[deps]
+
+source_file="res://Asset/sound/weapon/Rocket/Missile Fire.wav"
+dest_files=["res://.godot/imported/Missile Fire.wav-fc5a5dc7b171c4a1c818592dc4c7f797.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

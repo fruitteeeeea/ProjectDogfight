@@ -16,6 +16,13 @@ class_name PlayerGun
 @export var fire_on_label: CanvasGroup 
 @export var reloding_label: CanvasGroup
 
+@onready var sfx_gun_fire: AudioStreamPlayer2D = $SFXGunFire
+@onready var sfx_gun_fire_end: AudioStreamPlayer2D = $SFXGunFireEnd
+@onready var sfx_gun_reload_start: AudioStreamPlayer2D = $SFXGunReloadStart
+@onready var sfx_gun_reloading: AudioStreamPlayer2D = $SFXGunReloading
+@onready var sfx_gun_reload_end: AudioStreamPlayer2D = $SFXGunReloadEnd
+
+
 
 var fire_on : bool = false:
 	set(v):
@@ -25,6 +32,8 @@ var fire_on : bool = false:
 			fire_interval_timer.start(fire_interval)
 			
 			reload_active = false
+			
+			sfx_gun_fire.play()
 		else :
 			fire_on_label.hide()
 			fire_interval_timer.stop()
@@ -32,6 +41,9 @@ var fire_on : bool = false:
 			reload_active = true
 			reload_time = 0.0
 			reload_accumulator = 0.0
+			
+			sfx_gun_fire_end.play()
+			sfx_gun_fire.stop()
 
 var reload_active := false:
 	set(v):
@@ -41,8 +53,11 @@ var reload_active := false:
 		reload_active = v
 		
 		if reload_active:
+			sfx_gun_reload_start.play()
 			reloding_label.show()
 		else :
+			sfx_gun_reloading.stop()
+			sfx_gun_reload_end.play()
 			reloding_label.hide()
 
 var reload_time = 0.0
@@ -109,3 +124,8 @@ func _handle_bullet_reload(delta : float) -> void:
 		if current_bullet >= max_bullet:
 			reload_active = false
 			break
+
+
+func _on_sfx_gun_reload_start_finished() -> void:
+	if reload_active:
+		sfx_gun_reloading.play()

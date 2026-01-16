@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ynsugrevh2ti"
+path="res://.godot/imported/Jet Start A.wav-6ea0bef374f8f8db3688a4a0b36deb62.sample"
+
+[deps]
+
+source_file="res://Asset/sound/jet/Jet Start A.wav"
+dest_files=["res://.godot/imported/Jet Start A.wav-6ea0bef374f8f8db3688a4a0b36deb62.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

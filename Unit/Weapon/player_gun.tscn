@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://0nqokfttyooa"]
+[gd_scene load_steps=10 format=3 uid="uid://0nqokfttyooa"]
 
 [ext_resource type="PackedScene" uid="uid://b6m4bm7mcdcof" path="res://Unit/Weapon/gun.tscn" id="1_gm42i"]
 [ext_resource type="Script" uid="uid://g4w0206vpq2h" path="res://Unit/Weapon/player_gun.gd" id="2_0j3ss"]
 [ext_resource type="PackedScene" uid="uid://iw4ebp6p7gw7" path="res://Unit/Bullet/bullet.tscn" id="3_apcn5"]
+[ext_resource type="AudioStream" uid="uid://c7f8gubeonwpx" path="res://Asset/sound/weapon/Gun/Gun Fire Loop A.wav" id="4_5c061"]
+[ext_resource type="AudioStream" uid="uid://j6rf27vkcpsk" path="res://Asset/sound/weapon/Gun/gun_reloaded_start.wav" id="5_5jqkg"]
+[ext_resource type="AudioStream" uid="uid://80abdx0pkpy6" path="res://Asset/sound/weapon/Gun/Inner Mechanism D.wav" id="5_tbkko"]
+[ext_resource type="AudioStream" uid="uid://bgeaqvthen0vk" path="res://Asset/sound/weapon/Gun/gun_reloaded_end.wav" id="6_2twp0"]
+[ext_resource type="AudioStream" uid="uid://bqofc7gaxctq8" path="res://Asset/sound/weapon/Gun/gun_reloadeding.wav" id="6_bfh8v"]
 
 [sub_resource type="Curve" id="Curve_toghf"]
 _limits = [0.0, 30.0, 0.0, 2.0]
@@ -16,10 +21,38 @@ fire_interval = 0.1
 max_bullet = 200
 current_bullet = 0
 reload_speed_curve = SubResource("Curve_toghf")
+alert_clor = Color(0, 0, 0, 1)
+alert_threshold = 0.8
 BulletScene = ExtResource("3_apcn5")
 
 [node name="fire_interval_timer" type="Timer" parent="." index="0"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
+[node name="SFXGunFire" type="AudioStreamPlayer2D" parent="." index="1"]
+stream = ExtResource("4_5c061")
+volume_db = -5.0
+pitch_scale = 1.68
+bus = &"SFX"
+
+[node name="SFXGunFireEnd" type="AudioStreamPlayer2D" parent="." index="2"]
+stream = ExtResource("5_tbkko")
+volume_db = -5.0
+pitch_scale = 1.68
+bus = &"SFX"
+
+[node name="SFXGunReloadStart" type="AudioStreamPlayer2D" parent="." index="3"]
+stream = ExtResource("5_5jqkg")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="SFXGunReloading" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource("6_bfh8v")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="SFXGunReloadEnd" type="AudioStreamPlayer2D" parent="." index="5"]
+stream = ExtResource("6_2twp0")
+pitch_scale = 1.5
+bus = &"SFX"
 
 [connection signal="timeout" from="fire_interval_timer" to="." method="_on_fire_interval_timer_timeout"]
+[connection signal="finished" from="SFXGunReloadStart" to="." method="_on_sfx_gun_reload_start_finished"]

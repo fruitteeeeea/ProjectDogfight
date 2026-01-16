@@ -10,6 +10,7 @@ class_name DamageComponent
 @onready var hit_splash_particle: CPUParticles2D = $HitSplashParticle
 @onready var crash_splash_particle: CPUParticles2D = $CrashSplashParticle
 
+@onready var sfx_explode: AudioStreamPlayer2D = $SFXExplode
 
 func _ready() -> void:
 	if !jet:
@@ -44,6 +45,7 @@ func _die_effect() -> void:
 	crash_splash_particle.emitting = true
 	trail.emitting = false
 	die_particle.emitting = true
+	sfx_explode.play()
 
 
 #子类覆写

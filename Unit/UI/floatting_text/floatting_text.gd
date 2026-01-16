@@ -1,8 +1,11 @@
 extends AnimatedSprite2D
 class_name FloattingText
 
+@onready var sfx_bonus: AudioStreamPlayer = $SFXBonus
 
-func _on_draw() -> void:
+
+func _ready() -> void:
+	sfx_bonus.play()
 	play("default")
 
 

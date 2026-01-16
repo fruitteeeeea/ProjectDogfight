@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=58 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -35,6 +35,13 @@
 [ext_resource type="Texture2D" uid="uid://sof80q3dpct8" path="res://Asset/UI/suit_hearts.png" id="31_l0xr3"]
 [ext_resource type="Texture2D" uid="uid://bkltacndxyqm7" path="res://Asset/Rocket/rocket_sprite_shadow.png" id="33_dn0s1"]
 [ext_resource type="PackedScene" uid="uid://owohvdo1fuvj" path="res://Unit/Jet/Component/player_damage_component.tscn" id="34_se872"]
+[ext_resource type="AudioStream" uid="uid://mya7kqicienq" path="res://Asset/sound/jet/Jet Engine Low Loop B.wav" id="36_swlur"]
+[ext_resource type="AudioStream" uid="uid://rtpi70o545e" path="res://Asset/sound/jet/after_burn/Afterburner Loop B.wav" id="37_qejli"]
+[ext_resource type="AudioStream" uid="uid://v0fgl7rtvtbp" path="res://Asset/sound/jet/Jet Start E.wav" id="38_0u1hj"]
+[ext_resource type="AudioStream" uid="uid://dmyuvvbs7o2ku" path="res://Asset/sound/jet/Inner Mechanism A.wav" id="38_frrsq"]
+[ext_resource type="AudioStream" uid="uid://ynsugrevh2ti" path="res://Asset/sound/jet/Jet Start A.wav" id="39_bl3tp"]
+[ext_resource type="AudioStream" uid="uid://cmwm1xqx203m2" path="res://Asset/sound/jet/Jet Engine Hollow Loop B.wav" id="39_edi3d"]
+[ext_resource type="AudioStream" uid="uid://b053662c26fom" path="res://Asset/sound/jet/after_burn/Inner Mechanism H.wav" id="40_h44hf"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -1349,5 +1356,41 @@ texture = ExtResource("31_c1pcq")
 visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
+
+[node name="SFX" type="Node2D" parent="." index="9"]
+
+[node name="SFXEngineStart" type="AudioStreamPlayer2D" parent="SFX" index="0"]
+stream = ExtResource("38_0u1hj")
+volume_db = -3.0
+pitch_scale = 0.8
+
+[node name="SFXEngineEnd" type="AudioStreamPlayer2D" parent="SFX" index="1"]
+stream = ExtResource("38_frrsq")
+volume_db = -5.0
+pitch_scale = 1.5
+
+[node name="SFXEngine" type="AudioStreamPlayer2D" parent="SFX" index="2"]
+stream = ExtResource("36_swlur")
+volume_db = -5.0
+
+[node name="SFXEngineoff" type="AudioStreamPlayer2D" parent="SFX" index="3"]
+stream = ExtResource("39_edi3d")
+volume_db = -15.0
+
+[node name="SFXAfterBurnerStart" type="AudioStreamPlayer2D" parent="SFX" index="4"]
+stream = ExtResource("39_bl3tp")
+volume_db = -3.0
+pitch_scale = 0.8
+
+[node name="SFXAfterBurnerEnd" type="AudioStreamPlayer2D" parent="SFX" index="5"]
+stream = ExtResource("40_h44hf")
+volume_db = -0.3
+pitch_scale = 1.5
+
+[node name="SFXAfterBurner" type="AudioStreamPlayer2D" parent="SFX" index="6"]
+stream = ExtResource("37_qejli")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="SFX" index="7"]
+current = true
 
 [connection signal="timeout" from="HUD/Misson/MissionTimer" to="HUD/Misson" method="_on_mission_timer_timeout"]

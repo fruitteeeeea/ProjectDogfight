@@ -48,6 +48,16 @@ var engine_on : bool = true
 
 @onready var player_damage_component: PlayerDamageComponent = $PlayerDamageComponent
 
+#SFX
+@onready var sfx_engine_start: AudioStreamPlayer2D = $SFX/SFXEngineStart
+@onready var sfx_engine_end: AudioStreamPlayer2D = $SFX/SFXEngineEnd
+@onready var sfx_engine: AudioStreamPlayer2D = $SFX/SFXEngine
+@onready var sfx_engineoff: AudioStreamPlayer2D = $SFX/SFXEngineoff
+
+@onready var sfx_after_burner_start: AudioStreamPlayer2D = $SFX/SFXAfterBurnerStart
+@onready var sfx_after_burner_end: AudioStreamPlayer2D = $SFX/SFXAfterBurnerEnd
+@onready var sfx_after_burner: AudioStreamPlayer2D = $SFX/SFXAfterBurner
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("engine"): #切换引擎状态 
 		engine_on = !engine_on

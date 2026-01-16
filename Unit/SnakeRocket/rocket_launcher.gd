@@ -15,6 +15,9 @@ var current_rocket_nb := 0:
 var up_dir := true
 
 @onready var reloading_timer: Timer = $ReloadingTimer
+@onready var sfx_rocket_fire: AudioStreamPlayer2D = $SFXRocketFire
+@onready var sfx_rocket_reload: AudioStreamPlayer2D = $SFXRocketReload
+
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -34,6 +37,8 @@ func _launch_rocket(dir :float = 1 , nb := 1, interval := .1, jam := 0.0) -> voi
 	var forward := global_transform.x.normalized() * (Vector2.ONE * dir)
 	var angle : float
 	
+	
+	
 	for i in range(nb):
 		var rocket = SnakeRocketScene.instantiate()
 
@@ -49,8 +54,11 @@ func _launch_rocket(dir :float = 1 , nb := 1, interval := .1, jam := 0.0) -> voi
 		
 		get_tree().current_scene.add_child(rocket)
 		rocket.global_position = global_position
+		sfx_rocket_fire.play()
 		await get_tree().create_timer(.1).timeout
 
 
 func _on_timer_timeout() -> void:
-	current_rocket_nb = min(current_rocket_nb + 1, max_rocket_nb)
+	if current_rocket_nb < max_rocket_nb:
+		current_rocket_nb = min(current_rocket_nb + 1, max_rocket_nb)
+		sfx_rocket_reload.play()

@@ -44,11 +44,17 @@ var burst_accel := false:
 			hud_offset_manager.trigger_accel_shake()
 			accelerate_on.show()
 			
+			player.sfx_after_burner_start.play()
+			player.sfx_after_burner.play()
+			
 		else :
 			player.burst_accel = 1.0
 			camera_2d.target_zoom = camera_2d.defult_zoom
 			burst_trail.emitting = false
 			accelerate_on.hide()
+			
+			player.sfx_after_burner_end.play()
+			player.sfx_after_burner.stop()
 
 func _ready() -> void:
 	progress_bar.max_value = max_burst_accel_fuel

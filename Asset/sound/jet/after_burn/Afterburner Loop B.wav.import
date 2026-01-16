@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://rtpi70o545e"
+path="res://.godot/imported/Afterburner Loop B.wav-f16e74d7ec8934a059bbf57d6c0527b0.sample"
+
+[deps]
+
+source_file="res://Asset/sound/jet/after_burn/Afterburner Loop B.wav"
+dest_files=["res://.godot/imported/Afterburner Loop B.wav-f16e74d7ec8934a059bbf57d6c0527b0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

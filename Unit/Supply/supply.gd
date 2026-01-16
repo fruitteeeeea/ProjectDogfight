@@ -7,6 +7,7 @@ var player : Player
 var is_picked := false
 
 @onready var area_2d: Area2D = $Area2D
+@onready var sfx_supply_claim: AudioStreamPlayer = $SFXSupplyClaim
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and (not is_picked):
@@ -15,6 +16,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 		is_picked = true
 		area_2d.set_deferred("monitoring", false)
+		
+		sfx_supply_claim.play()
 		
 		if !follow_mode:
 			queue_free()
