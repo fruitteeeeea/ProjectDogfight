@@ -1421,6 +1421,7 @@ visibility_mode = 1
 
 [node name="Joystick" type="Node2D" parent="HUD/PlayerTouchControl" index="1"]
 position = Vector2(232, 864)
+scale = Vector2(2, 2)
 script = ExtResource("41_s5jdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick" index="0"]
@@ -1430,10 +1431,6 @@ texture = ExtResource("42_qson6")
 
 [node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick/Point" index="0"]
 texture = ExtResource("43_dr1eb")
-
-[node name="Label" type="Label" parent="HUD/PlayerTouchControl/Joystick" index="2"]
-offset_right = 40.0
-offset_bottom = 33.0
 
 [node name="SFX" type="Node2D" parent="." index="9"]
 
