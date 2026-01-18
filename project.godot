@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 GameFeel="*res://Camera/game_feel.tscn"
 GameStatusServer="*res://Unit/Server/game_status_server.tscn"
+SoundManager="*res://Unit/Server/sound_manager.tscn"
 SpwanServer="*res://Unit/Server/spwan_server.tscn"
 
 [display]

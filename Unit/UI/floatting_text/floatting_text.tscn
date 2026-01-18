@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://rtgahvid3v5d"]
+[gd_scene load_steps=6 format=3 uid="uid://rtgahvid3v5d"]
 
 [ext_resource type="Texture2D" uid="uid://djyvuelxfwf1j" path="res://Asset/UI/floatting_text.png" id="1_2m0g8"]
 [ext_resource type="Script" uid="uid://ofd1rvdr41bg" path="res://Unit/UI/floatting_text/floatting_text.gd" id="2_yg7ee"]
-[ext_resource type="AudioStream" uid="uid://c7k50ch2vr5fq" path="res://Asset/sound/enemy/Signal Positive Wood Chimes A.wav" id="3_pc4dv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yg7ee"]
 atlas = ExtResource("1_2m0g8")
@@ -51,11 +50,6 @@ sprite_frames = SubResource("SpriteFrames_8p7l4")
 frame = 7
 frame_progress = 1.0
 script = ExtResource("2_yg7ee")
-
-[node name="SFXBonus" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_pc4dv")
-volume_db = -10.0
-pitch_scale = 1.6
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
 [connection signal="draw" from="." to="." method="_on_draw"]

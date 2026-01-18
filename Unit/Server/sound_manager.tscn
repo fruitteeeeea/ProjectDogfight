@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://duq68d7otrl68"]
+
+[ext_resource type="Script" uid="uid://boio2u0lys7w5" path="res://Unit/Server/sound_manager.gd" id="1_ugg3w"]
+[ext_resource type="AudioStream" uid="uid://c7k50ch2vr5fq" path="res://Asset/sound/enemy/Signal Positive Wood Chimes A.wav" id="2_sfb6e"]
+[ext_resource type="AudioStream" uid="uid://db0ig1hmiirkb" path="res://Asset/sound/supply/Mobile Buff 001.wav" id="3_rnuxy"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_ugg3w")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="SFXBonus" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("2_sfb6e")
+volume_db = -10.0
+pitch_scale = 1.6
+
+[node name="SFXSupplyClaim" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_rnuxy")

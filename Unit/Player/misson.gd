@@ -14,6 +14,8 @@ class_name MissionPanel
 @export var player : Player
 @export var player_damage_component : PlayerDamageComponent
 
+@onready var bgm_player: AudioStreamPlayer = $BGMPlayer
+
 var target_point : int
 
 func _ready() -> void:
@@ -21,6 +23,7 @@ func _ready() -> void:
 
 
 func mission_start(_time : float, point : int) -> void:
+	bgm_player.play()
 	GameStatusServer.reset_game_status()
 	mission_timer.start(_time)
 	target_points_label.text = "/ " + str(point) + " pts. "

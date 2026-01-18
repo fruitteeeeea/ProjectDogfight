@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://iwacin3xf4lt"]
+[gd_scene load_steps=7 format=3 uid="uid://iwacin3xf4lt"]
 
 [ext_resource type="Texture2D" uid="uid://lqjr3s0tmqtm" path="res://Asset/Supply/meteor_detailedLarge.png" id="1_ne522"]
 [ext_resource type="Script" uid="uid://i5mtym6afrvk" path="res://Unit/Supply/supply.gd" id="1_wlrxg"]
 [ext_resource type="Texture2D" uid="uid://b7bwbjs1lit2u" path="res://Asset/Supply/star_small.png" id="2_4q4fe"]
-[ext_resource type="AudioStream" uid="uid://db0ig1hmiirkb" path="res://Asset/sound/supply/Mobile Buff 001.wav" id="4_mxyfr"]
 
 [sub_resource type="Curve" id="Curve_4q4fe"]
 _data = [Vector2(0.0839286, 0.939916), 0.0, 0.0, 0, 0, Vector2(0.294643, 0.257143), 0.0, 0.0, 0, 0, Vector2(0.451786, 0.576681), 0.0, 0.0, 0, 0, Vector2(0.575, 0.333613), 0.0, 0.0, 0, 0, Vector2(1, 0.410084), 0.0, 0.0, 0, 0]
@@ -47,8 +46,5 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_4q4fe")
-
-[node name="SFXSupplyClaim" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_mxyfr")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

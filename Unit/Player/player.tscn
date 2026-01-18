@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=59 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://bwdkyxd77xhqq" path="res://Asset/UI/InputPrompts/mouse_move.png" id="21_pcvun"]
 [ext_resource type="Script" uid="uid://bp2sy2vk7tcpq" path="res://Unit/Player/misson.gd" id="22_vj671"]
 [ext_resource type="Texture2D" uid="uid://bp3c65c1pyvph" path="res://Asset/UI/InputPrompts/keyboard_space.png" id="23_xx0et"]
+[ext_resource type="AudioStream" uid="uid://c7ycryshs6kvi" path="res://Asset/sound/music/Chiptune Vol4 Limbo Cut 60.wav" id="24_s8q2k"]
 [ext_resource type="Texture2D" uid="uid://cms55552ivqkj" path="res://Asset/UI/InputPrompts/keyboard_q.png" id="24_v1p3j"]
 [ext_resource type="Texture2D" uid="uid://djeirgrk1cueb" path="res://Asset/UI/InputPrompts/keyboard_e.png" id="25_pcvun"]
 [ext_resource type="Texture2D" uid="uid://dkrm6l6nahost" path="res://Asset/UI/crosshair127.png" id="27_0xfex"]
@@ -891,6 +892,10 @@ text = "/ 5000 pts."
 
 [node name="MissionTimer" type="Timer" parent="HUD/Misson" index="2"]
 one_shot = true
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="HUD/Misson" index="3"]
+stream = ExtResource("24_s8q2k")
+volume_db = -15.0
 
 [node name="InputPrompts" type="Control" parent="HUD" index="4"]
 layout_mode = 3

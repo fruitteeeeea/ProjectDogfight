@@ -63,8 +63,7 @@ fixed_fps = 60
 visibility_rect = Rect2(-4000, -4000, 40000, 4000)
 process_material = SubResource("ParticleProcessMaterial_1bvp3")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="SFXWind" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_v7n5n")
 volume_db = -20.0
 autoplay = true
-stream_paused = true
