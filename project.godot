@@ -28,6 +28,7 @@ SpwanServer="*res://Unit/Server/spwan_server.tscn"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
+window/handheld/orientation=4
 mouse_cursor/custom_image="uid://qgtt4iihnros"
 mouse_cursor/custom_image_hotspot=Vector2(64, 64)
 
