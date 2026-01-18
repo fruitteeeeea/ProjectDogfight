@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cukppeq26yfa1"]
+[gd_scene load_steps=9 format=3 uid="uid://cukppeq26yfa1"]
 
 [ext_resource type="Script" uid="uid://dkxnx8t4hjveg" path="res://Unit/UI/result_menu.gd" id="1_7cjnc"]
 [ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://Unit/UI/FrostedGlassShader.gdshader" id="1_pnvqm"]
+[ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="3_0wcn7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7cjnc"]
 shader = ExtResource("1_pnvqm")
@@ -35,6 +36,12 @@ font_size = 64
 
 [sub_resource type="LabelSettings" id="LabelSettings_pnvqm"]
 font_size = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxks5"]
+size = Vector2(1920, 1080)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1gpln"]
+font_size = 48
 
 [node name="ResultMenu" type="Control"]
 layout_mode = 3
@@ -129,20 +136,38 @@ size_flags_horizontal = 0
 text = "Run out of time."
 label_settings = SubResource("LabelSettings_pnvqm")
 
-[node name="Retry" type="Button" parent="."]
+[node name="TouchToRetry" type="Control" parent="."]
 visible = false
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -312.0
-offset_right = 64.0
-offset_bottom = -248.0
+anchor_bottom = 0.5
 grow_horizontal = 2
-grow_vertical = 0
-text = "Retry"
+grow_vertical = 2
 
-[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="TouchToRetry"]
+shape = SubResource("RectangleShape2D_oxks5")
+action = "StartTheGame"
+
+[node name="Label" type="Label" parent="TouchToRetry"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.5
+offset_top = 276.0
+offset_right = 146.5
+offset_bottom = 309.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Touch to retry."
+label_settings = SubResource("LabelSettings_1gpln")
+
+[node name="BlinkCanvasItem" type="Node" parent="TouchToRetry/Label"]
+script = ExtResource("3_0wcn7")
+max_value = Color(1, 1, 1, 0.501961)
+metadata/_custom_type_script = "uid://dxl17dpembjyc"

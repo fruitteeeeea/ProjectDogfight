@@ -39,6 +39,8 @@ position = Vector2(654, 782)
 [node name="EnemySpwaner" parent="." instance=ExtResource("5_m416f")]
 
 [node name="GameSpeed" parent="." instance=ExtResource("6_f7yv3")]
+enable = true
+trriger_type = "Click"
 game_speed_scale = Array[float]([3.0, 1.0])
 
 [node name="GameHUD" type="CanvasLayer" parent="."]

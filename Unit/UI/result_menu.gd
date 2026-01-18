@@ -11,7 +11,10 @@ class_name ResultMenu
 @onready var result: Label = $GameOver/HBoxContainer/Result
 @onready var blur_background: ColorRect = $BlurBackground
 
-@onready var retry: Button = $Retry
+var game_finished = false
+
+@onready var touch_to_retry: Control = $TouchToRetry
+
 
 func _ready() -> void:
 	GameStatusServer.reset_game_status()
@@ -24,8 +27,10 @@ func _show_result(_battle_complete : bool) -> void:
 	else :
 		_show_game_over()
 	
+	
+	game_finished = true
 	blur_background.show()
-	retry.show()
+	touch_to_retry.show()
 
 
 func _show_battle_result() -> void:
@@ -54,9 +59,11 @@ func _show_game_over() -> void:
 	game_over.show()
 	_display_box(game_over)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("StartTheGame") && game_finished:
+		get_tree().reload_current_scene()
 
-func _on_retry_pressed() -> void:
-	get_tree().reload_current_scene()
+
 
 
 #region Tween
