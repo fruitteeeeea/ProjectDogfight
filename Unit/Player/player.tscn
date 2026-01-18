@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=64 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -39,10 +39,14 @@
 [ext_resource type="AudioStream" uid="uid://mya7kqicienq" path="res://Asset/sound/jet/Jet Engine Low Loop B.wav" id="36_swlur"]
 [ext_resource type="AudioStream" uid="uid://rtpi70o545e" path="res://Asset/sound/jet/after_burn/Afterburner Loop B.wav" id="37_qejli"]
 [ext_resource type="AudioStream" uid="uid://v0fgl7rtvtbp" path="res://Asset/sound/jet/Jet Start E.wav" id="38_0u1hj"]
+[ext_resource type="Texture2D" uid="uid://bhlewxtgg6eak" path="res://Asset/UI/TouchIcon/xbox_button_color_a.png" id="38_a3vo5"]
 [ext_resource type="AudioStream" uid="uid://dmyuvvbs7o2ku" path="res://Asset/sound/jet/Inner Mechanism A.wav" id="38_frrsq"]
 [ext_resource type="AudioStream" uid="uid://ynsugrevh2ti" path="res://Asset/sound/jet/Jet Start A.wav" id="39_bl3tp"]
 [ext_resource type="AudioStream" uid="uid://cmwm1xqx203m2" path="res://Asset/sound/jet/Jet Engine Hollow Loop B.wav" id="39_edi3d"]
+[ext_resource type="Texture2D" uid="uid://cjpbgk6xnwphy" path="res://Asset/UI/TouchIcon/xbox_button_color_b.png" id="39_s5jdw"]
 [ext_resource type="AudioStream" uid="uid://b053662c26fom" path="res://Asset/sound/jet/after_burn/Inner Mechanism H.wav" id="40_h44hf"]
+[ext_resource type="Texture2D" uid="uid://dkcybcusgla1p" path="res://Asset/UI/TouchIcon/xbox_button_color_x.png" id="40_qson6"]
+[ext_resource type="Texture2D" uid="uid://bh8ndmt060ke1" path="res://Asset/UI/TouchIcon/xbox_button_color_y.png" id="41_dr1eb"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -172,6 +176,9 @@ font_size = 32
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vj671"]
 blend_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3vo5"]
+radius = 64.0
 
 [node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
 collision_layer = 3
@@ -1361,6 +1368,52 @@ texture = ExtResource("31_c1pcq")
 visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
+
+[node name="PlayerTouchControl" type="Control" parent="HUD" index="9"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ABXYButton" type="Control" parent="HUD/PlayerTouchControl" index="0"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="A" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="0"]
+position = Vector2(-352, -168)
+texture_normal = ExtResource("38_a3vo5")
+shape = SubResource("CircleShape2D_a3vo5")
+action = "open_fire"
+visibility_mode = 1
+
+[node name="B" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="1"]
+position = Vector2(-256, -264)
+texture_normal = ExtResource("39_s5jdw")
+shape = SubResource("CircleShape2D_a3vo5")
+action = "launch_rocket"
+visibility_mode = 1
+
+[node name="X" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="2"]
+position = Vector2(-448, -264)
+texture_normal = ExtResource("40_qson6")
+shape = SubResource("CircleShape2D_a3vo5")
+action = "BurstSpeed"
+visibility_mode = 1
+
+[node name="Y" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="3"]
+position = Vector2(-352, -360)
+texture_normal = ExtResource("41_dr1eb")
+shape = SubResource("CircleShape2D_a3vo5")
+action = "engine"
+visibility_mode = 1
 
 [node name="SFX" type="Node2D" parent="." index="9"]
 

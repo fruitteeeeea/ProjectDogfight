@@ -10,4 +10,3 @@ void fragment() {
 	COLOR = texture(TEXTURE,UV + vec2(TIME * -speed, TIME * -speed));
 	// Called for every pixel the material is visible on.
 }
-

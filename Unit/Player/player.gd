@@ -109,6 +109,13 @@ func _get_final_speed() -> float:
 	var _speed = speed
 	return _speed * _get_burst_accel()
 
+
+#玩家输入的方向 
+func _get_input_direction() -> Vector2:
+	var dir : Vector2
+	return dir
+
+
 #持续加速
 func _get_burst_accel() -> float:
 	base_accel = lerpf(base_accel, burst_accel, .5 * burst_ratio)
