@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=67 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -47,6 +47,9 @@
 [ext_resource type="AudioStream" uid="uid://b053662c26fom" path="res://Asset/sound/jet/after_burn/Inner Mechanism H.wav" id="40_h44hf"]
 [ext_resource type="Texture2D" uid="uid://dkcybcusgla1p" path="res://Asset/UI/TouchIcon/xbox_button_color_x.png" id="40_qson6"]
 [ext_resource type="Texture2D" uid="uid://bh8ndmt060ke1" path="res://Asset/UI/TouchIcon/xbox_button_color_y.png" id="41_dr1eb"]
+[ext_resource type="Script" uid="uid://cw7nf4ng4gs4n" path="res://Unit/Player/joystick.gd" id="41_s5jdw"]
+[ext_resource type="Texture2D" uid="uid://c03b13n37buj" path="res://Asset/UI/Joystick/Radius.png" id="42_qson6"]
+[ext_resource type="Texture2D" uid="uid://ctccienmlpby7" path="res://Asset/UI/Joystick/Button.png" id="43_dr1eb"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -180,7 +183,7 @@ blend_mode = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3vo5"]
 radius = 64.0
 
-[node name="Player" groups=["player"] instance=ExtResource("1_bfvk7")]
+[node name="Player" node_paths=PackedStringArray("joysitck") groups=["player"] instance=ExtResource("1_bfvk7")]
 collision_layer = 3
 script = ExtResource("2_aph0k")
 engine_off_burst_accel = -0.8
@@ -191,6 +194,7 @@ fall_strength = 0.4
 accelerate_burst_accel = 1.8
 accelerate_off_burst_ratio = 2.0
 accelerate_turn_speed = 1.5
+joysitck = NodePath("HUD/PlayerTouchControl/Joystick")
 turn_speed = 1.0
 
 [node name="Sprite2D" parent="Graphic" index="0"]
@@ -1414,6 +1418,22 @@ texture_normal = ExtResource("41_dr1eb")
 shape = SubResource("CircleShape2D_a3vo5")
 action = "engine"
 visibility_mode = 1
+
+[node name="Joystick" type="Node2D" parent="HUD/PlayerTouchControl" index="1"]
+position = Vector2(232, 864)
+script = ExtResource("41_s5jdw")
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick" index="0"]
+texture = ExtResource("42_qson6")
+
+[node name="Point" type="Node2D" parent="HUD/PlayerTouchControl/Joystick" index="1"]
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick/Point" index="0"]
+texture = ExtResource("43_dr1eb")
+
+[node name="Label" type="Label" parent="HUD/PlayerTouchControl/Joystick" index="2"]
+offset_right = 40.0
+offset_bottom = 33.0
 
 [node name="SFX" type="Node2D" parent="." index="9"]
 

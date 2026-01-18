@@ -32,6 +32,8 @@ var engine_on : bool = true
 @export var accelerate_turn_speed := 1.5 #引擎关闭的时候转向倍率 
 @onready var accelerate_component: AccelerationComponent = $AccelerateComponent
 
+#控制模块
+@export var joysitck : Joystick
 
 @onready var limbo_hsm: LimboHSM = $LimboHSM
 @onready var engine_on_state: LimboState = $LimboHSM/EngineOnState
@@ -94,7 +96,7 @@ func _get_move_direction(delta) -> Vector2:
 
 func _get_forward(delta) -> Vector2:
 	if !force_dir:
-		target_forward = (get_global_mouse_position() - global_position).normalized()
+		target_forward = _get_input_direction()
 	
 	check_position()
 	super(delta)
@@ -112,8 +114,10 @@ func _get_final_speed() -> float:
 
 #玩家输入的方向 
 func _get_input_direction() -> Vector2:
-	var dir : Vector2
-	return dir
+	if joysitck.get_dir() != Vector2.ZERO:
+		return joysitck.get_dir()
+	
+	return (get_global_mouse_position() - global_position).normalized()
 
 
 #持续加速
