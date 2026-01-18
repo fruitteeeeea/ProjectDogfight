@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://k5msw5fm124k"]
+[gd_scene load_steps=14 format=3 uid="uid://k5msw5fm124k"]
 
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_7dbjd"]
 [ext_resource type="Script" uid="uid://doh7g3ch50gia" path="res://Main/game_manager.gd" id="2_k34uy"]
@@ -14,6 +14,9 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_f6fdm"]
 font_size = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1lxc"]
+size = Vector2(1920, 100)
 
 [node name="MainGame" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-640.0]
@@ -58,6 +61,7 @@ offset_bottom = 210.0
 grow_horizontal = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameHUD/ReadyToStart/PanelContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -98,6 +102,32 @@ script = ExtResource("8_x645j")
 blink_mode = "alpha"
 duration = 1.0
 interval = 0.5
+
+[node name="TapHereToStart" type="Control" parent="GameHUD/ReadyToStart/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="GameHUD/ReadyToStart/PanelContainer/TapHereToStart"]
+shape = SubResource("RectangleShape2D_p1lxc")
+action = "StartTheGame"
+
+[node name="Label" type="Label" parent="GameHUD/ReadyToStart/PanelContainer/TapHereToStart"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -221.0
+offset_top = -22.0
+offset_right = 221.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Tap Here To Start The Game."
+label_settings = SubResource("LabelSettings_f6fdm")
 
 [node name="ResultMenu" parent="GameHUD" instance=ExtResource("9_aab7o")]
 

@@ -1421,7 +1421,6 @@ visibility_mode = 1
 
 [node name="Joystick" type="Node2D" parent="HUD/PlayerTouchControl" index="1"]
 position = Vector2(232, 864)
-scale = Vector2(2, 2)
 script = ExtResource("41_s5jdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick" index="0"]

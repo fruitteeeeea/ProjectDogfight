@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://j6rednkkkc1t"]
+[gd_scene load_steps=11 format=3 uid="uid://j6rednkkkc1t"]
 
 [ext_resource type="Script" uid="uid://clobmhcou5ixa" path="res://Unit/UI/Menu/main_menu.gd" id="1_b2vmc"]
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_plyx2"]
 [ext_resource type="Shader" uid="uid://dskykeqhsdh1p" path="res://Unit/UI/Menu/moving_texture.gdshader" id="2_36v3h"]
 [ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://Unit/UI/FrostedGlassShader.gdshader" id="3_5a3qv"]
+[ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="5_rnkyl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5a3qv"]
 shader = ExtResource("2_36v3h")
@@ -36,8 +37,14 @@ shader_parameter/blur_samples = 4
 shader_parameter/glass_opacity = 0.2
 shader_parameter/node_size = Vector2(100, 100)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2vmc"]
+size = Vector2(1920, 1080)
+
+[sub_resource type="LabelSettings" id="LabelSettings_b2vmc"]
+font_size = 48
+
 [sub_resource type="LabelSettings" id="LabelSettings_36v3h"]
-font_size = 92
+font_size = 128
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_b2vmc")
@@ -46,9 +53,11 @@ script = ExtResource("1_b2vmc")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -67,6 +76,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -94,16 +104,51 @@ text = "Option
 layout_mode = 2
 text = "About"
 
+[node name="TouchToStart" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer/Control/TouchToStart"]
+shape = SubResource("RectangleShape2D_b2vmc")
+action = "StartTheGame"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/TouchToStart"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.5
+offset_top = 276.0
+offset_right = 146.5
+offset_bottom = 309.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Touch to start the game"
+label_settings = SubResource("LabelSettings_b2vmc")
+
+[node name="BlinkCanvasItem" type="Node" parent="CanvasLayer/Control/TouchToStart/Label"]
+script = ExtResource("5_rnkyl")
+max_value = Color(1, 1, 1, 0.501961)
+metadata/_custom_type_script = "uid://dxl17dpembjyc"
+
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -439.0
-offset_top = -212.0
-offset_right = 439.0
-offset_bottom = -87.0
+offset_left = -644.5
+offset_top = -268.0
+offset_right = 644.5
+offset_bottom = -94.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Blueprint Dogfight."
