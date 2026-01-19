@@ -1445,11 +1445,12 @@ pitch_scale = 0.8
 [node name="SFXEngineEnd" type="AudioStreamPlayer2D" parent="SFX" index="1"]
 stream = ExtResource("38_frrsq")
 volume_db = -5.0
-pitch_scale = 1.5
+pitch_scale = 1.25
 
 [node name="SFXEngine" type="AudioStreamPlayer2D" parent="SFX" index="2"]
 stream = ExtResource("36_swlur")
 volume_db = -5.0
+pitch_scale = 0.8
 
 [node name="SFXEngineoff" type="AudioStreamPlayer2D" parent="SFX" index="3"]
 stream = ExtResource("39_edi3d")
@@ -1463,10 +1464,11 @@ pitch_scale = 0.8
 [node name="SFXAfterBurnerEnd" type="AudioStreamPlayer2D" parent="SFX" index="5"]
 stream = ExtResource("40_h44hf")
 volume_db = -0.3
-pitch_scale = 1.5
+pitch_scale = 1.75
 
 [node name="SFXAfterBurner" type="AudioStreamPlayer2D" parent="SFX" index="6"]
 stream = ExtResource("37_qejli")
+volume_db = 1.2
 
 [node name="AudioListener2D" type="AudioListener2D" parent="SFX" index="7"]
 current = true

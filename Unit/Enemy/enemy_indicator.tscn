@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://pch86ahboxtj"]
 
 [ext_resource type="Script" uid="uid://crpb5dmphqscm" path="res://Unit/Enemy/enemy_indicator.gd" id="1_uhv8j"]
-[ext_resource type="Texture2D" uid="uid://njb2cbf4ee6k" path="res://Asset/UI/EnemyIndicator.png" id="2_3qr2e"]
+[ext_resource type="Texture2D" uid="uid://bld5u3rq2wxel" path="res://Asset/UI/warning.png" id="2_uhv8j"]
 
 [node name="EnemyIndicator" type="Control"]
 layout_mode = 3
@@ -10,27 +10,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -928.0
-offset_top = -572.0
-offset_right = -928.0
-offset_bottom = -572.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -960.0
+offset_bottom = -540.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uhv8j")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 1
@@ -39,12 +29,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -88.0
-offset_right = 32.0
-offset_bottom = 40.0
+offset_left = -64.0
+offset_top = -76.0
+offset_right = 64.0
+offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
+rotation = -1.5708
 scale = Vector2(0.3, 0.3)
 pivot_offset = Vector2(64, 64)
-texture = ExtResource("2_3qr2e")
+texture = ExtResource("2_uhv8j")

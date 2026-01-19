@@ -68,6 +68,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		hud_offset_manager.trigger_dodge_shake()
 		animation_player.play("dodge")
 
+	if event.is_action_pressed("debug"):
+		take_damage(10.0)
+
+
 func _ready() -> void:
 	_init_state_machine()
 

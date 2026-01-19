@@ -71,9 +71,13 @@ dir : Vector(1,1)"
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
 
 [node name="EnemyIndicator" parent="CanvasLayer" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("7_lebci")]
+offset_top = -582.0
+offset_bottom = -582.0
 enemy = NodePath("../..")
 
 [node name="EnemyGun" parent="." index="8" instance=ExtResource("10_s1sfp")]
 
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="CanvasLayer/EnemyIndicator" method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="EnemyGun" method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="CanvasLayer/EnemyIndicator" method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="EnemyGun" method="_on_visible_on_screen_notifier_2d_screen_exited"]

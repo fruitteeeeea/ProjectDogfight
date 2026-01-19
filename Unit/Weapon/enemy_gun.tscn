@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs7k75frbxvbs"]
+[gd_scene load_steps=6 format=3 uid="uid://cs7k75frbxvbs"]
 
 [ext_resource type="PackedScene" uid="uid://b6m4bm7mcdcof" path="res://Unit/Weapon/gun.tscn" id="1_5xi0v"]
 [ext_resource type="Script" uid="uid://y05o33tfs208" path="res://Unit/Weapon/enemy_gun.gd" id="2_gmr4g"]
 [ext_resource type="PackedScene" uid="uid://djvkpsb0xg7y8" path="res://Unit/Bullet/enemy_bullet.tscn" id="3_m37mh"]
+[ext_resource type="AudioStream" uid="uid://dr3bogsh274wm" path="res://Asset/sound/weapon/bullet/fire.wav" id="4_8f38o"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_m37mh"]
+random_pitch = 1.25
+streams_count = 1
+stream_0/stream = ExtResource("4_8f38o")
 
 [node name="EnemyGun" instance=ExtResource("1_5xi0v")]
 script = ExtResource("2_gmr4g")
 bullet_number = 1
 BulletScene = ExtResource("3_m37mh")
+
+[node name="SFXFire" type="AudioStreamPlayer2D" parent="." index="0"]
+stream = SubResource("AudioStreamRandomizer_m37mh")
+volume_db = 3.0
+attenuation = 0.450625

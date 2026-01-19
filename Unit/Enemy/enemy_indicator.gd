@@ -9,13 +9,25 @@ func _physics_process(delta: float) -> void:
 	if enemy.is_dead:
 		queue_free()
 	
+	if visible == false: 
+		return
+	
 	var target_pos = _get_screen_pos(enemy)
 	target_pos = target_pos.clamp(
 		Vector2(50, 100),
 		Vector2(1920, 1080) - Vector2(100, 50)
 	)
 	control.position = target_pos
-	
+
+
+	var screen_center = get_viewport().get_camera_2d().global_position
+	var dir = (enemy.global_position - screen_center)
+
+	if dir.length_squared() > 0.0001:
+		control.rotation = dir.angle()
+		# 如果贴图默认朝上，用下面这行
+		# control.rotation = dir.angle() + PI / 2
+
 	time_eclpase += delta
 	if time_eclpase >= .5:
 		time_eclpase = 0 

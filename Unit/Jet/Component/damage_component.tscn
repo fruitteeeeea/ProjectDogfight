@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cr2n35uakvhy6"]
+[gd_scene load_steps=9 format=3 uid="uid://cr2n35uakvhy6"]
 
 [ext_resource type="Script" uid="uid://cyvt0ejvx3uyr" path="res://Unit/Jet/Component/damage_component.gd" id="1_nk7qr"]
 [ext_resource type="Texture2D" uid="uid://ygfahp04kcg7" path="res://Asset/particle/Particle00.png" id="2_215oy"]
-[ext_resource type="AudioStream" uid="uid://bum3qkpb2mfcv" path="res://Asset/sound/enemy/JetDestory.wav" id="3_531fe"]
+[ext_resource type="AudioStream" uid="uid://bum3qkpb2mfcv" path="res://Asset/sound/jet/health/JetDestory.wav" id="3_531fe"]
 
 [sub_resource type="Curve" id="Curve_5k7b3"]
 _data = [Vector2(0, 0.881648), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -19,6 +19,11 @@ point_count = 5
 [sub_resource type="Gradient" id="Gradient_b5uau"]
 offsets = PackedFloat32Array(0.0015083, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.776471, 0.156863, 0.156863, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5k7b3"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("3_531fe")
 
 [node name="DamageComponent" type="Node2D"]
 script = ExtResource("1_nk7qr")
@@ -61,6 +66,6 @@ scale_amount_curve = SubResource("Curve_261iw")
 color_ramp = SubResource("Gradient_531fe")
 
 [node name="SFXExplode" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_531fe")
+stream = SubResource("AudioStreamRandomizer_5k7b3")
 volume_db = 0.03
 max_polyphony = 5

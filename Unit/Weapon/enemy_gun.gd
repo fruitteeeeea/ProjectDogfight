@@ -3,6 +3,8 @@ class_name EnemyGun
 
 @export var bullet_number := 1
 
+@onready var sfx_fire: AudioStreamPlayer2D = $SFXFire
+
 var can_fire := false
 
 #默认发射方式 不用接受参数 
@@ -15,6 +17,7 @@ func fire() -> void:
 	
 	for i in range(bullet_number):
 		_fire(Vector2.ZERO, direction, 5.0)
+		sfx_fire.play()
 		await get_tree().create_timer(.05).timeout
 
 
