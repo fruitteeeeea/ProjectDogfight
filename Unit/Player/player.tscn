@@ -201,7 +201,7 @@ tracks/1/path = NodePath("../../SFX/SFXgetYourReward:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.6),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -248,7 +248,7 @@ font_size = 32
 blend_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3vo5"]
-radius = 48.0
+radius = 64.0
 
 [node name="Player" node_paths=PackedStringArray("player_control") groups=["player"] instance=ExtResource("1_bfvk7")]
 collision_layer = 3
@@ -1510,7 +1510,6 @@ layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
 [node name="PlayerTouchControl" type="Control" parent="HUD" index="10"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1538,7 +1537,7 @@ action = "open_fire"
 visibility_mode = 1
 
 [node name="B" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="1"]
-position = Vector2(-256, -295)
+position = Vector2(-224, -328)
 scale = Vector2(1.35, 1.35)
 texture_normal = ExtResource("39_s5jdw")
 shape = SubResource("CircleShape2D_a3vo5")
@@ -1546,7 +1545,7 @@ action = "launch_rocket"
 visibility_mode = 1
 
 [node name="X" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="2"]
-position = Vector2(-448, -295)
+position = Vector2(-480, -328)
 scale = Vector2(1.35, 1.35)
 texture_normal = ExtResource("40_qson6")
 shape = SubResource("CircleShape2D_a3vo5")
@@ -1554,7 +1553,7 @@ action = "BurstSpeed"
 visibility_mode = 1
 
 [node name="Y" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="3"]
-position = Vector2(-352, -391)
+position = Vector2(-352, -464)
 scale = Vector2(1.35, 1.35)
 texture_normal = ExtResource("41_dr1eb")
 shape = SubResource("CircleShape2D_a3vo5")
