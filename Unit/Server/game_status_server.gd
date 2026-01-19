@@ -53,3 +53,11 @@ func _input(event: InputEvent) -> void:
 		(event is InputEventMouseMotion and event.velocity.length() > MOUSE_DEADZONE)
 	):
 		current_input_mode = InputMode.KEYBOARD
+
+
+func is_mobile() -> bool:
+	return OS.has_feature("mobile")
+
+
+func is_pc() -> bool:
+	return OS.has_feature("pc")

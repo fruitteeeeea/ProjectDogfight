@@ -198,6 +198,7 @@ accelerate_off_burst_ratio = 2.0
 accelerate_turn_speed = 1.5
 player_control = NodePath("PlayerControl")
 turn_speed = 1.0
+metadata/_edit_horizontal_guides_ = [536.0]
 
 [node name="Sprite2D" parent="Graphic" index="0"]
 scale = Vector2(0.35, 0.35)
@@ -1383,44 +1384,44 @@ script = ExtResource("41_pd0ne")
 
 [node name="ABXYButton" type="Control" parent="HUD/PlayerTouchControl" index="0"]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 6
 anchor_left = 1.0
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="A" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="0"]
-position = Vector2(-352, -168)
+position = Vector2(-352, 28)
 texture_normal = ExtResource("38_a3vo5")
 shape = SubResource("CircleShape2D_a3vo5")
 action = "open_fire"
 visibility_mode = 1
 
 [node name="B" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="1"]
-position = Vector2(-256, -264)
+position = Vector2(-256, -68)
 texture_normal = ExtResource("39_s5jdw")
 shape = SubResource("CircleShape2D_a3vo5")
 action = "launch_rocket"
 visibility_mode = 1
 
 [node name="X" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="2"]
-position = Vector2(-448, -264)
+position = Vector2(-448, -68)
 texture_normal = ExtResource("40_qson6")
 shape = SubResource("CircleShape2D_a3vo5")
 action = "BurstSpeed"
 visibility_mode = 1
 
 [node name="Y" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="3"]
-position = Vector2(-352, -360)
+position = Vector2(-352, -164)
 texture_normal = ExtResource("41_dr1eb")
 shape = SubResource("CircleShape2D_a3vo5")
 action = "engine"
 visibility_mode = 1
 
 [node name="Joystick" type="Node2D" parent="HUD/PlayerTouchControl" index="1"]
-position = Vector2(232, 864)
+position = Vector2(232, 536)
 script = ExtResource("41_s5jdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick" index="0"]
