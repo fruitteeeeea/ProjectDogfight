@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cukppeq26yfa1"]
+[gd_scene load_steps=11 format=3 uid="uid://cukppeq26yfa1"]
 
 [ext_resource type="Script" uid="uid://dkxnx8t4hjveg" path="res://Unit/UI/result_menu.gd" id="1_7cjnc"]
 [ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://Unit/UI/FrostedGlassShader.gdshader" id="1_pnvqm"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="3_0wcn7"]
+[ext_resource type="AudioStream" uid="uid://iirlggwplddu" path="res://Asset/sound/UI/Signal Positive JRPG C.wav" id="4_oxks5"]
+[ext_resource type="AudioStream" uid="uid://dkk7xvc57pjvi" path="res://Asset/sound/UI/Signal Negative JRPG C.wav" id="5_1gpln"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7cjnc"]
 shader = ExtResource("1_pnvqm")
@@ -171,3 +173,15 @@ label_settings = SubResource("LabelSettings_1gpln")
 script = ExtResource("3_0wcn7")
 max_value = Color(1, 1, 1, 0.501961)
 metadata/_custom_type_script = "uid://dxl17dpembjyc"
+
+[node name="Win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oxks5")
+volume_db = -10.0
+pitch_scale = 0.8
+bus = &"SFX"
+
+[node name="Lose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1gpln")
+volume_db = -10.0
+pitch_scale = 0.8
+bus = &"SFX"

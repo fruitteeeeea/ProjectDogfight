@@ -11,9 +11,9 @@ var your_points : int = 0
 var enemy_destory : int = 0
 
 var rank : Dictionary[int, String] = {
-	4500 : "C",
-	5000 : "B",
-	5500 : "A"
+	2500 : "C",
+	3000 : "B",
+	4500 : "A"
 }
 
 enum InputMode {

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dkk7xvc57pjvi"
+path="res://.godot/imported/Signal Negative JRPG C.wav-3fe404ec5b8548f40a9d4f67392753ac.sample"
+
+[deps]
+
+source_file="res://Asset/sound/UI/Signal Negative JRPG C.wav"
+dest_files=["res://.godot/imported/Signal Negative JRPG C.wav-3fe404ec5b8548f40a9d4f67392753ac.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

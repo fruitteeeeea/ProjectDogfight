@@ -5,7 +5,6 @@ extends Node2D
 
 
 @export var mission_time : float = 60
-@export var target_points : int = 4000
 
 @export var player : Player
 var mission_panel : MissionPanel
@@ -26,6 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _start_the_game() -> void:
 	ready_to_start.queue_free()
+	var target_points : int = GameStatusServer.rank.keys()[0] #通关最低分数
 	mission_panel.mission_start(mission_time, target_points)
 	
 	game_start = true

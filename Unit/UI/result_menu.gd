@@ -11,10 +11,12 @@ class_name ResultMenu
 @onready var result: Label = $GameOver/HBoxContainer/Result
 @onready var blur_background: ColorRect = $BlurBackground
 
-var game_finished = false
+@onready var win: AudioStreamPlayer = $Win
+@onready var lose: AudioStreamPlayer = $Lose
 
 @onready var touch_to_retry: Control = $TouchToRetry
 
+var game_finished = false
 
 func _ready() -> void:
 	GameStatusServer.reset_game_status()
@@ -22,6 +24,9 @@ func _ready() -> void:
 
 
 func _show_result(_battle_complete : bool) -> void:
+	if game_finished:
+		return
+	
 	if _battle_complete:
 		_show_battle_result()
 	else :
@@ -48,6 +53,8 @@ func _show_battle_result() -> void:
 	
 	battle_compelete.show()
 	_display_box(battle_compelete)
+	
+	win.play()
 
 
 func _show_game_over() -> void:
@@ -58,12 +65,13 @@ func _show_game_over() -> void:
 	_display_text(result)
 	game_over.show()
 	_display_box(game_over)
+	
+	lose.play()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("StartTheGame") && game_finished:
 		get_tree().reload_current_scene()
-
-
 
 
 #region Tween
