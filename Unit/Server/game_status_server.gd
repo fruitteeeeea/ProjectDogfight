@@ -3,12 +3,19 @@ extends Node
 signal show_result(complete : bool) #游戏因各种原因结束 展示结算面板 
 signal change_input_device(input_mode : InputMode)
 
+signal distribute_rewards
 
 const STICK_DEADZONE := 0.55 #摇杆死区
 const MOUSE_DEADZONE := 16.0
 
 var your_points : int = 0
-var enemy_destory : int = 0
+var enemy_destory : int = 0:
+	set(v):
+		enemy_destory = v
+		if enemy_destory % 5 == 0 && enemy_destory != 0:
+			distribute_rewards.emit()
+			print("获取奖励！")
+
 
 var rank : Dictionary[int, String] = {
 	2500 : "C",

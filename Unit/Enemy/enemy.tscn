@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d2rcul35yljaa"]
+[gd_scene load_steps=16 format=3 uid="uid://d2rcul35yljaa"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_0dgib"]
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dek3b4g0lpd8n" path="res://Unit/Jet/Component/enemy_damage_component.tscn" id="8_gcf3q"]
 [ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="8_iw8a2"]
 [ext_resource type="Texture2D" uid="uid://cqkxjneua3try" path="res://Asset/UI/enemy_attack.png" id="9_gcf3q"]
+[ext_resource type="AudioStream" uid="uid://c1yxnu7dpu23p" path="res://Asset/sound/enemy/Warning F.wav" id="10_rkan2"]
 [ext_resource type="PackedScene" uid="uid://cs7k75frbxvbs" path="res://Unit/Weapon/enemy_gun.tscn" id="10_s1sfp"]
 
 [sub_resource type="Gradient" id="Gradient_iw8a2"]
@@ -45,6 +46,18 @@ tracks/1/keys = {
 "method": &"fire"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SFXEnemyAttack:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
 
 [sub_resource type="Animation" id="Animation_s1sfp"]
 length = 0.001
@@ -55,6 +68,18 @@ tracks/0/path = NodePath("WorldLabel2D/EnemyAttack:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SFXEnemyAttack:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -122,6 +147,7 @@ dir : Vector(1,1)"
 
 [node name="EnemyAttack" type="TextureRect" parent="WorldLabel2D" index="1"]
 visible = false
+layout_mode = 0
 offset_left = -16.0
 offset_top = -72.0
 offset_right = 112.0
@@ -142,6 +168,10 @@ enemy = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_s1sfp")
 }
+
+[node name="SFXEnemyAttack" type="AudioStreamPlayer2D" parent="." index="10"]
+stream = ExtResource("10_rkan2")
+volume_db = -5.0
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="CanvasLayer/EnemyIndicator" method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="EnemyGun" method="_on_visible_on_screen_notifier_2d_screen_entered"]
