@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq1o384plj4l1"]
+
+[ext_resource type="Script" uid="uid://b6kc01pbc5net" path="res://Unit/Player/input_prompt.gd" id="1_aq4jw"]
+[ext_resource type="Texture2D" uid="uid://vbbfj5y1lxnr" path="res://Asset/UI/TouchIcon/xbox_stick_top_l.png" id="2_dgcxg"]
+[ext_resource type="Texture2D" uid="uid://bwdkyxd77xhqq" path="res://Asset/UI/InputPrompts/mouse_move.png" id="3_w4eqq"]
+
+[node name="InputPromptIcon" type="Control"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_aq4jw")
+
+[node name="GamepadIconRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_dgcxg")
+
+[node name="KeyboardIconRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_w4eqq")

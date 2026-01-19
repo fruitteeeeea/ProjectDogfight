@@ -44,8 +44,8 @@ func _physics_process(delta: float) -> void:
 	var max_mouse_dist := center_pos.length()
 	var strength = clamp(distance / max_mouse_dist, 0.0, 1.0)
 	
-	if player.joysitck.get_dir() != Vector2.ZERO:
-		mouse_offset = player.joysitck.get_dir()
+	if player.player_control.get_dir() != Vector2.ZERO:
+		mouse_offset = player.player_control.get_dir()
 		strength = 1
 
 	# ① 每帧衰减震动（全局一次）

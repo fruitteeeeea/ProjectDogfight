@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene load_steps=69 format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -22,12 +22,12 @@
 [ext_resource type="FontFile" uid="uid://bpkb7efje5rwl" path="res://Asset/font/realtimeroundedtest-black.otf" id="20_4dcrn"]
 [ext_resource type="Texture2D" uid="uid://b34j05vi4y03q" path="res://Asset/UI/skull.png" id="20_6h1yq"]
 [ext_resource type="Texture2D" uid="uid://bji2a24tvivpl" path="res://Asset/UI/InputPrompts/keyboard_w.png" id="21_4dcrn"]
-[ext_resource type="Texture2D" uid="uid://bwdkyxd77xhqq" path="res://Asset/UI/InputPrompts/mouse_move.png" id="21_pcvun"]
 [ext_resource type="Script" uid="uid://bp2sy2vk7tcpq" path="res://Unit/Player/misson.gd" id="22_vj671"]
 [ext_resource type="Texture2D" uid="uid://bp3c65c1pyvph" path="res://Asset/UI/InputPrompts/keyboard_space.png" id="23_xx0et"]
 [ext_resource type="AudioStream" uid="uid://c7ycryshs6kvi" path="res://Asset/sound/music/Chiptune Vol4 Limbo Cut 60.wav" id="24_s8q2k"]
 [ext_resource type="Texture2D" uid="uid://cms55552ivqkj" path="res://Asset/UI/InputPrompts/keyboard_q.png" id="24_v1p3j"]
 [ext_resource type="Texture2D" uid="uid://djeirgrk1cueb" path="res://Asset/UI/InputPrompts/keyboard_e.png" id="25_pcvun"]
+[ext_resource type="PackedScene" uid="uid://cq1o384plj4l1" path="res://Unit/UI/InputPrompt/input_prompt_icon.tscn" id="25_xbe7k"]
 [ext_resource type="Texture2D" uid="uid://dkrm6l6nahost" path="res://Asset/UI/crosshair127.png" id="27_0xfex"]
 [ext_resource type="Script" uid="uid://d163en6k6x26j" path="res://Unit/Player/player_attitude.gd" id="27_4ei6y"]
 [ext_resource type="Script" uid="uid://b4g5em3g6s45p" path="res://Unit/Player/player_health.gd" id="30_swlur"]
@@ -47,9 +47,11 @@
 [ext_resource type="AudioStream" uid="uid://b053662c26fom" path="res://Asset/sound/jet/after_burn/Inner Mechanism H.wav" id="40_h44hf"]
 [ext_resource type="Texture2D" uid="uid://dkcybcusgla1p" path="res://Asset/UI/TouchIcon/xbox_button_color_x.png" id="40_qson6"]
 [ext_resource type="Texture2D" uid="uid://bh8ndmt060ke1" path="res://Asset/UI/TouchIcon/xbox_button_color_y.png" id="41_dr1eb"]
+[ext_resource type="Script" uid="uid://ccvpdshr8f8u2" path="res://Unit/Player/player_touch_control.gd" id="41_pd0ne"]
 [ext_resource type="Script" uid="uid://cw7nf4ng4gs4n" path="res://Unit/Player/joystick.gd" id="41_s5jdw"]
 [ext_resource type="Texture2D" uid="uid://c03b13n37buj" path="res://Asset/UI/Joystick/Radius.png" id="42_qson6"]
 [ext_resource type="Texture2D" uid="uid://ctccienmlpby7" path="res://Asset/UI/Joystick/Button.png" id="43_dr1eb"]
+[ext_resource type="Script" uid="uid://2nyaotcfo2qe" path="res://Unit/Player/player_control.gd" id="53_fcyym"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
 _data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -183,7 +185,7 @@ blend_mode = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3vo5"]
 radius = 64.0
 
-[node name="Player" node_paths=PackedStringArray("joysitck") groups=["player"] instance=ExtResource("1_bfvk7")]
+[node name="Player" node_paths=PackedStringArray("player_control") groups=["player"] instance=ExtResource("1_bfvk7")]
 collision_layer = 3
 script = ExtResource("2_aph0k")
 engine_off_burst_accel = -0.8
@@ -194,7 +196,7 @@ fall_strength = 0.4
 accelerate_burst_accel = 1.8
 accelerate_off_burst_ratio = 2.0
 accelerate_turn_speed = 1.5
-joysitck = NodePath("HUD/PlayerTouchControl/Joystick")
+player_control = NodePath("PlayerControl")
 turn_speed = 1.0
 
 [node name="Sprite2D" parent="Graphic" index="0"]
@@ -296,11 +298,15 @@ script = ExtResource("9_85r8r")
 [node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2"]
 script = ExtResource("10_toghf")
 
-[node name="PlayerDamageComponent" parent="." index="3" node_paths=PackedStringArray("player_health_hud", "jet") instance=ExtResource("34_se872")]
+[node name="PlayerControl" type="Node2D" parent="." index="3" node_paths=PackedStringArray("joystick")]
+script = ExtResource("53_fcyym")
+joystick = NodePath("../HUD/PlayerTouchControl/Joystick")
+
+[node name="PlayerDamageComponent" parent="." index="4" node_paths=PackedStringArray("player_health_hud", "jet") instance=ExtResource("34_se872")]
 player_health_hud = NodePath("../HUD/PlayerHealth")
 jet = NodePath("..")
 
-[node name="AccelerateComponent" type="Node2D" parent="." index="4" node_paths=PackedStringArray("rocket_launcher")]
+[node name="AccelerateComponent" type="Node2D" parent="." index="5" node_paths=PackedStringArray("rocket_launcher")]
 script = ExtResource("11_oriqu")
 max_burst_accel_fuel = 100.0
 rocket_launcher = NodePath("../Weapon/RocketLauncher")
@@ -376,22 +382,22 @@ offset_left = 1176.0
 offset_top = 840.0
 offset_right = 1297.0
 offset_bottom = 911.0
-text = "Engine: On"
+text = "Engine: Off"
 
-[node name="Camera2D" type="Camera2D" parent="." index="5" node_paths=PackedStringArray("target_point")]
+[node name="Camera2D" type="Camera2D" parent="." index="6" node_paths=PackedStringArray("target_point")]
 zoom = Vector2(1.2, 1.2)
 script = ExtResource("3_aph0k")
 target_point = NodePath("../Graphic/CameraPoint")
 
 [node name="TrumaComponent" parent="Camera2D" index="0" instance=ExtResource("3_pm1gd")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 root_node = NodePath("../Graphic")
 libraries = {
 &"": SubResource("AnimationLibrary_dhsxg")
 }
 
-[node name="Weapon" type="Node2D" parent="." index="7"]
+[node name="Weapon" type="Node2D" parent="." index="8"]
 
 [node name="PlayerGun" parent="Weapon" index="0" node_paths=PackedStringArray("bullet_number", "fire_on_label", "reloding_label") instance=ExtResource("15_vj671")]
 bullet_number = NodePath("../../HUD/GunSlot/BulletNumber")
@@ -404,7 +410,7 @@ reloding_label = NodePath("../../HUD/GunSlot/BulletNumber/RelodingLabel")
 SnakeRocketScene = ExtResource("17_vj671")
 rocket_slot = NodePath("../../HUD/RocketSlot")
 
-[node name="HUD" type="CanvasLayer" parent="." index="8"]
+[node name="HUD" type="CanvasLayer" parent="." index="9"]
 
 [node name="HUDOffsetManager" type="Node2D" parent="HUD" index="0" node_paths=PackedStringArray("player", "control_list")]
 script = ExtResource("11_uefnm")
@@ -941,16 +947,8 @@ size_flags_horizontal = 8
 [node name="HBoxContainer2" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="0"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="0"]
-custom_minimum_size = Vector2(64, 54)
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="0" instance=ExtResource("25_xbe7k")]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2/Control" index="0"]
-layout_mode = 1
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_pcvun")
 
 [node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="1"]
 layout_mode = 2
@@ -963,11 +961,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(64, 54)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control" index="0"]
-layout_mode = 1
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control" index="0" instance=ExtResource("25_xbe7k")]
+
+[node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control/InputPromptIcon" index="0"]
+texture = ExtResource("41_dr1eb")
+
+[node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control/InputPromptIcon" index="1"]
 texture = ExtResource("21_4dcrn")
 
 [node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
@@ -981,19 +980,16 @@ layout_mode = 2
 custom_minimum_size = Vector2(64, 54)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control" index="0"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -44.94
-offset_right = 78.0
-offset_bottom = 83.06
-grow_horizontal = 2
-grow_vertical = 2
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control" index="0" instance=ExtResource("25_xbe7k")]
+
+[node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control/InputPromptIcon" index="0"]
+texture = ExtResource("40_qson6")
+
+[node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control/InputPromptIcon" index="1"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 112.0
+offset_bottom = 112.0
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("23_xx0et")
 
@@ -1008,11 +1004,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(64, 54)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control" index="0"]
-layout_mode = 1
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control" index="0" instance=ExtResource("25_xbe7k")]
+
+[node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control/InputPromptIcon" index="0"]
+texture = ExtResource("38_a3vo5")
+
+[node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control/InputPromptIcon" index="1"]
 texture = ExtResource("24_v1p3j")
 
 [node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="1"]
@@ -1026,11 +1023,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(64, 54)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control" index="0"]
-layout_mode = 1
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control" index="0" instance=ExtResource("25_xbe7k")]
+
+[node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control/InputPromptIcon" index="0"]
+texture = ExtResource("39_s5jdw")
+
+[node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control/InputPromptIcon" index="1"]
 texture = ExtResource("25_pcvun")
 
 [node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="1"]
@@ -1374,12 +1372,14 @@ layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
 [node name="PlayerTouchControl" type="Control" parent="HUD" index="9"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("41_pd0ne")
 
 [node name="ABXYButton" type="Control" parent="HUD/PlayerTouchControl" index="0"]
 layout_mode = 1
@@ -1431,7 +1431,7 @@ texture = ExtResource("42_qson6")
 [node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick/Point" index="0"]
 texture = ExtResource("43_dr1eb")
 
-[node name="SFX" type="Node2D" parent="." index="9"]
+[node name="SFX" type="Node2D" parent="." index="10"]
 
 [node name="SFXEngineStart" type="AudioStreamPlayer2D" parent="SFX" index="0"]
 stream = ExtResource("38_0u1hj")
@@ -1468,3 +1468,9 @@ stream = ExtResource("37_qejli")
 current = true
 
 [connection signal="timeout" from="HUD/Misson/MissionTimer" to="HUD/Misson" method="_on_mission_timer_timeout"]
+
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2/InputPromptIcon"]
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control/InputPromptIcon"]
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control/InputPromptIcon"]
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control/InputPromptIcon"]
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control/InputPromptIcon"]

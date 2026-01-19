@@ -56,6 +56,7 @@ func _apply_force_direction(
 
 
 func _exit() -> void:
+	player.accelerate_component.burst_accel = false
 	player.engine_on_label.hide()
 	
 	player.sfx_engine_end.play()
