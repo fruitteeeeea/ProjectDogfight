@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2rcul35yljaa"]
+[gd_scene load_steps=15 format=3 uid="uid://d2rcul35yljaa"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_0dgib"]
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
 [ext_resource type="PackedScene" uid="uid://dek3b4g0lpd8n" path="res://Unit/Jet/Component/enemy_damage_component.tscn" id="8_gcf3q"]
 [ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="8_iw8a2"]
+[ext_resource type="Texture2D" uid="uid://cqkxjneua3try" path="res://Asset/UI/enemy_attack.png" id="9_gcf3q"]
 [ext_resource type="PackedScene" uid="uid://cs7k75frbxvbs" path="res://Unit/Weapon/enemy_gun.tscn" id="10_s1sfp"]
 
 [sub_resource type="Gradient" id="Gradient_iw8a2"]
@@ -14,6 +15,57 @@ offsets = PackedFloat32Array(0, 0.352941, 0.998492, 1)
 colors = PackedColorArray(0.619608, 0.619608, 0.619608, 0.827451, 1, 1, 1, 0.526277, 1, 1, 1, 0.147813, 1, 1, 1, 0)
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_s64y3"]
+
+[sub_resource type="Animation" id="Animation_gcf3q"]
+resource_name = "01"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WorldLabel2D/EnemyAttack:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false, false, true, true, false, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyGun")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_s1sfp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WorldLabel2D/EnemyAttack:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1sfp"]
+_data = {
+&"01": SubResource("Animation_gcf3q"),
+&"RESET": SubResource("Animation_s1sfp")
+}
 
 [node name="Enemy" groups=["enemy"] instance=ExtResource("1_0dgib")]
 collision_layer = 4
@@ -53,7 +105,6 @@ grow_vertical = 2
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="5"]
 
 [node name="WorldLabel2D" type="Control" parent="." index="6"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -62,11 +113,21 @@ script = ExtResource("8_iw8a2")
 metadata/_custom_type_script = "uid://da7a50jvg5hpp"
 
 [node name="VelocityInfo" type="Label" parent="WorldLabel2D" index="0"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 33.0
 text = "speed : 100
 dir : Vector(1,1)"
+
+[node name="EnemyAttack" type="TextureRect" parent="WorldLabel2D" index="1"]
+visible = false
+offset_left = -16.0
+offset_top = -72.0
+offset_right = 112.0
+offset_bottom = 79.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_gcf3q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
 
@@ -76,6 +137,11 @@ offset_bottom = -582.0
 enemy = NodePath("../..")
 
 [node name="EnemyGun" parent="." index="8" instance=ExtResource("10_s1sfp")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+libraries = {
+&"": SubResource("AnimationLibrary_s1sfp")
+}
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="CanvasLayer/EnemyIndicator" method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="EnemyGun" method="_on_visible_on_screen_notifier_2d_screen_entered"]

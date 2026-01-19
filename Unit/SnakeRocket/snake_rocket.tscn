@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b4vpogepx8flp"]
+[gd_scene load_steps=22 format=3 uid="uid://b4vpogepx8flp"]
 
 [ext_resource type="Script" uid="uid://h3mujltinpsu" path="res://Unit/SnakeRocket/snake_rocket.gd" id="1_n13jw"]
 [ext_resource type="Texture2D" uid="uid://ch215mlss106s" path="res://Asset/Rocket/rocket_sprite.png" id="3_vkt1o"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://hob5x3xc5myj" path="res://Asset/UI/crosshair160.png" id="8_1ftbv"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="10_vkt1o"]
 [ext_resource type="Script" uid="uid://f034hyslrf1" path="res://Unit/SnakeRocket/missile_jammer.gd" id="10_y6jex"]
+[ext_resource type="AudioStream" uid="uid://vn6gg0del6er" path="res://Asset/sound/weapon/Rocket/Retro Destruction Bricks E.wav" id="11_y6jex"]
 
 [sub_resource type="Curve" id="Curve_c7l16"]
 _data = [Vector2(0, 0.704594), 0.0, 0.0, 0, 0, Vector2(1, 0.348814), 0.0, 0.0, 0, 0]
@@ -186,6 +187,10 @@ change_interval = 0.05
 max_angle_deg = 90.0
 jam_weight = 1.0
 rotate_speed = 300.0
+
+[node name="SFXExplode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_y6jex")
+pitch_scale = 0.89
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="DetectArea" to="." method="_on_detect_area_body_entered"]

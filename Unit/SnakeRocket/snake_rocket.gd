@@ -18,6 +18,7 @@ class_name SnakeRocket
 @onready var color_rect: ColorRect = $"2DWorldLabel/ColorRect"
 @onready var label: Label = $"2DWorldLabel/Label"
 
+@onready var sfx_explode: AudioStreamPlayer2D = $SFXExplode
 
 var target : Node2D:
 	set(v):
@@ -88,6 +89,8 @@ func _explord() -> void:
 	for e in detect_area.get_overlapping_bodies():
 		if e is Enemy:
 			e.take_damage(10.0)
+	
+	sfx_explode.play()
 	
 	await explode_particle.finished
 	queue_free()

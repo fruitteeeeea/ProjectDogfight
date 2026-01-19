@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=41 format=3 uid="uid://cmoc40bfp74xd"]
+[gd_resource type="BehaviorTree" load_steps=42 format=3 uid="uid://cmoc40bfp74xd"]
 
 [ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_o6x1q"]
 [ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/enemy_return_to_combat_area.gd" id="2_nlwx0"]
@@ -75,17 +75,22 @@ distance_min = 300.0
 distance_max = 799.0
 target_var = &"target"
 
-[sub_resource type="BBNode" id="BBNode_gt1rj"]
-saved_value = NodePath("EnemyGun")
-resource_name = "EnemyGun"
+[sub_resource type="BBNode" id="BBNode_2wkgj"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
 
-[sub_resource type="BTCallMethod" id="BTCallMethod_gt1rj"]
-node = SubResource("BBNode_gt1rj")
-method = &"fire"
+[sub_resource type="BTComment" id="BTComment_ego6o"]
+custom_name = "敌人开始攻击"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_2wkgj"]
+await_completion = 2.0
+animation_player = SubResource("BBNode_2wkgj")
+animation_name = &"01"
+children = [SubResource("BTComment_ego6o")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_gt1rj"]
 duration = 5.0
-children = [SubResource("BTCallMethod_gt1rj")]
+children = [SubResource("BTPlayAnimation_2wkgj")]
 
 [sub_resource type="BTProbability" id="BTProbability_2wkgj"]
 run_chance = 0.3

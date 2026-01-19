@@ -4,6 +4,7 @@ class_name EnemyGun
 @export var bullet_number := 1
 
 @onready var sfx_fire: AudioStreamPlayer2D = $SFXFire
+@onready var sfx_bullet_fly: AudioStreamPlayer2D = $SFXBulletFly
 
 var can_fire := false
 
@@ -18,6 +19,7 @@ func fire() -> void:
 	for i in range(bullet_number):
 		_fire(Vector2.ZERO, direction, 5.0)
 		sfx_fire.play()
+		sfx_bullet_fly.play()
 		await get_tree().create_timer(.05).timeout
 
 
