@@ -14,6 +14,8 @@ config/name="ProjectDogfight"
 config/tags=PackedStringArray("2d", "demo", "ios")
 run/main_scene="uid://j6rednkkkc1t"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/fullsize=false
+boot_splash/image="uid://l05vfbg0e4xw"
 config/icon="res://icon.svg"
 
 [autoload]
