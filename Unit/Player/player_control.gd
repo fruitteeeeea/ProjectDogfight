@@ -3,19 +3,24 @@ class_name PlayerControl
 
 @export var joystick : Joystick
 
+var cache_joystick_dir := Vector2.UP #仅供触屏使用
 var joypad_joystick_dir := Vector2.RIGHT
 
 func get_dir() -> Vector2:
-	if joystick.get_dir() != Vector2.ZERO: #触屏摇杆拥有最高优先级 
-		return joystick.get_dir()
+	var joystick_dir = joystick.get_dir()
+	if joystick_dir != Vector2.ZERO: #触屏摇杆拥有最高优先级 
+		cache_joystick_dir = joystick_dir
+		return joystick_dir
 	
 	match GameStatusServer.current_input_mode:
+		GameStatusServer.InputMode.TOUCH_SCREEN:
+			return cache_joystick_dir
 		GameStatusServer.InputMode.GAMEPAD:
 			return get_joypad_direction()
 		GameStatusServer.InputMode.KEYBOARD:
 			return get_mouse_direction()
 		_:
-			return Vector2.UP #实在没有了 默认向上
+			return Vector2.UP
 
 
 func get_joypad_direction() -> Vector2:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://j6rednkkkc1t"]
+[gd_scene load_steps=15 format=3 uid="uid://j6rednkkkc1t"]
 
 [ext_resource type="Script" uid="uid://clobmhcou5ixa" path="res://Unit/UI/Menu/main_menu.gd" id="1_b2vmc"]
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_plyx2"]
 [ext_resource type="Shader" uid="uid://dskykeqhsdh1p" path="res://Unit/UI/Menu/moving_texture.gdshader" id="2_36v3h"]
 [ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://Unit/UI/FrostedGlassShader.gdshader" id="3_5a3qv"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="5_rnkyl"]
+[ext_resource type="FontFile" uid="uid://bpkb7efje5rwl" path="res://Asset/font/realtimeroundedtest-black.otf" id="6_6r8xy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5a3qv"]
 shader = ExtResource("2_36v3h")
@@ -44,7 +45,118 @@ size = Vector2(1920, 1080)
 font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_36v3h"]
+font = ExtResource("6_6r8xy")
 font_size = 128
+
+[sub_resource type="Animation" id="Animation_rnkyl"]
+resource_name = "01"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/TouchToStart:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Title:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Title:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.6, 2),
+"transitions": PackedFloat32Array(1, 0.307786, 0.307786, 1),
+"update": 0,
+"values": [Vector2(940, 520), Vector2(940, 520), Vector2(940, 344), Vector2(940, 344)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Title:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_6r8xy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/TouchToStart:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Title:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Title:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(940, 344)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Title:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yx15w"]
+_data = {
+&"01": SubResource("Animation_rnkyl"),
+&"RESET": SubResource("Animation_6r8xy")
+}
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_b2vmc")
@@ -53,11 +165,9 @@ script = ExtResource("1_b2vmc")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -105,6 +215,7 @@ layout_mode = 2
 text = "About"
 
 [node name="TouchToStart" type="Control" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -139,20 +250,41 @@ script = ExtResource("5_rnkyl")
 max_value = Color(1, 1, 1, 0.501961)
 metadata/_custom_type_script = "uid://dxl17dpembjyc"
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Title" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -196.0
+offset_right = 20.0
+offset_bottom = -156.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Title"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -644.5
-offset_top = -268.0
+offset_top = -87.0
 offset_right = 644.5
-offset_bottom = -94.0
+offset_bottom = 87.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Blueprint Dogfight."
 label_settings = SubResource("LabelSettings_36v3h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yx15w")
+}
+autoplay = "01"
 
 [connection signal="pressed" from="CanvasLayer/Control/HBoxContainer/Play" to="." method="_on_play_pressed"]
 
