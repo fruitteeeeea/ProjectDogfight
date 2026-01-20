@@ -21,7 +21,7 @@ curve = SubResource("Curve_1bvp3")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1bvp3"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(2560, 1280, 1)
+emission_box_extents = Vector3(3848, 2136, 1)
 gravity = Vector3(0, 98, 0)
 scale_min = 0.5
 scale_max = 0.5
@@ -56,11 +56,11 @@ mouse_filter = 2
 color = Color(0.0392157, 0.0392157, 0.0392157, 0.701961)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 100
+amount = 200
 texture = ExtResource("2_v7n5n")
 lifetime = 2.0
 fixed_fps = 60
-visibility_rect = Rect2(-4000, -4000, 40000, 4000)
+visibility_rect = Rect2(-3890.64, -2163.89, 7762.57, 4363.08)
 process_material = SubResource("ParticleProcessMaterial_1bvp3")
 
 [node name="SFXWind" type="AudioStreamPlayer" parent="."]

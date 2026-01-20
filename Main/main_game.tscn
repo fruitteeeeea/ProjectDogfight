@@ -19,8 +19,8 @@ font_size = 32
 size = Vector2(1920, 100)
 
 [node name="MainGame" type="Node2D"]
-metadata/_edit_vertical_guides_ = [-640.0]
-metadata/_edit_horizontal_guides_ = [-2136.0]
+metadata/_edit_vertical_guides_ = [-3848.0]
+metadata/_edit_horizontal_guides_ = [-2136.0, 2136.0]
 
 [node name="BG" parent="." instance=ExtResource("1_7dbjd")]
 
