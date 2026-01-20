@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cms55552ivqkj"
-path="res://.godot/imported/keyboard_q.png-ba7629da9adbdcdfb7cdf5fe9e085841.ctex"
+uid="uid://bx0mc7hb17rm5"
+path="res://.godot/imported/mouse_left_outline.png-76e775c428034e5317ba9e4ddae3fc56.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/UI/InputPrompts/keyboard_q.png"
-dest_files=["res://.godot/imported/keyboard_q.png-ba7629da9adbdcdfb7cdf5fe9e085841.ctex"]
+source_file="res://Asset/UI/InputPrompts/mouse_left_outline.png"
+dest_files=["res://.godot/imported/mouse_left_outline.png-76e775c428034e5317ba9e4ddae3fc56.ctex"]
 
 [params]
 

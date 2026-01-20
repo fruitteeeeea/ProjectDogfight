@@ -68,9 +68,11 @@ func _ready() -> void:
 	fire_interval_timer.wait_time = fire_interval #赋值开火间隔
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(trriger_button):
-		fire_on = !fire_on
+		fire_on = true
+	if event.is_action_released(trriger_button):
+		fire_on = false
 
 
 func fire() -> void:

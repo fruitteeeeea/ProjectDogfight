@@ -26,7 +26,6 @@
 [ext_resource type="Script" uid="uid://j2yqwnbwkfxd" path="res://Unit/Player/get_your_reward.gd" id="23_tp8pl"]
 [ext_resource type="Texture2D" uid="uid://bp3c65c1pyvph" path="res://Asset/UI/InputPrompts/keyboard_space.png" id="23_xx0et"]
 [ext_resource type="AudioStream" uid="uid://c7ycryshs6kvi" path="res://Asset/sound/music/Chiptune Vol4 Limbo Cut 60.wav" id="24_s8q2k"]
-[ext_resource type="Texture2D" uid="uid://cms55552ivqkj" path="res://Asset/UI/InputPrompts/keyboard_q.png" id="24_v1p3j"]
 [ext_resource type="Texture2D" uid="uid://djeirgrk1cueb" path="res://Asset/UI/InputPrompts/keyboard_e.png" id="25_pcvun"]
 [ext_resource type="PackedScene" uid="uid://cq1o384plj4l1" path="res://Unit/UI/InputPrompt/input_prompt_icon.tscn" id="25_xbe7k"]
 [ext_resource type="Texture2D" uid="uid://dkrm6l6nahost" path="res://Asset/UI/crosshair127.png" id="27_0xfex"]
@@ -36,6 +35,7 @@
 [ext_resource type="Script" uid="uid://eybkex0wjhmy" path="res://Unit/Player/rocket_slot.gd" id="31_dn0s1"]
 [ext_resource type="Texture2D" uid="uid://sof80q3dpct8" path="res://Asset/UI/suit_hearts.png" id="31_l0xr3"]
 [ext_resource type="Texture2D" uid="uid://bkltacndxyqm7" path="res://Asset/Rocket/rocket_sprite_shadow.png" id="33_dn0s1"]
+[ext_resource type="Texture2D" uid="uid://bx0mc7hb17rm5" path="res://Asset/UI/InputPrompts/mouse_left_outline.png" id="34_3032a"]
 [ext_resource type="PackedScene" uid="uid://owohvdo1fuvj" path="res://Unit/Jet/Component/player_damage_component.tscn" id="34_se872"]
 [ext_resource type="AudioStream" uid="uid://mya7kqicienq" path="res://Asset/sound/jet/Jet Engine Low Loop B.wav" id="36_swlur"]
 [ext_resource type="AudioStream" uid="uid://rtpi70o545e" path="res://Asset/sound/jet/after_burn/Afterburner Loop B.wav" id="37_qejli"]
@@ -368,8 +368,7 @@ script = ExtResource("10_toghf")
 script = ExtResource("53_fcyym")
 joystick = NodePath("../HUD/PlayerTouchControl/Joystick")
 
-[node name="PlayerDamageComponent" parent="." index="4" node_paths=PackedStringArray("player_health_hud", "jet") instance=ExtResource("34_se872")]
-player_health_hud = NodePath("../HUD/PlayerHealth")
+[node name="PlayerDamageComponent" parent="." index="4" node_paths=PackedStringArray("jet") instance=ExtResource("34_se872")]
 jet = NodePath("..")
 
 [node name="AccelerateComponent" type="Node2D" parent="." index="5" node_paths=PackedStringArray("rocket_launcher")]
@@ -1148,7 +1147,7 @@ layout_mode = 2
 texture = ExtResource("38_a3vo5")
 
 [node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control/InputPromptIcon" index="1"]
-texture = ExtResource("24_v1p3j")
+texture = ExtResource("34_3032a")
 
 [node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="1"]
 layout_mode = 2
@@ -1295,7 +1294,7 @@ min_value = 2.5
 max_value = 3.0
 value = 2.5
 
-[node name="PlayerHealth" type="Control" parent="HUD" index="7"]
+[node name="PlayerHealth" type="Control" parent="HUD" index="7" node_paths=PackedStringArray("player_damage_component")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1303,6 +1302,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("30_swlur")
+player_damage_component = NodePath("../../PlayerDamageComponent")
 
 [node name="PlayerHeart" type="Control" parent="HUD/PlayerHealth" index="0"]
 anchors_preset = 0

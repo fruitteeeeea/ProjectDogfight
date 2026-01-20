@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2w0htc258n2f"]
+
+[ext_resource type="Script" uid="uid://cqgupobt65qsv" path="res://Unit/UI/Icon/way_point_icon.gd" id="1_rn8ll"]
+[ext_resource type="Texture2D" uid="uid://cmmt57tohhanc" path="res://Asset/UI/reward.png" id="2_f8502"]
+
+[node name="WayPointIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rn8ll")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -76.0
+offset_right = 64.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("2_f8502")

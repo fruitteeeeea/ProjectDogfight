@@ -1,7 +1,6 @@
 extends DamageComponent
 class_name PlayerDamageComponent
 
-@export var player_health_hud : PlayerHealthHUD
 @export var test_state := true
 
 @onready var sfx_hit: AudioStreamPlayer2D = $SFXHit
@@ -16,7 +15,4 @@ func take_damage(damage : float) -> void:
 
 func _special_hit_effect() -> void:
 	GameFeel.hit_stop_long()
-	player_health_hud.play_hit_flash()
-	player_health_hud.update_rocket_count(health)
-	
 	sfx_hit.play()

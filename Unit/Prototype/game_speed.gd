@@ -18,6 +18,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if !enable:
 		return
 	
+	if event.is_action_pressed("debug"):
+		var player = get_tree().get_first_node_in_group("player") as Player
+		player.take_damage(10)
+		GameStatusServer.enemy_destory += 1
+	
+	
 	if not event.is_action("game_speed"):
 		return
 

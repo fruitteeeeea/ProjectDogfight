@@ -133,7 +133,7 @@ label_settings = SubResource("LabelSettings_f6fdm")
 [node name="ResultMenu" parent="GameHUD" instance=ExtResource("9_aab7o")]
 
 [node name="Supply" parent="." instance=ExtResource("10_k34uy")]
-position = Vector2(1641, 1758)
+position = Vector2(-648, 704)
 
 [node name="Supply02Health" parent="." instance=ExtResource("11_p1lxc")]
-position = Vector2(1403, 1806)
+position = Vector2(2328, 952)

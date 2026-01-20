@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dhbe22luue8wo" path="res://Unit/Enemy/enemy.gd" id="2_kg1yc"]
 [ext_resource type="Texture2D" uid="uid://cusx3iicve3id" path="res://Asset/Jet/ship_sidesB.png" id="3_ois23"]
 [ext_resource type="BehaviorTree" uid="uid://cmoc40bfp74xd" path="res://Unit/Enemy/AI/enemyAI01.tres" id="6_gcf3q"]
-[ext_resource type="PackedScene" uid="uid://pch86ahboxtj" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
+[ext_resource type="PackedScene" uid="uid://b5amtk8k6tk7i" path="res://Unit/Enemy/enemy_indicator.tscn" id="7_lebci"]
 [ext_resource type="PackedScene" uid="uid://dek3b4g0lpd8n" path="res://Unit/Jet/Component/enemy_damage_component.tscn" id="8_gcf3q"]
 [ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://Unit/SnakeRocket/2d_world_label.gd" id="8_iw8a2"]
 [ext_resource type="Texture2D" uid="uid://cqkxjneua3try" path="res://Asset/UI/enemy_attack.png" id="9_gcf3q"]
@@ -157,10 +157,10 @@ texture = ExtResource("9_gcf3q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
 
-[node name="EnemyIndicator" parent="CanvasLayer" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("7_lebci")]
-offset_top = -582.0
-offset_bottom = -582.0
-enemy = NodePath("../..")
+[node name="EnemyIndicator" parent="CanvasLayer" index="0" node_paths=PackedStringArray("target") instance=ExtResource("7_lebci")]
+offset_top = -48.0
+offset_bottom = -48.0
+target = NodePath("../..")
 
 [node name="EnemyGun" parent="." index="8" instance=ExtResource("10_s1sfp")]
 

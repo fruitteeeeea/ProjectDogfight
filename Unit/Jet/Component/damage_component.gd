@@ -1,8 +1,14 @@
 extends Node2D
 class_name DamageComponent
 
+signal health_change(health : float)
+
 @export var jet : JetBase
-@export var health : float = 40.0
+@export var max_health : float = 40.0
+@export var health : float = 0.0:
+	set(v):
+		health = v
+		health_change.emit(health)
 
 @onready var trail: CPUParticles2D = $"../Graphic/Trail"
 
@@ -15,10 +21,17 @@ class_name DamageComponent
 func _ready() -> void:
 	if !jet:
 		printerr("DamageComponent 未找到 JetBase 父节点 ")
+	
+	health = max_health
 
 #受到伤害 
 func take_damage(damage : float) -> void:
-	health -= damage
+	health = clamp(health - damage, 0, max_health)
+	
+	if damage < 0:
+		_heal_effect()
+		return
+	
 	_hit_effect()
 	
 	if health <= 0:
@@ -32,11 +45,23 @@ func _hit_effect() -> void:
 	GameFeel.hit_stop_medium()
 	hit_splash_particle.restart()
 	hit_splash_particle.emitting = true
-	
 
-#子类覆写
+
 func _special_hit_effect() -> void:
 	pass
+
+
+#治疗效果
+func _heal_effect() -> void:
+	_special_heal_effect()
+
+
+func _special_heal_effect() -> void:
+	pass
+
+
+#子类覆写
+
 
 
 #被击杀之后的效果 
