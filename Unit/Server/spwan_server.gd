@@ -3,6 +3,10 @@ extends Node2D
 @export var FloattingText : PackedScene
 @export var player_reward_list : Array[PackedScene] = []
 
+@export var WORLD_RECT := Rect2(
+	Vector2(-3840.0, -2144.0),  # 左上角
+	Vector2(7680.0, 4288.0)    # 宽高
+)
 
 func spwan_flotting_text(pos : Vector2) -> void:
 	var floatting_text = FloattingText.instantiate() as FloattingText
@@ -31,6 +35,12 @@ func get_spawn_position(player_pos: Vector2, forward_dir: Vector2 ) -> Vector2:
 	var angle := randf_range(-PI / 2, PI / 2) #前进方向180度的范围。
 	var distance := randf_range(888.0, 1222.0)
 	var dir := forward.rotated(angle)
-	return player_pos + dir * distance
+	
+	var pos := player_pos + dir * distance
+
+	# 限制在 WORLD_RECT 内
+	pos.x = clamp(pos.x, WORLD_RECT.position.x, WORLD_RECT.position.x + WORLD_RECT.size.x)
+	pos.y = clamp(pos.y, WORLD_RECT.position.y, WORLD_RECT.position.y + WORLD_RECT.size.y)
+	return pos
 
 #endregion
