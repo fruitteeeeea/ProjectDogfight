@@ -5,3 +5,4 @@
 
 [node name="EnemyDamageComponent" instance=ExtResource("1_cbdwm")]
 script = ExtResource("2_gnool")
+max_health = 10.0

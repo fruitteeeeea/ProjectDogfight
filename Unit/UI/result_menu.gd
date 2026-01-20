@@ -15,6 +15,7 @@ class_name ResultMenu
 @onready var lose: AudioStreamPlayer = $Lose
 
 @onready var touch_to_retry: Control = $TouchToRetry
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var game_finished = false
 
@@ -35,7 +36,7 @@ func _show_result(_battle_complete : bool) -> void:
 	
 	game_finished = true
 	blur_background.show()
-	touch_to_retry.show()
+	animation_player.play("01")
 
 
 func _show_battle_result() -> void:

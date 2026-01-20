@@ -51,6 +51,7 @@ shape = SubResource("CircleShape2D_4q4fe")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="WayPointIcon" parent="CanvasLayer" node_paths=PackedStringArray("target") instance=ExtResource("4_mxyfr")]
+z_index = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0

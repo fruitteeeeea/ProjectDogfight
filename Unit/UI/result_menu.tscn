@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cukppeq26yfa1"]
+[gd_scene load_steps=14 format=3 uid="uid://cukppeq26yfa1"]
 
 [ext_resource type="Script" uid="uid://dkxnx8t4hjveg" path="res://Unit/UI/result_menu.gd" id="1_7cjnc"]
 [ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://Unit/UI/FrostedGlassShader.gdshader" id="1_pnvqm"]
@@ -44,6 +44,43 @@ size = Vector2(1920, 1080)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1gpln"]
 font_size = 48
+
+[sub_resource type="Animation" id="Animation_1gpln"]
+resource_name = "01"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TouchToRetry:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_5yd21"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TouchToRetry:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5yd21"]
+_data = {
+&"01": SubResource("Animation_1gpln"),
+&"RESET": SubResource("Animation_5yd21")
+}
 
 [node name="ResultMenu" type="Control"]
 layout_mode = 3
@@ -185,3 +222,8 @@ stream = ExtResource("5_1gpln")
 volume_db = -10.0
 pitch_scale = 0.8
 bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5yd21")
+}
