@@ -13,7 +13,7 @@ config_version=5
 config/name="ProjectDogfight"
 config/tags=PackedStringArray("2d", "demo", "ios")
 run/main_scene="uid://j6rednkkkc1t"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/fullsize=false
 boot_splash/image="uid://l05vfbg0e4xw"
 config/icon="uid://cusp27e4d7xqy"
@@ -33,6 +33,10 @@ window/stretch/mode="canvas_items"
 window/handheld/orientation=4
 mouse_cursor/custom_image="uid://qgtt4iihnros"
 mouse_cursor/custom_image_hotspot=Vector2(64, 64)
+
+[dotnet]
+
+project/assembly_name="ProjectDogfight"
 
 [global_group]
 
