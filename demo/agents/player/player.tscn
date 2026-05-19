@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d07ag5dcje13i"]
+[gd_scene format=3 uid="uid://d07ag5dcje13i"]
 
 [ext_resource type="PackedScene" uid="uid://ooigbfhfy4wa" path="res://demo/agents/agent_base.tscn" id="1_mswd4"]
 [ext_resource type="Script" uid="uid://cgqdrwywolo6a" path="res://demo/agents/player/player.gd" id="2_24nyi"]
@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8pofm"]
 size = Vector2(150, 50)
 
-[node name="Player" groups=["player"] instance=ExtResource("1_mswd4")]
+[node name="Player" unique_id=1380257147 groups=["player"] instance=ExtResource("1_mswd4")]
 collision_layer = 0
 collision_mask = 1
 script = ExtResource("2_24nyi")
@@ -28,26 +28,29 @@ collision_layer = 4
 [node name="Health" parent="." index="3"]
 max_health = 30.0
 
-[node name="LimboHSM" type="LimboHSM" parent="." index="4"]
+[node name="LimboHSM" type="LimboHSM" parent="." index="4" unique_id=1466144141]
 
-[node name="IdleState" type="LimboState" parent="LimboHSM" index="0" node_paths=PackedStringArray("animation_player")]
+[node name="IdleState" type="LimboState" parent="LimboHSM" index="0" unique_id=844381265 node_paths=PackedStringArray("animation_player")]
 script = ExtResource("3_ekb12")
 animation_player = NodePath("../../AnimationPlayer")
 idle_animation = &"idle"
 
-[node name="MoveState" type="LimboState" parent="LimboHSM" index="1" node_paths=PackedStringArray("animation_player")]
+[node name="MoveState" type="LimboState" parent="LimboHSM" index="1" unique_id=1600733829 node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_paikn")
 animation_player = NodePath("../../AnimationPlayer")
 animation = &"walk"
 
-[node name="AttackState" type="LimboState" parent="LimboHSM" index="2" node_paths=PackedStringArray("animation_player", "hitbox")]
+[node name="AttackState" type="LimboState" parent="LimboHSM" index="2" unique_id=52427796 node_paths=PackedStringArray("animation_player", "hitbox")]
 script = ExtResource("5_mpgu6")
 animation_player = NodePath("../../AnimationPlayer")
 animations = Array[StringName]([&"attack_1", &"attack_2", &"attack_3"])
 hitbox = NodePath("../../Root/Hitbox")
 
-[node name="DodgeState" type="LimboState" parent="LimboHSM" index="3" node_paths=PackedStringArray("animation_player", "hurtbox_collision")]
+[node name="DodgeState" type="LimboState" parent="LimboHSM" index="3" unique_id=1687496636 node_paths=PackedStringArray("animation_player", "hurtbox_collision")]
 script = ExtResource("6_7o4a6")
 animation_player = NodePath("../../AnimationPlayer")
 animation = &"dodge"
 hurtbox_collision = NodePath("../../Root/Hurtbox/HurtboxCollisionShape2D")
+
+[node name="AnimationPlayer" parent="." index="5"]
+autoplay = &"idle"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://j6rednkkkc1t"]
+[gd_scene format=3 uid="uid://j6rednkkkc1t"]
 
 [ext_resource type="Script" uid="uid://clobmhcou5ixa" path="res://Unit/UI/Menu/main_menu.gd" id="1_b2vmc"]
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_plyx2"]
@@ -158,12 +158,12 @@ _data = {
 &"RESET": SubResource("Animation_6r8xy")
 }
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Node2D" unique_id=211549496]
 script = ExtResource("1_b2vmc")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=732408329]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1741813974]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,12 +171,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BG" parent="CanvasLayer/Control" instance=ExtResource("1_plyx2")]
+[node name="BG" parent="CanvasLayer/Control" unique_id=232103387 instance=ExtResource("1_plyx2")]
 
 [node name="TextureRect" parent="CanvasLayer/Control/BG" index="0"]
 material = SubResource("ShaderMaterial_5a3qv")
 
-[node name="BlurBackground" type="ColorRect" parent="CanvasLayer/Control"]
+[node name="BlurBackground" type="ColorRect" parent="CanvasLayer/Control" unique_id=1541319989]
 material = SubResource("ShaderMaterial_b2vmc")
 layout_mode = 1
 anchors_preset = 15
@@ -185,7 +185,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=1853448207]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -200,21 +200,21 @@ offset_bottom = 119.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Play" type="Button" parent="CanvasLayer/Control/HBoxContainer" unique_id=1823840834]
 layout_mode = 2
 text = "Play
 "
 
-[node name="Button2" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Button2" type="Button" parent="CanvasLayer/Control/HBoxContainer" unique_id=1633008184]
 layout_mode = 2
 text = "Option
 "
 
-[node name="Button3" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Button3" type="Button" parent="CanvasLayer/Control/HBoxContainer" unique_id=1343568269]
 layout_mode = 2
 text = "About"
 
-[node name="TouchToStart" type="Control" parent="CanvasLayer/Control"]
+[node name="TouchToStart" type="Control" parent="CanvasLayer/Control" unique_id=1370176397]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -225,11 +225,11 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer/Control/TouchToStart"]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer/Control/TouchToStart" unique_id=1685561495]
 shape = SubResource("RectangleShape2D_b2vmc")
 action = "StartTheGame"
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/TouchToStart"]
+[node name="Label" type="Label" parent="CanvasLayer/Control/TouchToStart" unique_id=1817234792]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -245,12 +245,12 @@ grow_vertical = 2
 text = "Touch to start the game"
 label_settings = SubResource("LabelSettings_b2vmc")
 
-[node name="BlinkCanvasItem" type="Node" parent="CanvasLayer/Control/TouchToStart/Label"]
+[node name="BlinkCanvasItem" type="Node" parent="CanvasLayer/Control/TouchToStart/Label" unique_id=332343505]
 script = ExtResource("5_rnkyl")
 max_value = Color(1, 1, 1, 0.501961)
 metadata/_custom_type_script = "uid://dxl17dpembjyc"
 
-[node name="Title" type="Control" parent="CanvasLayer"]
+[node name="Title" type="Control" parent="CanvasLayer" unique_id=1873095383]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -264,7 +264,7 @@ offset_bottom = -156.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Title"]
+[node name="Label" type="Label" parent="CanvasLayer/Title" unique_id=261365454]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -280,11 +280,9 @@ grow_vertical = 2
 text = "Blueprint Dogfight."
 label_settings = SubResource("LabelSettings_36v3h")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_yx15w")
-}
-autoplay = "01"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=653162226]
+libraries/ = SubResource("AnimationLibrary_yx15w")
+autoplay = &"01"
 
 [connection signal="pressed" from="CanvasLayer/Control/HBoxContainer/Play" to="." method="_on_play_pressed"]
 

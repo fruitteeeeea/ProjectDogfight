@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=42 format=3 uid="uid://cmoc40bfp74xd"]
+[gd_resource type="BehaviorTree" format=3 uid="uid://cmoc40bfp74xd"]
 
 [ext_resource type="Script" uid="uid://v5o226aekwua" path="res://ai/tasks/in_combat_area.gd" id="1_o6x1q"]
 [ext_resource type="Script" uid="uid://crme3j4irdn24" path="res://ai/tasks/enemy_return_to_combat_area.gd" id="2_nlwx0"]

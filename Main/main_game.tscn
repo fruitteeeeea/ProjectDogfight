@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://k5msw5fm124k"]
+[gd_scene format=3 uid="uid://k5msw5fm124k"]
 
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://Unit/Prototype/bg.tscn" id="1_7dbjd"]
 [ext_resource type="Script" uid="uid://doh7g3ch50gia" path="res://Main/game_manager.gd" id="2_k34uy"]
@@ -18,34 +18,33 @@ font_size = 32
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1lxc"]
 size = Vector2(1920, 100)
 
-[node name="MainGame" type="Node2D"]
+[node name="MainGame" type="Node2D" unique_id=298867485]
 metadata/_edit_vertical_guides_ = [-3848.0]
 metadata/_edit_horizontal_guides_ = [-2136.0, 2136.0]
 
-[node name="BG" parent="." instance=ExtResource("1_7dbjd")]
+[node name="BG" parent="." unique_id=1531544280 instance=ExtResource("1_7dbjd")]
 
-[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+[node name="GameManager" type="Node2D" parent="." unique_id=826909921 node_paths=PackedStringArray("player")]
 script = ExtResource("2_k34uy")
 player = NodePath("../Player")
 
-[node name="Player" parent="." instance=ExtResource("3_p1lxc")]
+[node name="Player" parent="." unique_id=2108710671 instance=ExtResource("3_p1lxc")]
 position = Vector2(1176, 2000)
 metadata/_edit_horizontal_guides_ = [448.0]
 
-[node name="Enemy" parent="." instance=ExtResource("4_ui0m1")]
+[node name="Enemy" parent="." unique_id=1714170478 instance=ExtResource("4_ui0m1")]
 position = Vector2(654, 782)
 
-[node name="EnemySpwaner" parent="." instance=ExtResource("5_m416f")]
+[node name="EnemySpwaner" parent="." unique_id=1322948697 instance=ExtResource("5_m416f")]
 
-[node name="GameSpeed" parent="." instance=ExtResource("6_f7yv3")]
-enable = true
+[node name="GameSpeed" parent="." unique_id=1895896034 instance=ExtResource("6_f7yv3")]
 trriger_type = "Click"
 game_speed_scale = Array[float]([3.0, 1.0])
 
-[node name="GameHUD" type="CanvasLayer" parent="."]
+[node name="GameHUD" type="CanvasLayer" parent="." unique_id=1678203006]
 layer = 128
 
-[node name="ReadyToStart" type="Control" parent="GameHUD"]
+[node name="ReadyToStart" type="Control" parent="GameHUD" unique_id=728986962]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,7 +52,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="GameHUD/ReadyToStart"]
+[node name="PanelContainer" type="PanelContainer" parent="GameHUD/ReadyToStart" unique_id=995721328]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -61,22 +60,22 @@ offset_top = 120.0
 offset_bottom = 210.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GameHUD/ReadyToStart/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameHUD/ReadyToStart/PanelContainer" unique_id=1878200707]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="GameHUD/ReadyToStart/PanelContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="GameHUD/ReadyToStart/PanelContainer/HBoxContainer" unique_id=1680660631]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Press"
 label_settings = SubResource("LabelSettings_f6fdm")
 
-[node name="Control" type="Control" parent="GameHUD/ReadyToStart/PanelContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="GameHUD/ReadyToStart/PanelContainer/HBoxContainer" unique_id=1420129385]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="GameHUD/ReadyToStart/PanelContainer/HBoxContainer/Control"]
+[node name="TextureRect" type="TextureRect" parent="GameHUD/ReadyToStart/PanelContainer/HBoxContainer/Control" unique_id=2036672921]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -92,28 +91,28 @@ grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_i23kr")
 
-[node name="Label2" type="Label" parent="GameHUD/ReadyToStart/PanelContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="GameHUD/ReadyToStart/PanelContainer/HBoxContainer" unique_id=1148506023]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "To Start the game."
 label_settings = SubResource("LabelSettings_f6fdm")
 
-[node name="BlinkCanvsItem" type="Node" parent="GameHUD/ReadyToStart/PanelContainer"]
+[node name="BlinkCanvsItem" type="Node" parent="GameHUD/ReadyToStart/PanelContainer" unique_id=1892355488]
 script = ExtResource("8_x645j")
 blink_mode = "alpha"
 duration = 1.0
 interval = 0.5
 
-[node name="TapHereToStart" type="Control" parent="GameHUD/ReadyToStart/PanelContainer"]
+[node name="TapHereToStart" type="Control" parent="GameHUD/ReadyToStart/PanelContainer" unique_id=1476489392]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="GameHUD/ReadyToStart/PanelContainer/TapHereToStart"]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="GameHUD/ReadyToStart/PanelContainer/TapHereToStart" unique_id=1409589235]
 shape = SubResource("RectangleShape2D_p1lxc")
 action = "StartTheGame"
 
-[node name="Label" type="Label" parent="GameHUD/ReadyToStart/PanelContainer/TapHereToStart"]
+[node name="Label" type="Label" parent="GameHUD/ReadyToStart/PanelContainer/TapHereToStart" unique_id=2116959471]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -130,10 +129,10 @@ size_flags_horizontal = 4
 text = "Tap Here To Start The Game."
 label_settings = SubResource("LabelSettings_f6fdm")
 
-[node name="ResultMenu" parent="GameHUD" instance=ExtResource("9_aab7o")]
+[node name="ResultMenu" parent="GameHUD" unique_id=546635998 instance=ExtResource("9_aab7o")]
 
-[node name="Supply" parent="." instance=ExtResource("10_k34uy")]
+[node name="Supply" parent="." unique_id=511293429 instance=ExtResource("10_k34uy")]
 position = Vector2(-648, 704)
 
-[node name="Supply02Health" parent="." instance=ExtResource("11_p1lxc")]
+[node name="Supply02Health" parent="." unique_id=827663410 instance=ExtResource("11_p1lxc")]
 position = Vector2(2328, 952)

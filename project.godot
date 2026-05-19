@@ -8,13 +8,17 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="ProjectDogfight"
 config/tags=PackedStringArray("2d", "demo", "ios")
 run/main_scene="uid://j6rednkkkc1t"
-config/features=PackedStringArray("4.5", "Forward Plus")
-boot_splash/fullsize=false
+config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/stretch_mode=0
 boot_splash/image="uid://l05vfbg0e4xw"
 config/icon="uid://cusp27e4d7xqy"
 

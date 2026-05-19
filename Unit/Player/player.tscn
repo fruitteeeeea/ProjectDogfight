@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://dnc5yjftuv7il"]
+[gd_scene format=3 uid="uid://dnc5yjftuv7il"]
 
 [ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://Unit/Jet/jet_base.tscn" id="1_bfvk7"]
 [ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://Unit/Player/player.gd" id="2_aph0k"]
@@ -250,7 +250,7 @@ blend_mode = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3vo5"]
 radius = 64.0
 
-[node name="Player" node_paths=PackedStringArray("player_control") groups=["player"] instance=ExtResource("1_bfvk7")]
+[node name="Player" unique_id=1012878609 node_paths=PackedStringArray("player_control") groups=["player"] instance=ExtResource("1_bfvk7")]
 collision_layer = 3
 script = ExtResource("2_aph0k")
 engine_off_burst_accel = -0.8
@@ -278,7 +278,7 @@ texture = ExtResource("4_4qink")
 scale_amount_min = 0.5
 scale_amount_max = 0.5
 
-[node name="BurstTrail" type="CPUParticles2D" parent="Graphic" index="3"]
+[node name="BurstTrail" type="CPUParticles2D" parent="Graphic" index="3" unique_id=5317203]
 position = Vector2(-16, 0)
 emitting = false
 texture = ExtResource("8_qacwo")
@@ -291,17 +291,17 @@ initial_velocity_max = 400.0
 scale_amount_curve = SubResource("Curve_qacwo")
 color_ramp = SubResource("Gradient_qacwo")
 
-[node name="CameraPoint" type="Marker2D" parent="Graphic" index="4"]
+[node name="CameraPoint" type="Marker2D" parent="Graphic" index="4" unique_id=1008974108]
 position = Vector2(128, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Graphic/CameraPoint" index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="Graphic/CameraPoint" index="0" unique_id=198303610]
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("3_dhsxg")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Graphic" index="5"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Graphic" index="5" unique_id=1994500977]
 remote_path = NodePath("../../Weapon")
 
-[node name="EngineOnParticle" type="CPUParticles2D" parent="Graphic" index="6"]
+[node name="EngineOnParticle" type="CPUParticles2D" parent="Graphic" index="6" unique_id=454881706]
 emitting = false
 amount = 24
 texture = ExtResource("8_qacwo")
@@ -327,7 +327,7 @@ scale_curve_x = SubResource("Curve_4qink")
 scale_curve_y = null
 color_ramp = SubResource("Gradient_4qink")
 
-[node name="AccelerateParticle" type="CPUParticles2D" parent="Graphic" index="7"]
+[node name="AccelerateParticle" type="CPUParticles2D" parent="Graphic" index="7" unique_id=880895247]
 emitting = false
 amount = 24
 texture = ExtResource("8_qacwo")
@@ -353,32 +353,32 @@ scale_curve_x = SubResource("Curve_4qink")
 scale_curve_y = null
 color_ramp = SubResource("Gradient_qacwo")
 
-[node name="LimboHSM" type="LimboHSM" parent="." index="2"]
+[node name="LimboHSM" type="LimboHSM" parent="." index="2" unique_id=1886936251]
 
-[node name="EngineOnState" type="LimboState" parent="LimboHSM" index="0"]
+[node name="EngineOnState" type="LimboState" parent="LimboHSM" index="0" unique_id=1790924999]
 script = ExtResource("8_f8s14")
 
-[node name="EngineOffState" type="LimboState" parent="LimboHSM" index="1"]
+[node name="EngineOffState" type="LimboState" parent="LimboHSM" index="1" unique_id=85804328]
 script = ExtResource("9_85r8r")
 
-[node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2"]
+[node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2" unique_id=1056673927]
 script = ExtResource("10_toghf")
 
-[node name="PlayerControl" type="Node2D" parent="." index="3" node_paths=PackedStringArray("joystick")]
+[node name="PlayerControl" type="Node2D" parent="." index="3" unique_id=1979526810 node_paths=PackedStringArray("joystick")]
 script = ExtResource("53_fcyym")
 joystick = NodePath("../HUD/PlayerTouchControl/Joystick")
 
-[node name="PlayerDamageComponent" parent="." index="4" node_paths=PackedStringArray("jet") instance=ExtResource("34_se872")]
+[node name="PlayerDamageComponent" parent="." index="4" unique_id=485617705 node_paths=PackedStringArray("jet") instance=ExtResource("34_se872")]
 jet = NodePath("..")
 
-[node name="AccelerateComponent" type="Node2D" parent="." index="5" node_paths=PackedStringArray("rocket_launcher")]
+[node name="AccelerateComponent" type="Node2D" parent="." index="5" unique_id=1205480868 node_paths=PackedStringArray("rocket_launcher")]
 script = ExtResource("11_oriqu")
 max_burst_accel_fuel = 100.0
 rocket_launcher = NodePath("../Weapon/RocketLauncher")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="AccelerateComponent" index="0"]
+[node name="CanvasLayer" type="CanvasLayer" parent="AccelerateComponent" index="0" unique_id=2063769170]
 
-[node name="AccelHUD" type="Control" parent="AccelerateComponent/CanvasLayer" index="0"]
+[node name="AccelHUD" type="Control" parent="AccelerateComponent/CanvasLayer" index="0" unique_id=770953991]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -387,7 +387,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="0"]
+[node name="ProgressBar" type="ProgressBar" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="0" unique_id=114699277]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -403,44 +403,44 @@ grow_vertical = 2
 max_value = 20.0
 value = 20.0
 
-[node name="AccelAndSpeed" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="1"]
+[node name="AccelAndSpeed" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="1" unique_id=74021784]
 layout_mode = 0
 offset_left = 1176.0
 offset_top = 880.0
 offset_right = 1216.0
 offset_bottom = 913.0
 
-[node name="EngineOnLabel" type="CanvasGroup" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="2"]
+[node name="EngineOnLabel" type="CanvasGroup" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="2" unique_id=1847619272]
 visible = false
 position = Vector2(1176, 840)
 
-[node name="ColorRect" type="ColorRect" parent="AccelerateComponent/CanvasLayer/AccelHUD/EngineOnLabel" index="0"]
+[node name="ColorRect" type="ColorRect" parent="AccelerateComponent/CanvasLayer/AccelHUD/EngineOnLabel" index="0" unique_id=1934721115]
 offset_left = -8.0
 offset_right = 144.0
 offset_bottom = 40.0
 
-[node name="EngineON" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD/EngineOnLabel" index="1"]
+[node name="EngineON" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD/EngineOnLabel" index="1" unique_id=1198328926]
 material = SubResource("CanvasItemMaterial_dpwos")
 offset_right = 114.0
 offset_bottom = 33.0
 text = "Engine : ON"
 
-[node name="AccelerateOn" type="CanvasGroup" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="3"]
+[node name="AccelerateOn" type="CanvasGroup" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="3" unique_id=1463880454]
 visible = false
 position = Vector2(1176, 912)
 
-[node name="ColorRect" type="ColorRect" parent="AccelerateComponent/CanvasLayer/AccelHUD/AccelerateOn" index="0"]
+[node name="ColorRect" type="ColorRect" parent="AccelerateComponent/CanvasLayer/AccelHUD/AccelerateOn" index="0" unique_id=630777420]
 offset_left = -8.0
 offset_right = 192.0
 offset_bottom = 40.0
 
-[node name="AccelerateOn" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD/AccelerateOn" index="1"]
+[node name="AccelerateOn" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD/AccelerateOn" index="1" unique_id=480497068]
 material = SubResource("CanvasItemMaterial_dpwos")
 offset_right = 114.0
 offset_bottom = 33.0
 text = "Accelerate : On"
 
-[node name="EngineOffLabel" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="4"]
+[node name="EngineOffLabel" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="4" unique_id=1039629834]
 visible = false
 layout_mode = 0
 offset_left = 1176.0
@@ -449,35 +449,33 @@ offset_right = 1297.0
 offset_bottom = 911.0
 text = "Engine: Off"
 
-[node name="Camera2D" type="Camera2D" parent="." index="6" node_paths=PackedStringArray("target_point")]
+[node name="Camera2D" type="Camera2D" parent="." index="6" unique_id=1789409196 node_paths=PackedStringArray("target_point")]
 zoom = Vector2(1.2, 1.2)
 script = ExtResource("3_aph0k")
 target_point = NodePath("../Graphic/CameraPoint")
 
-[node name="TrumaComponent" parent="Camera2D" index="0" instance=ExtResource("3_pm1gd")]
+[node name="TrumaComponent" parent="Camera2D" index="0" unique_id=997448679 instance=ExtResource("3_pm1gd")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7" unique_id=1465064501]
 root_node = NodePath("../Graphic")
-libraries = {
-&"": SubResource("AnimationLibrary_dhsxg")
-}
+libraries/ = SubResource("AnimationLibrary_dhsxg")
 
-[node name="Weapon" type="Node2D" parent="." index="8"]
+[node name="Weapon" type="Node2D" parent="." index="8" unique_id=712358200]
 
-[node name="PlayerGun" parent="Weapon" index="0" node_paths=PackedStringArray("bullet_number", "fire_on_label", "reloding_label") instance=ExtResource("15_vj671")]
+[node name="PlayerGun" parent="Weapon" index="0" unique_id=1892615948 node_paths=PackedStringArray("bullet_number", "fire_on_label", "reloding_label") instance=ExtResource("15_vj671")]
 bullet_number = NodePath("../../HUD/GunSlot/BulletNumber")
 alert_clor = Color(0.898039, 0.223529, 0.207843, 1)
 alert_threshold = 0.5
 fire_on_label = NodePath("../../HUD/GunSlot/BulletNumber/FireOnLabel")
 reloding_label = NodePath("../../HUD/GunSlot/BulletNumber/RelodingLabel")
 
-[node name="RocketLauncher" parent="Weapon" index="1" node_paths=PackedStringArray("rocket_slot") instance=ExtResource("5_mh83u")]
+[node name="RocketLauncher" parent="Weapon" index="1" unique_id=1815048331 node_paths=PackedStringArray("rocket_slot") instance=ExtResource("5_mh83u")]
 SnakeRocketScene = ExtResource("17_vj671")
 rocket_slot = NodePath("../../HUD/RocketSlot")
 
-[node name="HUD" type="CanvasLayer" parent="." index="9"]
+[node name="HUD" type="CanvasLayer" parent="." index="9" unique_id=125065246]
 
-[node name="HUDOffsetManager" type="Node2D" parent="HUD" index="0" node_paths=PackedStringArray("player", "control_list")]
+[node name="HUDOffsetManager" type="Node2D" parent="HUD" index="0" unique_id=1653800570 node_paths=PackedStringArray("player", "control_list")]
 script = ExtResource("11_uefnm")
 player = NodePath("../..")
 control_list = {
@@ -494,7 +492,7 @@ NodePath("../PlayerHealth/PlayerHeart"): 1.0,
 NodePath("../GetYourReward"): 0.5
 }
 
-[node name="ScaleLine" type="Control" parent="HUD" index="1"]
+[node name="ScaleLine" type="Control" parent="HUD" index="1" unique_id=854567616]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -503,7 +501,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="ScaleLineHUD" type="Control" parent="HUD/ScaleLine" index="0"]
+[node name="ScaleLineHUD" type="Control" parent="HUD/ScaleLine" index="0" unique_id=1507311896]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -519,7 +517,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="PlayerPositionGuideLine" type="Control" parent="HUD/ScaleLine/ScaleLineHUD" index="0" node_paths=PackedStringArray("player")]
+[node name="PlayerPositionGuideLine" type="Control" parent="HUD/ScaleLine/ScaleLineHUD" index="0" unique_id=895262510 node_paths=PackedStringArray("player")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 4
@@ -533,7 +531,7 @@ mouse_filter = 2
 script = ExtResource("10_oriqu")
 player = NodePath("../../../..")
 
-[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine" index="0"]
+[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine" index="0" unique_id=126954170]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -547,7 +545,7 @@ offset_bottom = -37.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine" index="1"]
+[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine" index="1" unique_id=973982562]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -557,9 +555,9 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine/Control" index="0"]
+[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine/Control" index="0" unique_id=1374011605]
 
-[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine/Control/CanvasGroup" index="0"]
+[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine/Control/CanvasGroup" index="0" unique_id=488141469]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -573,7 +571,7 @@ grow_vertical = 2
 texture = ExtResource("10_dpwos")
 stretch_mode = 1
 
-[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine/Control/CanvasGroup" index="1"]
+[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine/Control/CanvasGroup" index="1" unique_id=246471037]
 material = SubResource("CanvasItemMaterial_dpwos")
 anchors_preset = 1
 anchor_left = 1.0
@@ -585,7 +583,7 @@ grow_horizontal = 0
 rotation = 1.57079
 texture = SubResource("GradientTexture1D_r22qm")
 
-[node name="PlayerPositionGuideLine2" type="Control" parent="HUD/ScaleLine/ScaleLineHUD" index="1" node_paths=PackedStringArray("player")]
+[node name="PlayerPositionGuideLine2" type="Control" parent="HUD/ScaleLine/ScaleLineHUD" index="1" unique_id=1905051001 node_paths=PackedStringArray("player")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 7
@@ -605,7 +603,7 @@ player = NodePath("../../../..")
 player_y_min = -3840.0
 player_y_max = 3840.0
 
-[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2" index="0"]
+[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2" index="0" unique_id=1671925820]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -619,7 +617,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2" index="1"]
+[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2" index="1" unique_id=1228683383]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -629,9 +627,9 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2/Control" index="0"]
+[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2/Control" index="0" unique_id=1987575241]
 
-[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2/Control/CanvasGroup" index="0"]
+[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2/Control/CanvasGroup" index="0" unique_id=779927881]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -645,7 +643,7 @@ grow_vertical = 2
 texture = ExtResource("10_dpwos")
 stretch_mode = 1
 
-[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2/Control/CanvasGroup" index="1"]
+[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2/Control/CanvasGroup" index="1" unique_id=1460442669]
 material = SubResource("CanvasItemMaterial_dpwos")
 anchors_preset = 1
 anchor_left = 1.0
@@ -657,7 +655,7 @@ grow_horizontal = 0
 rotation = 1.57079
 texture = SubResource("GradientTexture1D_r22qm")
 
-[node name="ScaleLineHUD2" type="Control" parent="HUD/ScaleLine" index="1"]
+[node name="ScaleLineHUD2" type="Control" parent="HUD/ScaleLine" index="1" unique_id=1245508273]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -673,7 +671,7 @@ grow_vertical = 2
 scale = Vector2(-1, 1)
 mouse_filter = 2
 
-[node name="PlayerPositionGuideLine" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2" index="0" node_paths=PackedStringArray("player")]
+[node name="PlayerPositionGuideLine" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2" index="0" unique_id=1565735648 node_paths=PackedStringArray("player")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 4
@@ -687,7 +685,7 @@ mouse_filter = 2
 script = ExtResource("10_oriqu")
 player = NodePath("../../../..")
 
-[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine" index="0"]
+[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine" index="0" unique_id=1727642085]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -702,7 +700,7 @@ offset_bottom = -37.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine" index="1"]
+[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine" index="1" unique_id=1805963336]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -712,9 +710,9 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine/Control" index="0"]
+[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine/Control" index="0" unique_id=706061621]
 
-[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine/Control/CanvasGroup" index="0"]
+[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine/Control/CanvasGroup" index="0" unique_id=44148550]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -728,7 +726,7 @@ grow_vertical = 2
 texture = ExtResource("10_dpwos")
 stretch_mode = 1
 
-[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine/Control/CanvasGroup" index="1"]
+[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine/Control/CanvasGroup" index="1" unique_id=1664535533]
 material = SubResource("CanvasItemMaterial_dpwos")
 anchors_preset = 1
 anchor_left = 1.0
@@ -740,7 +738,7 @@ grow_horizontal = 0
 rotation = 1.57079
 texture = SubResource("GradientTexture1D_r22qm")
 
-[node name="PlayerPositionGuideLine2" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2" index="1" node_paths=PackedStringArray("player")]
+[node name="PlayerPositionGuideLine2" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2" index="1" unique_id=1586690066 node_paths=PackedStringArray("player")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 7
@@ -760,7 +758,7 @@ player = NodePath("../../../..")
 player_y_min = -3840.0
 player_y_max = 3840.0
 
-[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2" index="0"]
+[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2" index="0" unique_id=1206564380]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -774,7 +772,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2" index="1"]
+[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2" index="1" unique_id=369331596]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -784,9 +782,9 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2/Control" index="0"]
+[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2/Control" index="0" unique_id=1012756659]
 
-[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2/Control/CanvasGroup" index="0"]
+[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2/Control/CanvasGroup" index="0" unique_id=179374573]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -800,7 +798,7 @@ grow_vertical = 2
 texture = ExtResource("10_dpwos")
 stretch_mode = 1
 
-[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2/Control/CanvasGroup" index="1"]
+[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2/Control/CanvasGroup" index="1" unique_id=1222487458]
 material = SubResource("CanvasItemMaterial_dpwos")
 anchors_preset = 1
 anchor_left = 1.0
@@ -812,7 +810,7 @@ grow_horizontal = 0
 rotation = 1.57079
 texture = SubResource("GradientTexture1D_r22qm")
 
-[node name="Warning" type="Control" parent="HUD" index="2"]
+[node name="Warning" type="Control" parent="HUD" index="2" unique_id=1707823729]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -827,7 +825,7 @@ offset_bottom = -252.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="HUD/Warning" index="0"]
+[node name="HBoxContainer" type="VBoxContainer" parent="HUD/Warning" index="0" unique_id=612379884]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -841,21 +839,21 @@ offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="HUD/Warning/HBoxContainer" index="0"]
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Warning/HBoxContainer" index="0" unique_id=510021459]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="HUD/Warning/HBoxContainer/PanelContainer" index="0"]
+[node name="ColorRect" type="ColorRect" parent="HUD/Warning/HBoxContainer/PanelContainer" index="0" unique_id=2144875500]
 layout_mode = 2
 color = Color(0.827451, 0.184314, 0.184314, 1)
 
-[node name="BlinkCanvsItem" type="Node" parent="HUD/Warning/HBoxContainer/PanelContainer/ColorRect" index="0"]
+[node name="BlinkCanvsItem" type="Node" parent="HUD/Warning/HBoxContainer/PanelContainer/ColorRect" index="0" unique_id=810278477]
 script = ExtResource("5_dhsxg")
 blink_mode = "alpha"
 duration = 0.1
 interval = 0.0
 
-[node name="TextureRect" type="TextureRect" parent="HUD/Warning/HBoxContainer/PanelContainer/ColorRect" index="1"]
+[node name="TextureRect" type="TextureRect" parent="HUD/Warning/HBoxContainer/PanelContainer/ColorRect" index="1" unique_id=2073538692]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 4.0
@@ -864,24 +862,24 @@ offset_bottom = 132.0
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("20_6h1yq")
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD/Warning/HBoxContainer/PanelContainer/ColorRect" index="2"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Warning/HBoxContainer/PanelContainer/ColorRect" index="2" unique_id=1579261465]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="HUD/Warning/HBoxContainer/PanelContainer" index="1"]
+[node name="Label" type="Label" parent="HUD/Warning/HBoxContainer/PanelContainer" index="1" unique_id=302637982]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Warning"
 label_settings = SubResource("LabelSettings_85r8r")
 
-[node name="Label2" type="Label" parent="HUD/Warning/HBoxContainer" index="1"]
+[node name="Label2" type="Label" parent="HUD/Warning/HBoxContainer" index="1" unique_id=633706494]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "MissileApproach"
 label_settings = SubResource("LabelSettings_toghf")
 
-[node name="GetYourReward" type="Control" parent="HUD" index="3"]
+[node name="GetYourReward" type="Control" parent="HUD" index="3" unique_id=1634665657]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -894,7 +892,7 @@ offset_bottom = 208.0
 grow_horizontal = 2
 script = ExtResource("23_tp8pl")
 
-[node name="PanelContainer" type="PanelContainer" parent="HUD/GetYourReward" index="0"]
+[node name="PanelContainer" type="PanelContainer" parent="HUD/GetYourReward" index="0" unique_id=698240012]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 5
@@ -906,11 +904,11 @@ offset_right = 224.0
 offset_bottom = 48.0
 grow_horizontal = 2
 
-[node name="ColorRect" type="ColorRect" parent="HUD/GetYourReward/PanelContainer" index="0"]
+[node name="ColorRect" type="ColorRect" parent="HUD/GetYourReward/PanelContainer" index="0" unique_id=1207209962]
 layout_mode = 2
 color = Color(0.976471, 0.658824, 0.145098, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/GetYourReward/PanelContainer/ColorRect" index="0"]
+[node name="TextureRect" type="TextureRect" parent="HUD/GetYourReward/PanelContainer/ColorRect" index="0" unique_id=1560672397]
 layout_mode = 0
 offset_left = 60.0
 offset_top = 16.0
@@ -919,18 +917,18 @@ offset_bottom = 144.0
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("46_fcyym")
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD/GetYourReward/PanelContainer/ColorRect" index="1"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/GetYourReward/PanelContainer/ColorRect" index="1" unique_id=1621321047]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="HUD/GetYourReward/PanelContainer" index="1"]
+[node name="Label" type="Label" parent="HUD/GetYourReward/PanelContainer" index="1" unique_id=418605194]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Get your reward!"
 label_settings = SubResource("LabelSettings_85r8r")
 
-[node name="Label2" type="Label" parent="HUD/GetYourReward" index="1"]
+[node name="Label2" type="Label" parent="HUD/GetYourReward" index="1" unique_id=668360897]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -947,12 +945,10 @@ size_flags_horizontal = 4
 text = "5 enemies has been killed"
 label_settings = SubResource("LabelSettings_toghf")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/GetYourReward" index="2"]
-libraries = {
-&"": SubResource("AnimationLibrary_tp8pl")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/GetYourReward" index="2" unique_id=2039252055]
+libraries/ = SubResource("AnimationLibrary_tp8pl")
 
-[node name="Misson" type="Control" parent="HUD" index="4" node_paths=PackedStringArray("player", "player_damage_component")]
+[node name="Misson" type="Control" parent="HUD" index="4" unique_id=2032959953 node_paths=PackedStringArray("player", "player_damage_component")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -965,93 +961,93 @@ script = ExtResource("22_vj671")
 player = NodePath("../..")
 player_damage_component = NodePath("../../PlayerDamageComponent")
 
-[node name="Misson" type="CanvasGroup" parent="HUD/Misson" index="0"]
+[node name="Misson" type="CanvasGroup" parent="HUD/Misson" index="0" unique_id=870037484]
 position = Vector2(256, 136)
 
-[node name="PanelContainer2" type="PanelContainer" parent="HUD/Misson/Misson" index="0"]
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/Misson/Misson" index="0" unique_id=994478333]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="HUD/Misson/Misson/PanelContainer2" index="0"]
+[node name="ColorRect" type="ColorRect" parent="HUD/Misson/Misson/PanelContainer2" index="0" unique_id=1442611727]
 layout_mode = 2
 
-[node name="PanelContainer" type="MarginContainer" parent="HUD/Misson/Misson/PanelContainer2" index="1"]
+[node name="PanelContainer" type="MarginContainer" parent="HUD/Misson/Misson/PanelContainer2" index="1" unique_id=1828262664]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 5
 
-[node name="Label2" type="Label" parent="HUD/Misson/Misson/PanelContainer2/PanelContainer" index="0"]
+[node name="Label2" type="Label" parent="HUD/Misson/Misson/PanelContainer2/PanelContainer" index="0" unique_id=843258381]
 material = SubResource("CanvasItemMaterial_dpwos")
 layout_mode = 2
 text = "Misson"
 label_settings = SubResource("LabelSettings_dhsxg")
 
-[node name="Label" type="Label" parent="HUD/Misson/Misson" index="1"]
+[node name="Label" type="Label" parent="HUD/Misson/Misson" index="1" unique_id=488433358]
 offset_top = 56.0
 offset_right = 40.0
 offset_bottom = 89.0
 text = "Get enough points within the time limit."
 
-[node name="Time" type="CanvasGroup" parent="HUD/Misson" index="1"]
+[node name="Time" type="CanvasGroup" parent="HUD/Misson" index="1" unique_id=1169782011]
 position = Vector2(1408, 136)
 
-[node name="PanelContainer2" type="PanelContainer" parent="HUD/Misson/Time" index="0"]
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/Misson/Time" index="0" unique_id=1554076603]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="HUD/Misson/Time/PanelContainer2" index="0"]
+[node name="ColorRect" type="ColorRect" parent="HUD/Misson/Time/PanelContainer2" index="0" unique_id=414456332]
 layout_mode = 2
 
-[node name="PanelContainer" type="MarginContainer" parent="HUD/Misson/Time/PanelContainer2" index="1"]
+[node name="PanelContainer" type="MarginContainer" parent="HUD/Misson/Time/PanelContainer2" index="1" unique_id=1605122178]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 5
 
-[node name="TimeLeftLabel" type="Label" parent="HUD/Misson/Time/PanelContainer2/PanelContainer" index="0"]
+[node name="TimeLeftLabel" type="Label" parent="HUD/Misson/Time/PanelContainer2/PanelContainer" index="0" unique_id=275130646]
 material = SubResource("CanvasItemMaterial_dpwos")
 layout_mode = 2
 text = "00 : 54"
 label_settings = SubResource("LabelSettings_dhsxg")
 
-[node name="BlinkCanvsItem" type="Node" parent="HUD/Misson/Time/PanelContainer2" index="2"]
+[node name="BlinkCanvsItem" type="Node" parent="HUD/Misson/Time/PanelContainer2" index="2" unique_id=910720779]
 script = ExtResource("5_dhsxg")
 min_value = Color(0.827451, 0.184314, 0.184314, 0.211765)
 max_value = Color(0.827451, 0.184314, 0.184314, 1)
 interval = 0.0
 enable = false
 
-[node name="Label" type="Label" parent="HUD/Misson/Time" index="1"]
+[node name="Label" type="Label" parent="HUD/Misson/Time" index="1" unique_id=1222185228]
 offset_left = -64.0
 offset_top = 16.0
 offset_bottom = 49.0
 text = "Time"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Misson/Time" index="2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Misson/Time" index="2" unique_id=839066109]
 offset_top = 64.0
 offset_right = 40.0
 offset_bottom = 104.0
 
-[node name="CurrentPointsLabel" type="Label" parent="HUD/Misson/Time/HBoxContainer" index="0"]
+[node name="CurrentPointsLabel" type="Label" parent="HUD/Misson/Time/HBoxContainer" index="0" unique_id=218510592]
 layout_mode = 2
 text = "1000"
 
-[node name="TargetPointsLabel" type="Label" parent="HUD/Misson/Time/HBoxContainer" index="1"]
+[node name="TargetPointsLabel" type="Label" parent="HUD/Misson/Time/HBoxContainer" index="1" unique_id=1574877316]
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 text = "/ 5000 pts."
 
-[node name="MissionTimer" type="Timer" parent="HUD/Misson" index="2"]
+[node name="MissionTimer" type="Timer" parent="HUD/Misson" index="2" unique_id=66863433]
 one_shot = true
 
-[node name="BGMPlayer" type="AudioStreamPlayer" parent="HUD/Misson" index="3"]
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="HUD/Misson" index="3" unique_id=548048655]
 stream = ExtResource("24_s8q2k")
 volume_db = -15.0
 
-[node name="InputPrompts" type="Control" parent="HUD" index="5"]
+[node name="InputPrompts" type="Control" parent="HUD" index="5" unique_id=37658398]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1060,7 +1056,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD/InputPrompts" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/InputPrompts" index="0" unique_id=1603951942]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1077,28 +1073,31 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer" index="0"]
+[node name="VBoxContainer" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer" index="0" unique_id=1998617736]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="0"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="0" unique_id=1802827681]
 layout_mode = 2
 
-[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="0" instance=ExtResource("25_xbe7k")]
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="0" unique_id=1791123317 instance=ExtResource("25_xbe7k")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="1"]
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="1" unique_id=687175263]
 layout_mode = 2
 text = "Jet Direction"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="1" unique_id=1457996186]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer" index="0" unique_id=75962367]
 custom_minimum_size = Vector2(64, 54)
 layout_mode = 2
 
-[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control" index="0" instance=ExtResource("25_xbe7k")]
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control" index="0" unique_id=923995456 instance=ExtResource("25_xbe7k")]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 54.0
 
 [node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control/InputPromptIcon" index="0"]
 texture = ExtResource("41_dr1eb")
@@ -1106,18 +1105,21 @@ texture = ExtResource("41_dr1eb")
 [node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control/InputPromptIcon" index="1"]
 texture = ExtResource("21_4dcrn")
 
-[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1421949748]
 layout_mode = 2
 text = "Engine Switch"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="2" unique_id=1251471988]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3" index="0"]
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3" index="0" unique_id=45617362]
 custom_minimum_size = Vector2(64, 54)
 layout_mode = 2
 
-[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control" index="0" instance=ExtResource("25_xbe7k")]
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control" index="0" unique_id=1169995135 instance=ExtResource("25_xbe7k")]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 54.0
 
 [node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control/InputPromptIcon" index="0"]
 texture = ExtResource("40_qson6")
@@ -1130,18 +1132,21 @@ offset_bottom = 112.0
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("23_xx0et")
 
-[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3" index="1"]
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3" index="1" unique_id=1143871209]
 layout_mode = 2
 text = "Acceleration"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="3"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="3" unique_id=264056200]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="0"]
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="0" unique_id=850286512]
 custom_minimum_size = Vector2(64, 54)
 layout_mode = 2
 
-[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control" index="0" instance=ExtResource("25_xbe7k")]
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control" index="0" unique_id=1712875459 instance=ExtResource("25_xbe7k")]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 54.0
 
 [node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control/InputPromptIcon" index="0"]
 texture = ExtResource("38_a3vo5")
@@ -1149,18 +1154,21 @@ texture = ExtResource("38_a3vo5")
 [node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control/InputPromptIcon" index="1"]
 texture = ExtResource("34_3032a")
 
-[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="1"]
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="1" unique_id=1616900003]
 layout_mode = 2
 text = "MiniGun"
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="4"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="4" unique_id=1885718484]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="0"]
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="0" unique_id=2008582553]
 custom_minimum_size = Vector2(64, 54)
 layout_mode = 2
 
-[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control" index="0" instance=ExtResource("25_xbe7k")]
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control" index="0" unique_id=1286068969 instance=ExtResource("25_xbe7k")]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 54.0
 
 [node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control/InputPromptIcon" index="0"]
 texture = ExtResource("39_s5jdw")
@@ -1168,11 +1176,11 @@ texture = ExtResource("39_s5jdw")
 [node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control/InputPromptIcon" index="1"]
 texture = ExtResource("25_pcvun")
 
-[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="1"]
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="1" unique_id=1523479124]
 layout_mode = 2
 text = "RocketLauncher"
 
-[node name="PlayerAttitude" type="Control" parent="HUD" index="6" node_paths=PackedStringArray("player")]
+[node name="PlayerAttitude" type="Control" parent="HUD" index="6" unique_id=185901009 node_paths=PackedStringArray("player")]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -1186,7 +1194,7 @@ grow_vertical = 0
 script = ExtResource("27_4ei6y")
 player = NodePath("../..")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PlayerAttitude" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PlayerAttitude" index="0" unique_id=14195923]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -1200,15 +1208,15 @@ offset_bottom = -369.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="HUD/PlayerAttitude/VBoxContainer" index="0"]
+[node name="Label" type="Label" parent="HUD/PlayerAttitude/VBoxContainer" index="0" unique_id=1093904482]
 layout_mode = 2
 text = "Attitude"
 
-[node name="Direction" type="Control" parent="HUD/PlayerAttitude/VBoxContainer" index="1"]
+[node name="Direction" type="Control" parent="HUD/PlayerAttitude/VBoxContainer" index="1" unique_id=1799857112]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="MoveDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="0"]
+[node name="MoveDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="0" unique_id=2091923891]
 modulate = Color(0.422371, 0.422371, 0.422371, 1)
 layout_mode = 0
 offset_right = 40.0
@@ -1217,7 +1225,7 @@ rotation = -1.57079
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("27_0xfex")
 
-[node name="ForwardDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="1"]
+[node name="ForwardDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="1" unique_id=136537508]
 modulate = Color(0.117647, 0.533333, 0.898039, 1)
 layout_mode = 0
 offset_right = 40.0
@@ -1226,7 +1234,7 @@ rotation = -2.35619
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("27_0xfex")
 
-[node name="TargetForwardDireciton" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="2"]
+[node name="TargetForwardDireciton" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="2" unique_id=72470582]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1234,7 +1242,7 @@ rotation = -0.523598
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("27_0xfex")
 
-[node name="ForceDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="3"]
+[node name="ForceDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="3" unique_id=667672067]
 visible = false
 modulate = Color(0.956863, 0.262745, 0.211765, 1)
 layout_mode = 0
@@ -1243,18 +1251,18 @@ offset_bottom = 40.0
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("27_0xfex")
 
-[node name="Info" type="VBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer" index="2"]
+[node name="Info" type="VBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer" index="2" unique_id=1503662754]
 layout_mode = 2
 
-[node name="Speed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="0"]
+[node name="Speed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="0" unique_id=598182854]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="Speed" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/Speed" index="0"]
+[node name="Speed" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/Speed" index="0" unique_id=517705501]
 layout_mode = 2
 text = "Speed"
 
-[node name="ProgressBarSpeed" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/Speed" index="1"]
+[node name="ProgressBarSpeed" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/Speed" index="1" unique_id=1889802626]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -1262,15 +1270,15 @@ min_value = 380.0
 max_value = 684.0
 value = 380.0
 
-[node name="AccelSpeed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="1"]
+[node name="AccelSpeed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="1" unique_id=1315135439]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="AccelSpeed" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/AccelSpeed" index="0"]
+[node name="AccelSpeed" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/AccelSpeed" index="0" unique_id=521342911]
 layout_mode = 2
 text = "AccelSpeed"
 
-[node name="ProgressBarAccelSpeed" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/AccelSpeed" index="1"]
+[node name="ProgressBarAccelSpeed" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/AccelSpeed" index="1" unique_id=814468292]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -1278,15 +1286,15 @@ min_value = 1.0
 max_value = 1.8
 value = 1.0
 
-[node name="TurnSpeed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="2"]
+[node name="TurnSpeed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="2" unique_id=115158523]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="TurnSpeed" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/TurnSpeed" index="0"]
+[node name="TurnSpeed" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/TurnSpeed" index="0" unique_id=1008090759]
 layout_mode = 2
 text = "TurnSpeed"
 
-[node name="ProgressBarTurnSpeed" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/TurnSpeed" index="1"]
+[node name="ProgressBarTurnSpeed" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/TurnSpeed" index="1" unique_id=4601251]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -1294,7 +1302,7 @@ min_value = 2.5
 max_value = 3.0
 value = 2.5
 
-[node name="PlayerHealth" type="Control" parent="HUD" index="7" node_paths=PackedStringArray("player_damage_component")]
+[node name="PlayerHealth" type="Control" parent="HUD" index="7" unique_id=1486715567 node_paths=PackedStringArray("player_damage_component")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1304,12 +1312,12 @@ grow_vertical = 2
 script = ExtResource("30_swlur")
 player_damage_component = NodePath("../../PlayerDamageComponent")
 
-[node name="PlayerHeart" type="Control" parent="HUD/PlayerHealth" index="0"]
+[node name="PlayerHeart" type="Control" parent="HUD/PlayerHealth" index="0" unique_id=256834050]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Shadow" type="HBoxContainer" parent="HUD/PlayerHealth/PlayerHeart" index="0"]
+[node name="Shadow" type="HBoxContainer" parent="HUD/PlayerHealth/PlayerHeart" index="0" unique_id=53542672]
 modulate = Color(0.129412, 0.129412, 0.129412, 0.501961)
 layout_mode = 1
 anchors_preset = 8
@@ -1325,23 +1333,23 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.75, 0.75)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="0"]
+[node name="TextureRect" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="0" unique_id=1661715527]
 layout_mode = 2
 texture = ExtResource("31_l0xr3")
 
-[node name="TextureRect2" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="1"]
+[node name="TextureRect2" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="1" unique_id=71710876]
 layout_mode = 2
 texture = ExtResource("31_l0xr3")
 
-[node name="TextureRect3" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="2"]
+[node name="TextureRect3" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="2" unique_id=1548635722]
 layout_mode = 2
 texture = ExtResource("31_l0xr3")
 
-[node name="TextureRect4" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="3"]
+[node name="TextureRect4" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="3" unique_id=78030748]
 layout_mode = 2
 texture = ExtResource("31_l0xr3")
 
-[node name="PlayerHeart" type="HBoxContainer" parent="HUD/PlayerHealth/PlayerHeart" index="1"]
+[node name="PlayerHeart" type="HBoxContainer" parent="HUD/PlayerHealth/PlayerHeart" index="1" unique_id=847667077]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1356,23 +1364,23 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.75, 0.75)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="0"]
+[node name="TextureRect" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="0" unique_id=1312793323]
 layout_mode = 2
 texture = ExtResource("31_l0xr3")
 
-[node name="TextureRect2" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="1"]
+[node name="TextureRect2" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="1" unique_id=1502113792]
 layout_mode = 2
 texture = ExtResource("31_l0xr3")
 
-[node name="TextureRect3" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="2"]
+[node name="TextureRect3" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="2" unique_id=787111838]
 layout_mode = 2
 texture = ExtResource("31_l0xr3")
 
-[node name="TextureRect4" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="3"]
+[node name="TextureRect4" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="3" unique_id=1393047839]
 layout_mode = 2
 texture = ExtResource("31_l0xr3")
 
-[node name="PlayerHitFlash" type="Control" parent="HUD/PlayerHealth" index="1"]
+[node name="PlayerHitFlash" type="Control" parent="HUD/PlayerHealth" index="1" unique_id=50869949]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1380,7 +1388,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="HUD/PlayerHealth/PlayerHitFlash" index="0"]
+[node name="ColorRect" type="ColorRect" parent="HUD/PlayerHealth/PlayerHitFlash" index="0" unique_id=897759601]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1390,7 +1398,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.898039, 0.223529, 0.207843, 1)
 
-[node name="GunSlot" type="Control" parent="HUD" index="8"]
+[node name="GunSlot" type="Control" parent="HUD" index="8" unique_id=2072689099]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1399,7 +1407,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BulletNumber" type="Label" parent="HUD/GunSlot" index="0"]
+[node name="BulletNumber" type="Label" parent="HUD/GunSlot" index="0" unique_id=1323628821]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1414,47 +1422,47 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Gun: 1000"
 
-[node name="FireOnLabel" type="CanvasGroup" parent="HUD/GunSlot/BulletNumber" index="0"]
+[node name="FireOnLabel" type="CanvasGroup" parent="HUD/GunSlot/BulletNumber" index="0" unique_id=1840080129]
 visible = false
 position = Vector2(0, -40)
 
-[node name="ColorRect" type="ColorRect" parent="HUD/GunSlot/BulletNumber/FireOnLabel" index="0"]
+[node name="ColorRect" type="ColorRect" parent="HUD/GunSlot/BulletNumber/FireOnLabel" index="0" unique_id=2047890262]
 offset_left = -8.0
 offset_right = 128.0
 offset_bottom = 40.0
 
-[node name="Label2" type="Label" parent="HUD/GunSlot/BulletNumber/FireOnLabel" index="1"]
+[node name="Label2" type="Label" parent="HUD/GunSlot/BulletNumber/FireOnLabel" index="1" unique_id=139452253]
 material = SubResource("CanvasItemMaterial_vj671")
 offset_right = 114.0
 offset_bottom = 33.0
 text = "Fire : ON"
 
-[node name="RelodingLabel" type="CanvasGroup" parent="HUD/GunSlot/BulletNumber" index="1"]
+[node name="RelodingLabel" type="CanvasGroup" parent="HUD/GunSlot/BulletNumber" index="1" unique_id=978145708]
 visible = false
 position = Vector2(0, 40)
 
-[node name="ColorRect" type="ColorRect" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="0"]
+[node name="ColorRect" type="ColorRect" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="0" unique_id=980172729]
 offset_left = -8.0
 offset_right = 128.0
 offset_bottom = 40.0
 
-[node name="Label2" type="Label" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="1"]
+[node name="Label2" type="Label" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="1" unique_id=1543289515]
 material = SubResource("CanvasItemMaterial_vj671")
 offset_right = 114.0
 offset_bottom = 33.0
 text = "Reloading"
 
-[node name="BlinkCanvsItem" type="Node" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="2"]
+[node name="BlinkCanvsItem" type="Node" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="2" unique_id=1870728514]
 script = ExtResource("5_dhsxg")
 
-[node name="RocketSlot" type="Control" parent="HUD" index="9"]
+[node name="RocketSlot" type="Control" parent="HUD" index="9" unique_id=1151041440]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("31_dn0s1")
 
-[node name="ShadowIcon" type="HBoxContainer" parent="HUD/RocketSlot" index="0"]
+[node name="ShadowIcon" type="HBoxContainer" parent="HUD/RocketSlot" index="0" unique_id=810351283]
 modulate = Color(0.129412, 0.129412, 0.129412, 0.501961)
 layout_mode = 0
 offset_left = 368.0
@@ -1464,23 +1472,23 @@ offset_bottom = 754.0
 scale = Vector2(0.7, 0.7)
 theme_override_constants/separation = 32
 
-[node name="TextureRect" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="0"]
+[node name="TextureRect" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="0" unique_id=955455888]
 layout_mode = 2
 texture = ExtResource("33_dn0s1")
 
-[node name="TextureRect2" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="1"]
+[node name="TextureRect2" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="1" unique_id=1808647355]
 layout_mode = 2
 texture = ExtResource("33_dn0s1")
 
-[node name="TextureRect3" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="2"]
+[node name="TextureRect3" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="2" unique_id=1114619828]
 layout_mode = 2
 texture = ExtResource("33_dn0s1")
 
-[node name="TextureRect4" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="3"]
+[node name="TextureRect4" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="3" unique_id=1798343133]
 layout_mode = 2
 texture = ExtResource("33_dn0s1")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/RocketSlot" index="1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/RocketSlot" index="1" unique_id=1475496519]
 layout_mode = 0
 offset_left = 360.0
 offset_top = 616.0
@@ -1489,27 +1497,28 @@ offset_bottom = 746.0
 scale = Vector2(0.7, 0.7)
 theme_override_constants/separation = 32
 
-[node name="TextureRect" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="0"]
+[node name="TextureRect" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="0" unique_id=1660780825]
 visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
-[node name="TextureRect2" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="1"]
+[node name="TextureRect2" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="1" unique_id=2002521096]
 visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
-[node name="TextureRect3" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="2"]
+[node name="TextureRect3" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="2" unique_id=748337385]
 visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
-[node name="TextureRect4" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="3"]
+[node name="TextureRect4" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="3" unique_id=1037525207]
 visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
-[node name="PlayerTouchControl" type="Control" parent="HUD" index="10"]
+[node name="PlayerTouchControl" type="Control" parent="HUD" index="10" unique_id=1730662325]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1518,7 +1527,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("41_pd0ne")
 
-[node name="ABXYButton" type="Control" parent="HUD/PlayerTouchControl" index="0"]
+[node name="ABXYButton" type="Control" parent="HUD/PlayerTouchControl" index="0" unique_id=565003216]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -1528,7 +1537,7 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="A" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="0"]
+[node name="A" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="0" unique_id=729752131]
 position = Vector2(-352, -199)
 scale = Vector2(1.35, 1.35)
 texture_normal = ExtResource("38_a3vo5")
@@ -1536,7 +1545,7 @@ shape = SubResource("CircleShape2D_a3vo5")
 action = "open_fire"
 visibility_mode = 1
 
-[node name="B" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="1"]
+[node name="B" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="1" unique_id=1686974790]
 position = Vector2(-224, -328)
 scale = Vector2(1.35, 1.35)
 texture_normal = ExtResource("39_s5jdw")
@@ -1544,7 +1553,7 @@ shape = SubResource("CircleShape2D_a3vo5")
 action = "launch_rocket"
 visibility_mode = 1
 
-[node name="X" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="2"]
+[node name="X" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="2" unique_id=996144943]
 position = Vector2(-480, -328)
 scale = Vector2(1.35, 1.35)
 texture_normal = ExtResource("40_qson6")
@@ -1552,7 +1561,7 @@ shape = SubResource("CircleShape2D_a3vo5")
 action = "BurstSpeed"
 visibility_mode = 1
 
-[node name="Y" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="3"]
+[node name="Y" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="3" unique_id=930617610]
 position = Vector2(-352, -464)
 scale = Vector2(1.35, 1.35)
 texture_normal = ExtResource("41_dr1eb")
@@ -1560,58 +1569,58 @@ shape = SubResource("CircleShape2D_a3vo5")
 action = "engine"
 visibility_mode = 1
 
-[node name="Joystick" type="Node2D" parent="HUD/PlayerTouchControl" index="1"]
+[node name="Joystick" type="Node2D" parent="HUD/PlayerTouchControl" index="1" unique_id=1852710149]
 position = Vector2(232, 880)
 script = ExtResource("41_s5jdw")
 
-[node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick" index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick" index="0" unique_id=1538608565]
 texture = ExtResource("42_qson6")
 
-[node name="Point" type="Node2D" parent="HUD/PlayerTouchControl/Joystick" index="1"]
+[node name="Point" type="Node2D" parent="HUD/PlayerTouchControl/Joystick" index="1" unique_id=1090888109]
 
-[node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick/Point" index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick/Point" index="0" unique_id=2103243981]
 texture = ExtResource("43_dr1eb")
 
-[node name="SFX" type="Node2D" parent="." index="10"]
+[node name="SFX" type="Node2D" parent="." index="10" unique_id=471888132]
 
-[node name="SFXEngineStart" type="AudioStreamPlayer2D" parent="SFX" index="0"]
+[node name="SFXEngineStart" type="AudioStreamPlayer2D" parent="SFX" index="0" unique_id=1880993528]
 stream = ExtResource("38_0u1hj")
 volume_db = -3.0
 pitch_scale = 0.8
 
-[node name="SFXEngineEnd" type="AudioStreamPlayer2D" parent="SFX" index="1"]
+[node name="SFXEngineEnd" type="AudioStreamPlayer2D" parent="SFX" index="1" unique_id=1255663681]
 stream = ExtResource("38_frrsq")
 volume_db = -5.0
 pitch_scale = 1.25
 
-[node name="SFXEngine" type="AudioStreamPlayer2D" parent="SFX" index="2"]
+[node name="SFXEngine" type="AudioStreamPlayer2D" parent="SFX" index="2" unique_id=118729498]
 stream = ExtResource("36_swlur")
 volume_db = -5.0
 pitch_scale = 0.8
 
-[node name="SFXEngineoff" type="AudioStreamPlayer2D" parent="SFX" index="3"]
+[node name="SFXEngineoff" type="AudioStreamPlayer2D" parent="SFX" index="3" unique_id=731434484]
 stream = ExtResource("39_edi3d")
 volume_db = -15.0
 
-[node name="SFXAfterBurnerStart" type="AudioStreamPlayer2D" parent="SFX" index="4"]
+[node name="SFXAfterBurnerStart" type="AudioStreamPlayer2D" parent="SFX" index="4" unique_id=503194517]
 stream = ExtResource("39_bl3tp")
 volume_db = -3.0
 pitch_scale = 0.8
 
-[node name="SFXAfterBurnerEnd" type="AudioStreamPlayer2D" parent="SFX" index="5"]
+[node name="SFXAfterBurnerEnd" type="AudioStreamPlayer2D" parent="SFX" index="5" unique_id=1496529925]
 stream = ExtResource("40_h44hf")
 volume_db = -0.3
 pitch_scale = 1.75
 
-[node name="SFXAfterBurner" type="AudioStreamPlayer2D" parent="SFX" index="6"]
+[node name="SFXAfterBurner" type="AudioStreamPlayer2D" parent="SFX" index="6" unique_id=893375583]
 stream = ExtResource("37_qejli")
 volume_db = 1.2
 
-[node name="SFXgetYourReward" type="AudioStreamPlayer2D" parent="SFX" index="7"]
+[node name="SFXgetYourReward" type="AudioStreamPlayer2D" parent="SFX" index="7" unique_id=893875132]
 stream = ExtResource("55_3032a")
 volume_db = 1.0
 
-[node name="AudioListener2D" type="AudioListener2D" parent="SFX" index="8"]
+[node name="AudioListener2D" type="AudioListener2D" parent="SFX" index="8" unique_id=1053995434]
 current = true
 
 [connection signal="timeout" from="HUD/Misson/MissionTimer" to="HUD/Misson" method="_on_mission_timer_timeout"]
