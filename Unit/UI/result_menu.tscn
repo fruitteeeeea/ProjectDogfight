@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cukppeq26yfa1"]
+[gd_scene format=3 uid="uid://cukppeq26yfa1"]
 
 [ext_resource type="Script" uid="uid://dkxnx8t4hjveg" path="res://Unit/UI/result_menu.gd" id="1_7cjnc"]
 [ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://Unit/UI/FrostedGlassShader.gdshader" id="1_pnvqm"]
@@ -82,7 +82,7 @@ _data = {
 &"RESET": SubResource("Animation_5yd21")
 }
 
-[node name="ResultMenu" type="Control"]
+[node name="ResultMenu" type="Control" unique_id=1986623808]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,7 +91,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7cjnc")
 
-[node name="BlurBackground" type="ColorRect" parent="."]
+[node name="BlurBackground" type="ColorRect" parent="." unique_id=782263847]
 visible = false
 material = SubResource("ShaderMaterial_7cjnc")
 layout_mode = 1
@@ -101,7 +101,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BattleCompelete" type="VBoxContainer" parent="."]
+[node name="BattleCompelete" type="VBoxContainer" parent="." unique_id=705719714]
 visible = false
 layout_mode = 1
 anchors_preset = 14
@@ -113,38 +113,38 @@ offset_bottom = 63.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="BattleCompelete"]
+[node name="PanelContainer" type="PanelContainer" parent="BattleCompelete" unique_id=99006095]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="BattleCompelete/PanelContainer"]
+[node name="Label" type="Label" parent="BattleCompelete/PanelContainer" unique_id=1553761243]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Battle Compelete"
 label_settings = SubResource("LabelSettings_cn1xi")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BattleCompelete"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BattleCompelete" unique_id=1415694360]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="YourPoints" type="Label" parent="BattleCompelete/VBoxContainer"]
+[node name="YourPoints" type="Label" parent="BattleCompelete/VBoxContainer" unique_id=1239543329]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Your points : "
 label_settings = SubResource("LabelSettings_pnvqm")
 
-[node name="EnemyDestory" type="Label" parent="BattleCompelete/VBoxContainer"]
+[node name="EnemyDestory" type="Label" parent="BattleCompelete/VBoxContainer" unique_id=1116606324]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Enemy Destory : "
 label_settings = SubResource("LabelSettings_pnvqm")
 
-[node name="Rank" type="Label" parent="BattleCompelete/VBoxContainer"]
+[node name="Rank" type="Label" parent="BattleCompelete/VBoxContainer" unique_id=1935681205]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Rank : D"
 label_settings = SubResource("LabelSettings_pnvqm")
 
-[node name="GameOver" type="VBoxContainer" parent="."]
+[node name="GameOver" type="VBoxContainer" parent="." unique_id=217384827]
 visible = false
 layout_mode = 1
 anchors_preset = 14
@@ -156,26 +156,26 @@ offset_bottom = 63.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="GameOver"]
+[node name="PanelContainer" type="PanelContainer" parent="GameOver" unique_id=453453950]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="GameOver/PanelContainer"]
+[node name="Label" type="Label" parent="GameOver/PanelContainer" unique_id=783199747]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Game Over"
 label_settings = SubResource("LabelSettings_cn1xi")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="GameOver"]
+[node name="HBoxContainer" type="VBoxContainer" parent="GameOver" unique_id=687280563]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Result" type="Label" parent="GameOver/HBoxContainer"]
+[node name="Result" type="Label" parent="GameOver/HBoxContainer" unique_id=735578541]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Run out of time."
 label_settings = SubResource("LabelSettings_pnvqm")
 
-[node name="TouchToRetry" type="Control" parent="."]
+[node name="TouchToRetry" type="Control" parent="." unique_id=108154393]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -186,11 +186,11 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="TouchToRetry"]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="TouchToRetry" unique_id=1047087083]
 shape = SubResource("RectangleShape2D_oxks5")
 action = "StartTheGame"
 
-[node name="Label" type="Label" parent="TouchToRetry"]
+[node name="Label" type="Label" parent="TouchToRetry" unique_id=968449912]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -206,24 +206,22 @@ grow_vertical = 2
 text = "Touch to retry."
 label_settings = SubResource("LabelSettings_1gpln")
 
-[node name="BlinkCanvasItem" type="Node" parent="TouchToRetry/Label"]
+[node name="BlinkCanvasItem" type="Node" parent="TouchToRetry/Label" unique_id=367682737]
 script = ExtResource("3_0wcn7")
 max_value = Color(1, 1, 1, 0.501961)
 metadata/_custom_type_script = "uid://dxl17dpembjyc"
 
-[node name="Win" type="AudioStreamPlayer" parent="."]
+[node name="Win" type="AudioStreamPlayer" parent="." unique_id=1030225731]
 stream = ExtResource("4_oxks5")
 volume_db = -10.0
 pitch_scale = 0.8
 bus = &"SFX"
 
-[node name="Lose" type="AudioStreamPlayer" parent="."]
+[node name="Lose" type="AudioStreamPlayer" parent="." unique_id=616794218]
 stream = ExtResource("5_1gpln")
 volume_db = -10.0
 pitch_scale = 0.8
 bus = &"SFX"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_5yd21")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=272317452]
+libraries/ = SubResource("AnimationLibrary_5yd21")

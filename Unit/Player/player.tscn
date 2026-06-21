@@ -48,12 +48,7 @@
 [ext_resource type="AudioStream" uid="uid://b053662c26fom" path="res://Asset/sound/jet/after_burn/Inner Mechanism H.wav" id="40_h44hf"]
 [ext_resource type="Texture2D" uid="uid://dkcybcusgla1p" path="res://Asset/UI/TouchIcon/xbox_button_color_x.png" id="40_qson6"]
 [ext_resource type="Texture2D" uid="uid://bh8ndmt060ke1" path="res://Asset/UI/TouchIcon/xbox_button_color_y.png" id="41_dr1eb"]
-[ext_resource type="Script" uid="uid://ccvpdshr8f8u2" path="res://Unit/Player/player_touch_control.gd" id="41_pd0ne"]
-[ext_resource type="Script" uid="uid://cw7nf4ng4gs4n" path="res://Unit/Player/joystick.gd" id="41_s5jdw"]
-[ext_resource type="Texture2D" uid="uid://c03b13n37buj" path="res://Asset/UI/Joystick/Radius.png" id="42_qson6"]
-[ext_resource type="Texture2D" uid="uid://ctccienmlpby7" path="res://Asset/UI/Joystick/Button.png" id="43_dr1eb"]
 [ext_resource type="Texture2D" uid="uid://comeidayb5lrn" path="res://Asset/UI/pentagon_question.png" id="46_fcyym"]
-[ext_resource type="Script" uid="uid://2nyaotcfo2qe" path="res://Unit/Player/player_control.gd" id="53_fcyym"]
 [ext_resource type="AudioStream" uid="uid://cem2vcc7ibek4" path="res://Asset/sound/UI/Combo Complete B.wav" id="55_3032a"]
 
 [sub_resource type="Curve" id="Curve_qacwo"]
@@ -247,10 +242,7 @@ font_size = 32
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vj671"]
 blend_mode = 2
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_a3vo5"]
-radius = 64.0
-
-[node name="Player" unique_id=1012878609 node_paths=PackedStringArray("player_control") groups=["player"] instance=ExtResource("1_bfvk7")]
+[node name="Player" unique_id=1012878609 groups=["player"] instance=ExtResource("1_bfvk7")]
 collision_layer = 3
 script = ExtResource("2_aph0k")
 engine_off_burst_accel = -0.8
@@ -261,7 +253,6 @@ fall_strength = 0.4
 accelerate_burst_accel = 1.8
 accelerate_off_burst_ratio = 2.0
 accelerate_turn_speed = 1.5
-player_control = NodePath("PlayerControl")
 turn_speed = 1.0
 metadata/_edit_horizontal_guides_ = [1032.0]
 
@@ -364,14 +355,10 @@ script = ExtResource("9_85r8r")
 [node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2" unique_id=1056673927]
 script = ExtResource("10_toghf")
 
-[node name="PlayerControl" type="Node2D" parent="." index="3" unique_id=1979526810 node_paths=PackedStringArray("joystick")]
-script = ExtResource("53_fcyym")
-joystick = NodePath("../HUD/PlayerTouchControl/Joystick")
-
-[node name="PlayerDamageComponent" parent="." index="4" unique_id=485617705 node_paths=PackedStringArray("jet") instance=ExtResource("34_se872")]
+[node name="PlayerDamageComponent" parent="." index="3" unique_id=485617705 node_paths=PackedStringArray("jet") instance=ExtResource("34_se872")]
 jet = NodePath("..")
 
-[node name="AccelerateComponent" type="Node2D" parent="." index="5" unique_id=1205480868 node_paths=PackedStringArray("rocket_launcher")]
+[node name="AccelerateComponent" type="Node2D" parent="." index="4" unique_id=1205480868 node_paths=PackedStringArray("rocket_launcher")]
 script = ExtResource("11_oriqu")
 max_burst_accel_fuel = 100.0
 rocket_launcher = NodePath("../Weapon/RocketLauncher")
@@ -449,18 +436,18 @@ offset_right = 1297.0
 offset_bottom = 911.0
 text = "Engine: Off"
 
-[node name="Camera2D" type="Camera2D" parent="." index="6" unique_id=1789409196 node_paths=PackedStringArray("target_point")]
+[node name="Camera2D" type="Camera2D" parent="." index="5" unique_id=1789409196 node_paths=PackedStringArray("target_point")]
 zoom = Vector2(1.2, 1.2)
 script = ExtResource("3_aph0k")
 target_point = NodePath("../Graphic/CameraPoint")
 
 [node name="TrumaComponent" parent="Camera2D" index="0" unique_id=997448679 instance=ExtResource("3_pm1gd")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7" unique_id=1465064501]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6" unique_id=1465064501]
 root_node = NodePath("../Graphic")
 libraries/ = SubResource("AnimationLibrary_dhsxg")
 
-[node name="Weapon" type="Node2D" parent="." index="8" unique_id=712358200]
+[node name="Weapon" type="Node2D" parent="." index="7" unique_id=712358200]
 
 [node name="PlayerGun" parent="Weapon" index="0" unique_id=1892615948 node_paths=PackedStringArray("bullet_number", "fire_on_label", "reloding_label") instance=ExtResource("15_vj671")]
 bullet_number = NodePath("../../HUD/GunSlot/BulletNumber")
@@ -473,7 +460,7 @@ reloding_label = NodePath("../../HUD/GunSlot/BulletNumber/RelodingLabel")
 SnakeRocketScene = ExtResource("17_vj671")
 rocket_slot = NodePath("../../HUD/RocketSlot")
 
-[node name="HUD" type="CanvasLayer" parent="." index="9" unique_id=125065246]
+[node name="HUD" type="CanvasLayer" parent="." index="8" unique_id=125065246]
 
 [node name="HUDOffsetManager" type="Node2D" parent="HUD" index="0" unique_id=1653800570 node_paths=PackedStringArray("player", "control_list")]
 script = ExtResource("11_uefnm")
@@ -1517,71 +1504,7 @@ visible = false
 layout_mode = 2
 texture = ExtResource("31_c1pcq")
 
-[node name="PlayerTouchControl" type="Control" parent="HUD" index="10" unique_id=1730662325]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("41_pd0ne")
-
-[node name="ABXYButton" type="Control" parent="HUD/PlayerTouchControl" index="0" unique_id=565003216]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="A" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="0" unique_id=729752131]
-position = Vector2(-352, -199)
-scale = Vector2(1.35, 1.35)
-texture_normal = ExtResource("38_a3vo5")
-shape = SubResource("CircleShape2D_a3vo5")
-action = "open_fire"
-visibility_mode = 1
-
-[node name="B" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="1" unique_id=1686974790]
-position = Vector2(-224, -328)
-scale = Vector2(1.35, 1.35)
-texture_normal = ExtResource("39_s5jdw")
-shape = SubResource("CircleShape2D_a3vo5")
-action = "launch_rocket"
-visibility_mode = 1
-
-[node name="X" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="2" unique_id=996144943]
-position = Vector2(-480, -328)
-scale = Vector2(1.35, 1.35)
-texture_normal = ExtResource("40_qson6")
-shape = SubResource("CircleShape2D_a3vo5")
-action = "BurstSpeed"
-visibility_mode = 1
-
-[node name="Y" type="TouchScreenButton" parent="HUD/PlayerTouchControl/ABXYButton" index="3" unique_id=930617610]
-position = Vector2(-352, -464)
-scale = Vector2(1.35, 1.35)
-texture_normal = ExtResource("41_dr1eb")
-shape = SubResource("CircleShape2D_a3vo5")
-action = "engine"
-visibility_mode = 1
-
-[node name="Joystick" type="Node2D" parent="HUD/PlayerTouchControl" index="1" unique_id=1852710149]
-position = Vector2(232, 880)
-script = ExtResource("41_s5jdw")
-
-[node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick" index="0" unique_id=1538608565]
-texture = ExtResource("42_qson6")
-
-[node name="Point" type="Node2D" parent="HUD/PlayerTouchControl/Joystick" index="1" unique_id=1090888109]
-
-[node name="Sprite2D" type="Sprite2D" parent="HUD/PlayerTouchControl/Joystick/Point" index="0" unique_id=2103243981]
-texture = ExtResource("43_dr1eb")
-
-[node name="SFX" type="Node2D" parent="." index="10" unique_id=471888132]
+[node name="SFX" type="Node2D" parent="." index="9" unique_id=471888132]
 
 [node name="SFXEngineStart" type="AudioStreamPlayer2D" parent="SFX" index="0" unique_id=1880993528]
 stream = ExtResource("38_0u1hj")

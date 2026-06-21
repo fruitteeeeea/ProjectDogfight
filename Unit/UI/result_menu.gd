@@ -1,6 +1,8 @@
 extends Control
 class_name ResultMenu
 
+@export var controler : Control
+
 @onready var battle_compelete: VBoxContainer = $BattleCompelete
 @onready var game_over: VBoxContainer = $GameOver
 
@@ -33,6 +35,8 @@ func _show_result(_battle_complete : bool) -> void:
 	else :
 		_show_game_over()
 	
+	if controler:
+		controler.hide()
 	
 	game_finished = true
 	blur_background.show()

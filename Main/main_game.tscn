@@ -6,11 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="4_ui0m1"]
 [ext_resource type="PackedScene" uid="uid://duhpi6ih7unwk" path="res://Unit/Prototype/enemy_spwaner.tscn" id="5_m416f"]
 [ext_resource type="PackedScene" uid="uid://dsm8xf4dmc6xd" path="res://Unit/Prototype/game_speed.tscn" id="6_f7yv3"]
+[ext_resource type="Texture2D" uid="uid://bhlewxtgg6eak" path="res://Asset/UI/TouchIcon/xbox_button_color_a.png" id="6_kg3yv"]
+[ext_resource type="Texture2D" uid="uid://cjpbgk6xnwphy" path="res://Asset/UI/TouchIcon/xbox_button_color_b.png" id="7_3curb"]
 [ext_resource type="Texture2D" uid="uid://c6mtgbu8f2fht" path="res://Asset/UI/InputPrompts/keyboard_enter.png" id="7_i23kr"]
+[ext_resource type="Texture2D" uid="uid://dkcybcusgla1p" path="res://Asset/UI/TouchIcon/xbox_button_color_x.png" id="8_aqbwo"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://Unit/Player/blink_canvs_item.gd" id="8_x645j"]
 [ext_resource type="PackedScene" uid="uid://cukppeq26yfa1" path="res://Unit/UI/result_menu.tscn" id="9_aab7o"]
+[ext_resource type="Texture2D" uid="uid://bh8ndmt060ke1" path="res://Asset/UI/TouchIcon/xbox_button_color_y.png" id="9_vqf66"]
 [ext_resource type="PackedScene" uid="uid://iwacin3xf4lt" path="res://Unit/Supply/supply.tscn" id="10_k34uy"]
 [ext_resource type="PackedScene" uid="uid://c0tkaccmwv5by" path="res://Unit/Supply/supply_02_health.tscn" id="11_p1lxc"]
+[ext_resource type="Texture2D" uid="uid://c03b13n37buj" path="res://Asset/UI/Joystick/Radius.png" id="12_m416f"]
+[ext_resource type="Texture2D" uid="uid://ctccienmlpby7" path="res://Asset/UI/Joystick/Button.png" id="13_f7yv3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f6fdm"]
 font_size = 32
@@ -18,26 +24,21 @@ font_size = 32
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1lxc"]
 size = Vector2(1920, 100)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_a0vra"]
+radius = 64.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m416f"]
+texture = ExtResource("12_m416f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7yv3"]
+texture = ExtResource("13_f7yv3")
+
 [node name="MainGame" type="Node2D" unique_id=298867485]
 metadata/_edit_vertical_guides_ = [-3848.0]
 metadata/_edit_horizontal_guides_ = [-2136.0, 2136.0]
 
-[node name="BG" parent="." unique_id=1531544280 instance=ExtResource("1_7dbjd")]
-
-[node name="GameManager" type="Node2D" parent="." unique_id=826909921 node_paths=PackedStringArray("player")]
-script = ExtResource("2_k34uy")
-player = NodePath("../Player")
-
-[node name="Player" parent="." unique_id=2108710671 instance=ExtResource("3_p1lxc")]
-position = Vector2(1176, 2000)
-metadata/_edit_horizontal_guides_ = [448.0]
-
-[node name="Enemy" parent="." unique_id=1714170478 instance=ExtResource("4_ui0m1")]
-position = Vector2(654, 782)
-
-[node name="EnemySpwaner" parent="." unique_id=1322948697 instance=ExtResource("5_m416f")]
-
 [node name="GameSpeed" parent="." unique_id=1895896034 instance=ExtResource("6_f7yv3")]
+enable = true
 trriger_type = "Click"
 game_speed_scale = Array[float]([3.0, 1.0])
 
@@ -129,7 +130,107 @@ size_flags_horizontal = 4
 text = "Tap Here To Start The Game."
 label_settings = SubResource("LabelSettings_f6fdm")
 
-[node name="ResultMenu" parent="GameHUD" unique_id=546635998 instance=ExtResource("9_aab7o")]
+[node name="ResultMenu" parent="GameHUD" unique_id=546635998 node_paths=PackedStringArray("controler") instance=ExtResource("9_aab7o")]
+controler = NodePath("../PlayerTouchControl")
+
+[node name="PlayerTouchControl" type="Control" parent="GameHUD" unique_id=1527693842]
+z_index = 99
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ABXYButton" type="Control" parent="GameHUD/PlayerTouchControl" unique_id=658718106]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="A" type="TouchScreenButton" parent="GameHUD/PlayerTouchControl/ABXYButton" unique_id=679904977]
+position = Vector2(-352, -199)
+scale = Vector2(1.35, 1.35)
+texture_normal = ExtResource("6_kg3yv")
+shape = SubResource("CircleShape2D_a0vra")
+action = "open_fire"
+visibility_mode = 1
+
+[node name="B" type="TouchScreenButton" parent="GameHUD/PlayerTouchControl/ABXYButton" unique_id=1564659239]
+position = Vector2(-224, -328)
+scale = Vector2(1.35, 1.35)
+texture_normal = ExtResource("7_3curb")
+shape = SubResource("CircleShape2D_a0vra")
+action = "launch_rocket"
+visibility_mode = 1
+
+[node name="X" type="TouchScreenButton" parent="GameHUD/PlayerTouchControl/ABXYButton" unique_id=445563353]
+position = Vector2(-480, -328)
+scale = Vector2(1.35, 1.35)
+texture_normal = ExtResource("8_aqbwo")
+shape = SubResource("CircleShape2D_a0vra")
+action = "BurstSpeed"
+visibility_mode = 1
+
+[node name="X2" type="TouchScreenButton" parent="GameHUD/PlayerTouchControl/ABXYButton" unique_id=2096409909]
+position = Vector2(-232, -840)
+scale = Vector2(1.35, 1.35)
+texture_normal = ExtResource("8_aqbwo")
+shape = SubResource("CircleShape2D_a0vra")
+action = "game_speed"
+visibility_mode = 1
+
+[node name="Y" type="TouchScreenButton" parent="GameHUD/PlayerTouchControl/ABXYButton" unique_id=1546158575]
+position = Vector2(-352, -464)
+scale = Vector2(1.35, 1.35)
+texture_normal = ExtResource("9_vqf66")
+shape = SubResource("CircleShape2D_a0vra")
+action = "engine"
+visibility_mode = 1
+
+[node name="MoveJoystick" type="VirtualJoystick" parent="GameHUD/PlayerTouchControl" unique_id=1774320432]
+z_index = 999
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.29200003
+anchor_bottom = 0.94100004
+offset_right = -0.6400757
+offset_bottom = -0.2800293
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal_joystick = SubResource("StyleBoxTexture_m416f")
+theme_override_styles/normal_tip = SubResource("StyleBoxTexture_f7yv3")
+theme_override_styles/pressed_joystick = SubResource("StyleBoxTexture_m416f")
+theme_override_styles/pressed_tip = SubResource("StyleBoxTexture_f7yv3")
+joystick_mode = 2
+joystick_size = 240.0
+tip_size = 120.0
+initial_offset_ratio = Vector2(0.5, 0.7)
+action_left = &"move_left"
+action_right = &"move_right"
+action_up = &"move_up"
+action_down = &"move_down"
+
+[node name="BG" parent="." unique_id=1531544280 instance=ExtResource("1_7dbjd")]
+
+[node name="GameManager" type="Node2D" parent="." unique_id=826909921 node_paths=PackedStringArray("player")]
+script = ExtResource("2_k34uy")
+player = NodePath("../Player")
+
+[node name="Player" parent="." unique_id=2108710671 instance=ExtResource("3_p1lxc")]
+position = Vector2(1176, 2000)
+metadata/_edit_horizontal_guides_ = [448.0]
+
+[node name="Enemy" parent="." unique_id=1714170478 instance=ExtResource("4_ui0m1")]
+position = Vector2(654, 782)
+
+[node name="EnemySpwaner" parent="." unique_id=1322948697 instance=ExtResource("5_m416f")]
 
 [node name="Supply" parent="." unique_id=511293429 instance=ExtResource("10_k34uy")]
 position = Vector2(-648, 704)

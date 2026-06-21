@@ -20,9 +20,7 @@ func _enter() -> void:
 
 
 func _update(delta: float) -> void:
-	if player.force_dir == Vector2.ZERO: #没有强制方向的时候 
-		player.target_forward = (player.get_global_mouse_position() - player.global_position).normalized()
-	else :
+	if player.force_dir != Vector2.ZERO:
 		player.target_forward = _apply_force_direction(player.target_forward)
 	
 	

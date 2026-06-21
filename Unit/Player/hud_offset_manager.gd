@@ -37,16 +37,8 @@ func trigger_hit_shake():
 
 
 func _physics_process(delta: float) -> void:
-	var mouse_pos := get_viewport().get_mouse_position()
-	var mouse_offset := mouse_pos - center_pos
-
-	var distance := mouse_offset.length()
-	var max_mouse_dist := center_pos.length()
-	var strength = clamp(distance / max_mouse_dist, 0.0, 1.0)
-	
-	if player.player_control.get_dir() != Vector2.ZERO:
-		mouse_offset = player.player_control.get_dir()
-		strength = 1
+	var control_offset := player.target_forward
+	var strength := 1.0
 
 	# ① 每帧衰减震动（全局一次）
 	shake_strength = move_toward(shake_strength, 0, delta * shake_decay)
@@ -64,7 +56,7 @@ func _physics_process(delta: float) -> void:
 		var base_pos := base_positions[ctrl]
 
 		# —— 鼠标视差偏移（parallax）
-		var parallax_offset := -mouse_offset.normalized()
+		var parallax_offset := -control_offset.normalized()
 		parallax_offset *= strength * max_offset * weight
 
 		# —— ⭐ 最终位置合成

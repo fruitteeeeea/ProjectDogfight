@@ -5,7 +5,7 @@ signal change_input_device(input_mode : InputMode)
 
 signal distribute_rewards
 
-const STICK_DEADZONE := 0.55 #摇杆死区
+const INPUT_DEVICE_STICK_THRESHOLD := 0.55
 const MOUSE_DEADZONE := 16.0
 
 var your_points : int = 0
@@ -48,7 +48,7 @@ func _input(event: InputEvent) -> void:
 	
 	if (
 		event is InputEventJoypadButton or 
-		(event is InputEventJoypadMotion and  abs(event.axis_value) > STICK_DEADZONE)
+		(event is InputEventJoypadMotion and abs(event.axis_value) > INPUT_DEVICE_STICK_THRESHOLD)
 	):
 		current_input_mode = InputMode.GAMEPAD
 		return

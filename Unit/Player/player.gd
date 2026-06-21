@@ -11,6 +11,12 @@ var burst_ratio : float = 1.0
 var force_dir : Vector2 = Vector2.ZERO
 
 var engine_on : bool = true
+var last_control_direction := Vector2.UP
+
+const MOVE_LEFT := &"move_left"
+const MOVE_RIGHT := &"move_right"
+const MOVE_UP := &"move_up"
+const MOVE_DOWN := &"move_down"
 
 #引擎关闭
 @export var engine_off_burst_accel := - 0.4 
@@ -31,9 +37,6 @@ var engine_on : bool = true
 
 @export var accelerate_turn_speed := 1.5 #引擎关闭的时候转向倍率 
 @onready var accelerate_component: AccelerationComponent = $AccelerateComponent
-
-#控制模块
-@export var player_control : PlayerControl
 
 @onready var limbo_hsm: LimboHSM = $LimboHSM
 @onready var engine_on_state: LimboState = $LimboHSM/EngineOnState
@@ -97,11 +100,31 @@ func _get_move_direction(delta) -> Vector2:
 
 func _get_forward(delta) -> Vector2:
 	if !force_dir:
-		target_forward = player_control.get_dir().normalized()
+		target_forward = _get_control_direction()
 	
 	check_position()
 	super(delta)
 	return forward
+
+
+func _get_control_direction() -> Vector2:
+	var input_direction := Input.get_vector(
+		MOVE_LEFT,
+		MOVE_RIGHT,
+		MOVE_UP,
+		MOVE_DOWN
+	)
+
+	if (
+		input_direction.is_zero_approx()
+		and GameStatusServer.current_input_mode == GameStatusServer.InputMode.KEYBOARD
+	):
+		input_direction = get_global_mouse_position() - global_position
+
+	if not input_direction.is_zero_approx():
+		last_control_direction = input_direction.normalized()
+
+	return last_control_direction
 
 
 func _get_speed() -> float:
