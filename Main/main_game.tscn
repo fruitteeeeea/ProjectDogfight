@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dnc5yjftuv7il" path="res://Unit/Player/player.tscn" id="3_p1lxc"]
 [ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://Unit/Enemy/enemy.tscn" id="4_ui0m1"]
 [ext_resource type="PackedScene" uid="uid://duhpi6ih7unwk" path="res://Unit/Prototype/enemy_spwaner.tscn" id="5_m416f"]
+[ext_resource type="Script" uid="uid://cdkgulvu32i7m" path="res://Main/player_touch_control.gd" id="5_tacrw"]
 [ext_resource type="PackedScene" uid="uid://dsm8xf4dmc6xd" path="res://Unit/Prototype/game_speed.tscn" id="6_f7yv3"]
 [ext_resource type="Texture2D" uid="uid://bhlewxtgg6eak" path="res://Asset/UI/TouchIcon/xbox_button_color_a.png" id="6_kg3yv"]
 [ext_resource type="Texture2D" uid="uid://cjpbgk6xnwphy" path="res://Asset/UI/TouchIcon/xbox_button_color_b.png" id="7_3curb"]
@@ -142,6 +143,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("5_tacrw")
 
 [node name="ABXYButton" type="Control" parent="GameHUD/PlayerTouchControl" unique_id=658718106]
 layout_mode = 1
