@@ -1,0 +1,196 @@
+[gd_scene load_steps=22 format=3 uid="uid://b4vpogepx8flp"]
+
+[ext_resource type="Script" uid="uid://h3mujltinpsu" path="res://game/combat/missiles/snake_rocket.gd" id="1_n13jw"]
+[ext_resource type="Texture2D" path="res://assets/sprites/missiles/rocket_sprite.png" id="3_vkt1o"]
+[ext_resource type="PackedScene" uid="uid://ch12iu35e0pqj" path="res://game/combat/missiles/trail/trail.tscn" id="3_xe1xm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/particles/particle_00.png" id="4_w84y8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/missiles/effect_yellow.png" id="5_m5gxl"]
+[ext_resource type="Texture2D" path="res://assets/sprites/missiles/rocket_flame.png" id="6_c7l16"]
+[ext_resource type="Script" uid="uid://da7a50jvg5hpp" path="res://game/combat/missiles/world_label_2d.gd" id="7_1fdsh"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/crosshair160.png" id="8_1ftbv"]
+[ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://game/ui/effects/blink_canvas_item.gd" id="10_vkt1o"]
+[ext_resource type="Script" uid="uid://f034hyslrf1" path="res://game/combat/missiles/missile_jammer.gd" id="10_y6jex"]
+[ext_resource type="AudioStream" path="res://assets/audio/weapons/missiles/Retro Destruction Bricks E.wav" id="11_y6jex"]
+
+[sub_resource type="Curve" id="Curve_c7l16"]
+_data = [Vector2(0, 0.704594), 0.0, 0.0, 0, 0, Vector2(1, 0.348814), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_c7l16"]
+offsets = PackedFloat32Array(0, 0.819005)
+colors = PackedColorArray(1, 1, 1, 0.721569, 1, 1, 1, 0.561057)
+
+[sub_resource type="Curve" id="Curve_m5gxl"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(1e-05, 0.958305), 0.0, 0.0, 0, 0, Vector2(1, 36.4638), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_w84y8"]
+_data = [Vector2(0, 0.844274), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_w84y8"]
+offsets = PackedFloat32Array(0, 0.551111, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.697778, 1, 1, 1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fdsh"]
+atlas = ExtResource("6_c7l16")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ftbv"]
+atlas = ExtResource("6_c7l16")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w28ho"]
+atlas = ExtResource("6_c7l16")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m5gxl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fdsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ftbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w28ho")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7l16"]
+radius = 112.0
+
+[node name="SnakeRocket" type="Node2D"]
+script = ExtResource("1_n13jw")
+wave_frequency = 20.0
+metadata/_edit_vertical_guides_ = [40.0]
+metadata/_edit_horizontal_guides_ = [-8.0]
+
+[node name="Graphic" type="Node2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Graphic"]
+amount = 1
+texture = ExtResource("4_w84y8")
+lifetime = 0.1
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_c7l16")
+color_ramp = SubResource("Gradient_c7l16")
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphic"]
+position = Vector2(20.375, -1.31225e-05)
+rotation = 1.5708
+scale = Vector2(0.317032, 0.356399)
+texture = ExtResource("3_vkt1o")
+
+[node name="ExplodeParticle" type="CPUParticles2D" parent="Graphic"]
+emitting = false
+texture = ExtResource("4_w84y8")
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+damping_min = 20.0
+damping_max = 20.0
+damping_curve = SubResource("Curve_m5gxl")
+scale_amount_curve = SubResource("Curve_w84y8")
+color_ramp = SubResource("Gradient_w84y8")
+
+[node name="Trail" parent="Graphic" instance=ExtResource("3_xe1xm")]
+top_level = true
+width = 5.0
+texture = ExtResource("5_m5gxl")
+texture_mode = 1
+MAX_LENGTH = 100
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+scale = Vector2(2, 1)
+sprite_frames = SubResource("SpriteFrames_m5gxl")
+autoplay = "default"
+frame_progress = 0.417658
+
+[node name="DetectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
+shape = SubResource("CircleShape2D_c7l16")
+
+[node name="2DWorldLabel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_1fdsh")
+
+[node name="ColorRect" type="ColorRect" parent="2DWorldLabel"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = -16.0
+color = Color(1, 0.933333, 0.345098, 1)
+
+[node name="Label" type="Label" parent="2DWorldLabel"]
+layout_mode = 0
+offset_left = -56.0
+offset_top = -56.0
+offset_right = 71.0
+offset_bottom = -23.0
+text = "Searching"
+
+[node name="WarnningSign" type="TextureRect" parent="2DWorldLabel"]
+visible = false
+modulate = Color(0.827451, 0.184314, 0.184314, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -52.0
+offset_right = 76.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_1ftbv")
+
+[node name="BlinkCanvasItem" type="Node" parent="2DWorldLabel/WarnningSign"]
+script = ExtResource("10_vkt1o")
+min_value = Color(0.980392, 0.980392, 0.980392, 1)
+max_value = Color(0.827451, 0.184314, 0.184314, 1)
+metadata/_custom_type_script = "uid://dxl17dpembjyc"
+
+[node name="MissileJammer" type="Node" parent="."]
+script = ExtResource("10_y6jex")
+change_interval = 0.05
+max_angle_deg = 90.0
+jam_weight = 1.0
+rotate_speed = 300.0
+
+[node name="SFXExplode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_y6jex")
+pitch_scale = 0.89
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="DetectArea" to="." method="_on_detect_area_body_entered"]

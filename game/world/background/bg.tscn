@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://bl1cf0r32i67t"]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/prototypes/blueprint_sprite_32x32.png" id="1_clmw2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/particles/particle_00.png" id="2_v7n5n"]
+[ext_resource type="AudioStream" path="res://assets/audio/environment/Wind Loop A.wav" id="3_v7n5n"]
+
+[sub_resource type="Curve" id="Curve_lquwl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.694581, 0.516981), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7mycd"]
+curve = SubResource("Curve_lquwl")
+
+[sub_resource type="Curve" id="Curve_1bvp3"]
+_data = [Vector2(0, 0.426415), 0.0, 0.0, 0, 0, Vector2(0.221675, 0.766038), 0.0, 0.0, 0, 0, Vector2(0.438424, 0.230189), 0.0, 0.0, 0, 0, Vector2(1, 0.456604), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_lquwl"]
+curve = SubResource("Curve_1bvp3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1bvp3"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(3848, 2136, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_lquwl")
+alpha_curve = SubResource("CurveTexture_7mycd")
+turbulence_enabled = true
+
+[node name="BG" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3846.0
+offset_top = -2132.0
+offset_right = 3846.0
+offset_bottom = 2132.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_clmw2")
+stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -3848.0
+offset_top = -2136.0
+offset_right = 3848.0
+offset_bottom = 2136.0
+mouse_filter = 2
+color = Color(0.0392157, 0.0392157, 0.0392157, 0.701961)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 200
+texture = ExtResource("2_v7n5n")
+lifetime = 2.0
+fixed_fps = 60
+visibility_rect = Rect2(-3890.64, -2163.89, 7762.57, 4363.08)
+process_material = SubResource("ParticleProcessMaterial_1bvp3")
+
+[node name="SFXWind" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_v7n5n")
+volume_db = -20.0
+autoplay = true

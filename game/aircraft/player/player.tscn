@@ -1,0 +1,1555 @@
+[gd_scene format=3 uid="uid://dnc5yjftuv7il"]
+
+[ext_resource type="PackedScene" uid="uid://qmreh1awhiwm" path="res://game/aircraft/shared/jet_base.tscn" id="1_bfvk7"]
+[ext_resource type="Script" uid="uid://cnv48xflr8sb6" path="res://game/aircraft/player/player.gd" id="2_aph0k"]
+[ext_resource type="Script" uid="uid://r077cnmnbhed" path="res://game/aircraft/shared/camera_2d.gd" id="3_aph0k"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/crosshair005.png" id="3_dhsxg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/aircraft/ship_J.png" id="3_ibccj"]
+[ext_resource type="PackedScene" uid="uid://mv1sve8aww0k" path="res://game/camera/trauma_component.tscn" id="3_pm1gd"]
+[ext_resource type="Texture2D" path="res://assets/sprites/particles/flame.png" id="4_4qink"]
+[ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://game/ui/effects/blink_canvas_item.gd" id="5_dhsxg"]
+[ext_resource type="PackedScene" uid="uid://dw514kmcsyfxe" path="res://game/combat/missiles/rocket_launcher.tscn" id="5_mh83u"]
+[ext_resource type="Script" uid="uid://dbepmm8o001e8" path="res://game/aircraft/player/states/engine_on_state.gd" id="8_f8s14"]
+[ext_resource type="Texture2D" path="res://assets/sprites/particles/particle_00.png" id="8_qacwo"]
+[ext_resource type="Script" uid="uid://k7u52r1h256" path="res://game/aircraft/player/states/engine_off_state.gd" id="9_85r8r"]
+[ext_resource type="Texture2D" path="res://assets/sprites/missiles/player_position_guideline.png" id="10_dpwos"]
+[ext_resource type="Script" uid="uid://depgavo7qxod3" path="res://game/ui/hud/player_position_guide_line.gd" id="10_oriqu"]
+[ext_resource type="Script" uid="uid://ch3hf4ujv44vf" path="res://game/aircraft/player/states/burst_accelerate_state.gd" id="10_toghf"]
+[ext_resource type="Script" uid="uid://bhv5mohwbu3ig" path="res://game/aircraft/player/accelerate_component.gd" id="11_oriqu"]
+[ext_resource type="Script" uid="uid://beswwf0ir65f8" path="res://game/ui/hud/hud_offset_manager.gd" id="11_uefnm"]
+[ext_resource type="PackedScene" uid="uid://0nqokfttyooa" path="res://game/combat/weapons/player_gun.tscn" id="15_vj671"]
+[ext_resource type="PackedScene" uid="uid://b4vpogepx8flp" path="res://game/combat/missiles/snake_rocket.tscn" id="17_vj671"]
+[ext_resource type="FontFile" path="res://assets/fonts/realtimeroundedtest-black.otf" id="20_4dcrn"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/skull.png" id="20_6h1yq"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/input_prompts/keyboard_w.png" id="21_4dcrn"]
+[ext_resource type="Script" uid="uid://bp2sy2vk7tcpq" path="res://game/ui/hud/mission.gd" id="22_vj671"]
+[ext_resource type="Script" uid="uid://j2yqwnbwkfxd" path="res://game/ui/hud/get_your_reward.gd" id="23_tp8pl"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/input_prompts/keyboard_space.png" id="23_xx0et"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/Chiptune Vol4 Limbo Cut 60.wav" id="24_s8q2k"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/input_prompts/keyboard_e.png" id="25_pcvun"]
+[ext_resource type="PackedScene" uid="uid://cq1o384plj4l1" path="res://game/ui/input/input_prompt/input_prompt_icon.tscn" id="25_xbe7k"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/crosshair127.png" id="27_0xfex"]
+[ext_resource type="Script" uid="uid://d163en6k6x26j" path="res://game/ui/hud/player_attitude.gd" id="27_4ei6y"]
+[ext_resource type="Script" uid="uid://b4g5em3g6s45p" path="res://game/ui/hud/player_health.gd" id="30_swlur"]
+[ext_resource type="Texture2D" path="res://assets/sprites/missiles/rocket_sprite.png" id="31_c1pcq"]
+[ext_resource type="Script" uid="uid://eybkex0wjhmy" path="res://game/ui/hud/rocket_slot.gd" id="31_dn0s1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/suit_hearts.png" id="31_l0xr3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/missiles/rocket_sprite_shadow.png" id="33_dn0s1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/input_prompts/mouse_left_outline.png" id="34_3032a"]
+[ext_resource type="PackedScene" uid="uid://owohvdo1fuvj" path="res://game/aircraft/shared/components/player_damage_component.tscn" id="34_se872"]
+[ext_resource type="AudioStream" path="res://assets/audio/aircraft/Jet Engine Low Loop B.wav" id="36_swlur"]
+[ext_resource type="AudioStream" path="res://assets/audio/aircraft/afterburner/Afterburner Loop B.wav" id="37_qejli"]
+[ext_resource type="AudioStream" path="res://assets/audio/aircraft/Jet Start E.wav" id="38_0u1hj"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/touch_icons/xbox_button_color_a.png" id="38_a3vo5"]
+[ext_resource type="AudioStream" path="res://assets/audio/aircraft/Inner Mechanism A.wav" id="38_frrsq"]
+[ext_resource type="AudioStream" path="res://assets/audio/aircraft/Jet Start A.wav" id="39_bl3tp"]
+[ext_resource type="AudioStream" path="res://assets/audio/aircraft/Jet Engine Hollow Loop B.wav" id="39_edi3d"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/touch_icons/xbox_button_color_b.png" id="39_s5jdw"]
+[ext_resource type="AudioStream" path="res://assets/audio/aircraft/afterburner/Inner Mechanism H.wav" id="40_h44hf"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/touch_icons/xbox_button_color_x.png" id="40_qson6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/touch_icons/xbox_button_color_y.png" id="41_dr1eb"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/pentagon_question.png" id="46_fcyym"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/Combo Complete B.wav" id="55_3032a"]
+
+[sub_resource type="Curve" id="Curve_qacwo"]
+_data = [Vector2(0, 0.577376), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_qacwo"]
+offsets = PackedFloat32Array(0, 0.612368, 1)
+colors = PackedColorArray(1, 0.960784, 0.615686, 1, 0.883146, 0.434939, 0.32355, 1, 0.827451, 0.184314, 0.184314, 1)
+
+[sub_resource type="Curve" id="Curve_vj671"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 49.1126), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_4qink"]
+_data = [Vector2(0, 0.993531), 0.0, 0.0, 0, 0, Vector2(1, 0.292752), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_4qink"]
+offsets = PackedFloat32Array(0, 0.509804, 0.996983)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.682299, 1, 1, 1, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dpwos"]
+blend_mode = 2
+
+[sub_resource type="Animation" id="Animation_dhsxg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_toghf"]
+resource_name = "dodge"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(0.189464, 0.189464, 0.189464),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1e-05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(0.189464, 0.189464, 0.189464),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(8, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.5),
+"transitions": PackedFloat32Array(0.189464, 0.189464, 0.189464),
+"update": 0,
+"values": [1.5708, 0.633555, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhsxg"]
+_data = {
+&"RESET": SubResource("Animation_dhsxg"),
+&"dodge": SubResource("Animation_toghf")
+}
+
+[sub_resource type="Gradient" id="Gradient_oriqu"]
+offsets = PackedFloat32Array(0, 0.152466, 0.249626, 0.665172, 0.792227, 0.913303, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.766816, 1, 1, 1, 0, 1, 1, 1, 0.0213995, 1, 1, 1, 0.156831, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r22qm"]
+gradient = SubResource("Gradient_oriqu")
+width = 44
+
+[sub_resource type="LabelSettings" id="LabelSettings_85r8r"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_toghf"]
+
+[sub_resource type="Animation" id="Animation_fcyym"]
+resource_name = "01"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 2.5, 2.6, 2.7, 2.8, 2.9, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false, false, true, true, false, false, true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../SFX/SFXgetYourReward:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tp8pl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../SFX/SFXgetYourReward:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tp8pl"]
+_data = {
+&"01": SubResource("Animation_fcyym"),
+&"RESET": SubResource("Animation_tp8pl")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_dhsxg"]
+font = ExtResource("20_4dcrn")
+font_size = 32
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vj671"]
+blend_mode = 2
+
+[node name="Player" unique_id=1012878609 groups=["player"] instance=ExtResource("1_bfvk7")]
+collision_layer = 3
+script = ExtResource("2_aph0k")
+engine_off_burst_accel = -0.8
+engine_off_burst_ratio = 1.0
+engine_off_turn_speed = 5.0
+gravity_dir = Vector2(0, 1)
+fall_strength = 0.4
+accelerate_burst_accel = 1.8
+accelerate_off_burst_ratio = 2.0
+accelerate_turn_speed = 1.5
+turn_speed = 1.0
+metadata/_edit_horizontal_guides_ = [1032.0]
+
+[node name="Sprite2D" parent="Graphic" index="0"]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("3_ibccj")
+
+[node name="Trail" parent="Graphic" index="1"]
+position = Vector2(-32, 0)
+lifetime = 2.0
+
+[node name="Flame" parent="Graphic" index="2"]
+texture = ExtResource("4_4qink")
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="BurstTrail" type="CPUParticles2D" parent="Graphic" index="3" unique_id=5317203]
+position = Vector2(-16, 0)
+emitting = false
+texture = ExtResource("8_qacwo")
+lifetime = 0.3
+particle_flag_align_y = true
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 5)
+initial_velocity_min = 150.0
+initial_velocity_max = 400.0
+scale_amount_curve = SubResource("Curve_qacwo")
+color_ramp = SubResource("Gradient_qacwo")
+
+[node name="CameraPoint" type="Marker2D" parent="Graphic" index="4" unique_id=1008974108]
+position = Vector2(128, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphic/CameraPoint" index="0" unique_id=198303610]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("3_dhsxg")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Graphic" index="5" unique_id=1994500977]
+remote_path = NodePath("../../Weapon")
+
+[node name="EngineOnParticle" type="CPUParticles2D" parent="Graphic" index="6" unique_id=454881706]
+emitting = false
+amount = 24
+texture = ExtResource("8_qacwo")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 600.0
+linear_accel_min = 100.0
+linear_accel_max = 200.0
+damping_min = 50.0
+damping_max = 100.0
+damping_curve = SubResource("Curve_vj671")
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+split_scale = true
+scale_curve_x = SubResource("Curve_4qink")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_4qink")
+
+[node name="AccelerateParticle" type="CPUParticles2D" parent="Graphic" index="7" unique_id=880895247]
+emitting = false
+amount = 24
+texture = ExtResource("8_qacwo")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 600.0
+initial_velocity_max = 780.0
+linear_accel_min = 100.0
+linear_accel_max = 200.0
+damping_min = 50.0
+damping_max = 100.0
+damping_curve = SubResource("Curve_vj671")
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+split_scale = true
+scale_curve_x = SubResource("Curve_4qink")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_qacwo")
+
+[node name="LimboHSM" type="LimboHSM" parent="." index="2" unique_id=1886936251]
+
+[node name="EngineOnState" type="LimboState" parent="LimboHSM" index="0" unique_id=1790924999]
+script = ExtResource("8_f8s14")
+
+[node name="EngineOffState" type="LimboState" parent="LimboHSM" index="1" unique_id=85804328]
+script = ExtResource("9_85r8r")
+
+[node name="BurstAccelerateState" type="LimboState" parent="LimboHSM" index="2" unique_id=1056673927]
+script = ExtResource("10_toghf")
+
+[node name="PlayerDamageComponent" parent="." index="3" unique_id=485617705 node_paths=PackedStringArray("jet") instance=ExtResource("34_se872")]
+jet = NodePath("..")
+
+[node name="AccelerateComponent" type="Node2D" parent="." index="4" unique_id=1205480868 node_paths=PackedStringArray("rocket_launcher")]
+script = ExtResource("11_oriqu")
+max_burst_accel_fuel = 100.0
+rocket_launcher = NodePath("../Weapon/RocketLauncher")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="AccelerateComponent" index="0" unique_id=2063769170]
+
+[node name="AccelHUD" type="Control" parent="AccelerateComponent/CanvasLayer" index="0" unique_id=770953991]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="0" unique_id=114699277]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = 372.0
+offset_right = 192.0
+offset_bottom = 399.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 20.0
+value = 20.0
+
+[node name="AccelAndSpeed" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="1" unique_id=74021784]
+layout_mode = 0
+offset_left = 1176.0
+offset_top = 880.0
+offset_right = 1216.0
+offset_bottom = 913.0
+
+[node name="EngineOnLabel" type="CanvasGroup" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="2" unique_id=1847619272]
+visible = false
+position = Vector2(1176, 840)
+
+[node name="ColorRect" type="ColorRect" parent="AccelerateComponent/CanvasLayer/AccelHUD/EngineOnLabel" index="0" unique_id=1934721115]
+offset_left = -8.0
+offset_right = 144.0
+offset_bottom = 40.0
+
+[node name="EngineON" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD/EngineOnLabel" index="1" unique_id=1198328926]
+material = SubResource("CanvasItemMaterial_dpwos")
+offset_right = 114.0
+offset_bottom = 33.0
+text = "Engine : ON"
+
+[node name="AccelerateOn" type="CanvasGroup" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="3" unique_id=1463880454]
+visible = false
+position = Vector2(1176, 912)
+
+[node name="ColorRect" type="ColorRect" parent="AccelerateComponent/CanvasLayer/AccelHUD/AccelerateOn" index="0" unique_id=630777420]
+offset_left = -8.0
+offset_right = 192.0
+offset_bottom = 40.0
+
+[node name="AccelerateOn" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD/AccelerateOn" index="1" unique_id=480497068]
+material = SubResource("CanvasItemMaterial_dpwos")
+offset_right = 114.0
+offset_bottom = 33.0
+text = "Accelerate : On"
+
+[node name="EngineOffLabel" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="4" unique_id=1039629834]
+visible = false
+layout_mode = 0
+offset_left = 1176.0
+offset_top = 840.0
+offset_right = 1297.0
+offset_bottom = 911.0
+text = "Engine: Off"
+
+[node name="Camera2D" type="Camera2D" parent="." index="5" unique_id=1789409196 node_paths=PackedStringArray("target_point")]
+zoom = Vector2(1.2, 1.2)
+script = ExtResource("3_aph0k")
+target_point = NodePath("../Graphic/CameraPoint")
+
+[node name="TraumaComponent" parent="Camera2D" index="0" unique_id=997448679 instance=ExtResource("3_pm1gd")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6" unique_id=1465064501]
+root_node = NodePath("../Graphic")
+libraries/ = SubResource("AnimationLibrary_dhsxg")
+
+[node name="Weapon" type="Node2D" parent="." index="7" unique_id=712358200]
+
+[node name="PlayerGun" parent="Weapon" index="0" unique_id=1892615948 node_paths=PackedStringArray("bullet_number", "fire_on_label", "reloding_label") instance=ExtResource("15_vj671")]
+bullet_number = NodePath("../../HUD/GunSlot/BulletNumber")
+alert_clor = Color(0.898039, 0.223529, 0.207843, 1)
+alert_threshold = 0.5
+fire_on_label = NodePath("../../HUD/GunSlot/BulletNumber/FireOnLabel")
+reloding_label = NodePath("../../HUD/GunSlot/BulletNumber/RelodingLabel")
+
+[node name="RocketLauncher" parent="Weapon" index="1" unique_id=1815048331 node_paths=PackedStringArray("rocket_slot") instance=ExtResource("5_mh83u")]
+SnakeRocketScene = ExtResource("17_vj671")
+rocket_slot = NodePath("../../HUD/RocketSlot")
+
+[node name="HUD" type="CanvasLayer" parent="." index="8" unique_id=125065246]
+
+[node name="HUDOffsetManager" type="Node2D" parent="HUD" index="0" unique_id=1653800570 node_paths=PackedStringArray("player", "control_list")]
+script = ExtResource("11_uefnm")
+player = NodePath("../..")
+control_list = {
+NodePath("../../AccelerateComponent/CanvasLayer/AccelHUD"): 1.25,
+NodePath("../ScaleLine/ScaleLineHUD"): 1.3,
+NodePath("../ScaleLine/ScaleLineHUD2"): 1.3,
+NodePath("../Warning"): 0.5,
+NodePath("../Mission"): 1.0,
+NodePath("../InputPrompts"): 1.0,
+NodePath("../PlayerAttitude"): 1.0,
+NodePath("../GunSlot"): 1.0,
+NodePath("../RocketSlot"): 1.0,
+NodePath("../PlayerHealth/PlayerHeart"): 1.0,
+NodePath("../GetYourReward"): 0.5
+}
+
+[node name="ScaleLine" type="Control" parent="HUD" index="1" unique_id=854567616]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ScaleLineHUD" type="Control" parent="HUD/ScaleLine" index="0" unique_id=1507311896]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -256.0
+offset_right = 384.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="PlayerPositionGuideLine" type="Control" parent="HUD/ScaleLine/ScaleLineHUD" index="0" unique_id=895262510 node_paths=PackedStringArray("player")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -256.0
+offset_right = 512.0
+offset_bottom = 256.0
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_oriqu")
+player = NodePath("../../../..")
+
+[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine" index="0" unique_id=126954170]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -60.0
+offset_right = 120.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine" index="1" unique_id=973982562]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine/Control" index="0" unique_id=1374011605]
+
+[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine/Control/CanvasGroup" index="0" unique_id=488141469]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -3584.0
+offset_right = 16.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_dpwos")
+stretch_mode = 1
+
+[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine/Control/CanvasGroup" index="1" unique_id=246471037]
+material = SubResource("CanvasItemMaterial_dpwos")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 24.0
+offset_right = 536.0
+offset_bottom = 28.0
+grow_horizontal = 0
+rotation = 1.57079
+texture = SubResource("GradientTexture1D_r22qm")
+
+[node name="PlayerPositionGuideLine2" type="Control" parent="HUD/ScaleLine/ScaleLineHUD" index="1" unique_id=1905051001 node_paths=PackedStringArray("player")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 672.0
+offset_top = -512.0
+offset_right = 1184.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.57079
+mouse_filter = 2
+script = ExtResource("10_oriqu")
+player = NodePath("../../../..")
+player_y_min = -3840.0
+player_y_max = 3840.0
+
+[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2" index="0" unique_id=1671925820]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2" index="1" unique_id=1228683383]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2/Control" index="0" unique_id=1987575241]
+
+[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2/Control/CanvasGroup" index="0" unique_id=779927881]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -3584.0
+offset_right = 16.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_dpwos")
+stretch_mode = 1
+
+[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine2/Control/CanvasGroup" index="1" unique_id=1460442669]
+material = SubResource("CanvasItemMaterial_dpwos")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 24.0
+offset_right = 536.0
+offset_bottom = 28.0
+grow_horizontal = 0
+rotation = 1.57079
+texture = SubResource("GradientTexture1D_r22qm")
+
+[node name="ScaleLineHUD2" type="Control" parent="HUD/ScaleLine" index="1" unique_id=1245508273]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 112.0
+offset_top = -252.0
+offset_right = 624.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-1, 1)
+mouse_filter = 2
+
+[node name="PlayerPositionGuideLine" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2" index="0" unique_id=1565735648 node_paths=PackedStringArray("player")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -256.0
+offset_right = 512.0
+offset_bottom = 256.0
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_oriqu")
+player = NodePath("../../../..")
+
+[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine" index="0" unique_id=1727642085]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -60.0
+offset_right = 120.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine" index="1" unique_id=1805963336]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine/Control" index="0" unique_id=706061621]
+
+[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine/Control/CanvasGroup" index="0" unique_id=44148550]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -3584.0
+offset_right = 16.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_dpwos")
+stretch_mode = 1
+
+[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine/Control/CanvasGroup" index="1" unique_id=1664535533]
+material = SubResource("CanvasItemMaterial_dpwos")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 24.0
+offset_right = 536.0
+offset_bottom = 28.0
+grow_horizontal = 0
+rotation = 1.57079
+texture = SubResource("GradientTexture1D_r22qm")
+
+[node name="PlayerPositionGuideLine2" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2" index="1" unique_id=1586690066 node_paths=PackedStringArray("player")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 672.0
+offset_top = -512.0
+offset_right = 1184.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.57079
+mouse_filter = 2
+script = ExtResource("10_oriqu")
+player = NodePath("../../../..")
+player_y_min = -3840.0
+player_y_max = 3840.0
+
+[node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2" index="0" unique_id=1206564380]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Control" type="Control" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2" index="1" unique_id=369331596]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="CanvasGroup" type="CanvasGroup" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2/Control" index="0" unique_id=1012756659]
+
+[node name="ScaleTexture" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2/Control/CanvasGroup" index="0" unique_id=179374573]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -3584.0
+offset_right = 16.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_dpwos")
+stretch_mode = 1
+
+[node name="FadeMask" type="TextureRect" parent="HUD/ScaleLine/ScaleLineHUD2/PlayerPositionGuideLine2/Control/CanvasGroup" index="1" unique_id=1222487458]
+material = SubResource("CanvasItemMaterial_dpwos")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 24.0
+offset_right = 536.0
+offset_bottom = 28.0
+grow_horizontal = 0
+rotation = 1.57079
+texture = SubResource("GradientTexture1D_r22qm")
+
+[node name="Warning" type="Control" parent="HUD" index="2" unique_id=1707823729]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -252.0
+offset_right = -20.0
+offset_bottom = -252.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="HUD/Warning" index="0" unique_id=612379884]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -36.0
+offset_right = 156.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Warning/HBoxContainer" index="0" unique_id=510021459]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Warning/HBoxContainer/PanelContainer" index="0" unique_id=2144875500]
+layout_mode = 2
+color = Color(0.827451, 0.184314, 0.184314, 1)
+
+[node name="BlinkCanvsItem" type="Node" parent="HUD/Warning/HBoxContainer/PanelContainer/ColorRect" index="0" unique_id=810278477]
+script = ExtResource("5_dhsxg")
+blink_mode = "alpha"
+duration = 0.1
+interval = 0.0
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Warning/HBoxContainer/PanelContainer/ColorRect" index="1" unique_id=2073538692]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 4.0
+offset_right = 168.0
+offset_bottom = 132.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("20_6h1yq")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Warning/HBoxContainer/PanelContainer/ColorRect" index="2" unique_id=1579261465]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="HUD/Warning/HBoxContainer/PanelContainer" index="1" unique_id=302637982]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Warning"
+label_settings = SubResource("LabelSettings_85r8r")
+
+[node name="Label2" type="Label" parent="HUD/Warning/HBoxContainer" index="1" unique_id=633706494]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "MissileApproach"
+label_settings = SubResource("LabelSettings_toghf")
+
+[node name="GetYourReward" type="Control" parent="HUD" index="3" unique_id=1634665657]
+visible = false
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 168.0
+offset_right = 20.0
+offset_bottom = 208.0
+grow_horizontal = 2
+script = ExtResource("23_tp8pl")
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/GetYourReward" index="0" unique_id=698240012]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_top = -16.0
+offset_right = 224.0
+offset_bottom = 48.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/GetYourReward/PanelContainer" index="0" unique_id=1207209962]
+layout_mode = 2
+color = Color(0.976471, 0.658824, 0.145098, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/GetYourReward/PanelContainer/ColorRect" index="0" unique_id=1560672397]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 16.0
+offset_right = 188.0
+offset_bottom = 144.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("46_fcyym")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/GetYourReward/PanelContainer/ColorRect" index="1" unique_id=1621321047]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="HUD/GetYourReward/PanelContainer" index="1" unique_id=418605194]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Get your reward!"
+label_settings = SubResource("LabelSettings_85r8r")
+
+[node name="Label2" type="Label" parent="HUD/GetYourReward" index="1" unique_id=668360897]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.5
+offset_top = 36.0
+offset_right = 110.5
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "5 enemies has been killed"
+label_settings = SubResource("LabelSettings_toghf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/GetYourReward" index="2" unique_id=2039252055]
+libraries/ = SubResource("AnimationLibrary_tp8pl")
+
+[node name="Mission" type="Control" parent="HUD" index="4" unique_id=2032959953 node_paths=PackedStringArray("player", "player_damage_component")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("22_vj671")
+player = NodePath("../..")
+player_damage_component = NodePath("../../PlayerDamageComponent")
+
+[node name="Mission" type="CanvasGroup" parent="HUD/Mission" index="0" unique_id=870037484]
+position = Vector2(256, 136)
+
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/Mission/Mission" index="0" unique_id=994478333]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Mission/Mission/PanelContainer2" index="0" unique_id=1442611727]
+layout_mode = 2
+
+[node name="PanelContainer" type="MarginContainer" parent="HUD/Mission/Mission/PanelContainer2" index="1" unique_id=1828262664]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 5
+
+[node name="Label2" type="Label" parent="HUD/Mission/Mission/PanelContainer2/PanelContainer" index="0" unique_id=843258381]
+material = SubResource("CanvasItemMaterial_dpwos")
+layout_mode = 2
+text = "Mission"
+label_settings = SubResource("LabelSettings_dhsxg")
+
+[node name="Label" type="Label" parent="HUD/Mission/Mission" index="1" unique_id=488433358]
+offset_top = 56.0
+offset_right = 40.0
+offset_bottom = 89.0
+text = "Get enough points within the time limit."
+
+[node name="Time" type="CanvasGroup" parent="HUD/Mission" index="1" unique_id=1169782011]
+position = Vector2(1408, 136)
+
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/Mission/Time" index="0" unique_id=1554076603]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Mission/Time/PanelContainer2" index="0" unique_id=414456332]
+layout_mode = 2
+
+[node name="PanelContainer" type="MarginContainer" parent="HUD/Mission/Time/PanelContainer2" index="1" unique_id=1605122178]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 5
+
+[node name="TimeLeftLabel" type="Label" parent="HUD/Mission/Time/PanelContainer2/PanelContainer" index="0" unique_id=275130646]
+material = SubResource("CanvasItemMaterial_dpwos")
+layout_mode = 2
+text = "00 : 54"
+label_settings = SubResource("LabelSettings_dhsxg")
+
+[node name="BlinkCanvsItem" type="Node" parent="HUD/Mission/Time/PanelContainer2" index="2" unique_id=910720779]
+script = ExtResource("5_dhsxg")
+min_value = Color(0.827451, 0.184314, 0.184314, 0.211765)
+max_value = Color(0.827451, 0.184314, 0.184314, 1)
+interval = 0.0
+enable = false
+
+[node name="Label" type="Label" parent="HUD/Mission/Time" index="1" unique_id=1222185228]
+offset_left = -64.0
+offset_top = 16.0
+offset_bottom = 49.0
+text = "Time"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Mission/Time" index="2" unique_id=839066109]
+offset_top = 64.0
+offset_right = 40.0
+offset_bottom = 104.0
+
+[node name="CurrentPointsLabel" type="Label" parent="HUD/Mission/Time/HBoxContainer" index="0" unique_id=218510592]
+layout_mode = 2
+text = "1000"
+
+[node name="TargetPointsLabel" type="Label" parent="HUD/Mission/Time/HBoxContainer" index="1" unique_id=1574877316]
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 2
+text = "/ 5000 pts."
+
+[node name="MissionTimer" type="Timer" parent="HUD/Mission" index="2" unique_id=66863433]
+one_shot = true
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="HUD/Mission" index="3" unique_id=548048655]
+stream = ExtResource("24_s8q2k")
+volume_db = -15.0
+
+[node name="InputPrompts" type="Control" parent="HUD" index="5" unique_id=37658398]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/InputPrompts" index="0" unique_id=1603951942]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -612.0
+offset_top = -154.0
+offset_right = 612.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer" index="0" unique_id=1998617736]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="0" unique_id=1802827681]
+layout_mode = 2
+
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="0" unique_id=1791123317 instance=ExtResource("25_xbe7k")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2" index="1" unique_id=687175263]
+layout_mode = 2
+text = "Jet Direction"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="1" unique_id=1457996186]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer" index="0" unique_id=75962367]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control" index="0" unique_id=923995456 instance=ExtResource("25_xbe7k")]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 54.0
+
+[node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control/InputPromptIcon" index="0"]
+texture = ExtResource("41_dr1eb")
+
+[node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control/InputPromptIcon" index="1"]
+texture = ExtResource("21_4dcrn")
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1421949748]
+layout_mode = 2
+text = "Engine Switch"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="2" unique_id=1251471988]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3" index="0" unique_id=45617362]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control" index="0" unique_id=1169995135 instance=ExtResource("25_xbe7k")]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 54.0
+
+[node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control/InputPromptIcon" index="0"]
+texture = ExtResource("40_qson6")
+
+[node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control/InputPromptIcon" index="1"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 112.0
+offset_bottom = 112.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("23_xx0et")
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3" index="1" unique_id=1143871209]
+layout_mode = 2
+text = "Acceleration"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="3" unique_id=264056200]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="0" unique_id=850286512]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control" index="0" unique_id=1712875459 instance=ExtResource("25_xbe7k")]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 54.0
+
+[node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control/InputPromptIcon" index="0"]
+texture = ExtResource("38_a3vo5")
+
+[node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control/InputPromptIcon" index="1"]
+texture = ExtResource("34_3032a")
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4" index="1" unique_id=1616900003]
+layout_mode = 2
+text = "MiniGun"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="HUD/InputPrompts/MarginContainer/VBoxContainer" index="4" unique_id=1885718484]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="0" unique_id=2008582553]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+
+[node name="InputPromptIcon" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control" index="0" unique_id=1286068969 instance=ExtResource("25_xbe7k")]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 54.0
+
+[node name="GamepadIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control/InputPromptIcon" index="0"]
+texture = ExtResource("39_s5jdw")
+
+[node name="KeyboardIconRect" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control/InputPromptIcon" index="1"]
+texture = ExtResource("25_pcvun")
+
+[node name="Label" type="Label" parent="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5" index="1" unique_id=1523479124]
+layout_mode = 2
+text = "RocketLauncher"
+
+[node name="PlayerAttitude" type="Control" parent="HUD" index="6" unique_id=185901009 node_paths=PackedStringArray("player")]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("27_4ei6y")
+player = NodePath("../..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PlayerAttitude" index="0" unique_id=14195923]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -560.0
+offset_top = -632.0
+offset_right = -327.0
+offset_bottom = -369.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="HUD/PlayerAttitude/VBoxContainer" index="0" unique_id=1093904482]
+layout_mode = 2
+text = "Attitude"
+
+[node name="Direction" type="Control" parent="HUD/PlayerAttitude/VBoxContainer" index="1" unique_id=1799857112]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="MoveDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="0" unique_id=2091923891]
+modulate = Color(0.422371, 0.422371, 0.422371, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = -1.57079
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("27_0xfex")
+
+[node name="ForwardDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="1" unique_id=136537508]
+modulate = Color(0.117647, 0.533333, 0.898039, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = -2.35619
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("27_0xfex")
+
+[node name="TargetForwardDireciton" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="2" unique_id=72470582]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = -0.523598
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("27_0xfex")
+
+[node name="ForceDirection" type="TextureRect" parent="HUD/PlayerAttitude/VBoxContainer/Direction" index="3" unique_id=667672067]
+visible = false
+modulate = Color(0.956863, 0.262745, 0.211765, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("27_0xfex")
+
+[node name="Info" type="VBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer" index="2" unique_id=1503662754]
+layout_mode = 2
+
+[node name="Speed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="0" unique_id=598182854]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Speed" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/Speed" index="0" unique_id=517705501]
+layout_mode = 2
+text = "Speed"
+
+[node name="ProgressBarSpeed" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/Speed" index="1" unique_id=1889802626]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 380.0
+max_value = 684.0
+value = 380.0
+
+[node name="AccelSpeed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="1" unique_id=1315135439]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="AccelSpeed" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/AccelSpeed" index="0" unique_id=521342911]
+layout_mode = 2
+text = "AccelSpeed"
+
+[node name="ProgressBarAccelSpeed" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/AccelSpeed" index="1" unique_id=814468292]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 1.0
+max_value = 1.8
+value = 1.0
+
+[node name="TurnSpeed" type="HBoxContainer" parent="HUD/PlayerAttitude/VBoxContainer/Info" index="2" unique_id=115158523]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="TurnSpeed" type="Label" parent="HUD/PlayerAttitude/VBoxContainer/Info/TurnSpeed" index="0" unique_id=1008090759]
+layout_mode = 2
+text = "TurnSpeed"
+
+[node name="ProgressBarTurnSpeed" type="ProgressBar" parent="HUD/PlayerAttitude/VBoxContainer/Info/TurnSpeed" index="1" unique_id=4601251]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 2.5
+max_value = 3.0
+value = 2.5
+
+[node name="PlayerHealth" type="Control" parent="HUD" index="7" unique_id=1486715567 node_paths=PackedStringArray("player_damage_component")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("30_swlur")
+player_damage_component = NodePath("../../PlayerDamageComponent")
+
+[node name="PlayerHeart" type="Control" parent="HUD/PlayerHealth" index="0" unique_id=256834050]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Shadow" type="HBoxContainer" parent="HUD/PlayerHealth/PlayerHeart" index="0" unique_id=53542672]
+modulate = Color(0.129412, 0.129412, 0.129412, 0.501961)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 844.0
+offset_top = 820.0
+offset_right = 1118.0
+offset_bottom = 884.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="0" unique_id=1661715527]
+layout_mode = 2
+texture = ExtResource("31_l0xr3")
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="1" unique_id=71710876]
+layout_mode = 2
+texture = ExtResource("31_l0xr3")
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="2" unique_id=1548635722]
+layout_mode = 2
+texture = ExtResource("31_l0xr3")
+
+[node name="TextureRect4" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/Shadow" index="3" unique_id=78030748]
+layout_mode = 2
+texture = ExtResource("31_l0xr3")
+
+[node name="PlayerHeart" type="HBoxContainer" parent="HUD/PlayerHealth/PlayerHeart" index="1" unique_id=847667077]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 836.0
+offset_top = 812.0
+offset_right = 1110.0
+offset_bottom = 876.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="0" unique_id=1312793323]
+layout_mode = 2
+texture = ExtResource("31_l0xr3")
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="1" unique_id=1502113792]
+layout_mode = 2
+texture = ExtResource("31_l0xr3")
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="2" unique_id=787111838]
+layout_mode = 2
+texture = ExtResource("31_l0xr3")
+
+[node name="TextureRect4" type="TextureRect" parent="HUD/PlayerHealth/PlayerHeart/PlayerHeart" index="3" unique_id=1393047839]
+layout_mode = 2
+texture = ExtResource("31_l0xr3")
+
+[node name="PlayerHitFlash" type="Control" parent="HUD/PlayerHealth" index="1" unique_id=50869949]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/PlayerHealth/PlayerHitFlash" index="0" unique_id=897759601]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.898039, 0.223529, 0.207843, 1)
+
+[node name="GunSlot" type="Control" parent="HUD" index="8" unique_id=2072689099]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BulletNumber" type="Label" parent="HUD/GunSlot" index="0" unique_id=1323628821]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = 340.0
+offset_right = -235.0
+offset_bottom = 373.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gun: 1000"
+
+[node name="FireOnLabel" type="CanvasGroup" parent="HUD/GunSlot/BulletNumber" index="0" unique_id=1840080129]
+visible = false
+position = Vector2(0, -40)
+
+[node name="ColorRect" type="ColorRect" parent="HUD/GunSlot/BulletNumber/FireOnLabel" index="0" unique_id=2047890262]
+offset_left = -8.0
+offset_right = 128.0
+offset_bottom = 40.0
+
+[node name="Label2" type="Label" parent="HUD/GunSlot/BulletNumber/FireOnLabel" index="1" unique_id=139452253]
+material = SubResource("CanvasItemMaterial_vj671")
+offset_right = 114.0
+offset_bottom = 33.0
+text = "Fire : ON"
+
+[node name="RelodingLabel" type="CanvasGroup" parent="HUD/GunSlot/BulletNumber" index="1" unique_id=978145708]
+visible = false
+position = Vector2(0, 40)
+
+[node name="ColorRect" type="ColorRect" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="0" unique_id=980172729]
+offset_left = -8.0
+offset_right = 128.0
+offset_bottom = 40.0
+
+[node name="Label2" type="Label" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="1" unique_id=1543289515]
+material = SubResource("CanvasItemMaterial_vj671")
+offset_right = 114.0
+offset_bottom = 33.0
+text = "Reloading"
+
+[node name="BlinkCanvsItem" type="Node" parent="HUD/GunSlot/BulletNumber/RelodingLabel" index="2" unique_id=1870728514]
+script = ExtResource("5_dhsxg")
+
+[node name="RocketSlot" type="Control" parent="HUD" index="9" unique_id=1151041440]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("31_dn0s1")
+
+[node name="ShadowIcon" type="HBoxContainer" parent="HUD/RocketSlot" index="0" unique_id=810351283]
+modulate = Color(0.129412, 0.129412, 0.129412, 0.501961)
+layout_mode = 0
+offset_left = 368.0
+offset_top = 624.0
+offset_right = 616.0
+offset_bottom = 754.0
+scale = Vector2(0.7, 0.7)
+theme_override_constants/separation = 32
+
+[node name="TextureRect" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="0" unique_id=955455888]
+layout_mode = 2
+texture = ExtResource("33_dn0s1")
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="1" unique_id=1808647355]
+layout_mode = 2
+texture = ExtResource("33_dn0s1")
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="2" unique_id=1114619828]
+layout_mode = 2
+texture = ExtResource("33_dn0s1")
+
+[node name="TextureRect4" type="TextureRect" parent="HUD/RocketSlot/ShadowIcon" index="3" unique_id=1798343133]
+layout_mode = 2
+texture = ExtResource("33_dn0s1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/RocketSlot" index="1" unique_id=1475496519]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 616.0
+offset_right = 608.0
+offset_bottom = 746.0
+scale = Vector2(0.7, 0.7)
+theme_override_constants/separation = 32
+
+[node name="TextureRect" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="0" unique_id=1660780825]
+visible = false
+layout_mode = 2
+texture = ExtResource("31_c1pcq")
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="1" unique_id=2002521096]
+visible = false
+layout_mode = 2
+texture = ExtResource("31_c1pcq")
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="2" unique_id=748337385]
+visible = false
+layout_mode = 2
+texture = ExtResource("31_c1pcq")
+
+[node name="TextureRect4" type="TextureRect" parent="HUD/RocketSlot/HBoxContainer" index="3" unique_id=1037525207]
+visible = false
+layout_mode = 2
+texture = ExtResource("31_c1pcq")
+
+[node name="SFX" type="Node2D" parent="." index="9" unique_id=471888132]
+
+[node name="SFXEngineStart" type="AudioStreamPlayer2D" parent="SFX" index="0" unique_id=1880993528]
+stream = ExtResource("38_0u1hj")
+volume_db = -3.0
+pitch_scale = 0.8
+
+[node name="SFXEngineEnd" type="AudioStreamPlayer2D" parent="SFX" index="1" unique_id=1255663681]
+stream = ExtResource("38_frrsq")
+volume_db = -5.0
+pitch_scale = 1.25
+
+[node name="SFXEngine" type="AudioStreamPlayer2D" parent="SFX" index="2" unique_id=118729498]
+stream = ExtResource("36_swlur")
+volume_db = -5.0
+pitch_scale = 0.8
+
+[node name="SFXEngineoff" type="AudioStreamPlayer2D" parent="SFX" index="3" unique_id=731434484]
+stream = ExtResource("39_edi3d")
+volume_db = -15.0
+
+[node name="SFXAfterBurnerStart" type="AudioStreamPlayer2D" parent="SFX" index="4" unique_id=503194517]
+stream = ExtResource("39_bl3tp")
+volume_db = -3.0
+pitch_scale = 0.8
+
+[node name="SFXAfterBurnerEnd" type="AudioStreamPlayer2D" parent="SFX" index="5" unique_id=1496529925]
+stream = ExtResource("40_h44hf")
+volume_db = -0.3
+pitch_scale = 1.75
+
+[node name="SFXAfterBurner" type="AudioStreamPlayer2D" parent="SFX" index="6" unique_id=893375583]
+stream = ExtResource("37_qejli")
+volume_db = 1.2
+
+[node name="SFXgetYourReward" type="AudioStreamPlayer2D" parent="SFX" index="7" unique_id=893875132]
+stream = ExtResource("55_3032a")
+volume_db = 1.0
+
+[node name="AudioListener2D" type="AudioListener2D" parent="SFX" index="8" unique_id=1053995434]
+current = true
+
+[connection signal="timeout" from="HUD/Mission/MissionTimer" to="HUD/Mission" method="_on_mission_timer_timeout"]
+
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2/InputPromptIcon"]
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control/InputPromptIcon"]
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer3/Control/InputPromptIcon"]
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer4/Control/InputPromptIcon"]
+[editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer5/Control/InputPromptIcon"]

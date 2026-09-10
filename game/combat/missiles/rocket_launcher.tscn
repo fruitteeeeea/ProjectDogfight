@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw514kmcsyfxe"]
+
+[ext_resource type="Script" uid="uid://btd2cyjlqddpx" path="res://game/combat/missiles/rocket_launcher.gd" id="1_ptis4"]
+[ext_resource type="AudioStream" path="res://assets/audio/weapons/missiles/Equip High Tech D.wav" id="2_ptis4"]
+[ext_resource type="AudioStream" path="res://assets/audio/weapons/missiles/Missile Fire.wav" id="3_bbeaa"]
+
+[node name="RocketLauncher" type="Node2D"]
+script = ExtResource("1_ptis4")
+
+[node name="ReloadingTimer" type="Timer" parent="."]
+
+[node name="SFXRocketFire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bbeaa")
+pitch_scale = 1.1
+max_polyphony = 5
+
+[node name="SFXRocketReload" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ptis4")
+
+[connection signal="timeout" from="ReloadingTimer" to="." method="_on_timer_timeout"]

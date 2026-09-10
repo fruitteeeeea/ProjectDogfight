@@ -1,0 +1,11 @@
+[gd_scene load_steps=5 format=3 uid="uid://joyv433lmf2s"]
+
+[ext_resource type="Script" uid="uid://ctkawhd16ejd7" path="res://game/autoload/spawn_server.gd" id="1_586oy"]
+[ext_resource type="PackedScene" uid="uid://rtgahvid3v5d" path="res://game/ui/effects/floating_text/floating_text.tscn" id="2_q4v0w"]
+[ext_resource type="PackedScene" uid="uid://iwacin3xf4lt" path="res://game/world/pickups/supply.tscn" id="3_r61gg"]
+[ext_resource type="PackedScene" uid="uid://c0tkaccmwv5by" path="res://game/world/pickups/health_supply.tscn" id="4_c2g5n"]
+
+[node name="SpawnServer" type="Node2D"]
+script = ExtResource("1_586oy")
+FloatingText = ExtResource("2_q4v0w")
+player_reward_list = Array[PackedScene]([ExtResource("3_r61gg"), ExtResource("4_c2g5n")])

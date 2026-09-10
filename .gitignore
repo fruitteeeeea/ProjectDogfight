@@ -1,7 +1,10 @@
-# Godot 4+ specific ignores
+# Godot-generated files
 .godot/
+*.import
+
+# Platform build output
 /android/
-Asset/UI/.DS_Store
-Asset/.DS_Store
-Asset/splash_screen/.DS_Store
+
+# OS and editor temporary files
 .DS_Store
+*.tmp

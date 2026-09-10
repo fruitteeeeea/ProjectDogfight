@@ -1,0 +1,70 @@
+extends Node
+
+signal show_result(complete : bool) #游戏因各种原因结束 展示结算面板 
+signal change_input_device(input_mode : InputMode)
+
+signal distribute_rewards
+
+const INPUT_DEVICE_STICK_THRESHOLD := 0.55
+const MOUSE_DEADZONE := 16.0
+
+var your_points : int = 0
+var enemies_destroyed : int = 0:
+	set(v):
+		enemies_destroyed = v
+		if enemies_destroyed % 5 == 0 && enemies_destroyed != 0:
+			distribute_rewards.emit()
+			print("获取奖励！")
+
+
+var rank : Dictionary[int, String] = {
+	2500 : "C",
+	3000 : "B",
+	4500 : "A"
+}
+
+enum InputMode {
+	TOUCH_SCREEN,
+	GAMEPAD,
+	KEYBOARD,
+}
+
+@export var current_input_mode : InputMode = InputMode.GAMEPAD:
+	set(v):
+		if current_input_mode != v:
+			current_input_mode = v
+			change_input_device.emit(current_input_mode)
+
+
+func reset_game_status() -> void:
+	your_points = 0
+	enemies_destroyed = 0
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		current_input_mode = InputMode.TOUCH_SCREEN
+		return
+	
+	if (
+		event is InputEventJoypadButton or 
+		(event is InputEventJoypadMotion and abs(event.axis_value) > INPUT_DEVICE_STICK_THRESHOLD)
+	):
+		current_input_mode = InputMode.GAMEPAD
+		return
+
+
+	if (
+		event is InputEventKey or 
+		event is InputEventMouseButton or 
+		(event is InputEventMouseMotion and event.velocity.length() > MOUSE_DEADZONE)
+	):
+		current_input_mode = InputMode.KEYBOARD
+
+
+func is_mobile() -> bool:
+	return OS.has_feature("mobile")
+
+
+func is_pc() -> bool:
+	return OS.has_feature("pc")

@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://cukppeq26yfa1"]
+
+[ext_resource type="Script" uid="uid://dkxnx8t4hjveg" path="res://game/ui/menus/result_menu.gd" id="1_7cjnc"]
+[ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://game/ui/effects/frosted_glass.gdshader" id="1_pnvqm"]
+[ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://game/ui/effects/blink_canvas_item.gd" id="3_0wcn7"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/Signal Positive JRPG C.wav" id="4_oxks5"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/Signal Negative JRPG C.wav" id="5_1gpln"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cjnc"]
+shader = ExtResource("1_pnvqm")
+shader_parameter/shape_type = 1
+shader_parameter/rect_size = Vector2(300, 200)
+shader_parameter/corner_radius_top_left = 37.92
+shader_parameter/corner_radius_top_right = 20.0
+shader_parameter/corner_radius_bottom_left = 20.0
+shader_parameter/corner_radius_bottom_right = 20.0
+shader_parameter/circle_radius = 100.0
+shader_parameter/outline_enabled = true
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = Color(1, 1, 1, 0)
+shader_parameter/shadow_enabled = false
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_blur = 15.0
+shader_parameter/edge_softness = 0.0
+shader_parameter/shape_color = Color(1, 1, 1, 1)
+shader_parameter/color_gradient_y = 0.0
+shader_parameter/color_gradient_x = 9.5e-08
+shader_parameter/color_multiplier = 0.1
+shader_parameter/enable_screen_blur = true
+shader_parameter/blur_amount = 4.0
+shader_parameter/blur_samples = 4
+shader_parameter/glass_opacity = 0.2
+shader_parameter/node_size = Vector2(100, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cn1xi"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_pnvqm"]
+font_size = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxks5"]
+size = Vector2(1920, 1080)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1gpln"]
+font_size = 48
+
+[sub_resource type="Animation" id="Animation_1gpln"]
+resource_name = "01"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TouchToRetry:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_5yd21"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TouchToRetry:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5yd21"]
+_data = {
+&"01": SubResource("Animation_1gpln"),
+&"RESET": SubResource("Animation_5yd21")
+}
+
+[node name="ResultMenu" type="Control" unique_id=1986623808]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7cjnc")
+
+[node name="BlurBackground" type="ColorRect" parent="." unique_id=782263847]
+visible = false
+material = SubResource("ShaderMaterial_7cjnc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BattleComplete" type="VBoxContainer" parent="." unique_id=705719714]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -63.5
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="BattleComplete" unique_id=99006095]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BattleComplete/PanelContainer" unique_id=1553761243]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Battle Complete"
+label_settings = SubResource("LabelSettings_cn1xi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BattleComplete" unique_id=1415694360]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="YourPoints" type="Label" parent="BattleComplete/VBoxContainer" unique_id=1239543329]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Your points : "
+label_settings = SubResource("LabelSettings_pnvqm")
+
+[node name="EnemiesDestroyed" type="Label" parent="BattleComplete/VBoxContainer" unique_id=1116606324]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Enemies Destroyed: "
+label_settings = SubResource("LabelSettings_pnvqm")
+
+[node name="Rank" type="Label" parent="BattleComplete/VBoxContainer" unique_id=1935681205]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Rank : D"
+label_settings = SubResource("LabelSettings_pnvqm")
+
+[node name="GameOver" type="VBoxContainer" parent="." unique_id=217384827]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -63.5
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GameOver" unique_id=453453950]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameOver/PanelContainer" unique_id=783199747]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Game Over"
+label_settings = SubResource("LabelSettings_cn1xi")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="GameOver" unique_id=687280563]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Result" type="Label" parent="GameOver/HBoxContainer" unique_id=735578541]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Run out of time."
+label_settings = SubResource("LabelSettings_pnvqm")
+
+[node name="TouchToRetry" type="Control" parent="." unique_id=108154393]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="TouchToRetry" unique_id=1047087083]
+shape = SubResource("RectangleShape2D_oxks5")
+action = "start_game"
+
+[node name="Label" type="Label" parent="TouchToRetry" unique_id=968449912]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.5
+offset_top = 220.0
+offset_right = 190.5
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Touch to retry."
+label_settings = SubResource("LabelSettings_1gpln")
+
+[node name="BlinkCanvasItem" type="Node" parent="TouchToRetry/Label" unique_id=367682737]
+script = ExtResource("3_0wcn7")
+max_value = Color(1, 1, 1, 0.501961)
+metadata/_custom_type_script = "uid://dxl17dpembjyc"
+
+[node name="Win" type="AudioStreamPlayer" parent="." unique_id=1030225731]
+stream = ExtResource("4_oxks5")
+volume_db = -10.0
+pitch_scale = 0.8
+bus = &"SFX"
+
+[node name="Lose" type="AudioStreamPlayer" parent="." unique_id=616794218]
+stream = ExtResource("5_1gpln")
+volume_db = -10.0
+pitch_scale = 0.8
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=272317452]
+libraries/ = SubResource("AnimationLibrary_5yd21")

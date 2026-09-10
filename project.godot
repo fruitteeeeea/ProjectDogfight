@@ -19,15 +19,15 @@ config/tags=PackedStringArray("2d", "demo", "ios")
 run/main_scene="uid://j6rednkkkc1t"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/stretch_mode=0
-boot_splash/image="uid://l05vfbg0e4xw"
-config/icon="uid://cusp27e4d7xqy"
+boot_splash/image="res://assets/branding/splash_screen/2bk21ne7urbg1.png"
+config/icon="res://icon.svg"
 
 [autoload]
 
-GameFeel="*res://Camera/game_feel.tscn"
-GameStatusServer="*res://Unit/Server/game_status_server.tscn"
-SoundManager="*res://Unit/Server/sound_manager.tscn"
-SpwanServer="*res://Unit/Server/spwan_server.tscn"
+GameFeel="*res://game/camera/game_feel.tscn"
+GameStatusServer="*res://game/autoload/game_status_server.tscn"
+SoundManager="*res://game/autoload/sound_manager.tscn"
+SpawnServer="*res://game/autoload/spawn_server.tscn"
 
 [display]
 
@@ -35,7 +35,7 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/handheld/orientation=4
-mouse_cursor/custom_image="uid://qgtt4iihnros"
+mouse_cursor/custom_image="res://assets/sprites/ui/crosshair007.png"
 mouse_cursor/custom_image_hotspot=Vector2(64, 64)
 
 [dotnet]
@@ -50,7 +50,7 @@ enemy=""
 [gui]
 
 theme/default_theme_scale=1.5
-theme/custom_font="uid://d2qrj4ibq4v3e"
+theme/custom_font="res://assets/fonts/realtimeroundedtest-bold.otf"
 
 [input]
 
@@ -89,13 +89,13 @@ dodge={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"location":0,"echo":false,"script":null)
 ]
 }
-StartTheGame={
+start_game={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
-BurstSpeed={
+burst_speed={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":2,"pressure":0.0,"pressed":true,"script":null)
@@ -130,6 +130,7 @@ move_down={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=false
 
 [rendering]
 
