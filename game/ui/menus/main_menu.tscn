@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://dskykeqhsdh1p" path="res://game/ui/menus/moving_texture.gdshader" id="2_36v3h"]
 [ext_resource type="Shader" uid="uid://dha42trupmoxe" path="res://game/ui/effects/frosted_glass.gdshader" id="3_5a3qv"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://game/ui/effects/blink_canvas_item.gd" id="5_rnkyl"]
-[ext_resource type="FontFile" path="res://assets/fonts/realtimeroundedtest-black.otf" id="6_6r8xy"]
+[ext_resource type="FontFile" uid="uid://qk3hgy5sbeyl" path="res://assets/fonts/realtimeroundedtest-black.otf" id="6_6r8xy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5a3qv"]
 shader = ExtResource("2_36v3h")
