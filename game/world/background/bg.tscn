@@ -12,7 +12,7 @@ shader_parameter/colorC = Color(0.18, 0.12, 0.38, 1)
 shader_parameter/discomode = false
 shader_parameter/speed = 0.10000000149012
 shader_parameter/quality_octaves = 10
-shader_parameter/brightness = 0.55
+shader_parameter/brightness = 0.25000000861512
 
 [sub_resource type="Curve" id="Curve_lquwl"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.694581, 0.516981), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
