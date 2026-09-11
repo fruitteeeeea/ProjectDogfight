@@ -1,8 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://bl1cf0r32i67t"]
+[gd_scene format=3 uid="uid://bl1cf0r32i67t"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/prototypes/blueprint_sprite_32x32.png" id="1_clmw2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/particles/particle_00.png" id="2_v7n5n"]
-[ext_resource type="AudioStream" path="res://assets/audio/environment/Wind Loop A.wav" id="3_v7n5n"]
+[ext_resource type="Shader" uid="uid://doci8sfov6m3y" path="res://game/world/background/planet_coffee.gdshader" id="1_clmw2"]
+[ext_resource type="Texture2D" uid="uid://b1ec1g6fji1f8" path="res://assets/sprites/particles/particle_00.png" id="2_v7n5n"]
+[ext_resource type="AudioStream" uid="uid://cooajt88dkijo" path="res://assets/audio/environment/Wind Loop A.wav" id="3_v7n5n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_planet_coffee"]
+shader = ExtResource("1_clmw2")
+shader_parameter/colorA = Color(0.015, 0.025, 0.09, 1)
+shader_parameter/colorB = Color(0.075, 0.04, 0.18, 1)
+shader_parameter/colorC = Color(0.18, 0.12, 0.38, 1)
+shader_parameter/discomode = false
+shader_parameter/speed = 0.10000000149012
+shader_parameter/quality_octaves = 10
+shader_parameter/brightness = 0.55
 
 [sub_resource type="Curve" id="Curve_lquwl"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.694581, 0.516981), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -29,33 +39,18 @@ scale_curve = SubResource("CurveTexture_lquwl")
 alpha_curve = SubResource("CurveTexture_7mycd")
 turbulence_enabled = true
 
-[node name="BG" type="Node2D"]
+[node name="BG" type="Node2D" unique_id=976262573]
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -3846.0
-offset_top = -2132.0
-offset_right = 3846.0
-offset_bottom = 2132.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_clmw2")
-stretch_mode = 1
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -3848.0
-offset_top = -2136.0
-offset_right = 3848.0
-offset_bottom = 2136.0
+[node name="PlanetCoffee" type="ColorRect" parent="." unique_id=1533853073]
+material = SubResource("ShaderMaterial_planet_coffee")
+offset_left = -4864.0
+offset_top = -3200.0
+offset_right = 4864.0
+offset_bottom = 3200.0
 mouse_filter = 2
-color = Color(0.0392157, 0.0392157, 0.0392157, 0.701961)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=236393883]
 amount = 200
 texture = ExtResource("2_v7n5n")
 lifetime = 2.0
@@ -63,7 +58,7 @@ fixed_fps = 60
 visibility_rect = Rect2(-3890.64, -2163.89, 7762.57, 4363.08)
 process_material = SubResource("ParticleProcessMaterial_1bvp3")
 
-[node name="SFXWind" type="AudioStreamPlayer" parent="."]
+[node name="SFXWind" type="AudioStreamPlayer" parent="." unique_id=1132149288]
 stream = ExtResource("3_v7n5n")
 volume_db = -20.0
 autoplay = true
