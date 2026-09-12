@@ -12,4 +12,3 @@ func update_rocket_count(nb: int) -> void:
 		var child := h_box_container.get_child(i)
 		if child is TextureRect:
 			child.visible = i < nb
-			await get_tree().create_timer(.05).timeout

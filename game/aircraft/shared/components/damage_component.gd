@@ -26,6 +26,8 @@ func _ready() -> void:
 
 #受到伤害 
 func take_damage(damage : float) -> void:
+	if jet.is_dead or not GameStatusServer.can_receive_damage(jet is Player):
+		return
 	health = clamp(health - damage, 0, max_health)
 	
 	if damage < 0:

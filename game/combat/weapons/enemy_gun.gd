@@ -10,17 +10,19 @@ var can_fire := false
 
 #默认发射方式 不用接受参数 
 func fire() -> void:
-	if !can_fire:
+	if !can_fire or not GameStatusServer.is_battle_active():
 		return
 	
 	var player = get_tree().get_first_node_in_group("player") as Player
 	var direction = (player.global_position - global_position).normalized()
 	
 	for i in range(bullet_number):
+		if not GameStatusServer.is_battle_active():
+			return
 		_fire(Vector2.ZERO, direction, 5.0)
 		sfx_fire.play()
 		sfx_bullet_fly.play()
-		await get_tree().create_timer(.05).timeout
+		await get_tree().create_timer(.05, false).timeout
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:

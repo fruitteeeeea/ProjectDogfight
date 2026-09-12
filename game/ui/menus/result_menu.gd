@@ -20,70 +20,63 @@ class_name ResultMenu
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var game_finished = false
+var retry_enabled := false
+var _retry: Callable
+var _animation_tick_usec := 0
 
-func _ready() -> void:
-	GameStatusServer.reset_game_status()
-	GameStatusServer.show_result.connect(_show_result)
-
-
-func _show_result(_battle_complete : bool) -> void:
+func show_battle_result(snapshot: Dictionary, retry: Callable) -> void:
 	if game_finished:
 		return
-	
-	if _battle_complete:
-		_show_battle_result()
-	else :
-		_show_game_over()
-	
-	if controller:
-		controller.hide()
-	
 	game_finished = true
+	your_points.text = "Your points: " + str(snapshot.points)
+	enemies_destroyed.text = "Enemies destroyed: " + str(snapshot.kills)
+	rank.text = "Rank: " + snapshot.rank
+	if snapshot.complete:
+		battle_complete.show()
+		_display_box(battle_complete)
+		win.play()
+	else:
+		result.text = "Jet has been destroyed" if snapshot.reason == 1 else "Run out of time."
+		game_over.show()
+		_display_box(game_over)
+		lose.play()
 	blur_background.show()
+	_retry = retry
+	$TouchToRetry/TouchScreenButton.hide()
+	animation_player.animation_finished.connect(_enable_retry, CONNECT_ONE_SHOT)
+	animation_player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+	animation_player.speed_scale = 1.0
+	_animation_tick_usec = Time.get_ticks_usec()
 	animation_player.play("01")
 
+func _process(_delta: float) -> void:
+	if not game_finished:
+		return
+	var tick := Time.get_ticks_usec()
+	animation_player.advance(float(tick - _animation_tick_usec) / 1000000.0)
+	_animation_tick_usec = tick
 
-func _show_battle_result() -> void:
-	your_points.text = "Your points : " + str(GameStatusServer.your_points)
-	enemies_destroyed.text = "Enemies Destroyed: " + str(GameStatusServer.enemies_destroyed)
-	
-# 1. 获取所有阈值并从大到小排序
-	var thresholds = GameStatusServer.rank.keys()
-	thresholds.sort_custom(func(a, b): return a < b)
-	
-	# 2. 遍历并比较
-	for threshold in thresholds:
-		if GameStatusServer.your_points >= threshold:
-			rank.text = "Rank : " + GameStatusServer.rank[threshold]
-	
-	battle_complete.show()
-	_display_box(battle_complete)
-	
-	win.play()
+func _enable_retry(_animation: StringName) -> void:
+	retry_enabled = true
+	touch_to_retry.show()
 
-
-func _show_game_over() -> void:
-	var player = get_tree().get_first_node_in_group("player") as Player
-	if player.is_dead:
-		result.text = "Jet has been destroyed"
-		
-	_display_text(result)
-	game_over.show()
-	_display_box(game_over)
-	
-	lose.play()
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("start_game") && game_finished:
-		get_tree().reload_current_scene()
+func _input(event: InputEvent) -> void:
+	if not retry_enabled:
+		return
+	if event is InputEventKey and event.echo:
+		return
+	var pointer_pressed: bool = (event is InputEventScreenTouch and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)
+	if pointer_pressed or event.is_action_pressed("start_game"):
+		retry_enabled = false
+		get_viewport().set_input_as_handled()
+		_retry.call()
 
 
 #region Tween
 func _display_text(label : Label) -> void:
 	label.visible_ratio = 0.0
 	
-	var tween = create_tween().set_ease(Tween.EASE_OUT)
+	var tween = create_tween().set_ignore_time_scale(true).set_ease(Tween.EASE_OUT)
 	tween.tween_property(label, "visible_ratio", 1.0, 1.0)
 
 
@@ -92,7 +85,7 @@ func _display_box(box : VBoxContainer) -> void:
 	box.modulate.a = 0.0
 	blur_background.material.set_shader_parameter("blur_amount", 0.0)
 	
-	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).set_parallel()
+	var tween = create_tween().set_ignore_time_scale(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).set_parallel()
 	tween.tween_property(box, "position:x", 0.0, .3)
 	tween.tween_property(box, "modulate:a", 1.0, .3)
 	tween.tween_property(blur_background.material, "shader_parameter/blur_amount", 4.0, 1.0)

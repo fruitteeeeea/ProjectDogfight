@@ -64,6 +64,10 @@ const MOVE_DOWN := &"move_down"
 @onready var sfx_after_burner: AudioStreamPlayer2D = $SFX/SFXAfterBurner
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.echo:
+		return
+	if not GameStatusServer.can_control_player():
+		return
 	if event.is_action_pressed("engine"): #切换引擎状态 
 		engine_on = !engine_on
 		
@@ -107,7 +111,26 @@ func _get_forward(delta) -> Vector2:
 	return forward
 
 
+var require_stick_neutral := false
+
+func reset_combat_input() -> void:
+	last_control_direction = forward
+	require_stick_neutral = true
+	$Weapon/PlayerGun.reset_trigger()
+	if accelerate_component.burst_accel:
+		accelerate_component.burst_accel = false
+
 func _get_control_direction() -> Vector2:
+	if is_instance_valid(GameStatusServer.manager) and not GameStatusServer.can_control_player():
+		return forward
+	if require_stick_neutral:
+		var centered := true
+		for device in Input.get_connected_joypads():
+			if absf(Input.get_joy_axis(device, JOY_AXIS_LEFT_X)) > 0.15 or absf(Input.get_joy_axis(device, JOY_AXIS_LEFT_Y)) > 0.15:
+				centered = false
+		if not centered:
+			return last_control_direction
+		require_stick_neutral = false
 	var input_direction := Input.get_vector(
 		MOVE_LEFT,
 		MOVE_RIGHT,
@@ -171,6 +194,27 @@ func take_damage(damage : float) -> void:
 
 
 func die() -> void:
+	if is_dead or not GameStatusServer.can_receive_damage(true):
+		return
 	is_dead = true
 	player_dead.emit()
 #endregion
+
+func reset_for_mission() -> void:
+	reset_combat_input()
+	is_dead = false
+	force_dir = Vector2.ZERO
+	engine_on = true
+	limbo_hsm.dispatch("EngineOn")
+	base_accel = 1.0
+	burst_accel = 1.0
+	burst_ratio = 1.0
+	move_direction = forward
+	target_forward = forward
+	velocity = forward * speed
+	accelerate_component.reset_for_mission()
+	$Weapon/PlayerGun.reset_for_mission()
+	$Weapon/RocketLauncher.reset_for_mission()
+	player_damage_component.health = player_damage_component.max_health
+	$HUD/PlayerHealth.reset_display()
+	animation_player.stop()

@@ -33,9 +33,6 @@ shader_parameter/blur_samples = 4
 shader_parameter/glass_opacity = 0.2
 shader_parameter/node_size = Vector2(100, 100)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2vmc"]
-size = Vector2(1920, 1080)
-
 [sub_resource type="LabelSettings" id="LabelSettings_b2vmc"]
 font_size = 48
 
@@ -217,10 +214,6 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer/Control/TouchToStart" unique_id=1685561495]
-shape = SubResource("RectangleShape2D_b2vmc")
-action = "start_game"
-
 [node name="Label" type="Label" parent="CanvasLayer/Control/TouchToStart" unique_id=1817234792]
 layout_mode = 1
 anchors_preset = 8
@@ -253,6 +246,19 @@ offset_left = -20.0
 offset_top = -196.0
 offset_right = 20.0
 offset_bottom = -156.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Title" unique_id=1564572222]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1038.0
+offset_top = -78.0
+offset_right = 1038.0
+offset_bottom = 78.0
 grow_horizontal = 2
 grow_vertical = 2
 

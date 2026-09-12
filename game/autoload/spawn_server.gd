@@ -9,6 +9,8 @@ extends Node2D
 )
 
 func spawn_floating_text(pos : Vector2) -> void:
+	if not GameStatusServer.is_battle_active():
+		return
 	var floating_text = FloatingText.instantiate() as FloatingText
 	get_tree().current_scene.add_child(floating_text)
 	floating_text.global_position = pos
@@ -17,6 +19,12 @@ func spawn_floating_text(pos : Vector2) -> void:
 #region SpawnPlayerReward 生成玩家奖励
 #生成玩家奖励
 func spawn_player_reward() -> void:
+	if GameStatusServer.is_battle_active():
+		_spawn_player_reward.call_deferred(GameStatusServer.battle_epoch)
+
+func _spawn_player_reward(epoch: int) -> void:
+	if not GameStatusServer.is_battle_active() or epoch != GameStatusServer.battle_epoch:
+		return
 	#先获取物品
 	var player = get_tree().get_first_node_in_group("player") as Player
 	if !player: return
@@ -26,7 +34,7 @@ func spawn_player_reward() -> void:
 	var spawn_pos = get_spawn_position(pos, dir)
 	
 	var reward = player_reward_list.pick_random().instantiate() as SupplyPackage
-	get_tree().current_scene.call_deferred("add_child", reward)
+	get_tree().current_scene.add_child(reward)
 	reward.global_position = spawn_pos
 
 

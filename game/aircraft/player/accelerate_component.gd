@@ -63,11 +63,17 @@ func _ready() -> void:
 
 #按下之后 开始加速 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.echo:
+		return
+	if not GameStatusServer.can_control_player():
+		return
 	if event.is_action_pressed(trigger_button):
 		burst_accel = !burst_accel
 
 
 func _physics_process(delta: float) -> void:
+	if not GameStatusServer.can_control_player():
+		return
 	if progress_bar.value<= 0.0:
 		burst_accel = false
 	
@@ -77,3 +83,14 @@ func _physics_process(delta: float) -> void:
 		progress_bar.value += delta * burst_recover
 	
 	accel_and_speed.text = str(snappedf(player._get_burst_accel(), .1)) + " / " + str(snappedf(player._get_final_speed(), .1))
+
+func reset_for_mission() -> void:
+	burst_accel = false
+	progress_bar.value = max_burst_accel_fuel
+	accelerate_particle.emitting = false
+	for pack in acceleration_burst_pack:
+		if is_instance_valid(pack):
+			pack.queue_free()
+	acceleration_burst_pack.clear()
+	player.sfx_after_burner_start.stop()
+	player.sfx_after_burner_end.stop()

@@ -54,6 +54,8 @@ func _apply_force_direction(
 
 
 func _exit() -> void:
+	if not is_instance_valid(player.sfx_engine_end) or not player.sfx_engine_end.is_inside_tree():
+		return
 	player.accelerate_component.burst_accel = false
 	player.engine_on_label.hide()
 	

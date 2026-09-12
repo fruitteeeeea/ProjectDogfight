@@ -38,9 +38,10 @@ func take_damage(damage : float) -> void:
 
 
 func die() -> void:
+	if is_dead or not GameStatusServer.is_battle_active():
+		return
 	super()
-	GameStatusServer.your_points += 100
-	GameStatusServer.enemies_destroyed += 1
+	GameStatusServer.record_kill()
 	bt_player.active = false
 	_enter_dead_state()
 	_crash()
@@ -53,10 +54,10 @@ func _crash() -> void:
 	
 	turn_speed = 50.0
 	target_forward = Vector2(crash_dir_x, -1.0)
-	await  get_tree().create_timer(randf_range(.25, .5)).timeout
+	await  get_tree().create_timer(randf_range(.25, .5), false).timeout
 	turn_speed = 2.5
 	target_forward = JetMath.add_random_offset_to_angle(Vector2(crash_dir_x,  1.0), 30)
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(5.0, false).timeout
 	queue_free()
 #endregion
 

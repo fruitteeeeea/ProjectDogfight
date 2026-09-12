@@ -1,7 +1,7 @@
 extends DamageComponent
 class_name PlayerDamageComponent
 
-@export var test_state := true
+@export var test_state := false
 
 @onready var sfx_hit: AudioStreamPlayer2D = $SFXHit
 

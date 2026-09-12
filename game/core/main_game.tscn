@@ -3,27 +3,20 @@
 [ext_resource type="PackedScene" uid="uid://bl1cf0r32i67t" path="res://game/world/background/bg.tscn" id="1_7dbjd"]
 [ext_resource type="Script" uid="uid://doh7g3ch50gia" path="res://game/core/game_manager.gd" id="2_k34uy"]
 [ext_resource type="PackedScene" uid="uid://dnc5yjftuv7il" path="res://game/aircraft/player/player.tscn" id="3_p1lxc"]
-[ext_resource type="PackedScene" uid="uid://d2rcul35yljaa" path="res://game/aircraft/enemy/enemy.tscn" id="4_ui0m1"]
 [ext_resource type="PackedScene" uid="uid://duhpi6ih7unwk" path="res://game/world/spawning/enemy_spawner.tscn" id="5_m416f"]
 [ext_resource type="Script" uid="uid://cdkgulvu32i7m" path="res://game/ui/input/player_touch_control.gd" id="5_tacrw"]
-[ext_resource type="PackedScene" uid="uid://dsm8xf4dmc6xd" path="res://game/ui/hud/game_speed.tscn" id="6_f7yv3"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/touch_icons/xbox_button_color_a.png" id="6_kg3yv"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/touch_icons/xbox_button_color_b.png" id="7_3curb"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/input_prompts/keyboard_enter.png" id="7_i23kr"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/touch_icons/xbox_button_color_x.png" id="8_aqbwo"]
+[ext_resource type="Texture2D" uid="uid://b4slawkr7fl0e" path="res://assets/sprites/ui/touch_icons/xbox_button_color_a.png" id="6_kg3yv"]
+[ext_resource type="Texture2D" uid="uid://dmvccprvlw0f0" path="res://assets/sprites/ui/touch_icons/xbox_button_color_b.png" id="7_3curb"]
+[ext_resource type="Texture2D" uid="uid://dpbthdv0paitm" path="res://assets/sprites/ui/input_prompts/keyboard_enter.png" id="7_i23kr"]
+[ext_resource type="Texture2D" uid="uid://cdl8f1y1dg0jx" path="res://assets/sprites/ui/touch_icons/xbox_button_color_x.png" id="8_aqbwo"]
 [ext_resource type="Script" uid="uid://dxl17dpembjyc" path="res://game/ui/effects/blink_canvas_item.gd" id="8_x645j"]
 [ext_resource type="PackedScene" uid="uid://cukppeq26yfa1" path="res://game/ui/menus/result_menu.tscn" id="9_aab7o"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/touch_icons/xbox_button_color_y.png" id="9_vqf66"]
-[ext_resource type="PackedScene" uid="uid://iwacin3xf4lt" path="res://game/world/pickups/supply.tscn" id="10_k34uy"]
-[ext_resource type="PackedScene" uid="uid://c0tkaccmwv5by" path="res://game/world/pickups/health_supply.tscn" id="11_p1lxc"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/joystick/Radius.png" id="12_m416f"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/joystick/Button.png" id="13_f7yv3"]
+[ext_resource type="Texture2D" uid="uid://ck258cnbmenn5" path="res://assets/sprites/ui/touch_icons/xbox_button_color_y.png" id="9_vqf66"]
+[ext_resource type="Texture2D" uid="uid://de4337o1erfaf" path="res://assets/sprites/ui/joystick/Radius.png" id="12_m416f"]
+[ext_resource type="Texture2D" uid="uid://ck5l53aijpg75" path="res://assets/sprites/ui/joystick/Button.png" id="13_f7yv3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f6fdm"]
 font_size = 32
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1lxc"]
-size = Vector2(1920, 100)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a0vra"]
 radius = 64.0
@@ -35,13 +28,9 @@ texture = ExtResource("12_m416f")
 texture = ExtResource("13_f7yv3")
 
 [node name="MainGame" type="Node2D" unique_id=298867485]
+process_mode = 1
 metadata/_edit_vertical_guides_ = [-3848.0]
 metadata/_edit_horizontal_guides_ = [-2136.0, 2136.0]
-
-[node name="GameSpeed" parent="." unique_id=1895896034 instance=ExtResource("6_f7yv3")]
-enable = true
-trigger_type = "Click"
-game_speed_scale = Array[float]([3.0, 1.0])
 
 [node name="GameHUD" type="CanvasLayer" parent="." unique_id=1678203006]
 layer = 128
@@ -110,10 +99,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="GameHUD/ReadyToStart/PanelContainer/TapHereToStart" unique_id=1409589235]
-shape = SubResource("RectangleShape2D_p1lxc")
-action = "start_game"
-
 [node name="Label" type="Label" parent="GameHUD/ReadyToStart/PanelContainer/TapHereToStart" unique_id=2116959471]
 layout_mode = 1
 anchors_preset = 8
@@ -179,14 +164,6 @@ shape = SubResource("CircleShape2D_a0vra")
 action = "burst_speed"
 visibility_mode = 1
 
-[node name="X2" type="TouchScreenButton" parent="GameHUD/PlayerTouchControl/ABXYButton" unique_id=2096409909]
-position = Vector2(-232, -840)
-scale = Vector2(1.35, 1.35)
-texture_normal = ExtResource("8_aqbwo")
-shape = SubResource("CircleShape2D_a0vra")
-action = "game_speed"
-visibility_mode = 1
-
 [node name="Y" type="TouchScreenButton" parent="GameHUD/PlayerTouchControl/ABXYButton" unique_id=1546158575]
 position = Vector2(-352, -464)
 scale = Vector2(1.35, 1.35)
@@ -229,13 +206,4 @@ player = NodePath("../Player")
 position = Vector2(1176, 2000)
 metadata/_edit_horizontal_guides_ = [448.0]
 
-[node name="Enemy" parent="." unique_id=1714170478 instance=ExtResource("4_ui0m1")]
-position = Vector2(654, 782)
-
 [node name="EnemySpawner" parent="." unique_id=1322948697 instance=ExtResource("5_m416f")]
-
-[node name="Supply" parent="." unique_id=511293429 instance=ExtResource("10_k34uy")]
-position = Vector2(-648, 704)
-
-[node name="HealthSupply" parent="." unique_id=827663410 instance=ExtResource("11_p1lxc")]
-position = Vector2(2328, 952)

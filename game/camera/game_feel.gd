@@ -16,18 +16,27 @@ func do_camera_shake(strength := 1.5):
 	
 	trauma_component.add_trauma(strength)
 
-func hit_stop_short():
-	Engine.time_scale = 0.05
-	await get_tree().create_timer(0.02, true, false, true).timeout
-	Engine.time_scale = 1
+var _hit_stop_generation := 0
 
-#时间减慢
-func hit_stop_medium():
-	Engine.time_scale = 0.15
-	await get_tree().create_timer(0.08, true, false, true).timeout
-	Engine.time_scale = 1
+func cancel_hit_stop() -> void:
+	_hit_stop_generation += 1
+	Engine.time_scale = 1.0
 
-func hit_stop_long():
-	Engine.time_scale = 0.0
-	await get_tree().create_timer(0.15, true, false, true).timeout
-	Engine.time_scale = 1
+func _hit_stop(scale: float, seconds: float) -> void:
+	if not GameStatusServer.is_battle_active():
+		return
+	_hit_stop_generation += 1
+	var generation := _hit_stop_generation
+	Engine.time_scale = scale
+	await get_tree().create_timer(seconds, true, false, true).timeout
+	if generation == _hit_stop_generation:
+		Engine.time_scale = 1.0
+
+func hit_stop_short() -> void:
+	_hit_stop(0.05, 0.02)
+
+func hit_stop_medium() -> void:
+	_hit_stop(0.15, 0.08)
+
+func hit_stop_long() -> void:
+	_hit_stop(0.0, 0.15)

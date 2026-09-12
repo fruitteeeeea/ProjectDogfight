@@ -6,7 +6,7 @@
 
 [node name="PlayerDamageComponent" instance=ExtResource("1_u3j04")]
 script = ExtResource("2_uboju")
-test_state = true
+test_state = false
 
 [node name="SFXHit" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource("3_dq7ky")

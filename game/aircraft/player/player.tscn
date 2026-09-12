@@ -391,6 +391,7 @@ max_value = 20.0
 value = 20.0
 
 [node name="AccelAndSpeed" type="Label" parent="AccelerateComponent/CanvasLayer/AccelHUD" index="1" unique_id=74021784]
+visible = false
 layout_mode = 0
 offset_left = 1176.0
 offset_top = 880.0
@@ -519,6 +520,7 @@ script = ExtResource("10_oriqu")
 player = NodePath("../../../..")
 
 [node name="PlayerPositionIndicator" type="Label" parent="HUD/ScaleLine/ScaleLineHUD/PlayerPositionGuideLine" index="0" unique_id=126954170]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1546,7 +1548,6 @@ volume_db = 1.0
 [node name="AudioListener2D" type="AudioListener2D" parent="SFX" index="8" unique_id=1053995434]
 current = true
 
-[connection signal="timeout" from="HUD/Mission/MissionTimer" to="HUD/Mission" method="_on_mission_timer_timeout"]
 
 [editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer2/InputPromptIcon"]
 [editable path="HUD/InputPrompts/MarginContainer/VBoxContainer/HBoxContainer/Control/InputPromptIcon"]

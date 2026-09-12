@@ -66,9 +66,16 @@ var reload_accumulator := 0.0
 func _ready() -> void:
 	current_bullet = max_bullet #初始时补充弹药
 	fire_interval_timer.wait_time = fire_interval #赋值开火间隔
+	_update_gun_text()
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.echo:
+		return
+	if not GameStatusServer.can_control_player():
+		return
+	if event is InputEventMouseButton and is_instance_valid(GameStatusServer.manager) and GameStatusServer.manager.is_pointer_over_menu(event.position):
+		return
 	if event.is_action_pressed(trigger_button):
 		fire_on = true
 	if event.is_action_released(trigger_button):
@@ -76,6 +83,8 @@ func _input(event: InputEvent) -> void:
 
 
 func fire() -> void:
+	if not GameStatusServer.can_control_player():
+		return
 	if current_bullet <= 0:
 		fire_on = false
 		return
@@ -110,6 +119,8 @@ func _update_gun_text() -> void:
 
 
 func _handle_bullet_reload(delta : float) -> void:
+	if not GameStatusServer.can_control_player():
+		return
 	if !reload_active or current_bullet >= max_bullet:
 		return
 
@@ -131,3 +142,24 @@ func _handle_bullet_reload(delta : float) -> void:
 func _on_sfx_gun_reload_start_finished() -> void:
 	if reload_active:
 		sfx_gun_reloading.play()
+
+func reset_trigger() -> void:
+	var saved_time: float = reload_time
+	var saved_accumulator: float = reload_accumulator
+	fire_on = false
+	reload_time = saved_time
+	reload_accumulator = saved_accumulator
+	sfx_gun_fire_end.stop()
+	reload_active = false
+	sfx_gun_reload_start.stop()
+	sfx_gun_reload_end.stop()
+
+func resume_reload() -> void:
+	reload_active = current_bullet < max_bullet
+
+func reset_for_mission() -> void:
+	reset_trigger()
+	current_bullet = max_bullet
+	reload_time = 0.0
+	reload_accumulator = 0.0
+	_update_gun_text()

@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2w0htc258n2f"]
+[gd_scene format=3 uid="uid://c2w0htc258n2f"]
 
 [ext_resource type="Script" uid="uid://cqgupobt65qsv" path="res://game/ui/hud/icons/way_point_icon.gd" id="1_rn8ll"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/reward.png" id="2_f8502"]
+[ext_resource type="Texture2D" uid="uid://ipu8b2q84c6p" path="res://assets/sprites/ui/reward.png" id="2_f8502"]
 
 [sub_resource type="Animation" id="Animation_f8502"]
 resource_name = "01"
@@ -64,7 +64,7 @@ _data = {
 &"RESET": SubResource("Animation_it0ql")
 }
 
-[node name="WayPointIcon" type="Control"]
+[node name="WayPointIcon" type="Control" unique_id=175475913]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,11 +73,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rn8ll")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=432949143]
 layout_mode = 1
 anchors_preset = 0
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=574243588]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -95,8 +95,6 @@ scale = Vector2(0.3, 0.3)
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("2_f8502")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_it0ql")
-}
-autoplay = "01"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=488743928]
+libraries/ = SubResource("AnimationLibrary_it0ql")
+autoplay = &"01"

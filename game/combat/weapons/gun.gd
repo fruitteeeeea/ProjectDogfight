@@ -9,6 +9,8 @@ func fire() -> void:
 
 
 func _fire(pos_offset : Vector2, dir : Vector2, spread_deg : float = 0.0) -> void:
+	if not GameStatusServer.can_control_player():
+		return
 	var bullet = BulletScene.instantiate() as Bullet
 	bullet.position = global_position + pos_offset.rotated(global_rotation) #要旋转一下位置的offset
 	

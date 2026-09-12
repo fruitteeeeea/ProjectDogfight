@@ -12,16 +12,14 @@ var cache_health : float
 
 func _ready() -> void:
 	player_damage_component.health_change.connect(_health_change)
+	reset_display()
 
 
 func _health_change(health : float) -> void:
-	if !cache_health:
-		cache_health  = health
-		return
-	
 	if health < cache_health: #扣血了 
 		play_hit_flash()
 
+	cache_health = health
 	update_health_count(health)
 
 
@@ -44,4 +42,10 @@ func update_health_count(health : float) -> void:
 		var child := player_heart.get_child(i)
 		if child is TextureRect:
 			child.visible = i < result
-			await get_tree().create_timer(.05).timeout
+
+func reset_display() -> void:
+	if hit_tween:
+		hit_tween.kill()
+	color_rect.modulate.a = 0.0
+	cache_health = player_damage_component.health
+	update_health_count(cache_health)

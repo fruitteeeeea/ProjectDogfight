@@ -17,30 +17,24 @@ class_name MissionPanel
 @onready var bgm_player: AudioStreamPlayer = $BGMPlayer
 
 var target_point : int
+var warning_started := false
+var duration := 60.0
 
-func _ready() -> void:
-	player.player_dead.connect(_mission_fall)
-
-
-func mission_start(_time : float, point : int) -> void:
+func mission_start(_time: float, point: int) -> void:
 	bgm_player.play()
-	GameStatusServer.reset_game_status()
+	duration = _time
+	warning_started = false
 	mission_timer.start(_time)
 	target_points_label.text = "/ " + str(point) + " pts. "
 	target_point = point
 	display_mission_panel()
-	player_damage_component.test_state = false
-
-	await get_tree().create_timer(_time * alert_threshold).timeout
-	blink_canvs_item.start_tween() #倒计时警告 
-
-
-func _mission_fall() -> void:
-	GameStatusServer.show_result.emit(false)
 
 
 func _physics_process(delta: float) -> void:
 	update_mission_info()
+	if GameStatusServer.is_battle_active() and not warning_started and mission_timer.time_left <= duration * (1.0 - alert_threshold):
+		warning_started = true
+		blink_canvs_item.start_tween()
 
 
 func update_mission_info() -> void:
@@ -53,15 +47,6 @@ func seconds_to_mmss(t: float) -> String:
 	var minutes := total_sec / 60
 	var seconds := total_sec % 60
 	return "%02d : %02d" % [minutes, seconds]
-
-
-func _on_mission_timer_timeout() -> void:
-	#这里对游戏结果进行判断 
-	if GameStatusServer.your_points < target_point:
-		GameStatusServer.show_result.emit(false) #游戏失败 
-	
-	else :
-		GameStatusServer.show_result.emit(true) #游戏完成！
 
 
 #region Tween

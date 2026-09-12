@@ -27,6 +27,10 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.echo:
+		return
+	if not GameStatusServer.can_control_player():
+		return
 	if event.is_action_pressed(trigger_button):
 		if current_rocket_nb > 0: 
 			current_rocket_nb -= 1
@@ -39,7 +43,10 @@ func _launch_rocket(dir :float = 1 , nb := 1, interval := .1, jam := 0.0) -> voi
 	
 	
 	
+	var epoch := GameStatusServer.battle_epoch
 	for i in range(nb):
+		if not GameStatusServer.can_control_player() or epoch != GameStatusServer.battle_epoch:
+			return
 		var rocket = SnakeRocketScene.instantiate()
 
 		if up_dir:
@@ -55,10 +62,19 @@ func _launch_rocket(dir :float = 1 , nb := 1, interval := .1, jam := 0.0) -> voi
 		get_tree().current_scene.add_child(rocket)
 		rocket.global_position = global_position
 		sfx_rocket_fire.play()
-		await get_tree().create_timer(.1).timeout
+		await get_tree().create_timer(.1, false).timeout
 
 
 func _on_timer_timeout() -> void:
+	if not GameStatusServer.can_control_player():
+		return
 	if current_rocket_nb < max_rocket_nb:
 		current_rocket_nb = min(current_rocket_nb + 1, max_rocket_nb)
 		sfx_rocket_reload.play()
+
+func reset_for_mission() -> void:
+	current_rocket_nb = max_rocket_nb
+	up_dir = true
+	reloading_timer.start(reloading_time)
+	sfx_rocket_fire.stop()
+	sfx_rocket_reload.stop()

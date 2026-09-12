@@ -173,7 +173,5 @@ libraries = {
 stream = ExtResource("10_rkan2")
 volume_db = -5.0
 
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="CanvasLayer/EnemyIndicator" method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="EnemyGun" method="_on_visible_on_screen_notifier_2d_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="CanvasLayer/EnemyIndicator" method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="EnemyGun" method="_on_visible_on_screen_notifier_2d_screen_exited"]

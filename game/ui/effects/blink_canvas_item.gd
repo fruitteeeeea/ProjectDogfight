@@ -2,6 +2,7 @@ extends Node
 class_name BlinkCanvasItem
 
 var canvas_item : CanvasItem
+var blink_tween: Tween
 
 @export_enum("alpha", "color") var blink_mode := "color"
 
@@ -22,7 +23,12 @@ func _ready():
 		start_tween()
 
 
+func stop_tween() -> void:
+	if blink_tween:
+		blink_tween.kill()
+
 func start_tween() -> void:
+	stop_tween()
 	var prop : NodePath = "modulate"
 	
 	if blink_mode == "alpha":
@@ -31,7 +37,8 @@ func start_tween() -> void:
 		max_value = 1.0
 	
 	
-	var tween := create_tween()
+	var tween := create_tween().set_ignore_time_scale(true)
+	blink_tween = tween
 	tween.set_loops()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
