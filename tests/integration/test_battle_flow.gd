@@ -226,9 +226,7 @@ func _ready() -> void:
 	expect(result_menu.retry_enabled, "retry becomes available after result animation")
 	await pointer(Vector2(800, 700), true)
 	await frames(5)
-	game = get_tree().current_scene
-	manager = game.get_node("GameManager")
-	expect(GameStatusServer.state == GameStatusServer.BattleState.FREE_FLIGHT and GameStatusServer.your_points == 0, "result screen tap restarts free flight")
+	expect(get_tree().current_scene.scene_file_path == "res://game/ui/menus/mission_select.tscn" and GameStatusServer.manager == null and Engine.time_scale == 1.0, "result screen tap returns to selection and clears battle")
 	await fresh()
 	await begin()
 	GameStatusServer.your_points = manager.target_points
@@ -294,16 +292,12 @@ func _ready() -> void:
 		expect(gun.current_bullet == gun.max_bullet and launcher.current_rocket_nb == launcher.max_rocket_nb and player.accelerate_component.progress_bar.value == player.accelerate_component.max_burst_accel_fuel, "retry %d restores ammunition and fuel" % (i + 1))
 		await begin()
 		manager.pause_battle()
-	manager.return_to_menu()
+	manager.return_to_mission_select()
 	await frames(5)
-	expect(not get_tree().paused and GameStatusServer.manager == null and get_tree().current_scene.scene_file_path == "res://game/ui/menus/main_menu.tscn", "return clears pause and opens main menu")
-	var title: Node = get_tree().current_scene
-	expect(not title.has_node("CanvasLayer/Control/TouchToStart/StartBattle"), "title restores text without start button")
-	title.get_node("AnimationPlayer").advance(2.1)
-	await frames()
-	await pointer(Vector2(900, 700))
+	expect(not get_tree().paused and GameStatusServer.manager == null and get_tree().current_scene.scene_file_path == "res://game/ui/menus/mission_select.tscn", "pause return clears battle and opens mission selection")
+	await click(get_tree().current_scene.get_node("%StartMission"))
 	await frames(5)
-	expect(GameStatusServer.state == GameStatusServer.BattleState.FREE_FLIGHT and GameStatusServer.your_points == 0, "title screen click enters free flight")
+	expect(GameStatusServer.state == GameStatusServer.BattleState.FREE_FLIGHT and GameStatusServer.your_points == 0, "mission start enters free flight")
 	game = get_tree().current_scene
 	manager = game.get_node("GameManager")
 	var prompt_point: Vector2 = manager.ready_to_start.get_node("PanelContainer").get_global_rect().get_center()
@@ -339,8 +333,14 @@ func capture_menus() -> void:
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png("/private/tmp/dogfight-title.png")
 	title._on_play_pressed()
-	await frames()
+	await frames(5)
+	get_tree().current_scene._request_start()
+	await frames(5)
 	game = get_tree().current_scene
+	if not game.has_node("GameManager"):
+		push_error("FAIL: capture could not enter battle")
+		get_tree().quit(1)
+		return
 	manager = game.get_node("GameManager")
 	await get_tree().create_timer(0.4, true, false, true).timeout
 	await RenderingServer.frame_post_draw

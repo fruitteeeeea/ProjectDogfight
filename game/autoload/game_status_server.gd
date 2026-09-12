@@ -16,6 +16,24 @@ var state: BattleState:
 			return manager.state
 		return BattleState.PREPARING
 var battle_epoch := 0
+const MISSION_CATALOG: MissionCatalog = preload("res://game/data/missions/mission_catalog.tres")
+var mission_catalog: MissionCatalog:
+	get: return MISSION_CATALOG
+var _selected_mission_id := 1
+var selected_mission_id: int:
+	get: return _selected_mission_id
+
+func set_selected_mission(id: int) -> bool:
+	var mission := mission_catalog.find_mission(id)
+	if mission == null or not mission.available:
+		return false
+	_selected_mission_id = id
+	return true
+
+func get_selected_mission() -> MissionDefinition:
+	var mission := mission_catalog.find_mission(_selected_mission_id)
+	return mission if mission != null and mission.available else null
+
 var _points := 0
 var _kills := 0
 var your_points: int:

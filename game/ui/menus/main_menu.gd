@@ -15,4 +15,7 @@ func _on_play_pressed() -> void:
 	if _starting:
 		return
 	_starting = true
-	get_tree().change_scene_to_file("res://game/core/main_game.tscn")
+	var error := get_tree().change_scene_to_file("res://game/ui/menus/mission_select.tscn")
+	if error != OK:
+		_starting = false
+		push_error("Could not open mission selection: " + error_string(error))

@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="MissionCatalog" format=3 uid="uid://s5fas8csc6al"]
+
+[ext_resource type="Script" uid="uid://bcwm47rtcg663" path="res://game/data/missions/mission_catalog.gd" id="1"]
+[ext_resource type="Script" uid="uid://qpv7fudxvl86" path="res://game/data/missions/mission_definition.gd" id="2"]
+
+[sub_resource type="Resource" id="Mission_1"]
+script = ExtResource("2")
+display_name = "First Sortie"
+objective = "Earn at least 2,500 points within 60 seconds and survive."
+background_story = "A remote training sector has come under pressure. Your first sortie will prove you can hold your own."
+available = true
+
+[sub_resource type="Resource" id="Mission_2"]
+script = ExtResource("2")
+mission_id = 2
+display_name = "Border Patrol"
+objective = "Earn at least 2,500 points within 60 seconds and survive."
+background_story = "Unidentified aircraft have crossed the frontier. Command needs a pilot who can keep the airspace under control."
+available = true
+
+[sub_resource type="Resource" id="Mission_3"]
+script = ExtResource("2")
+mission_id = 3
+display_name = "Emergency Sortie"
+objective = "Earn at least 2,500 points within 60 seconds and survive."
+background_story = "Radio traffic warns of renewed activity nearby. Scramble and restore control of the airspace."
+available = true
+
+[sub_resource type="Resource" id="Mission_4"]
+script = ExtResource("2")
+mission_id = 4
+display_name = "Mission 4"
+
+[sub_resource type="Resource" id="Mission_5"]
+script = ExtResource("2")
+mission_id = 5
+display_name = "Mission 5"
+
+[sub_resource type="Resource" id="Mission_6"]
+script = ExtResource("2")
+mission_id = 6
+display_name = "Mission 6"
+
+[sub_resource type="Resource" id="Mission_7"]
+script = ExtResource("2")
+mission_id = 7
+display_name = "Mission 7"
+
+[sub_resource type="Resource" id="Mission_8"]
+script = ExtResource("2")
+mission_id = 8
+display_name = "Mission 8"
+
+[sub_resource type="Resource" id="Mission_9"]
+script = ExtResource("2")
+mission_id = 9
+display_name = "Mission 9"
+
+[resource]
+script = ExtResource("1")
+missions = Array[ExtResource("2")]([SubResource("Mission_1"), SubResource("Mission_2"), SubResource("Mission_3"), SubResource("Mission_4"), SubResource("Mission_5"), SubResource("Mission_6"), SubResource("Mission_7"), SubResource("Mission_8"), SubResource("Mission_9")])

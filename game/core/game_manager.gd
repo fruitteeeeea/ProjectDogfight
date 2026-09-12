@@ -8,6 +8,7 @@ var _debug_result_override := -1
 @export var player: Player
 var state := GameStatusServer.BattleState.PREPARING
 var result_snapshot: Dictionary = {}
+var mission_id := 1
 var target_points := 2500
 var _initialized := false
 var _starting_battle := false
@@ -35,6 +36,9 @@ var mission_panel: MissionPanel
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	GameStatusServer.manager = self
+	if GameStatusServer.get_selected_mission() == null:
+		GameStatusServer.set_selected_mission(1)
+	mission_id = GameStatusServer.selected_mission_id
 	GameStatusServer.reset_game_status()
 	GameFeel.cancel_hit_stop()
 	get_tree().paused = true
@@ -78,7 +82,7 @@ func _build_menu() -> void:
 	_start_prompt_text = ready_to_start.get_node("PanelContainer/TapHereToStart/Label").text
 	_start_prompt_alignment = ready_to_start.get_node("PanelContainer/TapHereToStart/Label").horizontal_alignment
 	ready_to_start.z_index = 1
-	_pause_panel = _panel("Paused", [["Continue", resume_battle], ["Retry", retry_battle], ["Main menu", return_to_menu]])
+	_pause_panel = _panel("Paused", [["Continue", resume_battle], ["Retry", retry_battle], ["Select mission", return_to_mission_select]])
 	_pause_panel.get_child(0).get_child(0).hide()
 	_pause_panel.hide()
 	_pause_button.hide()
@@ -302,12 +306,12 @@ func _finalize_result() -> void:
 	for threshold in thresholds:
 		if GameStatusServer.your_points >= threshold:
 			rank = GameStatusServer.rank[threshold]
-	result_snapshot = {"complete": complete, "reason": reason, "points": GameStatusServer.your_points, "kills": GameStatusServer.enemies_destroyed, "rank": rank}
+	result_snapshot = {"complete": complete, "reason": reason, "points": GameStatusServer.your_points, "kills": GameStatusServer.enemies_destroyed, "rank": rank, "mission_id": mission_id}
 	_start_result_background()
 	_pause_button.hide()
 	_pause_panel.hide()
 	_pause_blur.hide()
-	result_menu.show_battle_result(result_snapshot.duplicate(true), retry_battle)
+	result_menu.show_battle_result(result_snapshot.duplicate(true), return_to_mission_select)
 
 func _start_result_background() -> void:
 	GameFeel.cancel_hit_stop()
@@ -357,8 +361,11 @@ func _on_result_node_added(node: Node) -> void:
 func retry_battle() -> void:
 	_navigate(true)
 
-func return_to_menu() -> void:
+func return_to_mission_select() -> void:
 	_navigate(false)
+
+func return_to_menu() -> void:
+	return_to_mission_select()
 
 func _navigate(retry: bool) -> void:
 	if _navigation_pending:
@@ -376,7 +383,7 @@ func _navigate(retry: bool) -> void:
 	if retry:
 		get_tree().reload_current_scene()
 	else:
-		get_tree().change_scene_to_file("res://game/ui/menus/main_menu.tscn")
+		get_tree().change_scene_to_file("res://game/ui/menus/mission_select.tscn")
 
 func _input(event: InputEvent) -> void:
 	var pointer_down: bool = (event is InputEventScreenTouch and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)

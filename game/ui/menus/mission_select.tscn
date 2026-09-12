@@ -1,0 +1,150 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://game/ui/menus/mission_select.gd" id="1"]
+[ext_resource type="PackedScene" path="res://game/ui/menus/mission_button.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://game/ui/menus/mission_details.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://game/world/background/bg.tscn" id="4"]
+[sub_resource type="ButtonGroup" id="Missions"]
+allow_unpress = false
+[node name="MissionSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+[node name="Background" parent="." instance=ExtResource("4")]
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.01, 0.015, 0.05, 0.4)
+[node name="SafeArea" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+[node name="Center" type="CenterContainer" parent="SafeArea"]
+layout_mode = 2
+mouse_filter = 2
+[node name="Content" type="VBoxContainer" parent="SafeArea/Center"]
+custom_minimum_size = Vector2(1280, 760)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 32
+[node name="Heading" type="Label" parent="SafeArea/Center/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 48
+text = "Select Mission"
+horizontal_alignment = 1
+[node name="MissionButtons" type="HBoxContainer" parent="SafeArea/Center/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Mission1" parent="SafeArea/Center/Content/MissionButtons" instance=ExtResource("2")]
+layout_mode = 2
+button_group = SubResource("Missions")
+text = "1"
+metadata/mission_id = 1
+button_pressed = true
+
+[node name="Mission2" parent="SafeArea/Center/Content/MissionButtons" instance=ExtResource("2")]
+layout_mode = 2
+button_group = SubResource("Missions")
+text = "2"
+metadata/mission_id = 2
+
+[node name="Mission3" parent="SafeArea/Center/Content/MissionButtons" instance=ExtResource("2")]
+layout_mode = 2
+button_group = SubResource("Missions")
+text = "3"
+metadata/mission_id = 3
+
+[node name="Mission4" parent="SafeArea/Center/Content/MissionButtons" instance=ExtResource("2")]
+layout_mode = 2
+button_group = SubResource("Missions")
+text = "4"
+metadata/mission_id = 4
+disabled = true
+focus_mode = 0
+
+[node name="Mission5" parent="SafeArea/Center/Content/MissionButtons" instance=ExtResource("2")]
+layout_mode = 2
+button_group = SubResource("Missions")
+text = "5"
+metadata/mission_id = 5
+disabled = true
+focus_mode = 0
+
+[node name="Mission6" parent="SafeArea/Center/Content/MissionButtons" instance=ExtResource("2")]
+layout_mode = 2
+button_group = SubResource("Missions")
+text = "6"
+metadata/mission_id = 6
+disabled = true
+focus_mode = 0
+
+[node name="Mission7" parent="SafeArea/Center/Content/MissionButtons" instance=ExtResource("2")]
+layout_mode = 2
+button_group = SubResource("Missions")
+text = "7"
+metadata/mission_id = 7
+disabled = true
+focus_mode = 0
+
+[node name="Mission8" parent="SafeArea/Center/Content/MissionButtons" instance=ExtResource("2")]
+layout_mode = 2
+button_group = SubResource("Missions")
+text = "8"
+metadata/mission_id = 8
+disabled = true
+focus_mode = 0
+
+[node name="Mission9" parent="SafeArea/Center/Content/MissionButtons" instance=ExtResource("2")]
+layout_mode = 2
+button_group = SubResource("Missions")
+text = "9"
+metadata/mission_id = 9
+disabled = true
+focus_mode = 0
+
+[node name="MissionDetails" parent="SafeArea/Center/Content" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+[node name="StartMission" parent="SafeArea/Center/Content" instance=ExtResource("2")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 40
+toggle_mode = false
+text = "Start Mission"
+
+[editable path="Background"]
+[editable path="SafeArea/Center/Content/MissionDetails"]
+[editable path="SafeArea/Center/Content/MissionButtons/Mission1"]
+[editable path="SafeArea/Center/Content/MissionButtons/Mission2"]
+[editable path="SafeArea/Center/Content/MissionButtons/Mission3"]
+[editable path="SafeArea/Center/Content/MissionButtons/Mission4"]
+[editable path="SafeArea/Center/Content/MissionButtons/Mission5"]
+[editable path="SafeArea/Center/Content/MissionButtons/Mission6"]
+[editable path="SafeArea/Center/Content/MissionButtons/Mission7"]
+[editable path="SafeArea/Center/Content/MissionButtons/Mission8"]
+[editable path="SafeArea/Center/Content/MissionButtons/Mission9"]
+[editable path="SafeArea/Center/Content/StartMission"]
