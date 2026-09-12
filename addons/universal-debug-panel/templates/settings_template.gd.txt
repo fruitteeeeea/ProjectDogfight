@@ -1,0 +1,4 @@
+class_name ExampleSettings
+extends Resource
+
+@export_range(0.0, 10.0, 0.1) var value: float = 1.0

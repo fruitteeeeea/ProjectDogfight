@@ -24,6 +24,8 @@ config/icon="res://assets/branding/icons/icon.png"
 
 [autoload]
 
+ImGuiRoot="*uid://dugmpnsxaagba"
+UniversalDebugPanel="*res://addons/universal-debug-panel/debug_panel_root.tscn"
 GameFeel="*res://game/camera/game_feel.tscn"
 GameStatusServer="*res://game/autoload/game_status_server.tscn"
 SoundManager="*res://game/autoload/sound_manager.tscn"
@@ -33,6 +35,7 @@ SpawnServer="*res://game/autoload/spawn_server.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/handheld/orientation=4
 mouse_cursor/custom_image="res://assets/sprites/ui/crosshair007.png"
@@ -41,6 +44,10 @@ mouse_cursor/custom_image_hotspot=Vector2(64, 64)
 [dotnet]
 
 project/assembly_name="ProjectDogfight"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/imgui-godot/plugin.cfg", "res://addons/universal-debug-panel/plugin.cfg")
 
 [global_group]
 

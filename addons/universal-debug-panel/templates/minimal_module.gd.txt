@@ -1,0 +1,20 @@
+extends DebugPanelModule
+
+var clicks := 0
+
+func get_module_id() -> StringName:
+	return &"example.minimal"
+
+func get_category() -> StringName:
+	return &"Programming"
+
+func get_tab_title() -> String:
+	return "Hello Debug Panel"
+
+func get_order() -> int:
+	return 100
+
+func draw(imgui: Object, _panel: Node) -> void:
+	imgui.Text("Clicks: %d" % clicks)
+	if imgui.call("Button", "Test Button"):
+		clicks += 1

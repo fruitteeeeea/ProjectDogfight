@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "universal_debug_panel",
+  "created_on": "2026-09-12",
+  "updated_on": "2026-09-13",
+  "first_released_on": null,
+  "compatibility": {
+    "godot_min": "4.7",
+    "tested_godot_versions": [
+      "4.7.limboai+v1.8.0.gha.5b4e0cb0f"
+    ]
+  },
+  "dependencies": [
+    {
+      "id": "imgui-godot",
+      "kind": "required",
+      "version_requirement": "6.3.2",
+      "purpose": "ImGui 类型及 ImGuiRoot"
+    }
+  ],
+  "features": [
+    {
+      "id": "feature_1",
+      "name": "模块注册与发现",
+      "status": "implemented",
+      "since": "1.0.0"
+    },
+    {
+      "id": "feature_2",
+      "name": "ImGui 调试面板",
+      "status": "implemented",
+      "since": "1.0.0"
+    },
+    {
+      "id": "feature_3",
+      "name": "导出排除调试插件",
+      "status": "implemented",
+      "since": "1.0.0"
+    },
+    {
+      "id": "feature_4",
+      "name": "Native startup diagnostics and independent window",
+      "status": "implemented",
+      "since": "1.0.2"
+    }
+  ],
+  "limitations": [
+    "Native imgui-godot 6.3.2 with Godot 4.7 / LimboAI 1.8 is the verified backend; C#-only and other versions are unverified.",
+    "Graphical editor runtime required for window smoke tests; headless verifies registration only."
+  ]
+}

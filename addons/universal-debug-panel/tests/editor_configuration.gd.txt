@@ -1,0 +1,38 @@
+@tool
+extends EditorPlugin
+var failures: Array[String] = []
+var checks := 0
+const PANEL := "universal-debug-panel"
+const WINDOW := "display/window/subwindows/embed_subwindows"
+func _enter_tree() -> void:
+	_delayed_run.call_deferred()
+func _delayed_run() -> void:
+	await get_tree().create_timer(5.0).timeout
+	_run()
+func expect(value: bool, label: String) -> void:
+	checks += 1
+	if not value:
+		failures.append(label)
+func _run() -> void:
+	expect(ProjectSettings.has_setting("autoload/ImGuiRoot"), "ImGui autoload")
+	expect(ProjectSettings.has_setting("autoload/UniversalDebugPanel"), "Panel autoload")
+	expect(not ProjectSettings.get_setting(WINDOW), "Independent window on first enable")
+	EditorInterface.set_plugin_enabled(PANEL, false)
+	expect(not ProjectSettings.has_setting("autoload/UniversalDebugPanel"), "Disable removes owned autoload")
+	expect(ProjectSettings.get_setting(WINDOW), "Disable restores original embedding")
+	EditorInterface.set_plugin_enabled(PANEL, true)
+	expect(ProjectSettings.has_setting("autoload/UniversalDebugPanel"), "Reenable autoload")
+	expect(not ProjectSettings.get_setting(WINDOW), "Reenable independent window")
+	ProjectSettings.set_setting(WINDOW, true)
+	EditorInterface.set_plugin_enabled(PANEL, false)
+	expect(ProjectSettings.get_setting(WINDOW), "Host modification preserved")
+	expect(not ProjectSettings.has_setting("essential_plugins/universal_debug_panel/owns_window_setting"), "Ownership cleared")
+	ProjectSettings.set_setting(WINDOW, false)
+	EditorInterface.set_plugin_enabled(PANEL, true)
+	EditorInterface.set_plugin_enabled(PANEL, false)
+	expect(not ProjectSettings.get_setting(WINDOW), "Unowned false preserved")
+	EditorInterface.set_plugin_enabled(PANEL, true)
+	ProjectSettings.save()
+	print("EDITOR CONFIGURATION ", "PASS" if failures.is_empty() else "FAIL", " ", checks, " checks ", failures)
+	await get_tree().create_timer(1.0).timeout
+	get_tree().quit(0 if failures.is_empty() else 1)

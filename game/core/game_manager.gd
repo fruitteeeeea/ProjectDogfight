@@ -1,6 +1,9 @@
 extends Node2D
 
 enum EndReason { COMPLETE, DESTROYED, TIME_UP }
+enum DebugResultMode { NORMAL, SUCCESS, FAILURE }
+var _debug_result_pending := false
+var _debug_result_override := -1
 @export var mission_time: float = 60.0
 @export var player: Player
 var state := GameStatusServer.BattleState.PREPARING
@@ -247,6 +250,27 @@ func _pause_audio(node: Node) -> void:
 	for child in node.get_children():
 		_pause_audio(child)
 
+func can_debug_request_result() -> bool:
+	return OS.has_feature("editor") and _initialized and not _navigation_pending and not _ending and not _debug_result_pending and state in [GameStatusServer.BattleState.FREE_FLIGHT, GameStatusServer.BattleState.PLAYING, GameStatusServer.BattleState.PAUSED]
+
+func debug_request_result(mode: int) -> bool:
+	if not can_debug_request_result() or mode not in DebugResultMode.values():
+		return false
+	_debug_result_pending = true
+	_debug_end_battle.call_deferred(mode)
+	return true
+
+func _debug_end_battle(mode: int) -> void:
+	if _navigation_pending or _ending:
+		return
+	if state == GameStatusServer.BattleState.PAUSED:
+		_clear_pause_background()
+	_debug_result_pending = false
+	_debug_result_override = mode
+	state = GameStatusServer.BattleState.PLAYING
+	ready_to_start.hide()
+	finish_battle(EndReason.TIME_UP)
+
 func finish_battle(_reason: EndReason) -> void:
 	if _ending:
 		return
@@ -265,6 +289,11 @@ func is_resolving_result() -> bool:
 func _finalize_result() -> void:
 	var reason := EndReason.DESTROYED if player.is_dead else EndReason.TIME_UP
 	var complete := not player.is_dead and GameStatusServer.your_points >= target_points
+	if _debug_result_override == DebugResultMode.SUCCESS:
+		complete = true
+	elif _debug_result_override == DebugResultMode.FAILURE:
+		complete = false
+		reason = EndReason.TIME_UP
 	if complete:
 		reason = EndReason.COMPLETE
 	var rank := "D"

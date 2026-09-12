@@ -1,0 +1,58 @@
+extends DebugPanelModule
+
+const MODULE_ID := &"example_module"
+const SETTINGS_PATH := "res://game_data/example_settings.tres"
+const DEFAULT_VALUE := 1.0
+
+var _settings: ExampleSettings
+var _draft := [DEFAULT_VALUE]
+var _saved_value := DEFAULT_VALUE
+
+
+func get_module_id() -> StringName:
+	return MODULE_ID
+
+
+func get_category() -> StringName:
+	return &"Programming"
+
+
+func get_tab_title() -> String:
+	return "Example Module"
+
+
+func get_order() -> int:
+	return 100
+
+
+func initialize(panel: Node) -> void:
+	_settings = panel.load_settings_resource(SETTINGS_PATH) as ExampleSettings
+	if _settings == null:
+		_settings = ExampleSettings.new()
+	_draft[0] = _settings.value
+	_saved_value = _settings.value
+	panel.register_settings_resource(MODULE_ID, _settings)
+
+
+func draw(imgui: Object, panel: Node) -> void:
+	imgui.SeparatorText("Settings")
+	imgui.SliderFloat("Value", _draft, 0.0, 10.0)
+
+	var has_unapplied_changes := not panel.settings_match_values(_settings, {"value": _draft[0]})
+	var has_unsaved_changes := not is_equal_approx(_settings.value, _saved_value)
+	imgui.Text("Edit Status: %s" % ("Unapplied Changes" if has_unapplied_changes else "Applied"))
+	imgui.Text("Storage Status: %s" % ("Not Saved" if has_unsaved_changes else "Saved"))
+
+	if imgui.Button("Apply Changes"):
+		panel.apply_settings_values(_settings, {"value": _draft[0]})
+	imgui.SameLine()
+	if imgui.Button("Revert"):
+		_draft[0] = _settings.value
+	if imgui.Button("Reset Defaults"):
+		_draft[0] = DEFAULT_VALUE
+	imgui.SameLine()
+	imgui.BeginDisabled(has_unapplied_changes or not panel.can_save_project_resources())
+	if imgui.Button("Save Settings"):
+		if panel.save_settings_resource(_settings, SETTINGS_PATH) == OK:
+			_saved_value = _settings.value
+	imgui.EndDisabled()
