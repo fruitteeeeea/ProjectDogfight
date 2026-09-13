@@ -135,13 +135,17 @@ func _panel(title: String, actions: Array) -> Control:
 	var panel := PanelContainer.new()
 	center.add_child(panel)
 	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 16)
 	panel.add_child(box)
 	var label := Label.new()
 	label.text = title
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(label)
 	for action in actions:
-		box.add_child(_button(action[0], action[1]))
+		var button := _button(action[0], action[1])
+		button.custom_minimum_size = Vector2(360, 128)
+		button.add_theme_font_size_override("font_size", 40)
+		box.add_child(button)
 	return panel
 
 func start_battle() -> bool:

@@ -308,3 +308,13 @@
 - 验证：点击音效 32 项、选关 87 项、战斗 103 项、调试 79 项、摇杆 36 项及 HUD 全部通过，退出码 0。检查真实播放接口调用次数、原始触摸、鼠标、焦点确认、取消触摸、重复请求、自动暂停静音以及暂停/结算音频路由。
 - 最终日志：/private/tmp/r014-ui-complete-output.log、r014-final-battle_flow-output.log、r014-final-debug_panel-output.log、r014-mission_select-output.log、r014-virtual_joystick_migration-output.log、r014-touch_hud_layer-output.log。导入日志 r014-import-output.log；既有系统证书与全局编辑器设置保存权限提示存在，无脚本错误。
 - 真人电脑/iPhone 的实际音量、快速连点听感及跨场景完整播放均未验收；本轮没有重新打包安装 iOS，也未自动提交。验收步骤见选关界面_使用与验收.md 的 R014。
+
+## R015：放大暂停菜单按钮
+
+- 日期：2026-09-13；构建：8fe0cdf + R015 工作区，未提交；状态：自动验证通过，待手动验收。
+- Continue、Retry、Select mission 最小尺寸统一为 360×128、字号 40、竖排间距 16，与选关开始按钮规格一致。保持原有节点、配色、焦点、模糊和点击音效；右上角 Pause 的 200×64 最小尺寸、字号与位置不变。
+- 修改仅作用于暂停菜单内按钮；保留电脑/手机同一逻辑尺寸，不修改战斗或导航行为。
+- 验证：战斗 117 项、选关 87 项、点击音效 32 项、调试 79 项、摇杆 36 项及 HUD 全部通过，退出码 0。新增检查三个按钮数量、尺寸、字号、等宽、居中、视口范围、文字边界和间距；音效回归覆盖实际鼠标/触摸菜单操作。
+- 图形检查退出码 0，暂停截图 /private/tmp/dogfight-paused.png 已检查文字完整及居中布局。已有退出纹理 RID 回收提示存在，无最终脚本错误。
+- 初次检查新增测试因动态变量缺少显式类型而解析失败，已修复；旧点击测试要求 0 dB，与用户已设置的 -18 dB 冲突，现改为比较场景配置，未改变音量。失败日志保留，最终日志为 /private/tmp/r015-final-{battle_flow,mission_select,debug_panel,capture}-output.log、r015-complete-ui-output.log、r015-{virtual_joystick_migration,touch_hud_layer}-output.log。
+- 手动 iPhone 横屏可读性、点击便利性及安全区域未验收；本轮不自动提交或重新打包安装 iOS。

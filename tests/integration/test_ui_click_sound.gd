@@ -31,7 +31,10 @@ func _ready() -> void:
 	sounds.set_script(load("res://tests/integration/ui_click_sound_spy.gd"))
 	sounds.set("sfx", sounds.get_node("SFX"))
 	var audio: AudioStreamPlayer = sounds.get_node("UIClick")
-	expect(audio.stream.resource_path == "res://assets/audio/ui/mouseclick1.ogg" and audio.bus == &"SFX" and audio.max_polyphony == 4 and audio.volume_db == 0.0 and audio.pitch_scale == 1.0, "preplaced click player uses requested stream and defaults")
+	var sound_configuration: Node = load("res://game/autoload/sound_manager.tscn").instantiate()
+	var configured_volume: float = sound_configuration.get_node("UIClick").volume_db
+	sound_configuration.free()
+	expect(audio.stream.resource_path == "res://assets/audio/ui/mouseclick1.ogg" and audio.bus == &"SFX" and audio.max_polyphony == 4 and audio.volume_db == configured_volume and audio.pitch_scale == 1.0, "preplaced click player uses requested stream and defaults")
 	expect(sounds.process_mode == Node.PROCESS_MODE_ALWAYS, "sound manager always processes")
 	var title := await open_scene(TITLE)
 	await pointer(Vector2(800, 700), true)

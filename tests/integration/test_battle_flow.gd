@@ -131,6 +131,22 @@ func _ready() -> void:
 	var bgm_volume: float = manager.mission_panel.bgm_player.volume_db
 	await click(manager._pause_button)
 	expect(GameStatusServer.state == GameStatusServer.BattleState.PAUSED, "GUI pause button is clickable")
+	var pause_buttons: Array[Node] = manager._pause_panel.find_children("*", "Button", true, false)
+	expect(pause_buttons.size() == 3, "pause retains three menu buttons")
+	var first_rect: Rect2 = pause_buttons[0].get_global_rect()
+	for index in pause_buttons.size():
+		var button: Button = pause_buttons[index]
+		var rect := button.get_global_rect()
+		expect(button.custom_minimum_size == Vector2(360, 128) and button.get_theme_font_size("font_size") == 40, "pause menu button %d matches mission start size and font" % index)
+		expect(is_equal_approx(rect.size.x, first_rect.size.x) and is_equal_approx(rect.get_center().x, first_rect.get_center().x) and get_viewport().get_visible_rect().encloses(rect), "pause menu button %d is equal-width aligned and in viewport" % index)
+		var text_size := button.get_theme_font("font").get_string_size(button.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 40)
+		expect(text_size.x <= rect.size.x and text_size.y <= rect.size.y, "pause menu button %d text fits" % index)
+		if index > 0:
+			var previous: Rect2 = pause_buttons[index - 1].get_global_rect()
+			expect(is_equal_approx(rect.position.y - previous.end.y, 16.0), "pause menu button gap is 16")
+	expect(manager._pause_panel.get_child(0).get_theme_constant("separation") == 16 and is_equal_approx(first_rect.get_center().x, get_viewport().get_visible_rect().get_center().x), "pause menu is centered with configured spacing")
+	expect(manager._pause_button.custom_minimum_size == Vector2(200, 64) and not manager._pause_button.has_theme_font_size_override("font_size") and manager._pause_button.offset_left == -230 and manager._pause_button.offset_top == 48, "top-right pause entry keeps original size font and position")
+
 	expect(is_equal_approx(manager.mission_panel.bgm_player.volume_db, bgm_volume + linear_to_db(0.5)), "pause halves BGM amplitude")
 	expect(manager._pause_blur.visible and manager._pause_blur.material != manager.result_menu.blur_background.material, "pause shows independent blur shader")
 	expect(manager._pause_button is Button and manager.ready_to_start.visible and manager.ready_to_start.get_node("PanelContainer/TapHereToStart/Label").text == "Paused", "pause uses button and original top label")
