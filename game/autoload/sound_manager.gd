@@ -8,3 +8,6 @@ func play_sfx(name : String) -> void:
 		return
 	
 	player.play()
+
+func play_ui_click() -> void:
+	$UIClick.play()

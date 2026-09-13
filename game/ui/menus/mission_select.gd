@@ -19,7 +19,7 @@ func _ready() -> void:
 		var mission := GameStatusServer.mission_catalog.find_mission(id)
 		button.disabled = mission == null or not mission.available
 		button.focus_mode = Control.FOCUS_NONE if button.disabled else Control.FOCUS_ALL
-		button.pressed.connect(_select_mission.bind(id))
+		button.pressed.connect(_activate_mission.bind(id))
 		button.focus_entered.connect(_select_mission.bind(id))
 	start_button.pressed.connect(_request_start)
 	if GameStatusServer.get_selected_mission() == null:
@@ -29,6 +29,13 @@ func _ready() -> void:
 	var selected := _selected_button()
 	if selected != null:
 		selected.grab_focus()
+
+func _activate_mission(id: int) -> void:
+	var mission := GameStatusServer.mission_catalog.find_mission(id)
+	if _entering or mission == null or not mission.available:
+		return
+	_select_mission(id)
+	SoundManager.play_ui_click()
 
 func _select_mission(id: int) -> void:
 	if _entering or not GameStatusServer.set_selected_mission(id):
@@ -96,7 +103,7 @@ func _input(event: InputEvent) -> void:
 	if pressed_button == start_button:
 		_request_start()
 	else:
-		_select_mission(pressed_button.get_meta("mission_id"))
+		_activate_mission(pressed_button.get_meta("mission_id"))
 		pressed_button.grab_focus()
 
 func _button_at(point: Vector2) -> Button:
@@ -111,6 +118,7 @@ func _request_start() -> void:
 	if _entering or GameStatusServer.get_selected_mission() == null:
 		return
 	_entering = true
+	SoundManager.play_ui_click()
 	_touch_targets.clear()
 	start_button.disabled = true
 	get_viewport().set_input_as_handled()

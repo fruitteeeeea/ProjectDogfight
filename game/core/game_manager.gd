@@ -113,8 +113,19 @@ func _button(title: String, action: Callable) -> Button:
 	var button := Button.new()
 	button.text = title
 	button.custom_minimum_size = Vector2(200, 64)
-	button.pressed.connect(action)
+	button.pressed.connect(_activate_menu_action.bind(action))
 	return button
+
+func _activate_menu_action(action: Callable) -> void:
+	if _navigation_pending:
+		return
+	if action == pause_battle:
+		if not _initialized or not GameStatusServer.can_control_player():
+			return
+	elif state != GameStatusServer.BattleState.PAUSED:
+		return
+	SoundManager.play_ui_click()
+	action.call()
 
 func _panel(title: String, actions: Array) -> Control:
 	var center := CenterContainer.new()
@@ -133,11 +144,12 @@ func _panel(title: String, actions: Array) -> Control:
 		box.add_child(_button(action[0], action[1]))
 	return panel
 
-func start_battle() -> void:
+func start_battle() -> bool:
 	if not _initialized or _starting_battle or state != GameStatusServer.BattleState.FREE_FLIGHT:
-		return
+		return false
 	_starting_battle = true
 	_begin_battle.call_deferred()
+	return true
 
 func _begin_battle() -> void:
 	if not _starting_battle:
@@ -389,24 +401,27 @@ func _input(event: InputEvent) -> void:
 	var pointer_down: bool = (event is InputEventScreenTouch and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)
 	if pointer_down and _initialized and GameStatusServer.can_control_player() and _pause_button.visible and _pause_button.get_global_rect().has_point(event.position):
 		get_viewport().set_input_as_handled()
-		pause_battle()
+		_activate_menu_action(pause_battle)
 		return
 	var pause_pressed: bool = (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE) or (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_START)
 	if pause_pressed and state in [GameStatusServer.BattleState.FREE_FLIGHT, GameStatusServer.BattleState.PLAYING, GameStatusServer.BattleState.PAUSED]:
 		if GameStatusServer.can_control_player():
-			pause_battle()
+			_activate_menu_action(pause_battle)
 		elif state == GameStatusServer.BattleState.PAUSED:
-			resume_battle()
+			_activate_menu_action(resume_battle)
 		get_viewport().set_input_as_handled()
+		return
 
 	if not _initialized or state != GameStatusServer.BattleState.FREE_FLIGHT:
 		return
 	var pointer_pressed: bool = (event is InputEventScreenTouch and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)
 	if pointer_pressed and ready_to_start.get_node("PanelContainer").get_global_rect().has_point(event.position):
-		start_battle()
+		if start_battle():
+			SoundManager.play_ui_click()
 		get_viewport().set_input_as_handled()
 	elif not (event is InputEventKey and event.echo) and event.is_action_pressed("start_game"):
-		start_battle()
+		if start_battle():
+			SoundManager.play_ui_click()
 		get_viewport().set_input_as_handled()
 
 func _exit_tree() -> void:

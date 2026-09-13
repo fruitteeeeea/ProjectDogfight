@@ -15,6 +15,7 @@ func _on_play_pressed() -> void:
 	if _starting:
 		return
 	_starting = true
+	SoundManager.play_ui_click()
 	var error := get_tree().change_scene_to_file("res://game/ui/menus/mission_select.tscn")
 	if error != OK:
 		_starting = false

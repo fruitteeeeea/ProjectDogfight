@@ -68,6 +68,7 @@ func _input(event: InputEvent) -> void:
 	var pointer_pressed: bool = (event is InputEventScreenTouch and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)
 	if pointer_pressed or event.is_action_pressed("start_game"):
 		retry_enabled = false
+		SoundManager.play_ui_click()
 		get_viewport().set_input_as_handled()
 		_retry.call()
 
