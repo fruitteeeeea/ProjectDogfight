@@ -1,26 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://duq68d7otrl68"]
+[gd_scene format=3 uid="uid://duq68d7otrl68"]
 
 [ext_resource type="Script" uid="uid://boio2u0lys7w5" path="res://game/autoload/sound_manager.gd" id="1_ugg3w"]
-[ext_resource type="AudioStream" path="res://assets/audio/enemy/Signal Positive Wood Chimes A.wav" id="2_sfb6e"]
-[ext_resource type="AudioStream" path="res://assets/audio/supply/Mobile Buff 001.wav" id="3_rnuxy"]
+[ext_resource type="AudioStream" uid="uid://clcgbljbasqsm" path="res://assets/audio/enemy/Signal Positive Wood Chimes A.wav" id="2_sfb6e"]
+[ext_resource type="AudioStream" uid="uid://clrorurc4lqjw" path="res://assets/audio/supply/Mobile Buff 001.wav" id="3_rnuxy"]
+[ext_resource type="AudioStream" uid="uid://bxaidocodqmh4" path="res://assets/audio/ui/mouseclick1.ogg" id="4_click"]
 
-[ext_resource type="AudioStream" path="res://assets/audio/ui/mouseclick1.ogg" id="4_click"]
-
-[node name="SoundManager" type="Node"]
+[node name="SoundManager" type="Node" unique_id=2090266234]
 process_mode = 3
 script = ExtResource("1_ugg3w")
 
-[node name="SFX" type="Node" parent="."]
+[node name="SFX" type="Node" parent="." unique_id=433715609]
 
-[node name="SFXBonus" type="AudioStreamPlayer" parent="SFX"]
+[node name="SFXBonus" type="AudioStreamPlayer" parent="SFX" unique_id=1157513845]
 stream = ExtResource("2_sfb6e")
 volume_db = -10.0
 pitch_scale = 1.6
 
-[node name="SFXSupplyClaim" type="AudioStreamPlayer" parent="SFX"]
+[node name="SFXSupplyClaim" type="AudioStreamPlayer" parent="SFX" unique_id=636688917]
 stream = ExtResource("3_rnuxy")
 
-[node name="UIClick" type="AudioStreamPlayer" parent="."]
+[node name="UIClick" type="AudioStreamPlayer" parent="." unique_id=1111221804]
 stream = ExtResource("4_click")
-bus = &"SFX"
+volume_db = -18.0
 max_polyphony = 4
+bus = &"SFX"
